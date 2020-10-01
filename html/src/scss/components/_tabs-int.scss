@@ -1,0 +1,89 @@
+.nav-tabs-int {
+    margin-bottom: 0;
+    .item-nav-tabs {
+        display: table !important;
+        height: 6em;
+        text-align: center;
+        transition: background .4s;
+
+        .link-nav-tabs {
+            color: $color-black;
+            opacity: .5;
+            display: table-cell;
+            vertical-align: middle;
+            font-family: $font-primary;
+            text-transform: uppercase;
+            font-size: .843rem;
+        }
+        &.active,
+            &:hover {
+                //background-color: $color-salud;
+                .link-nav-tabs {
+                    color: $color-white;
+                    opacity: 1;
+                }
+            }
+        
+    }
+    &.slid-salud{
+        .item-nav-tabs{
+            &.active,
+            &:hover {
+                background-color: $color-salud;
+                // .link-nav-tabs {
+                //     color: $color-white;
+                //     opacity: 1;
+                // }
+            }
+        }
+    }
+    &.slid-bienestar{
+        .item-nav-tabs{
+            &.active,
+            &:hover {
+                background-color: $color-bienestar;
+                // .link-nav-tabs {
+                //     color: $color-white;
+                //     opacity: 1;
+                // }
+            }
+        }
+    }
+    &.slid-belleza{
+        .item-nav-tabs{
+            &.active,
+            &:hover {
+                background-color: $color-belleza;
+                // .link-nav-tabs {
+                //     color: $color-white;
+                //     opacity: 1;
+                // }
+            }
+        }
+    }
+    &.slid-actividad{
+        .item-nav-tabs{
+            &.active,
+            &:hover {
+                background-color: $color-actividad;
+                // .link-nav-tabs {
+                //     color: $color-white;
+                //     opacity: 1;
+                // }
+            }
+        }
+    }
+    &.slid-linea-bb{
+        .item-nav-tabs{
+            &.active,
+            &:hover {
+                background-color: $color-linea-bb;
+                // .link-nav-tabs {
+                //     color: $color-white;
+                //     opacity: 1;
+                // }
+            }
+        }
+    }
+    
+}

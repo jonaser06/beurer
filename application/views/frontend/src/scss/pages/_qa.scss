@@ -1,0 +1,71 @@
+.img-a{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    &:before{
+        background: $color-black;
+        content:"";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .4;
+    }
+}
+.sct-qa {
+    padding-top: 3em;
+    .title-border {
+        margin-top: 0;
+        &:after {
+            display: none;
+        }
+    }
+
+    .card-product-int {
+        height: 14rem;
+        position: relative;
+
+        &.belleza {background-color: $color-belleza;}
+        &.salud {background: $color-salud;}
+        &.bienestar {background-color: $color-bienestar;}
+        &.act {background-color: $color-actividad;}
+        &.l-bb {background-color: $color-linea-bb;}
+        &.app {background-color: $color-primary;}
+
+        &:hover,
+        &.active {
+            img {
+                opacity: .25;
+            }
+            .img-a{
+                &:before{
+                    opacity: 0;
+                }
+            }
+        }
+        .title-card-int {
+            position: absolute;
+            color: $color-white;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: max-content;
+            
+            .icon-card-int {
+                font-size: 2.5rem;
+            }
+
+            .font-bold {
+                font-size: 1.32rem;
+            }
+        }
+    }
+    .title-product-acc {
+        padding-bottom: 2rem;
+        color: $color-primary;
+        font-size: 1.6rem;
+    }
+}

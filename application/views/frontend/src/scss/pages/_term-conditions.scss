@@ -1,0 +1,49 @@
+.sct-tc,
+.sct-polit{
+    padding-top: 4em;
+    >.container{
+        width: 75%;
+    }
+
+    .accordion{
+        .accordion-heading{
+            font-size: 1.6em;
+
+            .icon-cerrar{
+                font-size: 0.6em;
+            }
+            &.active .icon-cerrar{
+                font-size: .75em;
+            }
+        }
+    } 
+    .list-descr-detall .item-list-descr {
+        line-height: 1.45;
+        font-size: 1.15em;
+        margin-bottom: 8px;
+        width: 95%;
+        font-family: $font-light;
+    }
+    .list-int-tc{
+        list-style: lower-alpha;
+        padding-left: 2em;
+        margin-top: 11px;
+        li{
+            margin-bottom: 5px;
+        }
+    }
+}
+.sct-polit{
+    .accordion{
+        margin-top: 3em;
+
+        .accordion-heading {
+            padding-right: 4em;
+            line-height: 1;
+            
+            &.active .icon-cerrar {
+                font-size: 0.9em;
+            }
+        }
+    } 
+}

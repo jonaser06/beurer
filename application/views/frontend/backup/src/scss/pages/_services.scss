@@ -1,0 +1,15 @@
+.sct-info-services {
+    padding-bottom: 5em;
+    padding-top: 11em;
+    position: relative;
+    .forma-spinner {
+        position: absolute;
+        z-index: -1;
+        right: -23%;
+        bottom: -24%;
+        width: 90%;
+        -webkit-transform: rotate(-24deg);
+            -ms-transform: rotate(-24deg);
+                transform: rotate(-24deg);
+    }
+}

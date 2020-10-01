@@ -1,0 +1,128 @@
+/***************
+    TYPOGRAFÍA
+****************/
+@font-face {
+  font-family: 'nexa-bolduploaded_file';
+  src: url('../fonts/nexa_bold-webfont.woff2') format('woff2'),
+       url('../fonts/nexa_bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexaheavyuploaded_file';
+  src: url('../fonts/nexa_heavy-webfont.woff2') format('woff2'),
+       url('../fonts/nexa_heavy-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexa-lightuploaded_file';
+  src: url('../fonts/nexa_light-webfont.woff2') format('woff2'),
+       url('../fonts/nexa_light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexaregularuploaded_file';
+  src: url('../fonts/nexa_regular-webfont.woff2') format('woff2'),
+       url('../fonts/nexa_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/************
+    ICONS
+************/
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon/icomoon.eot?r20yld');
+  src:  url('../fonts/icomoon/icomoon.eot?r20yld#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon/icomoon.ttf?r20yld') format('truetype'),
+    url('../fonts/icomoon/icomoon.woff?r20yld') format('woff'),
+    url('../fonts/icomoon/icomoon.svg?r20yld#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-actividad:before {
+  content: "\e903";
+}
+.icon-belleza:before {
+  content: "\e904";
+}
+.icon-bienestar:before {
+  content: "\e905";
+}
+.icon-linea-bb:before {
+  content: "\e90b";
+}
+.icon-salud:before {
+  content: "\e90e";
+}
+.icon-aplicaciones:before {
+  content: "\e901";
+}
+.icon-cerrar:before {
+  content: "\e906";
+}
+.icon-hamb-open:before {
+  content: "\e907";
+}
+.icon-descarga-detalle:before {
+  content: "\e908";
+}
+.icon-descargar:before {
+  content: "\e909";
+}
+.icon-instagram:before {
+  content: "\e90a";
+}
+.icon-lupa:before {
+  content: "\e90c";
+}
+.icon-phone:before {
+  content: "\e90d";
+}
+.icon-sobre:before {
+  content: "\e90f";
+}
+.icon-ubc:before {
+  content: "\e910";
+}
+.icon-wts:before {
+  content: "\e911";
+}
+.icon-facebook:before {
+  content: "\e912";
+}
+.icon-youtube:before {
+  content: "\e913";
+}
+.icon-hamb-close:before {
+  content: "\e914";
+}
+.icon-arrow-m-mobile:before {
+  content: "\e900";
+}
+.icon-arrow-regresar:before {
+  content: "\e902";
+}

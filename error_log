@@ -1,0 +1,8 @@
+[18-Feb-2020 10:04:07 America/Chicago] PHP Fatal error:  Cannot use [] for reading in /home4/exeperu/public_html/clientes/beurer/test/application/controllers/frontend/Productos.php on line 69
+[21-Feb-2020 18:11:47 America/Chicago] PHP Fatal error:  Cannot use [] for reading in /home4/exeperu/public_html/clientes/beurer/test/application/controllers/backend/Productos.php on line 245
+[21-Feb-2020 18:12:20 America/Chicago] PHP Fatal error:  Cannot use [] for reading in /home4/exeperu/public_html/clientes/beurer/test/application/controllers/backend/Productos.php on line 245
+[21-Feb-2020 18:12:28 America/Chicago] PHP Fatal error:  Cannot use [] for reading in /home4/exeperu/public_html/clientes/beurer/test/application/controllers/backend/Productos.php on line 245
+[21-Feb-2020 18:12:33 America/Chicago] PHP Fatal error:  Cannot use [] for reading in /home4/exeperu/public_html/clientes/beurer/test/application/controllers/backend/Productos.php on line 245
+[24-Feb-2020 17:36:32 America/Chicago] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home4/exeperu/public_html/clientes/beurer/test/application/views/frontend/detalle-de-producto.php on line 72
+[26-Feb-2020 17:25:55 America/Chicago] PHP Fatal error:  Cannot use [] for reading in /home4/exeperu/public_html/clientes/beurer/test/application/controllers/Request.php on line 279
+[27-Feb-2020 16:18:17 America/Chicago] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home4/exeperu/public_html/clientes/beurer/test/application/views/frontend/src/includes/header.php on line 8

@@ -1,0 +1,165 @@
+.wrapper-services {
+
+    float: left;
+    .circles-content{
+        padding: 1.5em;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        border-radius: 50%;
+        float: left;
+        position: relative;
+        z-index: 1;
+        @media (min-width:1200px) and (max-width:1919px) {
+            padding: .7em
+        }
+
+        .circle-info {
+            width: 12.5em;
+            height: 12.5em;
+            border-radius: 50%;
+            background-color: $color-white; 
+            -webkit-transition: ease .3s; 
+            -o-transition: ease .3s; 
+            transition: ease .3s;
+            @media (min-width:320px)and (max-width:575px) {
+                width: 15em;
+                height: 15em;
+            }
+            @media (min-width:1200px) and (max-width:1400px) {
+                width: 11.8em;
+                height: 11.8em;
+            }
+            @media (min-width:1401px) and (max-width:1600px) {
+                width: 10.3em;
+                height: 10.3em;
+            }
+            
+            .icon-circles {
+                font-size: 3.8em;
+                margin-bottom: .3em;
+                color: $color-primary;
+            }
+
+            .title-circle {
+                color: $color-black;
+                text-align: center;
+                font-size: .8em;
+                margin-bottom: 10px;
+                margin-top: 5px;
+            }
+        }
+        &:hover {
+            .circle-info {
+                background-color: $color-primary;
+                -webkit-transform: scale(1.05);
+                    -ms-transform: scale(1.05);
+                        transform: scale(1.05);
+                .icon-circles,
+                .title-circle {
+                    color: $color-white;
+                }
+            }
+            .btn-vrCircle,
+            .img-spinner {
+                opacity: 1;
+            }
+            .img-spinner {
+                @media (max-width:991px){
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.bg-circle {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-image:url('../../assets/images/icons/bg-circles.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: .5em 0;
+    @media (max-width:575px){
+        display:flex;
+        background-image: none;
+    }
+    @media (min-width:576px) and (max-width:991px){
+        flex-direction: column;
+        background-image: none;
+    }
+    @media (min-width:1601px) and (max-width:1919px) {
+        margin-bottom: 10px;
+    }
+
+}
+.cntent-scale {
+    @media (min-width:576px) and (max-width:991px){
+        display:flex;
+    }
+    @media (min-width:1000px) and (max-width:1200px) {
+        transform: scale(.8)
+    }
+    @media (min-width:1300px) and (max-width:1400px) {
+        transform: scale(.95)
+    }
+    @media (min-width:1401px) and (max-width:1600px) {
+        transform: scale(.98)
+    }
+    @media (min-width:1601px) and (max-width:1919px) {
+        transform: scale(.8)
+    }
+}
+.content-svg {
+    width: 3.8em;
+    height: initial;
+    svg {
+        width: 100%;
+    }
+    &:last-child {
+        width: 3em;
+    }
+}
+.path {
+    fill:none;
+    stroke:#6eb344;
+    stroke-width:1.8;
+}
+.circles-content:hover .path {
+    stroke: #fff;
+}
+.svg-icon{
+    stroke-dasharray: 3000px;
+    stroke-dashoffset: 3000px;
+    animation: draw 30s linear forwards .5s;
+}
+@supports (-ms-ime-align:auto) {
+    .svg-icon{
+        stroke-dasharray: 0;
+        stroke-dashoffset: 0;
+        animation: draw 50s linear forwards 1s;
+    }
+    .content-svg {
+        height: 4.5em;
+    }
+}
+@media screen and (min-width:0\0) {
+    .svg-icon{
+        stroke-dasharray: 0;
+        stroke-dashoffset: 0;
+        animation: draw 50s linear forwards 2s;
+    }
+    .content-svg {
+        height: 4.5em;
+    }
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0
+      }
+}
+  
+    

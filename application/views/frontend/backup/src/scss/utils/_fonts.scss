@@ -1,0 +1,114 @@
+/*@font-face {
+    font-family: 'montserratbold';
+    src: url('../../../assets/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+         url('../../../assets/fonts/montserrat-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}*/
+@font-face {
+  font-family: 'montserratblack';
+  src: url('../../assets/fonts/montserrat-black-webfont.woff2') format('woff2'),
+       url('../../assets/fonts/montserrat-black-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+@font-face {
+    font-family: 'montserratmedium';
+    src: url('../../assets/fonts/montserrat-medium-webfont.woff2') format('woff2'),
+         url('../../assets/fonts/montserrat-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+  font-family: 'montserratregular';
+  src: url('../../assets/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+       url('../../assets/fonts/montserrat-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../../assets/fonts/icomoon/icomoon.eot?wm41e8');
+  src:  url('../../assets/fonts/icomoon/icomoon.eot?wm41e8#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/icomoon/icomoon.ttf?wm41e8') format('truetype'),
+    url('../../assets/fonts/icomoon/icomoon.woff?wm41e8') format('woff'),
+    url('../../assets/fonts/icomoon/icomoon.svg?wm41e8#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-flecha:before {
+  content: "\e906";
+}
+.icon-cuidado-hogar:before {
+  content: "\e905";
+}
+.icon-hamburger:before {
+  content: "\e900";
+}
+.icon-asesoria:before {
+  content: "\e901";
+}
+.icon-calidad:before {
+  content: "\e902";
+}
+.icon-clientes:before {
+  content: "\e903";
+}
+.icon-cond-de-pago:before {
+  content: "\e904";
+}
+.icon-cuidado-personal:before {
+  content: "\e908";
+}
+.icon-despacho:before {
+  content: "\e909";
+}
+.icon-email:before {
+  content: "\e90a";
+}
+.icon-ind-alimentaria:before {
+  content: "\e90b";
+}
+.icon-info-de-mercad:before {
+  content: "\e90c";
+}
+.icon-info-de-tend:before {
+  content: "\e90d";
+}
+.icon-nutricion:before {
+  content: "\e90e";
+}
+.icon-phone-f:before {
+  content: "\e90f";
+}
+.icon-phone-h:before {
+  content: "\e910";
+}
+.icon-suministro:before {
+  content: "\e911";
+}
+.icon-ubicacion:before {
+  content: "\e912";
+}
+.icon-close:before {
+  content: "\ea0f";
+}

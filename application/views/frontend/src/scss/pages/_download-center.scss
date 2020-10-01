@@ -1,0 +1,45 @@
+.slider-dscg{
+    &.downdload-center{
+        .wrapper-cards-products{
+            .img-cnt{
+                width: auto;
+            }
+            .content-title-card{
+                .h2-title {
+                    font-size: 1.143em;
+                }
+                .subtitle-card{
+                    font-size: 0.735em;
+                    margin-bottom: 0;
+                }
+                .btn-dscg{
+                    margin-top: 1em;
+                }
+            } 
+            .icon-descargar{
+                font-size: 4em;
+            }
+            .content-img-card{
+                height: auto;
+            }
+        }
+        .slick-slide {
+            >div{
+                padding: 0 2em;
+            }
+        }
+    }
+}
+.sct-download {
+    .rsp-slct{
+        margin-bottom: 3em;
+    }
+    .title-border {
+        &:after {
+            display: none;
+        }
+    }
+    .breadcrumb {
+        margin-top: 2.1em;
+    }
+}

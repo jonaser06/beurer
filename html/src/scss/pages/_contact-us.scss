@@ -1,0 +1,35 @@
+.wrapper-info-form {
+    >.row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .info-form {
+        margin-bottom: 1.2rem;
+        .titles-info-form{
+            font-size: 1rem;
+        }
+        .rds-form {
+            .icon-rs-form {
+                font-size: 1.7rem;
+                margin-right: 1.5rem;
+                color: $color-blacklight;
+                transition: .3s;
+                &:hover{
+                    color: $color-primary;
+                }
+            }
+        }
+    }
+}
+.sct-form-contact{
+    padding-top: 4em;
+
+    .map-beurer{
+        width: 100%;
+        margin-top: 5em;
+
+        iframe{
+            width: 100%;
+        }
+    }
+}

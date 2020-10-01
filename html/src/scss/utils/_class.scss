@@ -1,0 +1,132 @@
+.h100 {
+    height: 100%;
+}
+/*************
+    FUENTES
+**************/
+.font-nexaheavy {
+    font-family: $font-primary;
+}
+.font-nexaregular {
+    font-family: $font-secondary;
+}
+.font-light {
+    font-family: $font-light;
+}
+.font-bold {
+    font-family: $font-bold;
+}
+/***************
+    POSITION
+****************/
+.pos-rel {
+    position: relative;
+}
+/*************
+    DISPLAY
+*************/
+.d-in-block{
+    display: inline-block;
+}
+.d-block{
+    display: block;
+}
+.d-table{
+    display: table;
+}
+.d-t-cell{
+    display: table-cell;
+}
+.v-align-midd{
+    vertical-align: middle;
+}
+
+/*************
+    PADDING
+*************/
+.px-0 {
+    padding-right: 0;
+    padding-left: 0;
+}
+.px-1{
+    padding-right: 1px;
+    padding-left: 1px;
+}
+/*************
+    FLOAT
+*************/
+.float-r{
+    float: right;
+}
+
+/*************
+    MARGIN
+*************/
+.mt-0{
+    margin-top: 0;
+}
+.m-auto{
+    margin: auto;
+}
+
+/******************
+    COLORS / BG
+******************/
+.color-bienestar{
+    color: $color-bienestar !important;
+}
+.color-salud{
+    color: $color-salud !important;
+}
+.color-belleza{
+    color: $color-belleza !important;
+}
+.color-actividad{
+    color: $color-actividad !important;
+}
+.color-linea-bb{
+    color: $color-linea-bb !important;
+}
+.bg-primary{
+    background-color: $color-primary;
+}
+.bg-belleza{
+    background-color: $color-belleza !important;
+}
+.bg-actividad{
+    background-color: $color-actividad !important;
+}
+.bg-salud{
+    background-color: $color-salud !important;
+}
+.bg-bienestar{
+    background-color: $color-bienestar !important;
+}
+.bg-linea-bb{
+    background-color: $color-linea-bb !important;
+}
+/*************
+    BORDER
+*************/
+.border-bienestar{
+    border-color: $color-bienestar !important;
+}
+.border-salud{
+    border-color: $color-salud !important;
+}
+.border-belleza{
+    border-color: $color-belleza !important;
+}
+.border-actividad{
+    border-color: $color-actividad !important;
+}
+.border-linea-bb{
+    border-color: $color-linea-bb !important;
+}
+.border-bienestar,
+.border-salud,
+.border-belleza,
+.border-actividad,
+.border-linea-bb{
+    border: 2px solid;
+}

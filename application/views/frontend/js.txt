@@ -1,0 +1,76 @@
+<script>
+    $(document).ready(function(){
+        $(".d-menu").click(function(event){
+            $(".content-nav").toggleClass("caida");
+        });
+    });
+
+    $(document).ready(function(){
+        $(".d-menu1").click(function(event){
+            $(".content-nav").addClass("caida1");
+        });
+        $(".d-menu1").mouseout(function(event){
+            $(".content-nav").removeClass("caida1");
+        });
+        
+        
+    });
+    $(document).ready(function(){
+        $(".d-menu2").click(function(event){
+            $(".content-nav").addClass("caida2");
+        });
+        $(".d-menu2").mouseout(function(event){
+            $(".content-nav").removeClass("caida2");
+        });
+        
+    });
+    $(document).ready(function(){
+        $(".d-menu3").mouseover(function(event){
+            $(".content-nav").toggleClass("caida3");
+        });
+        $(".d-menu3").mouseout(function(event){
+            $(".content-nav").removeClass("caida3");
+        });
+        
+    });
+    $(document).ready(function(){
+        $(".d-menu4").mouseover(function(event){
+            $(".content-nav").toggleClass("caida4");
+        });
+        $(".d-menu4").mouseout(function(event){
+            $(".content-nav").removeClass("caida4");
+        });
+    });
+    $(document).ready(function(){
+        $(".d-menu5").click(function(event){
+            $(".content-nav").toggleClass("caida5");
+        });
+        $(".d-menu5").mouseout(function(event){
+            $(".content-nav").removeClass("caida5");
+        });
+    });
+</script>
+
+                            <!-- <div class="wrapper col-xs-4 px-0">
+                                <div class="cols">
+                                    <div class="col" ontouchstart="this.classList.toggle('hover');">
+                                        <div class="containers">
+                                            <div class="front"
+                                                style="background-image: url(../../assets/images/card-products/sueño-y-descanso.jpg)">
+                                                <div class="inner">
+                                                    <h2>sueño <br>y descanso</h2>
+                                                </div>
+                                            </div>
+                                            <div class="back" style="background-image: url(../../assets/images/card-products/sueño-y-descanso.jpg)">
+                                                <div class="inner">
+                                                    <div class="info-hp">
+                                                        <h2>sueño <br>y descanso</h2>
+                                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                            Alias cum repellat velit quae suscipit c.</p>    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->

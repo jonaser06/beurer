@@ -1,0 +1,13 @@
+.breadcrumb {
+    background-color: transparent;
+    .item-bradcrumb {
+        .link-bradcrumb {
+            font-size: .8rem;
+
+            &.active {
+                color: $color-primary;
+                font-family: $font-bold;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+[17-Feb-2020 18:04:56 America/Lima] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home4/exeperu/public_html/clientes/beurer/test/mgr/filemanager/include/php_image_magician.php on line 367
+[09-Apr-2020 15:01:44 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[16-Apr-2020 23:33:35 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[16-Apr-2020 23:38:05 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[17-Apr-2020 00:19:25 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[17-Apr-2020 02:19:39 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[17-Apr-2020 04:34:40 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[17-Apr-2020 06:12:43 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[17-Apr-2020 08:58:11 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[19-Apr-2020 04:16:19 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[19-Apr-2020 19:44:38 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[21-Apr-2020 13:34:50 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[21-Apr-2020 15:09:59 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[24-Apr-2020 19:13:11 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[28-Apr-2020 11:37:07 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92
+[17-Jul-2020 14:49:30 America/Lima] PHP Warning:  mime_content_type(): Empty filename or path in /home4/ludgacom/public_html/beurer/mgr/filemanager/upload.php on line 92

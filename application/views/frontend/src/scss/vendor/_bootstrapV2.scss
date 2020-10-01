@@ -1,0 +1,23 @@
+.container {
+    width: 83%;
+    @media (max-width:575px){
+        width: 95% !important;
+    }
+}
+
+@media (min-width: 1200px){
+    .col-1-5 {
+        width: 19%;
+    }
+    .col-1-6 {
+        width: 24%;
+    }
+    .col-1-5,
+    .col-1-6 {
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
