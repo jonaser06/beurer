@@ -5,8 +5,8 @@
         <section class="sct-banner-products pos-rel" id="section0">
             <img src="assets/images/banner/product-bienestar.jpg" alt="" class="img-cover">
             <div class="container content-title-banner">
-                <h3 class="title-peq-bproducts font-bold text-uppercase">Nos preocupamos</h3>
-                <h2 class="title-b-products font-bold text-uppercase">por su actividad</h2>
+                <h3 class="title-peq-bproducts font-bold text-uppercase">Nos preocupamos.</h3>
+                <h2 class="title-b-products font-bold text-uppercase">por su actividad.</h2>
             </div>
         </section>
         <section class="sct-products container-fluid bg-productss">
