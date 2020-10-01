@@ -82,7 +82,7 @@
                                     <ul class="col-xs-12 col-md-5 visible-md visible-lg">
                                         <li><a href="<?php echo base_url('nosotro'); ?>s" class="link-menu-hamb font-nexaheavy">quienes somos</a></li>
                                         <li><a href="<?php echo base_url('contactanos'); ?>" class="link-menu-hamb font-nexaheavy">Contacto</a></li>
-                                        <li><a href="#" class="font-nexaheavy nolink">Ayuda al cliente::</a>
+                                        <li><a href="#" class="font-nexaheavy nolink">Ayuda al cliente:::</a>
                                             <ul class="sub-m">
                                                 <li><a href="<?php echo base_url('preguntas-frecuentes'); ?>" class="link-subm-hamb font-nexaregular">FAQ</a></li>
                                                 <!-- <li><a href="<?php echo base_url('instrucciones-de-uso'); ?>" class="link-subm-hamb font-nexaregular">Instrucciones de uso</a> </li>-->
