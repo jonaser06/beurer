@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="principal" style="background-color:rgba(255,255,255,0.5);">
 
 <head>
     <meta charset="UTF-8">
@@ -36,92 +36,102 @@
     </script>
 </head>
 
-<body>
+<body style="background-color:rgba(255,255,255,0);">
     <?php  $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));     ?>
-    <div class="wrapper-header">
+    <div class="wrapper-header" id="cabecera">
         <header class="header">
             <div class="container-fluid menu-one px-0">
-                <div class="container">
+                <div class="container" style="width:100% !important; padding-left:5%;">
                     <div class="row">
-                        <div class="col-sm-4 hidden-xs">
+                        <div class="col-md-5 col-sm-3 col-xs-3 hidden-sm hidden-xs izquierdo">
                             <ul class="list-rs">
                                 <li class="">
-                                    <a href="<?php echo $confif['facebook']; ?>" class="icn icon-h icon-facebook"
-                                        target="_blank"></a>
-                                    <a href="<?php echo $confif['instagram'] ?>" class="instg" target="_blank"><img
-                                            src="<?= base_url('assets/images/icons/instagram.svg'); ?>" alt=""
-                                            class="icn icon-instg"></a>
-                                    <a href="<?php echo $confif['youtube'] ?>" class="icn icon-h icon-youtube"
-                                        target="_blank"></a>
+                                    <a href="<?php echo $confif['facebook']; ?>" class="icn icon-h icon-facebook" target="_blank"></a>
+                                    <a href="<?php echo $confif['instagram'] ?>" class="instg icon-h" target="_blank"><img src="<?= base_url('assets/images/icons/instagram.svg'); ?>" alt="" class="icn icon-instg"></a>
+                                    <a href="<?php echo $confif['youtube'] ?>" class="icn icon-h icon-youtube" target="_blank"></a>
                                 </li>
-                                <li class=""><a
-                                        href="https://api.whatsapp.com/send?phone=+51<?php echo trim($confif['whatsapp'])  ?>"
-                                        class="icon-h icon-wts" target="_blank"></a><span
-                                        class="font-nexaregular n-phone visible-lg"><?php echo $confif['numero_t']; ?></span>
-                                </li>
+                                <li class="">
+                                    <a href="https://api.whatsapp.com/send?phone=+51<?php echo trim($confif['whatsapp'])  ?>" class="icon-h icon-wts" target="_blank"></a>
+                                    <span class="font-nexaregular n-phone visible-lg number"><?php echo $confif['numero_t']; ?></span>
+                                </li> 
                             </ul>
                         </div>
-                        <div class="col-xs-7 col-sm-4 pos-mob">
+                        <div class="col-xs-4 col-sm-3 col-md-3 pos-mob" style="margin-left:-3%;">
                             <div class="img-logo">
-                                <a href="<?= base_url(); ?>"><img
-                                        src="<?= base_url('assets/images/logos/logo-beurer.svg'); ?>" alt=""
-                                        style="max-width:225px;"></a>
+                                <a href="<?= base_url(); ?>"><img src="<?= base_url('assets/images/logos/logo-beurer.svg'); ?>" alt="" style="max-width:225px;"></a>
                             </div>
                         </div>
-                        <div class="col-xs-5 col-sm-4 pos-inh box-search">
-                            <div class="text-right txt-mob">
-                                <form class="div-search d-in-block" method="POST"
-                                    action="<?= base_url('productos/resultado/') ?>">
-                                    <input type="text" class="input-search search_get" name="search_get"
-                                        placeholder="¿Qué estas buscando?" autocomplete="off">
+                        <div class="col-xs-8 col-sm-5 pos-inh box-search">
+                            <div class="text-right txt-mob derecho" style="margin-right:-3%;">
+                                <form class="div-search d-in-block" method="POST" action="<?= base_url('productos/resultado/') ?>">
+                                    <input type="text" class="input-search search_get" name="search_get" placeholder="¿Qué estas buscando?" autocomplete="off" style="font-size:0.9em; text-align:center; width:0px;">
                                     <span class="icon-h icon-lupa btn-search"></span>
-                                    <button type="submit"
-                                        class="bsc-btn hidden-md hidden-lg font-nexaregular">BUSCAR</button>
+                                    <button type="submit" class="bsc-btn hidden-md hidden-lg font-nexaregular">BUSCAR</button>
                                 </form>
                                 <i id="button-menu" class="icon-hamb-open"></i>
                                 <div class="result_buscador">
-                                    <ul id="show_result">
-
-                                    </ul>
+                                    <ul id="show_result"></ul>
                                 </div>
                             </div>
 
                         </div>
+                        <div class="col-xs-3 col-sm-4 col-md-4 pos-mob hidden-xs">
+                            <div class="utl1">
+                                <a href="carrito.php"><img src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt="" style="max-width:36px;"></a>
+                            </div>
+                            <div class="utl2">
+                                <a onclick="loginn()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:36px;"></a>
+                            </div>
+                            <div class="utl3">    
+                                <a href="rastrea-pedido.php"><img src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt="" style="max-width:48px;"></a>
+                            </div>
+                        </div>
+                        <div class="menu-hamb" style=" justify-content:right; display:grid; right:70%; padding-right:2%;">                            
+                            <div class="row">
+                                <div class="col-md-3 offset-md-6" style="  top:-6%;">
+                                    <div class="login" style="display:none;">
+                                        <h2 class="login-header">INICIA SESIÓN</h2>
+                                        <form class="login-container" action="panel-usuario.php">
+                                            <p><input type="email" style="text-align:center;" placeholder="Email o DNI"></p>
+                                            <p><input type="password" style="text-align:center;" placeholder="Contraseña"></p>
+                                            <div class="checkbox" style=" text-align:left; padding-left:5px;">
+                                                <label class="font-light label-pol" style="display:inline;">
+                                                <input type="checkbox" id="costo-envioc"/><i class="helper"></i>
+                                                </label>
+                                                <div style="display:inline-block; font-size:.9em;">Recuérdame</div>
+                                            </div>
+                                            <p style="padding-top:0px !important;margin-top:0px;"><input class="btn btn-primary1" type="submit" value="Iniciar sesión" style="padding:0;"></p>
+                                            <p><a href="#">¿Ha olvidado la contraseña?</a></p>
+                                            <hr style="margin-top:0px;">
+                                            <div style="text-align:center;">
+                                                <a class="btn btn-primary1" href="#" style="color:white;"> Deseo registrarme</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div class="menu-hamb">
+                        <div class="menu-hamb" style="display:none;">
                             <div class="container">
                                 <div class="row">
                                     <ul class="col-xs-12 col-md-5 visible-md visible-lg">
-                                        <li><a href="<?= base_url('salud'); ?>"
-                                                class="link-menu-hamb font-nexaheavy">salud</a></li>
-                                        <li><a href="<?= base_url('bienestar'); ?>"
-                                                class="link-menu-hamb font-nexaheavy">bienestar</a></li>
-                                        <li><a href="<?= base_url('belleza'); ?>"
-                                                class="link-menu-hamb font-nexaheavy">belleza</a></li>
-                                        <li><a href="<?= base_url('actividad'); ?>"
-                                                class="link-menu-hamb font-nexaheavy">actividad</a></li>
-                                        <li><a href="<?= base_url('linea-bebe'); ?>"
-                                                class="link-menu-hamb font-nexaheavy">línea bebé</a></li>
+                                        <li><a href="<?= base_url('salud'); ?>" class="link-menu-hamb font-nexaheavy">salud</a></li>
+                                        <li><a href="<?= base_url('bienestar'); ?>" class="link-menu-hamb font-nexaheavy">bienestar</a></li>
+                                        <li><a href="<?= base_url('belleza'); ?>" class="link-menu-hamb font-nexaheavy">belleza</a></li>
+                                        <li><a href="<?= base_url('actividad'); ?>" class="link-menu-hamb font-nexaheavy">actividad</a></li>
+                                        <li><a href="<?= base_url('linea-bebe'); ?>" class="link-menu-hamb font-nexaheavy">línea bebé</a></li>
                                     </ul>
                                     <ul class="col-xs-12 col-md-5 visible-md visible-lg">
-                                        <li><a href="<?php echo base_url('nosotro'); ?>s"
-                                                class="link-menu-hamb font-nexaheavy">quienes somos</a></li>
-                                        <li><a href="<?php echo base_url('contactanos'); ?>"
-                                                class="link-menu-hamb font-nexaheavy">Contacto</a></li>
-                                        <li><a href="#" class="font-nexaheavy nolink">Ayuda al cliente:::</a>
+                                        <li><a href="<?php echo base_url('nosotro'); ?>s" class="link-menu-hamb font-nexaheavy">quienes somos</a></li>
+                                        <li><a href="<?php echo base_url('contactanos'); ?>" class="link-menu-hamb font-nexaheavy">Contacto</a></li>
+                                        <li><a href="#" class="font-nexaheavy nolink">Ayuda al cliente</a>
                                             <ul class="sub-m">
-                                                <li><a href="<?php echo base_url('preguntas-frecuentes'); ?>"
-                                                        class="link-subm-hamb font-nexaregular">FAQ</a></li>
+                                                <li><a href="<?php echo base_url('preguntas-frecuentes'); ?>" class="link-subm-hamb font-nexaregular">FAQ</a></li>
                                                 <!-- <li><a href="<?php echo base_url('instrucciones-de-uso'); ?>" class="link-subm-hamb font-nexaregular">Instrucciones de uso</a> </li>-->
-                                                <li><a href="<?php echo base_url(''); ?>centro-de-descargas"
-                                                        class="link-subm-hamb font-nexaregular">Centro de descargas</a>
-                                                </li>
-                                                <li><a href="<?php echo base_url('terminos-y-condiciones'); ?>"
-                                                        class="link-subm-hamb font-nexaregular">Términos y
-                                                        condiciones</a></li>
-                                                <li><a href="<?php echo base_url('politicas-de-privacidad'); ?>"
-                                                        class="link-subm-hamb font-nexaregular">Políticas de
-                                                        privacidad</a></li>
+                                                <li><a href="<?php echo base_url(''); ?>centro-de-descargas" class="link-subm-hamb font-nexaregular">Centro de descargas</a></li>
+                                                <li><a href="<?php echo base_url('terminos-y-condiciones'); ?>"class="link-subm-hamb font-nexaregular">Términos y condiciones</a></li>
+                                                <li><a href="<?php echo base_url('politicas-de-privacidad'); ?>" class="link-subm-hamb font-nexaregular">Políticas de privacidad</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -136,9 +146,7 @@
                                                         $link = array('', 'salud/', 'bienestar/', 'belleza/', 'actividad/', 'linea-bebe/');
                                                         $num = 1;
                                                         if ($menu['menu_list']) {
-                                                            foreach ($menu['menu_list'] as $row) {
-
-                                                         
+                                                            foreach ($menu['menu_list'] as $row) {    
                                                     ?>
                                                     <li class="nav-header">
                                                         <a href="#" data-toggle="collapse"
