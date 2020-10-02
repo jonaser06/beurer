@@ -133,7 +133,7 @@ window.onload = function() {
         }
 
 
-        setTimeout(myFunction, 0);
+        setTimeout(myFunction, 1000);
        
         
    

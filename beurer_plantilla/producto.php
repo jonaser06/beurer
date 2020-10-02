@@ -3,6 +3,11 @@
 include 'src\includes\header.php'
 ?>
 
+<style>
+body{
+    background-color:#fff !important;  
+}
+</style>
 <main class="main-detail-products">
         
 <section class="sct-detail-products">
@@ -101,7 +106,7 @@ include 'src\includes\header.php'
                             
 		<div class="cantidad_btn" style="display:inline-block;">
 							<button id="dism" style="margin:0 2%;" onclick="disminuir()">-</button>
-                            <input class="form-control-field"  name="pwd" value="1" type="text" id="cantidad_prod"  min="1" style="width:10%; text-align:center;" readonly>
+                            <input class="form-control-field"  name="pwd" value="1" type="text" id="cantidad_prod"  min="1" style="padding:0px;width:10%; text-align:center;" readonly>
                             <button id="aum" style="margin:0 2%;" onclick="aumentar()">+</button>
 		</div>
                             <br> <br>

@@ -2,6 +2,30 @@
 include 'src\includes\header.php'
 ?>  
 
+<style>
+
+@media (max-width: 700px)  {
+.quantity{
+  width:40% !important;
+}
+
+.quantity input{
+  text-decoration:underline;
+}
+
+.rsubtotal{
+  width:60% !important;
+}
+
+
+
+.bloque-contacto{
+  width:100% !important;
+}
+}
+
+</style>
+
 
 <main class="main-detail-products"  >
 	<!--Inicio de cuerpo-->
@@ -69,7 +93,7 @@ include 'src\includes\header.php'
     <p class="font-nexaheavy" style="font-size:1.2rem;color:black;"> Recibirás una confirmación a través de tu correo electrónico con el resumen del pedido. </p>
     </div>
     <div style="text-align:center;">
-        <div class="row paso3" style="text-align:left; margin:auto; width:85%">
+        <div class="row paso3" style="text-align:left; margin:auto; width:85%;background-color:white;border-radius:20px;">
         <div class="col-md-12" style="background-color:white; border-radius:25px;padding:2.5% 3.5%;">
         <div class="titulo" style="height:100%;margin-left:0%;font-weight:bold;font-size:1.7rem;border-left:5px solid #c51152; padding-left:1%;" >INFORMACIÓN DE PEDIDO </div>
                 
@@ -95,7 +119,7 @@ include 'src\includes\header.php'
 
     <div class="basket" style="padding:0px;width:100%;" >
       
-      <div  style="background-color:white;border-radius:25px;float:left;padding:.5rem 2rem;margin-bottom:3%;">
+      <div  style="background-color:white;border-radius:25px;float:left;padding:.5rem 0rem;margin-bottom:3%;">
       <div class="titulo font-nexaheavy" style="font-size:1rem;margin-top:2%;float:left;margin-left:2%;padding-left:1% !important;border-left:2px solid #c51152;" >Productos seleccionados en carrito de compras</div>
       <div class="basket-labels" style="text-align:center;">
         <ul>  
@@ -205,7 +229,7 @@ include 'src\includes\header.php'
     </div>
         </div>
 
-        <div class="row" style="width:85%;margin:auto;">
+        <div class="row bloque-contacto" style="width:85%;margin:auto;">
     <div class="col-md-12">
         <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;min-height:14rem;width:29.33333333%;margin:2%;padding:2em;">
         <div class="font-bold" style="font-size:1.92em;text-align:center;">Chatea con nosotros</div>

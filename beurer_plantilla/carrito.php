@@ -671,8 +671,8 @@
 
     .loader {
       position: relative;
-      width: 15em;
-      height: 15em;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       margin: 0px;
       display: inline-block;
@@ -848,16 +848,16 @@
 
     @media screen and (min-width: 700px) {
       .loader {
-        flex-basis: 33.33%;
-        max-width: 33.33%;
+        flex-basis: 100%;
+        max-width: 100%;
       }
     }
 
 
     /* loader default-01 */
     .default .loader-container {
-      width: 120px;
-      height: 120px;
+      width: 250px;
+      height: 250px;
     }
 
     .default .ball {
@@ -919,8 +919,8 @@
     .default-01 .ball::before {
       top: 0;
       left: 0;
-      width: 80%;
-      padding-bottom: 80%;
+      width: 75%;
+      padding-bottom: 75%;
       border-radius: 50%;
       background-color: #ffc7bd;
       transform: translateZ(0);
@@ -1195,25 +1195,25 @@
                 style="margin-top:2%;margin-left:2%;padding-left:1% !important;border-left:2px solid #c51152;">INGRESA
                 TUS DATOS</div>
               <br>
-              <div class="col-md-4" style="padding-left:2% !important;">
+              <div class="col-md-4" style="padding-left:2% !important; margin-bottom:10%;">
                 <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Nuevos clientes</div>
                 <span class="font-light">¿Eres nuevo? Regístrate aquí y compra ahora. </span>
-                <br><br><br><br><br>
+                <br><br>
                 <span><a class="btn btn-cmn" href="producto.php"
                     style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a></span>
 
               </div>
-              <div class="col-md-4"
-                style="border-left:1px solid rgba(169,169,169,0.5);border-right:1px solid rgba(169,169,169,0.5);padding-left:2% !important;">
+              <div class="col-md-4 compra-sin-clave"
+                style="border-left:1px solid rgba(169,169,169,0.5);border-right:1px solid rgba(169,169,169,0.5);padding-left:2% !important; margin-bottom:10%;">
                 <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Compra sin clave</div>
                 <span class="font-light">Solo te pediremos algunos datos para el despacho. No serán guardados para tu
                   próxima compra. </span>
-                <br><br><br><br>
+                <br><br><br>
                 <span><a class="btn btn-cmn" href="producto.php"
                     style="width:80%;padding:7px 0px;font-size:1em;">CONTINUAR SIN REGISTRARSE</a></span>
               </div>
               <div class="col-md-4" style="padding-left:2% !important;">
-                <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Compra sin clave</div>
+                <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Inicia sesión</div>
                 <span class="font-light">Inicia sesión para caja rápida. </span>
                 <form class="login-container" style="padding:12px 0px;" action="panel-usuario.php">
                   <p class="font-light" style="line-height:0px;">Correo Electrónico</p>
@@ -1707,6 +1707,7 @@
         <div class='ball'></div>
         <div class='ball'></div>
         <div class='ball'></div>
+        <img src='assets/images/logotipo-beurer.png' style="width:80%;height:auto;padding:3%;margin-top:11%;">
       </div>
     </div>
 

@@ -18,9 +18,13 @@ include 'src\includes\header.php'
 			
 	<br>	
 		
-	<div class="formulario" style="text-align:center;" >
+	<div class="formulario" style="text-align:center;padding-top: 0px;
+    max-width: 920px;
+    border-radius: 8%;
+    margin: auto;
+    padding-bottom: 2%;" >
 	
-    <h1 style="background-color:#c51152; color:white;font-size:2.3em;font-weight:bold; padding-top:1%;padding-bottom:1%;padding-left:2%;">REGISTRO DE CLIENTE BEURER</h1>
+    <h1 style="background-color:#c51152; color:white;font-size:2.3em;font-weight:bold; padding-top:1%;padding-bottom:1%;padding-left:2%;margin-top:0px;border-radius: 25px 25px 1px 1px;">REGISTRO DE CLIENTE BEURER</h1>
 
 	<div class="linea"></div>	<br><br>
    
