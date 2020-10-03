@@ -968,7 +968,7 @@ select
 		color:black;
 		padding-left:0%;
 		vertical-align:middle;
-		font-size:30px;
+		font-size:2em;
 		font-family: "nexaheavyuploaded_file";
 	}
 
@@ -1201,6 +1201,11 @@ select
 		width:98% !important;
 	}
 
+	/*Provisional */
+	 /* .menu-enl  .menu-mobile{
+		display:none ; */
+	} 
+	/*Provisional */
 
 	.colors {
 		height:100%;
@@ -1453,11 +1458,14 @@ li.subtotal:before {
 }
 
 .info-prod img{
-	display:inline-block;width:25.5%;height:auto;margin-right:3%;padding-bottom:4%;
+	display:inline-block;
+	/*width:25.5%;*/
+	width:6vh;
+	height:auto;margin-right:3%;padding-bottom:4%;
 }
 
 .basket-product .subtotal{
-	color:black; font-size: 1.85em;font-family:'nexaheavyuploaded_file';
+	color:black; font-size: 1.8em;font-family:'nexaheavyuploaded_file';
 }
 
 
@@ -1590,6 +1598,9 @@ li.subtotal:before {
     width: 100%;
     margin-left:0% !important;
   }
+  #aum,#dism{
+	  height:2.5em;
+  }
   .basket-labels {
     display: none;
   }
@@ -1602,16 +1613,19 @@ li.subtotal:before {
   .product-image {
     width: 40%;
   }
+  .price{
+	  width:100%;
+	  margin-bottom:3%;
+  }
   .product-details {
     width: 60%;
   }
-  .price,
   .subtotal {
-    width: 33%;
+    width: 40%;
   }
   .quantity {
     text-align: center;
-    width: 34%;
+    width: 60%;
   }
   .quantity-field {
     float: none;
@@ -1620,7 +1634,8 @@ li.subtotal:before {
     bottom: 0;
     text-align: left;
     margin-top: 0.75rem;
-    position: relative;
+	position: relative;
+	text-align:right;;
   }
   .remove button {
     padding: 0;
@@ -1628,6 +1643,10 @@ li.subtotal:before {
   .summary {
     margin-top: 1.25rem;
     position: relative;
+  }
+  .compra-sin-clave{
+	  border-left:0 none !important;
+	  border-right:0 none !important;
   }
 }
 
@@ -2112,6 +2131,10 @@ background-color:#c51152 !important;
 	.paso3{
 		width: 92% !important;
 	}
+	´
+	.compra-sin-clave{
+		border:0 none !important;
+	}
 }
 @media (max-width: 640px)  {
 .dv-segui{
@@ -2169,3 +2192,11 @@ background-color:#c51152 !important;
     font-size:1rem;
     font-weight:bold;
 }
+
+.paso3 li{
+	color:black;
+  }
+
+
+
+

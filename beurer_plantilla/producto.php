@@ -8,8 +8,7 @@ body{
     background-color:#fff !important;  
 }
 </style>
-<main class="main-detail-products">
-        
+<main class="main-detail-products">  
 <section class="sct-detail-products">
             <div class="container cont-detail-products">
                  <div class="row">

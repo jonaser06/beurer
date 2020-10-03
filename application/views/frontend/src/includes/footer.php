@@ -100,6 +100,7 @@
     </footer>
 </div>
 <script src="<?= base_url(); ?>assets/js/app.js"></script>
+<script src="<?= base_url(); ?>assets/js/app2.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/animate-it.js"></script>
 <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script-->
 <script src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>

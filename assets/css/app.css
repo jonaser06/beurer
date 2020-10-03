@@ -12692,15 +12692,18 @@ button:focus {
 }
 
 .checkbox .helper {
-  color: #c51152;
+  color: white;;
   position: absolute;
+  background-color:#c51152;
+  
   top: 0px;
   left: 0;
   width: 1.3em;
   height: 1.3em;
   z-index: 0;
+  padding:1px;
   border: 0.05em solid currentColor;
-  border-radius: 0.0625rem;
+  border-radius:4px;
   transition: border-color 0.28s ease;
   bottom: 0;
   margin: auto;
@@ -12710,8 +12713,8 @@ button:focus {
 .checkbox .helper::after {
   position: absolute;
   height: 0;
-  width: 0.2rem;
-  background-color: #c51152;
+  width: 0.09rem;
+  background-color: white;
   display: block;
   -webkit-transform-origin: left top;
   transform-origin: left top;
@@ -12758,7 +12761,7 @@ button:focus {
 }
 
 .checkbox input:checked ~ .helper::before {
-  height: 1.7em;
+  height: 1.2em;
   transition-delay: 0.28s;
 }
 
