@@ -17097,7 +17097,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 tabControlIndexes = _.getNavigableIndexes().filter(function(val) {
                     return (val >= 0) && (val < _.slideCount);
                 });
-
+		// console.log(_.$slides);
         _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
             'aria-hidden': 'true',
             'tabindex': '-1'
@@ -19072,14 +19072,30 @@ $(document).ready(function () {
   $('#button-menu').click(function () {
     if ($('#button-menu').attr('class') == 'icon-hamb-open') {
       $('#button-menu').removeClass('icon-hamb-open').addClass('icon-hamb-close');
-      $('.menu-one .menu-hamb').css({
-        'height': '100vh'
+	//  if(window.matchMedia("(max-width: 991px)").matches) {
+	// 	 alert("You are pendeivis");
+	//   $('.menu-mobile , .menu-enl').css({
+    //     'display': 'block !important'
+    //   });}
+	  $('.menu-mobile').css({
+		'display': ''
       });
-      $('.menu-one .menu-hamb').addClass('vh');
+	  $('.menu-one .menu-hamb').addClass('vh');
+	  $('.menu-hamb').css({
+		'height': '100vh',
+		'display':'inherit'
+	  });
+	  if(window.matchMedia("(max-height: 400px)").matches) {
+		$('.menu-hamb').css({
+			'height': '130vh',
+			'display':'inherit'
+		  });
+		}
     } else {
       $('#button-menu').removeClass('icon-hamb-close').addClass('icon-hamb-open');
       $('.menu-one .menu-hamb').css({
-        'height': '0 '
+		'height': '0 ',
+		'display':'none'
       }); // Ocultamos el Menu
 
       $('.menu-one .menu-hamb').removeClass('vh');
@@ -19114,7 +19130,7 @@ $(document).ready(function () {
   $(window).scroll(function () {
     if (screen && screen.width > 1150) {
       var scrollTop = $(window).scrollTop();
-      console.log(scrollTop);
+     // console.log(scrollTop);
 
       if (scrollTop > 319) {
         $('.info-subproduct').addClass('scroll');
@@ -19166,3 +19182,6 @@ module.exports = __webpack_require__(/*! G:\GENESIS\beurer\src\scss\app.scss */"
 /***/ })
 
 /******/ });
+
+
+

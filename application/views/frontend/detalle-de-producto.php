@@ -68,7 +68,7 @@
                                             if(isset($product['imagen'])){
                                             for ($i=0; $i < count($product['imagen']); $i++) { ?> 
                                                 <?php if($i ==0){ ?>
-                                                <section class="tabs_section -open animated growIn"><img src="<?= base_url($product['imagen'][$i]); ?>" alt=""></section>
+                                                <section class="tabs_section -open animated growIn" id="principal-img"><img src="<?= base_url($product['imagen'][$i]); ?>" alt=""></section>
                                                 <?php }else{ ?>
                                                 <section class="tabs_section animated growIn"><img src="<?= base_url($product['imagen'][$i]); ?>" alt=""></section>    
                                                 <?php } ?>
@@ -105,22 +105,39 @@
             
                             <button class="trans-info name-product <?= $color; ?> font-nexaregular"><?= $pagina['pagina']; ?></button>
                             <h2 class="px-0 col-xs-12 title-detail-product font-nexaheavy"><?= $product['titulo']; ?></h2>
-                            <span class="px-0 col-xs-12 subtitle-detail-product font-nexaregular"><?= $product['subtitulo']; ?></span>
-                            <p class="p-internas"><?= $product['contenido']; ?></p>
-                            <h3 class="ttl-encuent font-nexaheavy text-center bg-primary">CÓMPRALO EN:</h3>
-                            <div class="col-xs-12 logos-tiendas">
-                            <?php if (isset($product['marca'])): ?>
-                            <?php foreach (json_decode($product['marca']) as $row): ?>
-                                <a href="<?= $row->enlace ?>" target="_blank">
-                                    <figure class="col-xs-4 col-sm-4">
-                                        <img src="<?= base_url($row->imagen_marcas); ?>" alt="">
-                                    </figure>
-                                </a>
-                            <?php endforeach ?>
-                            <?php endif ?>
-         
+                            <span class="px-0 col-xs-12 subtitle-detail-product font-nexaregular" style="border-bottom:2px solid lightgray;margin-bottom:15px;padding-bottom:15px;"><?= $product['subtitulo']; ?></span>
+                            
+
+
+                            <div style="display:block;"> <img style="display:inline-block;width:10vh;height:8vh;margin-right:3%;padding-bottom:4%;" src="<?= base_url(); ?>assets/images/precio-online.png">
+                            <div class="font-nexaheav text-left" style="display:inline-block;color:#c51152;font-weight:bold; font-size: 2.3em;font-family:'nexaregularuploaded_file';" >S/ <?= $product['precio']; ?></div>	
                             </div>
 
+                            <div class="font-nexaheav text-left " style="font-size:1.1em;font-weight:bold;font-family:'nexa-lightuploaded_file';margin-top:-0.5rem;" >Normal: S/ <?= $product['precio_anterior']; ?></div>
+                            <br>
+                            
+                            <span class="px-0 col-xs-12  font-nexaregular" style="font-size:1.2em; font-family:'nexaheavyuploaded_file';padding-bottom:11px; "> COLORES DISPONIBLES:</span>
+                           
+                                                        <ul class="colors" id="div-colors" style="display:block;">
+                                                            <li class="btn btnprimary1 color active" style="background-color:#c51152;"></li>
+                                                            <li class="btn btnprimary1 color" style="background-color:black"></li>
+                                                            <li class="btn btnprimary1 color" style="background-color:gray"></li>
+                                                            
+                                                        </ul>
+
+                            <div style="margin-top:4px;">
+                            <label style="display:inline-block;font-size:16px;font-family:'nexaregularuploaded_file';font-weight:bold;" >CANTIDAD: </label>
+                            
+                            <div class="cantidad_btn" style="display:inline-block;">
+                                                <button id="dism" style="margin:0 2%;" onclick="disminuir()">-</button>
+                                                <input class="form-control-field"  name="pwd" value="1" type="text" id="cantidad_prod"  min="1" style="padding:0px;width:10%; text-align:center;" readonly>
+                                                <button id="aum" style="margin:0 2%;" onclick="aumentar()">+</button>
+                            </div>
+                                                <br> <br>
+                                                <button  type="button" class="btn btn-cmn" data-toggle="modal" data-target="#DetalleProducto" ><a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1">AÑADIR AL CARRO</a></button>	     
+                                            </div>
+                                            
+                                    <br>
 
 
 
