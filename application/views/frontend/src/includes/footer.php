@@ -99,122 +99,39 @@
         </div>
     </footer>
 </div>
-<script src="<?= base_url(); ?>assets/js/app.js"></script>
-<script src="<?= base_url(); ?>assets/js/app2.js"></script>
-<script src="<?= base_url(); ?>assets/js/libraries/animate-it.js"></script>
-<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script-->
+<div class="popup-ini" id="login" style="display: none;">
+    <div class="popup-inner">
+        <img id="img-popup" src="https://beurer.pe/assets/sources/CANALES DE ATENCION-02.jpg" class="img-responsive" alt="">
+        <button type="button" class="close"><span aria-hidden="true">×</span></button>
+    </div>
+</div>		
+
+
+<script src="<?= base_url(); ?>assets/js/app.min.js"></script>
+<script src="<?= base_url(); ?>assets/js/app2.min.js"></script>
+
+<script src="assets/js/libraries/animate-it.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
+<script src="assets/js/libraries/fancybox.min.js"></script>
+<script src="assets/js/libraries/fullpage.js"></script>
+
 <script>
-    $('.search_get').keyup(function(event) {
-        $('show_result').html('<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" width="30">')
-        $.ajax({
-            url: '<?php echo base_url('productos/search/') ?>'+$(this).val(),
-        })
-        .done(function(data) {
-            $('#show_result').html(data)
-        })
-            .always(function() {
-            console.log("complete");
-        });
-        
-        
-    });
- 
+
+Culqi.publicKey = 'Aquí inserta tu llave pública';
+// Configura tu Culqi Checkout
+Culqi.settings({
+    title: 'BEURER',
+    currency: 'PEN',
+    description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+    amount: 216070
+});
+// Usa la funcion Culqi.open() en el evento que desees
+$('#buy').on('click', function(e) {
+    // Abre el formulario con las opciones de Culqi.settings
     
-    $('.box-search').hover(function(event) {
-        $('#show_result').html('')
-    });
-    
-    if (screen && screen.width > 992) {
-        $(".div-search").mouseover(function(event){
-            $(".input-search").css({
-                'width':'18em',
-                'border-color': '#c51152',
-                'border-radius': '15px',
-
-            })
-        });
-        $(".div-search").mouseout(function(event){
-            $(".input-search").css({
-                'width':'0',
-                'border-color': 'transparent',
-                'border-radius': '0',
-                //'padding': '0'
-            })
-        });
-    }else{
-        $(".div-search").click(function(){
-            $(".input-search").css({
-                "top" : "0" //modificamos el bottom a 0
-            });
-            $(".bsc-btn").css({
-                "opacity": "1",
-                "z-index": "10000"
-            })
-        });
-        $(".div-search").mouseout(function(){
-            $(".input-search").css({
-                "top" : "-100%" //modificamos el bottom a 0
-            });
-            $(".bsc-btn").css({
-                "opacity": "0",
-                "z-index": "-2"
-            })
-        });
-    }
-
-    $(document).ready(function(){
-        if (screen && screen.width > 992) {
-            console.log('hola');
-            $(".d-menu").hover(function(event){
-                
-                $(".content-nav").toggleClass("caida");
-                
-            });
-            $('.link-nav').click(function(e){
-                e.preventDefault();
-            })
-
-            var menuClasess = [1, 2, 3, 4, 5]
-
-            menuClasess.forEach(item => {
-                $('.d-menu' + item).mouseover(function(event){
-                    menuClasess.forEach(el => {
-                        $(".content-nav").removeClass("caida" + el);
-                    })
-                    $(".content-nav").addClass("caida" + item);
-                });
-            });
-
-            console.log($('.menu-one'));
-            $('.menu-one').on('mouseover', function() {
-                $(".content-nav").removeClass("caida");
-            });  
-        }
-    });
-
-    $('#subscribe').submit(function(event){
-        event.preventDefault();
-
-        $.ajax({
-            url: ''+ $(this).attr('action') +'',
-            type: 'POST',
-            data: $(this).serialize(),
-        })
-        .done(function(data) {
-            if(data.resp == true){
-                $('#subscribe').attr('title', ''+data.msj+'');
-                $('#subscribe').attr('data-original-title', ''+data.msj+'');
-
-                $('#subscribe').tooltip('show');
-                $('#subscribe')[0].reset();
-            }else{
-                $('#subscribe').attr('title', ''+data.msj+'');
-                $('#subscribe').attr('data-original-title', ''+data.msj+'');
-                $('#subscribe').tooltip('show');
-            }
-        });
-        
-    });
+    Culqi.open();
+    e.preventDefault();
+});
 
 </script>

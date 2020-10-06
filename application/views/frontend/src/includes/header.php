@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BEURER - <?php if(isset($product['titulo'])){ echo ucfirst(mb_strtolower($product['titulo'])); }if ($varify_product == 1) { echo $product['pagetitle']; }elseif($varify_product == 0){ echo $pagina['pagetitle']; }else{ echo $category[0]['titulo']; } ?>
+    <title>BEURER - <?php if(isset($product['titulo'])){ echo ucfirst(mb_strtolower($product['titulo'])); } if ($varify_product == 1) { echo $product['pagetitle']; }elseif($varify_product == 0){ echo $pagina['pagetitle']; }else{ echo $category[0]['titulo']; } ?>
     </title>
     <meta name="description"
         content="<?php if ($varify_product == 1) { echo $product['meta_description']; }elseif($varify_product == 0){ echo $pagina['meta_description']; } ?>" />
@@ -36,7 +36,7 @@
     </script>
 </head>
 
-<body style="background-color:rgba(255,255,255,0);">
+<body>
     <?php  $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));     ?>
     <div class="wrapper-header" id="cabecera">
         <header class="header">
@@ -104,7 +104,7 @@
                                             <p><a href="#">¿Ha olvidado la contraseña?</a></p>
                                             <hr style="margin-top:0px;">
                                             <div style="text-align:center;">
-                                                <a class="btn btn-primary1" href="#" style="color:white;"> Deseo registrarme</a>
+                                                <a class="btn btn-primary1" href="<?php echo base_url('registro'); ?>" style="color:white;"> Deseo registrarme</a>
                                             </div>
                                         </form>
                                     </div>
@@ -258,7 +258,6 @@
                                                         foreach ($row['subcat'] as $low) {
                                                             if($low['cantidad']>0) {
                                                                 ?>
-
                                                     <div class=" item-desplegable mm-<?= $low['cantidad'] ?>"><a
                                                             href="<?= base_url($link[$num]) . $low['url']; ?>"><?= $low['titulo']; ?></a>
                                                     </div>
