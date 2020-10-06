@@ -26,6 +26,6 @@ class Auth extends MY_Controller
         // exit;
 
         
-        $this->load->view("frontend/registro.php", $this->data);
+        $this->load->view("frontend/registro.php", $this->data, TRUE);
     }
 }
