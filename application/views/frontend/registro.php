@@ -580,7 +580,7 @@
 <!-- <script src="assets/js/registro.js"></script>    -->
 
 
-<?php include 'src\includes\footer.php' ?>
+<?php include 'src/includes/footer.php' ?>
 
 </body>
 
