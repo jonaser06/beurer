@@ -21,6 +21,7 @@ ObjMain = {
     }
 }
 
+
 window.addEventListener('load', () => {
     ObjMain.init();
 } );
