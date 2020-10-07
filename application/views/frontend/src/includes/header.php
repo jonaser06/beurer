@@ -21,6 +21,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/images/logos/favicon.ico'); ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/app_nuevo.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147139498-4"></script>

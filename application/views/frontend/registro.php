@@ -82,8 +82,7 @@
                                         <div class="divTableCell">
                                             <div class="tituloTabla1">Correo electrónico<div class="d_ob">(*)</div>
                                             </div>
-                                            <input type="email" id="c_correo1" size="20" maxlength="30" name="campo1"
-                                                id="correo" value="" required>
+                                            <input type="email" id="c_correo1" size="20" maxlength="30" name="campo1" id="correo" value="" required onkeyup="ObjMain.valida_correo(this);">
                                         </div>
                                     </div>
 

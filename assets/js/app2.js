@@ -847,25 +847,7 @@ $('#dfactura').click(function () {
     }
 });
 
-$("#c_correo1").blur(function () {
 
-
-    var perror = document.getElementById('dp_error');
-    var texto = this.value;
-    var error = document.getElementById('d_error');
-    var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-
-    if (!regex.test(texto)) {
-        perror.style.display = "inline-block";
-        error.innerHTML = "El correo ingresado es inválido";
-
-    } else {
-        perror.style.display = "none";
-        error.innerHTML = "";
-
-    }
-
-});
 
 $('#menor_edad').click(function () {
     var menor_edad = document.getElementById("d_menore");
