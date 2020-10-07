@@ -116,6 +116,8 @@
 <script src="assets/js/libraries/fancybox.min.js"></script>
 <script src="assets/js/libraries/fullpage.js"></script>
 
+<script src="<?= base_url(); ?>assets/js/main.js"></script>
+
 <script>
     /* menu */
     $(document).ready(function () {
