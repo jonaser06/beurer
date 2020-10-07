@@ -187,18 +187,7 @@
             ?>
         </section>
     </main>
-    <!-- Modal >
-    <div class="modal fade" id="PopupPromotions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">  
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <img id="img-popup" src="<?php echo base_url($confif['popup']); ?>" class="img-responsive">
-         
-        </div>
-      </div>
-    </div-->
+    
     
     <script src="assets/js/libraries/fullpage.js"></script>
     <script>
@@ -236,6 +225,7 @@
         
 
     </script>
+    
 </body>
 
 </html>

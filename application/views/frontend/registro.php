@@ -2,7 +2,6 @@
 
 <main class="main-detail-products">
     <!--Inicio de cuerpo-->
-
     <section class="sct-detail-products">
         <div class="container cont-detail-products">
             <div class="row">
@@ -11,25 +10,13 @@
 
         </div>
     </section>
-
-
-
+    
     <br>
-
-    <div class="formulario" style="text-align:center;padding-top: 0px;
-    max-width: 920px;
-    border-radius: 8%;
-    margin: auto;
-    padding-bottom: 2%;">
-
-        <h1
-            style="background-color:#c51152; color:white;font-size:2.3em;font-weight:bold; padding-top:1%;padding-bottom:1%;padding-left:2%;margin-top:0px;border-radius: 25px 25px 1px 1px;">
-            REGISTRO DE CLIENTE BEURER</h1>
+    <div class="formulario" style="text-align:center;padding-top: 0px; max-width: 920px; border-radius: 8%; margin: auto; padding-bottom: 2%;">
+        <h1 style="background-color:#c51152; color:white;font-size:2.3em;font-weight:bold; padding-top:1%;padding-bottom:1%;padding-left:2%;margin-top:0px;border-radius: 25px 25px 1px 1px;"> REGISTRO DE CLIENTE BEURER</h1>
 
         <div class="linea"></div> <br><br>
-
         <br>
-
         <div class="row cont_datos" id="d_formularios1" align="center" style="display:inline-block;width:46em;">
             <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
                 <div class="tab-button-outer">
@@ -510,11 +497,6 @@
         </div>
     </div>
 
-
-
-
-
-
     <div style="text-align:center !important;">
         <div class="checkbox"
             style="display:inline-block;  border:3px solid #c51152; background-color:whitesmoke; display:none;"
@@ -524,17 +506,10 @@
         </div>
     </div>
 
-
-    </div>
-
-    </div>
-
-
     <div class="linea"></div>
 
-    <br>
-    <br>
-    <br>
+    <br><br><br>
+
     <div style="text-align:center">
         <div style="text-align:center !important;">
             <div class="checkbox" style="display:inline-block; " id="d_politicas">
@@ -572,10 +547,6 @@
     <!--Fin de cuerpo-->
 </main>
 
-<script>
-
-
-</script>
 
 <!-- <script src="assets/js/registro.js"></script>    -->
 

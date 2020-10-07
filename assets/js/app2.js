@@ -468,35 +468,7 @@ $("#btn_nb").click(function () {
 
 
 
-$(document).ready(function () {
-    if (screen && screen.width > 992) {
-        console.log('hola');
-        $(".d-menu").hover(function (event) {
 
-            $(".content-nav").toggleClass("caida");
-
-        });
-        $('.link-nav').click(function (e) {
-            e.preventDefault();
-        })
-
-        var menuClasess = [1, 2, 3, 4, 5]
-
-        menuClasess.forEach(item => {
-            $('.d-menu' + item).mouseover(function (event) {
-                menuClasess.forEach(el => {
-                    $(".content-nav").removeClass("caida" + el);
-                })
-                $(".content-nav").addClass("caida" + item);
-            });
-        });
-
-        console.log($('.menu-one'));
-        $('.menu-one').on('mouseover', function () {
-            $(".content-nav").removeClass("caida");
-        });
-    }
-});
 
 $('#subscribe').submit(function (event) {
     event.preventDefault();
