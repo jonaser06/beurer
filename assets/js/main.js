@@ -4,7 +4,7 @@
 */
 ObjMain = {
     init: ()=>{
-        /* Eventos */
+        
     },
     valida_correo:(event) =>{
         var perror = document.getElementById('dp_error');
