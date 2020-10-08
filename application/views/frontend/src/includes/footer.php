@@ -101,14 +101,14 @@
 </div>
 <div class="popup-ini" id="login" style="display: none;">
     <div class="popup-inner">
-        <img id="img-popup" src="https://beurer.pe/assets/sources/CANALES DE ATENCION-02.jpg" class="img-responsive" alt="">
+        <img id="img-popup" src="https://beurer.pe/assets/sources/popup/CANALES%20DE%20ATENCION-02.jpg" class="img-responsive" alt="">
         <button type="button" class="close"><span aria-hidden="true">×</span></button>
     </div>
 </div>		
 
 
 <script src="<?= base_url(); ?>assets/js/app.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/app2.min.js"></script>
+<!-- <script src="<?= base_url(); ?>assets/js/app2.min.js"></script> -->
 
 <script src="assets/js/libraries/animate-it.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -122,7 +122,6 @@
     /* menu */
     $(document).ready(function () {
         if (screen && screen.width > 992) {
-            console.log('hola');
             $(".d-menu").hover(function (event) {
 
                 $(".content-nav").toggleClass("caida");
@@ -142,8 +141,6 @@
                     $(".content-nav").addClass("caida" + item);
                 });
             });
-
-            console.log($('.menu-one'));
             $('.menu-one').on('mouseover', function () {
                 $(".content-nav").removeClass("caida");
             });

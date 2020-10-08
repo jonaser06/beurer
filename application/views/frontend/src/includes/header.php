@@ -81,7 +81,7 @@
                                 <a href="carrito.php"><img src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt="" style="max-width:36px;"></a>
                             </div>
                             <div class="utl2">
-                                <a onclick="loginn()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:36px;"></a>
+                                <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:36px;"></a>
                             </div>
                             <div class="utl3">    
                                 <a href="rastrea-pedido.php"><img src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt="" style="max-width:48px;"></a>
