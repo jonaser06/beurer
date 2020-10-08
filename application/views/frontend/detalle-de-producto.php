@@ -179,7 +179,7 @@
                                 data-title="<?php echo $product['titulo']?>"
                                 data-id       = "<?php echo $product['id']?>"
                                 data-precio   = "<?php echo $product['precio']?>"
-                                data-cantidad ="<?php echo $product['id']?>">
+                                data-cantidad ="1">
                                 <a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1"
                                 >AÑADIR AL CARRO
                                 </a>
