@@ -1,6 +1,9 @@
 /* Control de eventos 
 *  ObjMain.init : objeto que que inicializa los eventos
 *  ObjMain.ajax_post : objeto para peticiones ajax
+*
+*   ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
+
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
@@ -12,6 +15,17 @@ ObjMain = {
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
         ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal')
         ObjMain.load_ubigeo();
+    },
+    getDataCarrito : () => {
+        return localStorage.getItem('productos')? 
+        {
+            total : parseFloat(localStorage.getItem('total')) ,
+            cantidad : parseInt(localStorage.getItem('cantidad')),
+            productos : JSON.parse(localStorage.getItem('productos'))
+        }:{ 
+            response : 'No se agregaron al carrito'
+        }
+        
     },
     login: ()=>{
         let ventanalogin = document.getElementsByClassName("login")[0];
@@ -219,31 +233,54 @@ class Carrito {
             productos : []
         }
         this.$btnAddCarrito  = document.querySelector(btnAddCarrito);
+        this.TRIGGUER();
     }
+    
     filter(){
         const DomTokenProd = {...this.$btnAddCarrito.dataset};
         delete DomTokenProd.target ;
         delete DomTokenProd.toggle ;
         return DomTokenProd;
     }
-    add () {
+    add() {
         const producto = this.filter();
+        if ( localStorage.getItem('productos') ) {
+            this.stateCarrito.productos = JSON.parse(localStorage.getItem('productos'));
+            this.addState(producto);
+            this.addStorage();
+            console.log(localStorage)
+        }else {
+            this.addState(producto);
+            this.addStorage();
+            console.log(localStorage)
 
-        // this.stateCarrito.productos.push(producto)
-        // this.stateCarrito.cantidad = parseInt(producto.cantidad);
-        // this.stateCarrito.total = this.stateCarrito.cantidad * parseFloat(product)
-        // localStorage.setItem('productos', JSON.stringify(this.stateCarrito.productos))
+        }
     }
-    listeners () {
+    addState (producto){
+        this.stateCarrito.productos.push(producto);
+        console.log(this.stateCarrito.productos)
+        this.stateCarrito.productos.forEach(prod => {
+            this.stateCarrito.cantidad += parseInt(prod.cantidad) 
+            this.stateCarrito.total    +=  parseFloat(prod.precio )* parseInt(prod.cantidad );
+        })
+    }
+    addStorage(){
+        localStorage.setItem('productos', JSON.stringify(this.stateCarrito.productos));
+        localStorage.setItem('total', JSON.stringify(this.stateCarrito.total));
+        localStorage.setItem('cantidad', JSON.stringify(this.stateCarrito.cantidad));
+    }
+    
+    TRIGGUER () {
         this.$btnAddCarrito.addEventListener('click', e => {
             this.add();
         })
     }
 }
 
+
 window.addEventListener('load', () => {
     
-    new Carrito('.bntAddCarrito');
+    new Carrito('.btnAddCarrito');
     ObjMain.init();
 } );
 
