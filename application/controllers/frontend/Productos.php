@@ -16,10 +16,8 @@ class Productos extends CI_Controller {
 		$cat =  $this->uri->segment(1);
 		$pagina=$this->taxonomia->getPaginaurl($cat);
 		$data['pagina']=$pagina;
-
 		$data['contenido'] = $this->contenido->getContenido($pagina['idpagina']);
 		$data['confif'] = $this->contenido->getContenido(1);
-
 		$data['menu'] = $this->contenido->getMenu();
 		$data['products'] = $this->contenido->getProdOfCat($name);
 		$data['category'] = $this->contenido->getOneSubCategoria($name);
@@ -39,7 +37,6 @@ class Productos extends CI_Controller {
 		$subcat =  $this->uri->segment(2);
 		$pagina=$this->taxonomia->getPaginaurl($cat);
 		$data['pagina']=$pagina;
-		;
 		$data['subcat'] = $this->uri->segment(2);
 		$data['cat'] = $this->uri->segment(1);
 		
@@ -47,6 +44,7 @@ class Productos extends CI_Controller {
 		$data['confif'] = $this->contenido->getContenido(1);
 		$data['menu'] = $this->contenido->getMenu();
 		$data['product'] = $this->contenido->getProducts($name);
+		
 		$data['varify_product'] = true;
 		//$data['category'] = $this->contenido->getOneSubCategoria($cat.'/'.$name.'/');
 
@@ -60,10 +58,9 @@ class Productos extends CI_Controller {
 			// 	}	
 			}	
 		}
-		
-
 		if(isset($_GET['test'])){
-			print_r($data); exit();
+			print_r($data); 
+			exit();
 		}
 		//print_r($data); exit();
 
