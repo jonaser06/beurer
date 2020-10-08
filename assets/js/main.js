@@ -1,6 +1,6 @@
 /* Control de eventos 
 *  ObjMain.init : objeto que que inicializa los eventos
-*  ObjMain.ajax_post : objeto para peticiones ajax
+*  ObjMain.ajax_post : objeto para peticiones ajax 
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
