@@ -2,8 +2,7 @@
 *  ObjMain.init : objeto que que inicializa los eventos
 *  ObjMain.ajax_post : objeto para peticiones ajax
 *
-*   ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
-
+*  ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
