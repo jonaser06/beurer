@@ -69,11 +69,11 @@
 
                                         <div class="divTableCell">
                                             <div class="tituloTabla1">Apellido Materno<div class="d_ob">(*)</div></div>
-                                            <input type="text" size="20" maxlength="20" id="c_apem1" onkeypress="return soloLetras(event)" value="">
+                                            <input type="text" size="20" maxlength="20" id="c_apem1" value="">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="tituloTabla1">Correo electrónico<div class="d_ob">(*)</div></div>
-                                            <input type="email" id="c_correo1" size="20" maxlength="30" id="correo" value="" required onkeyup="ObjMain.valida_correo(this);">
+                                            <input type="email" id="c_correo1" size="20" maxlength="30" id="correo" value="" required >
                                         </div>
                                     </div>
 
@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="divTableCell">
                                             <div class="tituloTabla1">Dirección<div class="d_ob">(*)</div></div>
-                                            <input type="text" size="20" maxlength="45" value="">
+                                            <input type="text" id="direction" size="20" maxlength="45" value="">
                                         </div>
 
                                     </div>
@@ -128,12 +128,13 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell">
                                             <div class="tituloTabla1">Referencia</div>
-                                            <input type="text" size="20" maxlength="45" value="">
+                                            <input type="text" id="referencia" size="20" maxlength="45" value="">
                                         </div>
+
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono<div class="d_ob">(*)</div>
                                             </div>
-                                            <input type="text" size="9" maxlength="9" id="c_telcel" onkeypress="return soloNumeros(event)" value="">
+                                            <input type="text" id="telephone" size="9" maxlength="9" id="c_telcel" value="">
                                         </div>
                                     </div>
 
@@ -145,24 +146,9 @@
                                         <div class="divTableCell" style="width:18%;">
                                             <div class="tituloTabla1">Día<div class="d_ob">(*)</div></div>
                                             <select name="dia" id="dia">
-                                                <option value=""></option>
-                                                <?php 
-                                                    $i = 1;
-                                                    while ( $i <= 31 ) {
-
-                                                        if ( $i < 10 ) {
-                                                            $dia = '0' . $i;
-                                                        } 	
-
-                                                        else {
-                                                            $dia = $i;
-                                                        }
-
-                                                        echo "<option value='$dia'>$dia</option>";
-
-                                                        $i++;
-                                                    }
-                                                ?>
+                                                <?php for($i = 1 ; $i<=31 ; $i++): ?>
+                                                    <option value='<?php echo $i; ?>'><?php echo $i; ?></option>
+                                                <?php endfor; ?>
                                             </select>
                                         </div>
                                         <div class="divTableCell" style="width:48%;">
@@ -170,28 +156,13 @@
                                             </div>
 
                                             <select name="mes" id="mes">
-                                                <option value=""></option>
-                                                <?php 
-                                        $meses = array(
-                                            '01' => 'Enero',
-                                            '02' => 'Febrero',
-                                            '03' => 'Marzo',
-                                            '04' => 'Abril',
-                                            '05' => 'Mayo',
-                                            '06' => 'Junio',
-                                            '07' => 'Julio',
-                                            '08' => 'Agosto',
-                                            '09' => 'Septiembre',
-                                            '10' => 'Octubre',
-                                            '11' => 'Noviembre',
-                                            '12' => 'Diciembre'
-                                        );
-
-                                        foreach ($meses as $num_mes => $mes) {
-                                            echo "<option value='$num_mes'>$mes</option>";
-                                        }
-
-                                    ?>
+                                                <?php
+                                                    $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                                                    
+                                                    foreach ($meses as $key => $value) {
+                                                        echo "<option value=".($key+1).">".$value."</option>";
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="divTableCell" style="width:28%;">
@@ -200,19 +171,15 @@
                                             <select name="anyo" id="anyo">
                                                 <option value=""></option>
                                                 <?php 
-                                        $tope = date( 'Y' );
-
-                                        $e_max = 100;
-                                        $e_min = 14;
-                                        
-                                        $anyo = $tope - $e_min;
-
-                                        while ( $anyo >= ( $tope - $e_max )) {
-                                            echo "<option value='$anyo'>$anyo</option>";
-                                            --$anyo;
-                                        }
-
-                                    ?>
+                                                    $tope = date( 'Y' );
+                                                    $e_max = 100;
+                                                    $e_min = 14;
+                                                    $anyo = $tope - $e_min;
+                                                    while ( $anyo >= ( $tope - $e_max )) {
+                                                        echo "<option value='$anyo'>$anyo</option>";
+                                                        --$anyo;
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -263,7 +230,7 @@
         <br>
 
         <span style="text-align:left;"><a class="btn " style="background-color:darkgray; color:white;" href="#">VOLVER</a></span>
-        <span><a class="btn btn-primary1" id="btn_sgt" href="#" onclick="ObjMain.submit_form();">COMPLETAR REGISTRO</a></span>
+        <span><a class="btn btn-primary1" id="btn_sgt" href="#" onclick="ObjMain.submit_form(event);">COMPLETAR REGISTRO</a></span>
     </div>
 
     <div class="linea"></div>
