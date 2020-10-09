@@ -1,6 +1,9 @@
 /* Control de eventos 
 *  ObjMain.init : objeto que que inicializa los eventos
 *  ObjMain.ajax_post : objeto para peticiones ajax
+*
+*   ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
+
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
@@ -8,7 +11,21 @@ var ubigeoPeru = {
 
 ObjMain = {
     init: ()=>{
+        ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
+        ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
+        ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal')
         ObjMain.load_ubigeo();
+    },
+    getDataCarrito : () => {
+        return localStorage.getItem('productos')? 
+        {
+            total : parseFloat(localStorage.getItem('total')) ,
+            cantidad : parseInt(localStorage.getItem('cantidad')),
+            productos : JSON.parse(localStorage.getItem('productos'))
+        }:{ 
+            response : 'No se agregaron al carrito'
+        }
+        
     },
     login: ()=>{
         let ventanalogin = document.getElementsByClassName("login")[0];
@@ -176,8 +193,58 @@ ObjMain = {
     solonumero: (event) =>{
         event.value = event.value.replace(/\D/g, '');
     },
+    
+    render:  ( element ,content ) => {
+        element.innerHTML = content ;
+    },
+    changueColor : ( visor , btnColorChangue ,btnCarrito)  => {
+        document.addEventListener('click', event => {
+            if(event.target.matches(btnColorChangue)){
+
+             const $visor = document.querySelector(visor),
+             $addCarrito = document.querySelector(btnCarrito);
+
+             const { img , color, codigo }= event.target.dataset;
+             ObjMain.render($visor , `<img src=${img}>` );
+                
+                $addCarrito.setAttribute('data-color',color);
+                $addCarrito.setAttribute('data-img',img);
+                $addCarrito.setAttribute('data-codigo',codigo);
+            }
+        })
+      },
+      changueQuanty : ( btnAdd,btnDown,nodeQuanty,btnCarrito) =>{
+        document.addEventListener('click', event => {
+
+            if(event.target.matches(btnAdd)){
+                const $addCarrito = document.querySelector(btnCarrito);
+                const $cantidad = document.querySelector(nodeQuanty)
+                $cantidad.value = parseInt($cantidad.value) + 1
+                $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+
+                
+            }
+            if(event.target.matches(btnDown)){
+                const $addCarrito = document.querySelector(btnCarrito);
+                const $cantidad = document.querySelector(nodeQuanty)
+                $cantidad.value = parseInt($cantidad.value) == 1 ? parseInt($cantidad.value):parseInt($cantidad.value) - 1 ;
+                $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+
+            }
+        })
+      },
+      modalCarrito: (btn , componentModal ) => {
+        const $btnAdd = document.querySelector(btn);
+        if($btnAdd) {
+            $btnAdd.addEventListener('click' , e => ObjMain.render( 
+                document.querySelector(componentModal),
+                `Cantidad: ${$btnAdd.dataset.cantidad}`
+            ))
+        }
+      },  
+    
     valida_correo:(correo) =>{
-        var texto = correo;
+        var texto = correo.value;
         var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
         if (!regex.test(texto)) {
@@ -207,8 +274,62 @@ ObjMain = {
     }
 }
 
+class Carrito {
+    constructor (btnAddCarrito) {
+        this.stateCarrito = {
+            cantidad : 0 ,
+            total : 0 ,
+            productos : []
+        }
+        this.$btnAddCarrito  = document.querySelector(btnAddCarrito);
+        this.TRIGGUER();
+    }
+    
+    filter(){
+        const DomTokenProd = {...this.$btnAddCarrito.dataset};
+        delete DomTokenProd.target ;
+        delete DomTokenProd.toggle ;
+        return DomTokenProd;
+    }
+    add() {
+        const producto = this.filter();
+        if ( localStorage.getItem('productos') ) {
+            this.stateCarrito.productos = JSON.parse(localStorage.getItem('productos'));
+            this.addState(producto);
+            this.addStorage();
+            console.log(localStorage)
+        }else {
+            this.addState(producto);
+            this.addStorage();
+            console.log(localStorage)
+
+        }
+    }
+    addState (producto){
+        this.stateCarrito.productos.push(producto);
+        console.log(this.stateCarrito.productos)
+        this.stateCarrito.productos.forEach(prod => {
+            this.stateCarrito.cantidad += parseInt(prod.cantidad) 
+            this.stateCarrito.total    +=  parseFloat(prod.precio )* parseInt(prod.cantidad );
+        })
+    }
+    addStorage(){
+        localStorage.setItem('productos', JSON.stringify(this.stateCarrito.productos));
+        localStorage.setItem('total', JSON.stringify(this.stateCarrito.total));
+        localStorage.setItem('cantidad', JSON.stringify(this.stateCarrito.cantidad));
+    }
+    
+    TRIGGUER () {
+        this.$btnAddCarrito.addEventListener('click', e => {
+            this.add();
+        })
+    }
+}
+
 
 window.addEventListener('load', () => {
+    
+    new Carrito('.btnAddCarrito');
     ObjMain.init();
 } );
 

@@ -132,7 +132,7 @@ include 'src\includes\header.php'
                             </div>
                             <br> <br>
                             <button type="button" class="btn btn-cmn" data-toggle="modal"
-                                data-target="#DetalleProducto"><a href="#"
+                                data-target=""><a href="#"
                                     style="color:white;border: 2px solid #c51152;" tabindex="-1">AÑADIR AL
                                     CARRO</a></button>
 
@@ -259,7 +259,7 @@ include 'src\includes\header.php'
 
 </main>
 
-<div class="modal fade" id="DetalleProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="DetalleProducto" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width:100%; padding:1%;padding-top:0px;border-radius:5%;padding:4%;">

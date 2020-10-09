@@ -1,0 +1,7 @@
+[
+    {"color":"verde", "foto":"img/foto01.png","codigo":"ski0001","activo":true},
+    {"color":"azul",  "foto":"img/foto02.png","codigo":"ski0002","activo":true},
+    {"color":"orange","foto":"img/foto03.png","codigo":"ski0003","activo":true}
+]
+    
+

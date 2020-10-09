@@ -475,6 +475,10 @@ class Contenido extends CI_Model {
             $data['prod_url'] = $rows['prod_url'];
             $data['video'] = $rows['video'];
             $data['active'] = $rows['active'];
+            // DETAILS FOR PRODUCTO 
+            $data['detalles-multimedia'] = $rows['detalles-multimedia'] ? json_decode($rows['detalles-multimedia'],true): FALSE;
+            // SUGERIDOS FOR MODAL
+            $data['sugeridos'] = $rows['relacionados'] ? json_decode($rows['relacionados'],true): FALSE;
             //Categoria
             $categoria = $this->db->where('id', $rows['categoria_id'])->get('categorias');
             $c_read = $categoria->row_array();
