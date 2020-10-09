@@ -11,6 +11,8 @@ var ubigeoPeru = {
 
 ObjMain = {
     init: ()=>{
+        let DOMAIN = (window.location.hostname=='localhost')?'localhost/beurer/':'http://www.blogingenieria.site/';
+        console.log(DOMAIN);
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
         ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal')
