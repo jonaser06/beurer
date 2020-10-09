@@ -2,19 +2,24 @@
 *  ObjMain.init : objeto que que inicializa los eventos
 *  ObjMain.ajax_post : objeto para peticiones ajax
 *
-*   ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
-
+*  ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
 };
+let DOMAIN;
 
 ObjMain = {
     init: ()=>{
+        DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
+        console.log(DOMAIN);
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
-        ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal')
-        ObjMain.load_ubigeo();
+        ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal');
+        if(window.location.href== ( DOMAIN+'registro' ) ){
+            console.log('Pagina de registro');
+            ObjMain.load_ubigeo();
+        }
     },
     getDataCarrito : () => {
         return localStorage.getItem('productos')? 
@@ -36,7 +41,7 @@ ObjMain = {
         }
     },
     load_ubigeo: ()=>{
-        ObjMain.ajax_post('GET', './ajax/getprovincia','')
+        ObjMain.ajax_post('GET', DOMAIN+'ajax/getprovincia','')
         .then((resp)=>{
             ubigeoPeru.ubigeos = JSON.parse(resp);
             ObjMain.showRegionsList();
@@ -160,10 +165,10 @@ ObjMain = {
                             formData.append("politicas", polt);
                             formData.append("ofertas", ofert);
 
-                        ObjMain.ajax_post('POST','./ajax/setregister', formData)
+                        ObjMain.ajax_post('POST',DOMAIN+'ajax/setregister', formData)
                         .then((resp)=>{
                             resp = JSON.parse(resp);
-                            window.location = "./registro";
+                            window.location = DOMAIN;
                         })
                         .catch((err)=>{
                             err = JSON.parse(err);
