@@ -283,8 +283,6 @@ window.addEventListener('load', () => {
     if($btncarrito) {
         new Carrito('.btnAddCarrito');
     }
-    
-   
     ObjMain.init();
 } );
 
