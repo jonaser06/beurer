@@ -16,8 +16,11 @@ ObjMain = {
         console.log(DOMAIN);
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
-        ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal')
-        ObjMain.load_ubigeo();
+        ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal');
+        if(window.location.href== ( DOMAIN+'registro' ) ){
+            console.log('Pagina de registro');
+            ObjMain.load_ubigeo();
+        }
     },
     getDataCarrito : () => {
         return localStorage.getItem('productos')? 
@@ -166,7 +169,7 @@ ObjMain = {
                         ObjMain.ajax_post('POST',DOMAIN+'ajax/setregister', formData)
                         .then((resp)=>{
                             resp = JSON.parse(resp);
-                            window.location = "./registro";
+                            window.location = DOMAIN;
                         })
                         .catch((err)=>{
                             err = JSON.parse(err);
