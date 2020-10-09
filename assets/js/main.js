@@ -279,8 +279,12 @@ class Carrito {
 
 
 window.addEventListener('load', () => {
+   $btncarrito = document.querySelector('.btnAddCarrito')
+    if($btncarrito) {
+        new Carrito('.btnAddCarrito');
+    }
     
-    new Carrito('.btnAddCarrito');
+   
     ObjMain.init();
 } );
 
