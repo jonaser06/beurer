@@ -8,10 +8,11 @@
 var ubigeoPeru = {
 	ubigeos: new Array()
 };
+let DOMAIN;
 
 ObjMain = {
     init: ()=>{
-        let DOMAIN = (window.location.hostname=='localhost')?'localhost/beurer/':'http://www.blogingenieria.site/';
+        DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
         console.log(DOMAIN);
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
@@ -38,7 +39,7 @@ ObjMain = {
         }
     },
     load_ubigeo: ()=>{
-        ObjMain.ajax_post('GET', './ajax/getprovincia','')
+        ObjMain.ajax_post('GET', DOMAIN+'ajax/getprovincia','')
         .then((resp)=>{
             ubigeoPeru.ubigeos = JSON.parse(resp);
             ObjMain.showRegionsList();
@@ -162,7 +163,7 @@ ObjMain = {
                             formData.append("politicas", polt);
                             formData.append("ofertas", ofert);
 
-                        ObjMain.ajax_post('POST','./ajax/setregister', formData)
+                        ObjMain.ajax_post('POST',DOMAIN+'ajax/setregister', formData)
                         .then((resp)=>{
                             resp = JSON.parse(resp);
                             window.location = "./registro";
