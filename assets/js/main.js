@@ -208,8 +208,9 @@ ObjMain = {
 
              const $visor = document.querySelector(visor),
              $addCarrito = document.querySelector(btnCarrito);
-
+             
              const { img , color, codigo }= event.target.dataset;
+             $visor.classList.add('-open')
              ObjMain.render($visor , `<img src=${img}>` );
                 
                 $addCarrito.setAttribute('data-color',color);
@@ -238,13 +239,21 @@ ObjMain = {
             }
         })
       },
+      changueImg : (tagImg , ruta ) => {
+        document.querySelector(tagImg).src = ruta
+      },
       modalCarrito: (btn , componentModal ) => {
         const $btnAdd = document.querySelector(btn);
         if($btnAdd) {
-            $btnAdd.addEventListener('click' , e => ObjMain.render( 
+            $btnAdd.addEventListener('click' , e => {
+                ObjMain.render( 
                 document.querySelector(componentModal),
                 `Cantidad: ${$btnAdd.dataset.cantidad}`
-            ))
+                );
+                if($btnAdd.dataset.img) {
+                    ObjMain.changueImg('.img-modal',$btnAdd.dataset.img)
+                }
+            })
         }
       },  
     
