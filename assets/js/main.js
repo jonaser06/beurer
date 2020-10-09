@@ -208,8 +208,9 @@ ObjMain = {
 
              const $visor = document.querySelector(visor),
              $addCarrito = document.querySelector(btnCarrito);
-
+             
              const { img , color, codigo }= event.target.dataset;
+             $visor.classList.add('-open')
              ObjMain.render($visor , `<img src=${img}>` );
                 
                 $addCarrito.setAttribute('data-color',color);

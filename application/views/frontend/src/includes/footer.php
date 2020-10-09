@@ -110,11 +110,11 @@
 <script src="<?= base_url(); ?>assets/js/app.min.js"></script>
 <!-- <script src="<?= base_url(); ?>assets/js/app2.min.js"></script> -->
 
-<script src="assets/js/libraries/animate-it.js"></script>
+<script src="<?= base_url(); ?>assets/js/libraries/animate-it.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
-<script src="assets/js/libraries/fancybox.min.js"></script>
-<script src="assets/js/libraries/fullpage.js"></script>
+<script src="<?= base_url(); ?>assets/js/libraries/fancybox.min.js"></script>
+<script src="<?= base_url(); ?>assets/js/libraries/fullpage.js"></script>
 
 <script src="<?= base_url(); ?>assets/js/main.js"></script>
 
