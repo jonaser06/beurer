@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2020 a las 10:54:21
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.33
+-- Servidor: localhost:3306
+-- Tiempo de generación: 09-10-2020 a las 06:14:54
+-- Versión del servidor: 5.7.31-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.24-0ubuntu0.18.04.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -146,9 +145,9 @@ CREATE TABLE `colecciones` (
   `titulo_central` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `titulo_hashtag` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `titulo_boton` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `galeria` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `galeria` mediumtext COLLATE utf8_unicode_ci,
   `image` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `activo` int(11) DEFAULT 0,
+  `activo` int(11) DEFAULT '0',
   `look_banner` varchar(350) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -186,8 +185,8 @@ CREATE TABLE `contenido` (
   `tipo` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `label` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descripcion` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valor` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `entrada` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `valor` text COLLATE utf8_unicode_ci,
+  `entrada` text COLLATE utf8_unicode_ci,
   `activo` int(11) DEFAULT NULL,
   `orden` decimal(4,2) DEFAULT NULL,
   `idcontenedor` int(11) NOT NULL,
@@ -1055,7 +1054,8 @@ CREATE TABLE `perfiles` (
 INSERT INTO `perfiles` (`idperfil`, `perfil`, `activo`) VALUES
 (1, 'superusuario', 1),
 (2, 'planer', 1),
-(3, 'administrador', 1);
+(3, 'administrador', 1),
+(4, 'cliente', 1);
 
 -- --------------------------------------------------------
 
@@ -1098,23 +1098,23 @@ CREATE TABLE `productos` (
   `categoria_id` int(11) DEFAULT NULL,
   `titulo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `subtitulo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `contenido` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `detalles-multimedia` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `relacionados` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `accesorios` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `descripcion` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ficha_tecnica` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `marcas` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `contenido` text COLLATE utf8_spanish_ci,
+  `detalles-multimedia` text COLLATE utf8_spanish_ci,
+  `relacionados` text COLLATE utf8_spanish_ci,
+  `accesorios` text COLLATE utf8_spanish_ci,
+  `descripcion` text COLLATE utf8_spanish_ci,
+  `ficha_tecnica` text COLLATE utf8_spanish_ci,
+  `marcas` text COLLATE utf8_spanish_ci,
   `tipo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `pdf` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `prod_url` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `pagetitle` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `meta_keyword` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `og_title` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `og_description` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `og_image` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `video` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pagetitle` text COLLATE utf8_spanish_ci,
+  `meta_description` text COLLATE utf8_spanish_ci,
+  `meta_keyword` text COLLATE utf8_spanish_ci,
+  `og_title` text COLLATE utf8_spanish_ci,
+  `og_description` text COLLATE utf8_spanish_ci,
+  `og_image` text COLLATE utf8_spanish_ci,
+  `video` text COLLATE utf8_spanish_ci,
   `active` int(11) DEFAULT NULL,
   `orden` decimal(4,2) DEFAULT NULL,
   `ancho` decimal(4,2) NOT NULL,
@@ -1322,8 +1322,8 @@ INSERT INTO `producto_marca` (`producto_id`, `marca_id`) VALUES
 CREATE TABLE `sitemap` (
   `idsitemap` int(11) NOT NULL,
   `pagetitle` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_keyword` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` text COLLATE utf8_unicode_ci,
+  `meta_keyword` text COLLATE utf8_unicode_ci,
   `og_title` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `og_description` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `og_imagen` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1790,115 +1790,96 @@ ALTER TABLE `videos`
 --
 ALTER TABLE `accesorios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
 --
 -- AUTO_INCREMENT de la tabla `categorias_video`
 --
 ALTER TABLE `categorias_video`
   MODIFY `idcategoria_video` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `colecciones`
 --
 ALTER TABLE `colecciones`
   MODIFY `idcoleccion` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `contenedor`
 --
 ALTER TABLE `contenedor`
   MODIFY `idcontenedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT de la tabla `contenido`
 --
 ALTER TABLE `contenido`
   MODIFY `idcontenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
-
 --
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=689;
-
 --
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `modulos`
 --
 ALTER TABLE `modulos`
   MODIFY `idmodulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `paginas`
 --
 ALTER TABLE `paginas`
   MODIFY `idpagina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
-  MODIFY `idperfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `idperfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
-
 --
 -- AUTO_INCREMENT de la tabla `sitemap`
 --
 ALTER TABLE `sitemap`
   MODIFY `idsitemap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT de la tabla `suscribete`
 --
 ALTER TABLE `suscribete`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
-
 --
 -- AUTO_INCREMENT de la tabla `sys_users`
 --
 ALTER TABLE `sys_users`
   MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT de la tabla `sys_users_profile`
 --
 ALTER TABLE `sys_users_profile`
   MODIFY `idprofile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT de la tabla `templates`
 --
 ALTER TABLE `templates`
   MODIFY `idtemplate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT de la tabla `videos`
 --
 ALTER TABLE `videos`
   MODIFY `idvideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -1977,7 +1958,6 @@ ALTER TABLE `sys_users_profile`
 --
 ALTER TABLE `templates`
   ADD CONSTRAINT `idpagina` FOREIGN KEY (`idpagina`) REFERENCES `paginas` (`idpagina`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
