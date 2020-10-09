@@ -405,7 +405,8 @@ $(function() {
                 </button>
 
                 <div style="display:block;text-align:center;">
-                    <div style="display:inline-block"> <img src="<?= base_url(); ?>assets/images/icono-comprobar.svg"
+                    <div style="display:inline-block"> 
+                    <img src="<?= base_url(); ?>assets/images/icono-comprobar.svg"
                             id="img-check" style="width:1.5rem;height:auto;"></div>
                     <div style="display:inline-block;vertical-align:middle;margin-left:1.5%;">
                         <h2 class="modal-title" id="txt-exito"
@@ -419,6 +420,7 @@ $(function() {
                 <div class="row">
                     <div class="col-md-5 col-xs-5">
                         <img 
+                        class="img-modal"
                         src="<?= base_url($product['imagen'][0]); ?>" 
                         alt="<?= $product['titulo']; ?>" 
                         style="width:100%; height:auto;text-align:left;"

@@ -1,5 +1,10 @@
 [
-    {"color":"#c51152", "foto":"https://mister-mango.omni.la/ProductCatalog/Workspace.CWDQQL6GUIJMS/ProductCatalog.CXCUTTZW6KPFG/1500x1500/CXPVU4KKCPW7Y.jpg","codigo":"ski0001","activo":true},
-    {"color":"yellow",  "foto":"https://mister-mango.omni.la/ProductCatalog/Workspace.CWDQQL6GUIJMS/ProductCatalog.CXCUTTZ4JJ52S/1500x1500/CXPVU2S3BV7BO.jpg","codigo":"ski0002","activo":true},
-    {"color":"rgba(0,0,0,.7)","foto":"https://mister-mango.omni.la/ProductCatalog/Workspace.CWDQQL6GUIJMS/ProductCatalog.CWT7FLWR4UBJ4/1500x1500/CW6LUDGBYXXC6.jpg","codigo":"ski0003","activo":true}
+    { "color":"rgba(0,0,0,.7)",  "foto":"http://localhost/beurer/assets/sources/GS300N_02.jpg","codigo":"ski0002","activo":true},
+    {
+        "color":"#cb3234", 
+        "foto":"http://localhost/beurer/assets/sources/GS300R_03.jpg",
+        "codigo":"ski0001",
+        "activo":true},
+        {"color":"#00adc7","foto":"http://localhost/beurer/assets/sources/GS300T_04.jpg","codigo":"ski0002","activo":true}
+   
 ]

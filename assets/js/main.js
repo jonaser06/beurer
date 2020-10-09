@@ -233,13 +233,21 @@ ObjMain = {
             }
         })
       },
+      changueImg : (tagImg , ruta ) => {
+        document.querySelector(tagImg).src = ruta
+      },
       modalCarrito: (btn , componentModal ) => {
         const $btnAdd = document.querySelector(btn);
         if($btnAdd) {
-            $btnAdd.addEventListener('click' , e => ObjMain.render( 
+            $btnAdd.addEventListener('click' , e => {
+                ObjMain.render( 
                 document.querySelector(componentModal),
                 `Cantidad: ${$btnAdd.dataset.cantidad}`
-            ))
+                );
+                if($btnAdd.dataset.img) {
+                    ObjMain.changueImg('.img-modal',$btnAdd.dataset.img)
+                }
+            })
         }
       },  
     
