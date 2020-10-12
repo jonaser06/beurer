@@ -89,19 +89,31 @@
                         </div>
                         <div class="menu-hamb" style=" justify-content:right; display:grid; right:70%; padding-right:2%;">                            
                             <div class="row">
-                                <div class="col-md-3 offset-md-6" style="  top:-6%;">
+                                <div class="col-md-3 offset-md-6" style="width:auto; top:-6%;">
+                                    <?php 
+                                    if ( isset($_SESSION['status']) && $_SESSION['status']) : 
+                                        $sesion = true;
+                                    else : $sesion = false;
+                                    endif;
+                                    ?>
+                                    <?php if ( !$sesion ): ?>
+                                    <!-- inicio de sesion -->
                                     <div class="login" style="display:none;">
                                         <h2 class="login-header">INICIA SESIÓN</h2>
-                                        <form class="login-container" action="panel-usuario.php">
-                                            <p><input type="email" style="text-align:center;" placeholder="Email o DNI"></p>
-                                            <p><input type="password" style="text-align:center;" placeholder="Contraseña"></p>
+                                        <form class="login-container" >
+                                            <p><input type="text" id="username_" style="text-align:center;" placeholder="Email o DNI"></p>
+                                            <p><input type="password" id="pasword_" style="text-align:center;" placeholder="Contraseña"></p>
+                                            <p class="response_sesion"></p>
                                             <div class="checkbox" style=" text-align:left; padding-left:5px;">
                                                 <label class="font-light label-pol" style="display:inline;">
-                                                <input type="checkbox" id="costo-envioc"/><i class="helper"></i>
+                                                <input type="checkbox" id="remember_"/>
+                                                <i class="helper"></i>
                                                 </label>
                                                 <div style="display:inline-block; font-size:.9em;">Recuérdame</div>
                                             </div>
-                                            <p style="padding-top:0px !important;margin-top:0px;"><input class="btn btn-primary1" type="submit" value="Iniciar sesión" style="padding:0;"></p>
+                                            <p style="padding-top:0px !important;margin-top:0px;">
+                                                <input class="btn btn-primary1" type="submit" value="Iniciar sesión" style="padding:0;">
+                                            </p>
                                             <p><a href="#">¿Ha olvidado la contraseña?</a></p>
                                             <hr style="margin-top:0px;">
                                             <div style="text-align:center;">
@@ -109,6 +121,16 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <?php endif; ?>
+                                    <?php if ( $sesion ): ?>
+                                    <!-- sesion iniciada -->
+                                    <div class="login user_menu" style="display:none;">
+                                        <ul>
+                                            <li><a href="<?= base_url('myaccount'); ?>">Mi Cuenta</a></li>
+                                            <li><a href="<?= base_url('ajax/logout'); ?>">Cerrar Sesión</a></li>
+                                        </ul>
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

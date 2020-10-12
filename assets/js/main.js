@@ -20,6 +20,9 @@ ObjMain = {
             console.log('Pagina de registro');
             ObjMain.load_ubigeo();
         }
+        if(document.querySelector('.login') != null){
+            ObjMain.sign_in();
+        }
     },
     getDataCarrito : () => {
         return localStorage.getItem('productos')? 
@@ -31,6 +34,45 @@ ObjMain = {
             response : 'No se agregaron al carrito'
         }
         
+    },
+    sign_in: () =>{
+        if(localStorage.getItem('remember')!= null){
+            let sesion = localStorage.getItem('remember');
+            sesion = JSON.parse(sesion);
+            document.querySelector("#username_").value = sesion.user;
+            document.querySelector("#pasword_").value = sesion.pass;
+            console.log("desde la memoria "+sesion);
+        }
+        if(document.querySelector('.login-container') != null ){
+            document.querySelector('.login-container').addEventListener('submit',(e)=>{
+                e.preventDefault();
+                let remember = {};
+                polt = (document.querySelector('#remember_').checked ) ? 1 : 0 ;
+                let user = document.querySelector("#username_").value;
+                let pass = document.querySelector("#pasword_").value;
+                if( polt == 1 ){
+                    remember.user = user;
+                    remember.pass = pass;
+                    localStorage.setItem('remember', JSON.stringify(remember));
+                }
+                let formData = new FormData();
+                formData.append("username", user);
+                formData.append("contrasena", pass);
+                ObjMain.ajax_post('POST',DOMAIN+'ajax/login', formData )
+                .then((resp)=>{
+                    resp = JSON.parse(resp);
+                    if(resp.status){
+                        window.location = DOMAIN;
+                    }
+                })
+                .catch((err)=>{
+                    err = JSON.parse(err);
+                    let message = document.querySelector(".response_sesion");
+                    message.innerHTML = err.message;
+    
+                });
+            });
+        }
     },
     login: ()=>{
         let ventanalogin = document.getElementsByClassName("login")[0];
@@ -127,19 +169,23 @@ ObjMain = {
             day = document.getElementById('dia').value;
             month = document.getElementById('mes').value;
             year = document.getElementById('anyo').value;
-            polt = (document.querySelector('#politicas').checked )? true : false ;
-            ofert = (document.querySelector('#publicidad').checked )? true : false ;
+            polt = (document.querySelector('#politicas').checked )? 1 : 0 ;
+            ofert = (document.querySelector('#publicidad').checked )? 1 : 0 ;
 
             /* validar campos nulos */
             if( tipodoc != null && n_documento != null && nombre != null && apellidoP != null && apellidoM != null && correo != null && pass1 != null &&  pass2 != null && 
-                dep != null && prov != null && dist != null && dire != null && ref != null && telf != null && day != null && month != null && year != null && polt == true ){
+                dep != null && prov != null && dist != null && dire != null && ref != null && telf != null && day != null && month != null && year != null ){
                     /* valida correo, politicas, y contraseñas */
                     if(!ObjMain.valida_correo(correo)){
-                        ObjMain.alert_form(false,'El correo ingresado es inválido!');
-                    }else if(polt==false){
-                        ObjMain.alert_form(false,'Debe aceptar las politicas!');
-                    }else if(pass1!=pass2){
-                        ObjMain.alert_form(false,'Las contraseñas no coinciden');
+                        return ObjMain.alert_form(false,'El correo ingresado es inválido!');
+                    }
+
+                    if(polt == 0){
+                        return ObjMain.alert_form(false,'Debe aceptar las politicas!');
+                    }
+                    
+                    if(pass1!=pass2){
+                        return ObjMain.alert_form(false,'Las contraseñas no coinciden');
                     }else{
                         let perror = document.getElementById('dp_error');
                         let error = document.getElementById('d_error');

@@ -88,5 +88,42 @@ class Ajax extends MY_Controller
              ->set_output(json_encode($this->resp));
     }
     
+    public function login(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
+            #isMail?
+            $user = $this->input->post('username');
+            $user = explode('@',$user);
+            if(count($user) > 1): $data = [ 'correo' => $this->input->post('username') ];
+            else: $data = [ 'documento' => $this->input->post('username') ];
+            endif; 
+            $data += [ 'contrasena' => hash('sha256',$this->input->post('contrasena')) ];
+
+            #query DB
+            $query = $this->dbSelect('*','clientes', $data );
+            if($query):
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->set_session($query);
+                $this->output
+                 ->set_content_type('application/json')
+                 ->set_status_header(200)
+                 ->set_output(json_encode($this->resp));
+                 return;
+            endif;
+
+            $this->resp['message'] = 'Usuario o contraseña incorrecta!';
+            $this->output
+                 ->set_content_type('application/json')
+                 ->set_status_header(404)
+                 ->set_output(json_encode($this->resp));
+                 return;
+        }
+    }
+
+    public function logout(){
+        session_destroy();
+        header('Location: '.base_url() );
+    }
 }
