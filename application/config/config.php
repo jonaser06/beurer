@@ -25,11 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |
  */
     // $config['base_url'] = 'http://www.blogingenieria.site/';
-<<<<<<< HEAD
+    
      $config['base_url'] = 'http://localhost/beurer/';
-=======
-    $config['base_url'] = 'http://localhost/beurer/';
->>>>>>> 9799b945dc7fbb139a29f366a051b5629ba8a3d6
 /*
   |--------------------------------------------------------------------------
   | Index File
