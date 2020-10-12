@@ -14,7 +14,11 @@ class MY_Controller extends CI_Controller
             'status'  => false,
             'code'    => 404,
             'message' => '',
-        ];   
+        ];  
+        if( !isset($_SESSION) ) {
+            session_start();
+
+        }
     }
 
     public function dbInsert($table, $data)
@@ -32,5 +36,10 @@ class MY_Controller extends CI_Controller
         $query = $this->db->get()->result_array();
         if ($query) return $query;
         return false;
+    }
+    public function set_session($data){
+        $_SESSION['status'] = true;
+        $_SESSION['id_cliente'] = $data[0]['id_cliente'];
+        return;
     }
 }
