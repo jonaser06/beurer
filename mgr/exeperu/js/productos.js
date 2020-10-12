@@ -1643,6 +1643,7 @@ Helpers.prototype.guardar_textareacar_color = function () {
     texarea.val(JSON.stringify(data));
 };
 
+
 Helpers.prototype.cancelar_complementocar_color = function () {
     let tabla = this.tables['table_complementos_color'];
     let row = tabla.row('.row_edit');
