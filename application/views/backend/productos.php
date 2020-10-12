@@ -5,7 +5,6 @@
     <head>
 
         <?= $this->load->view('backend/chunks/head', array(), TRUE) ?>
-
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini">
@@ -153,7 +152,7 @@
 
                                         </div>
                                         <br>
-                                        <!--<a href="#" data-toggle="modal" data-target="#edit_producto" class="btn btn-sm btn-info btn-flat"><i class="glyphicon glyphicon-plus"></i> Agregar producto</a>-->
+                                        <!-- <a href="#" data-toggle="modal" data-target="#edit_producto" class="btn btn-sm btn-info btn-flat"><i class="glyphicon glyphicon-plus"></i> Agregar producto</a> -->
 
                                         <a href="javascript: Exeperu.addProducto()" class="btn btn-sm btn-info btn-flat"><i class="glyphicon glyphicon-plus"></i> Agregar Producto</a>
 

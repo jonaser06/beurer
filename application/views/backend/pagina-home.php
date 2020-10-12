@@ -81,11 +81,10 @@
                     <div class="nav-tabs-custom" style="box-shadow: none;">
                         
                         <ul class="nav nav-tabs">
-                            <?php 
-                            if(isset($categoria)){?>
+                            
+                            
                                 <li><a href="#tab_categoria" data-toggle="tab">Categoría</a></li>
-                            <?php }
-                            ?>
+                            
                             <?php if (!empty($variables)) { ?>
                                 <li class="active"><a href="#tab_variables" data-toggle="tab">Variables</a></li>
                             <?php } ?>

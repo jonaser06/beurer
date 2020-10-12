@@ -1472,20 +1472,184 @@ Helpers.prototype.eliminar_complementocar_accesorio = function (iditem) {
 };
 
 Helpers.prototype.guardar_textareacar_accesorio = function () {
-    var tabla = this.tables['table_complementos_accesorio'];
-    var texarea = $('#accesorio_prod');
-    var data = tabla.data().toArray();
+    let tabla = this.tables['table_complementos_accesorio'];
+    let texarea = $('#accesorio_prod');
+    let data = tabla.data().toArray();
     console.log(data);
     texarea.val(JSON.stringify(data));
 };
 
 Helpers.prototype.cancelar_complementocar_accesorio = function () {
-    var tabla = this.tables['table_complementos_accesorio'];
-    var row = tabla.row('.row_edit');
-    var page = tabla.page();
+    let tabla = this.tables['table_complementos_accesorio'];
+    let row = tabla.row('.row_edit');
+    let page = tabla.page();
 
     if (row.node()) {
-        var $_row = $(row.node());
+        let $_row = $(row.node());
+        delete this.raw_data_current.row_edit;
+        $_row.removeClass('row_edit');
+        row.data(this.raw_data_current).page(page).draw('page');
+        this.raw_data_current = {};
+    }
+    return true;
+};
+
+
+
+// COLORES 
+
+Helpers.prototype.tableComplementosColors = function () {
+    let self = this;
+    let campo_14 = $('#color_prod');
+    let data = JSON.parse(campo_14.val());
+
+    this.loadDataTable('table_complementos_color', {
+        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "pagingType": "full_numbers",
+        "rowId": "idcolumn",
+        "data": data,
+        "columns": [
+            {"data": "codigo"},
+            {"data": "foto"} ,  
+            {"data": "color"} ,  
+            {"data": "estado"} ,  
+            {"data": "idcolumn", render: function (data, type, row, meta) {
+                    var salida;
+
+                    if (row.row_edit) {
+                        salida = [
+                            "<center>",
+                            "<a href=\"javascript: Exeperu.guardar_complementocar_color('" + data + "');\" class=\"btn btn-primary btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-floppy-o\"></i></a>",
+                            "</center>",
+                        ].join('');
+                    } else {
+                        salida = [
+                            "<center>",
+                            "<a href=\"javascript: Exeperu.editar_complementocar_color('" + data + "');\" class=\"btn btn-primary btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-pencil\"></i></a>&nbsp;&nbsp;",
+                            "<a href=\"javascript: Exeperu.eliminar_complementocar_color('" + data + "');\" class=\"btn btn-danger btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-trash-o\"></i></a>",
+                            "</center>",
+                        ].join('');
+                    }
+
+                    return salida;
+                }
+            }
+        ]
+    });
+};
+
+Helpers.prototype.crear_complemento_color = function (idmodelo) {
+    if (!this.cancelar_complementocar_color())
+        return false;
+
+    let tabla = this.tables['table_complementos_color'];
+    let page = tabla.page();
+    let total = tabla.data().length;
+    var next = total + 1;
+
+    tabla.row.add({
+        "codigo": '',
+        "foto": '',
+        "color": '',
+        "estado": '',
+        "idcolumn": "color_" + next,
+        "row_edit": true
+    }).draw().page('last').draw('page');
+    return this.editar_complementocar_color("color_" + next);
+};
+
+
+Helpers.prototype.editar_complementocar_color = function (iditem) {
+    let self = this;
+
+    if (!this.cancelar_complementocar_color())
+        return false;
+
+    let tabla = this.tables['table_complementos_color'];
+    let row = tabla.row('#' + iditem);
+    let $_row = $(row.node());
+    let page = tabla.page(); //obtener la pagina actual en donde se esta realizando la edicion
+    let raw_data = this.raw_data_current = row.data();
+    let edit_data = {};
+
+    $.each(raw_data, function (index, value) {
+        switch (index) {
+            case 'idcolumn':
+           //case 'idmodelo':
+                var valuex = value;
+                break;
+            case 'codigo':
+                var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
+                break;
+            case 'estado':
+                var valuex = '<select name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%"><option value="activo">activo</option><option value="inactivo">inactivo</option></select>';
+                break;
+            case 'foto':
+                var valuex = '<input type="text" name="' + index + '" id="color_img_'+ iditem +'" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
+                valuex += '<button type="button" onclick="Exeperu.popupManager(\'color_img_' + iditem + '\',\'\',\'' + self.key + '\')"><span class="glyphicon glyphicon-picture"></span></button>';
+                break;
+            case 'color':
+                    var valuex = '<input type="color" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="cursor:pointer;width:30px;height:30px;border:0;padding:0;border-radius;outline:none">';
+                break;
+            default:
+                var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada">';
+                break;
+        }
+
+        edit_data[index] = valuex;
+    });
+
+    edit_data.row_edit = true;
+    $_row.addClass('row_edit');
+
+    row.data(edit_data).page(page).draw('page');
+};
+
+
+Helpers.prototype.guardar_complementocar_color = function (iditem) {
+    let tabla = this.tables['table_complementos_color'];
+    let row = tabla.row('#' + iditem);
+    let $_row = $(row.node());
+    let page = tabla.page();
+    let raw_data = row.data();
+    let new_values = $('#' + iditem + ' .celda_editada').serializeArray();
+    let new_data = {};
+
+    $.each(new_values, function (index, value) {
+        raw_data[value.name] = value.value;
+    });
+    delete raw_data.row_edit;
+    $_row.removeClass('row_edit');
+
+    row.data(raw_data).page(page).draw('page');
+
+    return this.guardar_textareacar_color();
+};
+
+Helpers.prototype.eliminar_complementocar_color = function (iditem) {
+    let tabla = this.tables['table_complementos_color'];
+    let row = tabla.row('#' + iditem);
+    let page = tabla.page();
+
+    row.remove().page(page).draw('page');
+
+    return this.guardar_textareacar_color();
+};
+
+Helpers.prototype.guardar_textareacar_color = function () {
+    let tabla = this.tables['table_complementos_color'];
+    let texarea = $('#color_prod');
+    let data = tabla.data().toArray();
+    texarea.val(JSON.stringify(data));
+};
+
+Helpers.prototype.cancelar_complementocar_color = function () {
+    let tabla = this.tables['table_complementos_color'];
+    let row = tabla.row('.row_edit');
+    let page = tabla.page();
+
+    if (row.node()) {
+        let $_row = $(row.node());
         delete this.raw_data_current.row_edit;
         $_row.removeClass('row_edit');
         row.data(this.raw_data_current).page(page).draw('page');

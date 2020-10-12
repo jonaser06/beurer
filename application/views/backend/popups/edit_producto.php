@@ -10,8 +10,6 @@
 
             <h4><strong>Producto</strong></h4>
 
-
-
         </div>
 
         <style>
@@ -79,6 +77,9 @@
 
                         <a href="#sface" role="tab" id="beneficios-tab" data-toggle="tab" aria-controls="complementos" aria-expanded="false">Facebook</a>
 
+                    </li>
+                    <li>
+                        <a href="#color-detalle" aria-controls="descripcion" role="tab" data-toggle="tab">Colores</a>
                     </li>
 
             </ul>
@@ -265,7 +266,8 @@
                                 <div class="form-group" style="position: relative;">
                                     <label for="ft_prod">Accesorios</label>
                                     <textarea class="form-control" name="productos[accesorio]" id="accesorio_prod" rows="3" style="display: none;">
-                                        <?= isset($producto['accesorios']) ? $producto['accesorios'] : '[]'; ?></textarea><br>
+                                        <?= isset($producto['accesorios']) ? $producto['accesorios'] : '[]'; ?>
+                                    </textarea><br>
                                     <a href="javascript: Exeperu.crear_complemento_accesorio('<?= (isset($producto['id']) && (int) $producto['id'] > 0) ? $producto['id'] : '0' ?>')" class="btn btn-xs btn-info btn-flat"><i class="glyphicon glyphicon-plus"></i> Agregar</a><br><br>
                                     <div class="table-responsive">
                                         <table id="table_complementos_accesorio" class="table table-striped table-responsive">
@@ -326,14 +328,16 @@
                                     <textarea class="form-control" name="productos[imagenes]" id="img_prod" rows="3" style="display: none;">
                                         <?php  
                                             if(isset($imagenes[0])){
-                                                foreach ($imagenes as $value) { $datos_img[] = array('imagenes'=> $value['imagen'], 'idcolumn' => $value['idimagen']); }
+                                                foreach ($imagenes as $value) {
+                                                     $datos_img[] = array('imagenes'=> $value['imagen'], 'idcolumn' => $value['idimagen']); 
+                                                    }
                                                 echo json_encode($datos_img);   
                                             }else{
-
                                                 echo '[]';  
                                             } 
                                         ?>      
-                                    </textarea><br>
+                                    </textarea>
+                                    <br>
 
                                     <a href="javascript: Exeperu.crear_complemento_imagenes('<?= (isset($producto['id']) && (int) $producto['id'] > 0) ? $producto['id'] : '0' ?>')" class="btn btn-xs btn-info btn-flat"><i class="glyphicon glyphicon-plus"></i> Agregar</a><br><br>
                                     <div class="table-responsive">
@@ -528,6 +532,47 @@
 
                         </div>
 
+                        <!-- Coloress  -->
+                        <div role="tabpanel" class="tab-pane" id="color-detalle">
+
+                            <div class="col-xs-12">
+
+                                <div class="form-group" style="position: relative;">
+                                    <label for="ft_prod">Colores</label>
+
+                                    <textarea class="form-control" 
+                                    name="productos[colores]" 
+                                    id="color_prod" rows="3" 
+                                    style="display: block;"
+                                    >
+                                    <?= isset($producto['detalles-multimedia']) 
+                                    ? $producto['detalles-multimedia']:'[]'; 
+                                    ?>
+                                    </textarea>
+                                    <br>
+                                    <a 
+                                    href="javascript: Exeperu.crear_complemento_color('<?= (isset($producto['id']) && (int) $producto['id'] > 0) ? $producto['id'] : '0' ?>')" 
+                                    class="btn btn-xs btn-info btn-flat">
+                                    <i class="glyphicon glyphicon-plus"></i> COLOR-DETALLE</a>
+                                    <br><br>
+                                    <div class="table-responsive">
+                                        <table id="table_complementos_color" class="table table-striped table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código Sku</th>                                                            
+                                                    <th>Imagen</th>                                                            
+                                                    <th>Color</th>                                                                                                         
+                                                    <th>estado</th>                                                                                                         
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                  </div>
@@ -563,8 +608,9 @@ $(document).ready(function(){
     Exeperu.tableComplementosRelacionados();
     Exeperu.tableComplementosAccesorios();
     Exeperu.tableComplementosMarcas()
-    //Exeperu.tableComplementos();
-    //Exeperu.tableComplementosft();
+    Exeperu.tableComplementosColors()
+    // Exeperu.tableComplementos();
+    // Exeperu.tableComplementosft();
     Exeperu.tableComplementosImagenes();
     Exeperu.tinyInit();
 

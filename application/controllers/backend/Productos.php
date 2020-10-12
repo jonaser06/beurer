@@ -105,9 +105,6 @@ class Productos extends CI_Controller {
 					->set_content_type('application/json')
 					->set_output(json_encode(['data'=> $data]));
 	}
-
-
-
 	public function string_sanitize($string, $force_lowercase = true, $anal = false) {
 
 	    $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
@@ -175,9 +172,6 @@ class Productos extends CI_Controller {
 	public function save()
 
 	{
-		
-
-
 		$input = $this->input->post('productos');
 
 		//var_dump($input);
@@ -190,6 +184,7 @@ class Productos extends CI_Controller {
 			'accesorios' => $input['accesorio'],
 			'descripcion' => $input['descripcion'],
 			'ficha_tecnica' => $input['ficha_tecnica'],
+			'detalles-multimedia' => $input['colores'],
 			'marcas' => $input['marcas'],
 			'tipo' => '',
 			'pdf' => $input['pdf'],

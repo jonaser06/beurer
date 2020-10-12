@@ -205,13 +205,16 @@ ObjMain = {
     changueColor : ( visor , btnColorChangue ,btnCarrito)  => {
         document.addEventListener('click', event => {
             if(event.target.matches(btnColorChangue)){
+                DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
 
              const $visor = document.querySelector(visor),
-             $addCarrito = document.querySelector(btnCarrito);
+             $addCarrito = document.querySelector(btnCarrito)
+             tabs = document.querySelectorAll('.tabs_section');
              
              const { img , color, codigo }= event.target.dataset;
+             tabs.forEach(tab => tab.classList.remove('-open'))
              $visor.classList.add('-open')
-             ObjMain.render($visor , `<img src=${img}>` );
+             ObjMain.render($visor , `<img src=${DOMAIN}${img}>`);
                 
                 $addCarrito.setAttribute('data-color',color);
                 $addCarrito.setAttribute('data-img',img);
@@ -250,8 +253,9 @@ ObjMain = {
                 document.querySelector(componentModal),
                 `Cantidad: ${$btnAdd.dataset.cantidad}`
                 );
+                let foto = DOMAIN + $btnAdd.dataset.img;
                 if($btnAdd.dataset.img) {
-                    ObjMain.changueImg('.img-modal',$btnAdd.dataset.img)
+                    ObjMain.changueImg('.img-modal',foto)
                 }
             })
         }
@@ -339,13 +343,12 @@ class Carrito {
         })
     }
 }
-
-
 window.addEventListener('load', () => {
+    ObjMain.init();
+
    $btncarrito = document.querySelector('.btnAddCarrito')
     if($btncarrito) {
         new Carrito('.btnAddCarrito');
     }
-    ObjMain.init();
 } );
 

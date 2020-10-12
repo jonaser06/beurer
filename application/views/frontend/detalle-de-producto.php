@@ -147,7 +147,7 @@
                             <?php 
                                             if(!empty($detalles)){
                                                 foreach ($detalles as $key => $value) {
-                                                    if($value['activo']){
+                                                    if($value['estado']== 'activo'){
                                                         echo '<li class="btn btnprimary1 color active selectColor" 
                                                         style="background-color:'.$value['color'].';"
                                                         data-img = "'.$value['foto'].'"
@@ -486,9 +486,11 @@ $(function() {
                             
                         <?php 
                         if(!empty($producto_rel)) {
-                            $col = 12/count($producto_rel);
+                            $sugeridos = array_slice($producto_rel,0,3);
+                            
+                            $col = 12/count($sugeridos);
 
-                            foreach($producto_rel as $value ):
+                            foreach($sugeridos as $value ):
                                 echo 
                                 '
                                 <div class="col-md-'.$col.' col-xs-'.$col.'" style="padding:0;">
