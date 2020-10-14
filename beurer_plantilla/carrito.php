@@ -820,8 +820,8 @@
     .loader {
       flex-basis: 100%;
       max-width: 100%;
-      min-height: 300px;
-      max-height: 300px;
+      min-height: 46vh;
+      max-height: 273px;
       height: 50vh;
       position: relative;
       overflow: hidden;
@@ -1094,10 +1094,10 @@
               </div>
 
               <div class="quantity">
-                <button id="dism" style="width:20%; margin: 0 8%;" onclick="disminuir()">-</button>
+                <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
                 <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1"
                   readonly>
-                <button id="aum" style="width:20%; margin: 0 8%;" onclick="aumentar()">+</button>
+                <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
               </div>
               <div class="subtotal rsubtotal" id="subtotal">26.00</div>
 
@@ -1133,10 +1133,10 @@
                   Normal: S/ 25.69</div>
               </div>
               <div class="quantity">
-                <button id="dism" style="width:20%; margin: 0 8%;" onclick="disminuir()">-</button>
+                <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
                 <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1"
                   readonly>
-                <button id="aum" style="width:20%; margin: 0 8%;" onclick="aumentar()">+</button>
+                <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
               </div>
               <div class="subtotal rsubtotal" id="subtotal">29.00</div>
               <div class="remove">
@@ -1173,10 +1173,10 @@
                   Normal: S/ 25.69</div>
               </div>
               <div class="quantity">
-                <button id="dism" style="width:20%; margin: 0 8%;" onclick="disminuir()">-</button>
+                <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
                 <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1"
                   readonly>
-                <button id="aum" style="width:20%; margin: 0 8%;" onclick="aumentar()">+</button>
+                <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
               </div>
               <div class="subtotal rsubtotal" id="subtotal">22.00</div>
               <div class="remove">
@@ -1187,8 +1187,7 @@
 
           </div>
 
-          <div
-            style="float:left;width:100%; text-align:left;color:black;background-color:white; padding:.5rem 2rem;border-radius:25px;">
+          <div style="float:left;width:100%; text-align:left;color:black;background-color:white; padding:.5rem 2rem;border-radius:25px;">
 
             <div class="row">
               <div class="titulo font-nexaheavy"
@@ -1609,7 +1608,7 @@
 
                 <tr style="background-color:white">
                   <th scope="row" colspan="2" style="text-align:right; vertical-align:middle;"><input type="text"
-                      placeholder="Ej. 6W79H6" style="border: 1px solid black;" maxlength="12" /><i class="helper"></i>
+                      placeholder="Ej. 6W79H6" style="border: 1px solid black;font-size:1.3em;" maxlength="12" /><i class="helper"></i>
                   </th>
 
                   <td id="d_costonvio" style="color:#c51152; font-size:1.2em;"><label class="font-light label-pol"
@@ -1655,6 +1654,7 @@
         <br>
 
       </div>
+
     </div>
     <!--Fin de cuerpo-->
 
@@ -1679,9 +1679,11 @@
       </div>
     </div>
 
+    
   </main>
+  
 
-  <div id="container10">
+  <div id="container10" style="margin-top:17em;">
     <!-- <section2>
     <div class="loader loader-1">
       <div class="loader-outter"></div>
@@ -1707,12 +1709,14 @@
         <div class='ball'></div>
         <div class='ball'></div>
         <div class='ball'></div>
-        <img src='assets/images/logotipo-beurer.png' style="width:80%;height:auto;padding:3%;margin-top:11%;">
+        <img src='assets/images/logotipo-beurer.png' style="width:70%;height:auto;padding:3%;margin-top:15%;">
       </div>
     </div>
 
 
   </div>
+
+  
 
 
   <script src="assets/js/registro.js"></script>
@@ -1727,6 +1731,29 @@
   </script>
 
 
+  <div class="row" id="parte-contacto" style="width:80%;margin:auto;display:block; display:none;  ">
+  <div class="col-md-12" style="display:inline-block;">
+          <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
+          <div class="font-bold" style="font-size:1.92em;text-align:center;">Chatea con nosotros</div>
+          <img src="assets/images/icons/mensajero.svg" style="width:20%;margin:5% 0%;"><br>
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> Facebook Messenger de Beurer Perú </span>
+      </div>
+          <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
+          <div class="font-bold" style="font-size:1.92em;text-align:center;">Llámanos</div>
+          <img src="assets/images/icons/telefono.svg" style="width:28%;margin:1.5% 0%;">
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> (+51) 920 198 522 </span>
+          
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> (+51) 978 440 034 </span>
+
+      </div>
+          <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
+          <div class="font-bold" style="font-size:1.92em;text-align:center;">Escríbenos</div>
+          <img src="assets/images/icons/email.png" style="width:23%;margin:1.5% 0%;">
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> ventas@beurer.pe </span>
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> ventas1@beurer.pe </span>
+      </div>
+      </div>
+  </div>
   <br>
   <div class="wrapper-footer" id="piedepag" style="display:none;">
     <div class="container">
