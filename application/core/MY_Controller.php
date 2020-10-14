@@ -72,7 +72,7 @@ class MY_Controller extends CI_Controller
             'mailtype'  => 'html', 
             'charset'   => 'utf-8'
           ];
-          $message = $this->load->view('mail/correo',$data, TRUE);
+          $message = $this->load->view('mail/mail_recovery.php',$data, TRUE);
           
           $this->load->library('email',$config);
           $this->email->set_newline("\r\n");

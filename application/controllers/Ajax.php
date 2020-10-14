@@ -137,10 +137,9 @@ class Ajax extends MY_Controller
             if($query){
                 // $this->salt_encrypt($query[0]['id_cliente']);
                 // var_dump($this->salt_encrypt($query[0]['id_cliente']));
-                $mensaje = "test";
 
                 // Enviarlo
-                $enviar = mail('jonaser06@gmail.com', 'Mi título', $mensaje);
+                $this->sendmail('jonaser06@gmail.com','',"Gracias por su pedido!");
                 var_dump($enviar);
             }
         }
