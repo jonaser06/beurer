@@ -136,11 +136,12 @@ class Ajax extends MY_Controller
             $query = $this->dbSelect('*','clientes', $data );
             if($query){
                 // $this->salt_encrypt($query[0]['id_cliente']);
-                var_dump($this->salt_encrypt($query[0]['id_cliente']));
+                // var_dump($this->salt_encrypt($query[0]['id_cliente']));
                 $mensaje = "test";
 
                 // Enviarlo
-                mail('jonaser06@gmail.com', 'Mi título', $mensaje);
+                $enviar = mail('jonaser06@gmail.com', 'Mi título', $mensaje);
+                var_dump($enviar);
             }
         }
     }
