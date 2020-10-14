@@ -126,4 +126,22 @@ class Ajax extends MY_Controller
         session_destroy();
         header('Location: '.base_url() );
     }
+
+    public function recovery(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $user = $this->input->post('correo');
+            $data = ['correo' => $user ];
+
+            #query DB
+            $query = $this->dbSelect('*','clientes', $data );
+            if($query){
+                // $this->salt_encrypt($query[0]['id_cliente']);
+                var_dump($this->salt_encrypt($query[0]['id_cliente']));
+                $mensaje = "test";
+
+                // Enviarlo
+                mail('jonaser06@gmail.com', 'Mi título', $mensaje);
+            }
+        }
+    }
 }

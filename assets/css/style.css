@@ -1,6 +1,9 @@
 input,select {
     outline: none;
 }
+.wrapper-header{
+    top: 0px;
+}
 .user_menu{
     position: relative;
     z-index: 9999;
@@ -15,5 +18,34 @@ input,select {
     padding: 10px 30px;
 }
 .response_sesion{
+    color: #c51152;
+}
+.content-recovery{
+    width: 100%;
+    height: 500px;
+}
+.row-content-recovery{
+    position: relative; 
+    width: 90%;
+    margin: 160px auto;
+    max-width: 1200px;
+    padding-top: 50px;
+}
+.email-recovery{
+    width: 50%;
+}
+.button_recovery{
+    margin-top: 30px;
+    width: 50%;
+    background-color: #c51152;
+    color: #fff;
+    font-family: "nexaheavyuploaded_file";
+    border: none;
+    padding: 10px;
+    height: auto;
+    text-align: center;
+}
+.err_recovery, .err_mail{
+    display: none;
     color: #c51152;
 }

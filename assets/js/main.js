@@ -23,6 +23,32 @@ ObjMain = {
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
         }
+        if(document.querySelector('.email-recovery') != null){
+            ObjMain.recovery();
+        }
+    },
+    recovery: () => {
+        document.querySelector('.button_recovery').addEventListener('click', ()=>{
+            document.querySelector('.err_mail').style.display = 'none';
+            document.querySelector('.err_recovery').style.display = 'none';
+
+            let correo = document.querySelector('.email-recovery').value;
+            if(!ObjMain.valida_correo(correo)){
+                document.querySelector('.err_mail').style.display = 'block';
+            }else{
+                let formData = new FormData();
+                formData.append('correo', correo);
+                ObjMain.ajax_post('POST',DOMAIN+'ajax/recovery', formData)
+                .then((resp)=>{
+                    resp = JSON.parse(resp);
+                    window.location = DOMAIN;
+                })
+                .catch((err)=>{
+                    err = JSON.parse(err);
+                    document.querySelector('.err_mail').style.display = 'block';
+                });
+            }
+        });
     },
     getDataCarrito : () => {
         return localStorage.getItem('productos')? 

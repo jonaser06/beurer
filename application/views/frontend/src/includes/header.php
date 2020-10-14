@@ -114,7 +114,7 @@
                                             <p style="padding-top:0px !important;margin-top:0px;">
                                                 <input class="btn btn-primary1" type="submit" value="Iniciar sesión" style="padding:0;">
                                             </p>
-                                            <p><a href="#">¿Ha olvidado la contraseña?</a></p>
+                                            <p><a href="<?php echo base_url('recovery'); ?>">¿Ha olvidado la contraseña?</a></p>
                                             <hr style="margin-top:0px;">
                                             <div style="text-align:center;">
                                                 <a class="btn btn-primary1" href="<?php echo base_url('registro'); ?>" style="color:white;"> Deseo registrarme</a>

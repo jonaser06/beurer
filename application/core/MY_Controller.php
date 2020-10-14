@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+define('METHOD', 'AES-256-CBC');
+define('SECRET_KEY', '$.//ppp693-');
+define('SECRET_IV', '99326425');
 class MY_Controller extends CI_Controller
 {
     protected $data;
@@ -41,5 +44,22 @@ class MY_Controller extends CI_Controller
         $_SESSION['status'] = true;
         $_SESSION['id_cliente'] = $data[0]['id_cliente'];
         return;
+    }
+    public function salt_encrypt($pass){
+        $output = FALSE;
+        $key = hash('sha256', SECRET_KEY);
+        $iv = substr(hash('sha256', SECRET_KEY), 0, 16);
+
+        $output = openssl_encrypt($pass, METHOD, $key, 0, $iv);
+        $output = base64_encode($output);
+        return $output;
+    }
+    public function salt_decrypt($pass){
+
+        $key = hash('sha256', SECRET_KEY);
+        $iv = substr(hash('sha256', SECRET_KEY), 0, 16);
+
+        $output = openssl_decrypt(base64_decode($pass), METHOD, $key, 0, $iv);
+        return $output;
     }
 }
