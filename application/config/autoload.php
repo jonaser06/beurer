@@ -143,3 +143,5 @@ define('SQL_USER', getenv('SQL_USER') );
 define('SQL_PASS', getenv('SQL_PASS') );
 define('URL_BASE', getenv('DOMAIN') );
 define('DIR_U', getenv('DIR_U') );
+define('MAIL_USER', getenv('MAIL_USER') );
+define('MAIL_PASS', getenv('MAIL_PASS') );
