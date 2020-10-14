@@ -140,6 +140,13 @@
 
     <tr style="background-color:white;font-weight:bold;color:white;font-size:1.3em;">
     <td ></td>  
+    <td scope="row"  style="padding:3%;"></td>
+      
+      <td style="padding:3%" ></td>
+    </tr>
+
+    <tr style="background-color:white;font-weight:bold;color:white;font-size:1.3em;">
+    <td ></td>  
     <td scope="row"  style="padding:3%;background-color:rgba(197,17,82,0.9);vertical-align:middle;border-radius:20px 0px 0px 20px;">TOTAL A PAGAR</td>
       
       <td class="subtotalr" style="padding:3%;text-align:right;background-color:rgba(197,17,82,0.9);border-radius:0% 20px 20px 0%;" >615.00</td>
@@ -153,7 +160,7 @@
                 <div style="font-size:1.2em;text-align:right;" >Para culminar con su compra, haga click en el siguiente botón para ingresar los datos de su tarjeta. Todo el proceso está 100% seguro.</div>
                 <br>
                 <div >
-                <button class="btn btn-cmn buy" style="font-size:1.5em">PAGAR!</button>
+                <button class="btn btn-cmn buy" style="font-size:1.5em">PAGAR</button>
                 </div>            
             </div>
         </div>

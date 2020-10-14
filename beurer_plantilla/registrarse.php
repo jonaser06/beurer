@@ -83,7 +83,7 @@ include 'src\includes\header.php'
                     <div class="divTable" style=" width:100%;display:inline-block;" >
                         <div class="divTableBody" style="display:block;">
                             <div class="divTableRow" >
-                                <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">(*)</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">*</div></div>
                     
                                     <select id="s_tipodoc" onchange="selectTipoDoc();">
                                     <option id="di_pn1" value="1" selected >DNI</option>
@@ -94,7 +94,7 @@ include 'src\includes\header.php'
                                 </div>
                                 
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required >
                     
                                 </div>
@@ -102,13 +102,13 @@ include 'src\includes\header.php'
 
                             <div class="divTableRow" id="pn_datos1">
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Nombres <div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Nombres<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres1" onkeypress="return soloLetras(event)" value="" >		
                     
                                 </div>
 
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Apellidos<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Apellidos<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="" >		
                     
                                 </div>
@@ -116,11 +116,11 @@ include 'src\includes\header.php'
 
                             
                             <div class="divTableRow">
-                                <div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico<div class="d_ob">(*)</div></div> 
+                                <div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico<div class="d_ob">*</div></div> 
                                     <input type="email" id="c_correo1" size="20" maxlength="30" name="campo1"  id="correo"  value="" required >
                                 </div>
                     
-                                <div class="divTableCell"><div class="etiquetaFormulario">Departamento<div class="d_ob">(*)</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Departamento<div class="d_ob">*</div></div>
                                     <select  id="s_depa" onchange="selectDep();">
                                         <option value="1"> Amazonas</option>
                                         <option value="2">Ancash</option>
@@ -151,7 +151,7 @@ include 'src\includes\header.php'
                              </div>
             
                             <div class="divTableRow">
-                                <div class="divTableCell"><div class="etiquetaFormulario">Provincia<div class="d_ob">(*)</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Provincia<div class="d_ob">*</div></div>
                                     <select id="s_prov" onchange="selectProv();">
                                         <option>-</option>  
                 
@@ -377,7 +377,7 @@ include 'src\includes\header.php'
                                         
                                     </select>   
                                 </div>
-                                <div class="divTableCell"><div class="etiquetaFormulario">Distrito<div class="d_ob">(*)</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Distrito<div class="d_ob">*</div></div>
                                     <select id="s_dist" >
                                         <option  selected >-</option> 
                                     </select>
@@ -385,7 +385,7 @@ include 'src\includes\header.php'
                             </div>	
                 
                             <div class="divTableRow">
-                                <div class="divTableCell"><div class="etiquetaFormulario">Dirección de entrega<div class="d_ob">(*)</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Dirección de entrega<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="45" name="campo1" id="campo1" value="" >		
                                 </div>
                                 <div class="divTableCell"><div class="etiquetaFormulario">Referencia</div>
@@ -399,7 +399,7 @@ include 'src\includes\header.php'
                                     <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij" onkeypress="return soloNumeros(event)" value="" >		
                                 </div>
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Teléfono celular<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Teléfono celular<div class="d_ob">*</div></div>
                                     <input type="text" size="9" maxlength="9" name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="" >
                                 </div>
                             </div>
@@ -407,7 +407,7 @@ include 'src\includes\header.php'
                             <br>
                                 <div class="divTableRow" style="width:100%;">
                                     <div class="divTableCell" style="text-align:left; color:black;font-size:1.3em;font-weight:bold;">
-                                    <div class="d_ob">(*)</div> <span>Datos obligatorios.</span>
+                                    <div class="d_ob">*</div> <span>Datos obligatorios.</span>
                                     </div>
                                 </div>
 
@@ -449,7 +449,7 @@ include 'src\includes\header.php'
                     <div class="divTable" style=" width:100%;display:inline-block;" >
                         <div class="divTableBody" style="display:block;">
                             <div class="divTableRow" >
-                            <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">(*)</div></div>
+                            <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">*</div></div>
                     
                                 <select id="s_tipodoc" onchange="selectTipoDoc();">
                                 <option id="di_pn1" value="1" selected >DNI</option>
@@ -459,7 +459,7 @@ include 'src\includes\header.php'
                 
                             </div>                                
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required >
                     
                                 </div>
@@ -467,12 +467,12 @@ include 'src\includes\header.php'
 
                             <div class="divTableRow" id="pn_datos1">
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Nombres <div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Nombres <div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres1" onkeypress="return soloLetras(event)" value="" >		
                     
                                 </div>
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Apellidos<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Apellidos<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="" >		
                     
                                 </div>
@@ -480,7 +480,7 @@ include 'src\includes\header.php'
 
                             <div class="divTableRow">
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Teléfono<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Teléfono<div class="d_ob">*</div></div>
                                     <input type="text" size="9" maxlength="9" name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="" >
                                 </div>
                             </div>
@@ -488,7 +488,7 @@ include 'src\includes\header.php'
                             <br>
                                 <div class="divTableRow" style="width:100%;">
                                     <div class="divTableCell" style="text-align:left; color:black;font-size:1.3em;font-weight:bold;">
-                                    <div class="d_ob">(*)</div> <span>Datos obligatorios.</span>
+                                    <div class="d_ob">*</div> <span>Datos obligatorios.</span>
                                     </div>
                                 </div>
 
@@ -540,7 +540,7 @@ include 'src\includes\header.php'
                         <div class="divTableBody" style="display:block;">
                             <div class="divTableRow" style="width:100%;">
                                 <div class="divTableCell" style="width:100%;">
-                                    <div class="etiquetaFormulario">RUC<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">RUC<div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="campo1"  onkeypress="return soloNumeros(event)" value="" required >
                     
                                 </div>
@@ -549,14 +549,14 @@ include 'src\includes\header.php'
 
                             <div class="divTableRow" >
                                 <div class="divTableCell" style="width:100%;">
-                                    <div class="etiquetaFormulario">Razón Social<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Razón Social<div class="d_ob">*</div></div>
                                     <input type="text" size="9" maxlength="9" name="campo1" id="c_telcel"  value="" required>
                                 </div>
                             </div>
 
                             <div class="divTableRow">
                                 <div class="divTableCell" style="width:100%;">
-                                    <div class="etiquetaFormulario">Dirección Fiscal<div class="d_ob">(*)</div></div>
+                                    <div class="etiquetaFormulario">Dirección Fiscal<div class="d_ob">*</div></div>
                                     <input type="text" size="9" maxlength="9" name="campo1" id="c_telcel"  value="" required>
                                 </div>
                             </div>
@@ -564,7 +564,7 @@ include 'src\includes\header.php'
                             <br>
                                 <div class="divTableRow" >
                                     <div class="divTableCell" style="text-align:left; color:black;font-size:1.3em;font-weight:bold;">
-                                    <div class="d_ob">(*)</div> <span>Datos obligatorios.</span>
+                                    <div class="d_ob">*</div> <span>Datos obligatorios.</span>
                                     </div>
                                 </div>
 
@@ -614,7 +614,31 @@ include 'src\includes\header.php'
     <div class="linea"></div>	
 
     <br>
-	   
+       
+    
+    <div class="row" style="width:80%;margin:auto;display:block;  ">
+  <div class="col-md-12" style="display:inline-block;">
+          <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
+          <div class="font-bold" style="font-size:1.92em;text-align:center;">Chatea con nosotros</div>
+          <img src="assets/images/icons/mensajero.svg" style="width:20%;margin:5% 0%;"><br>
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> Facebook Messenger de Beurer Perú </span>
+      </div>
+          <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
+          <div class="font-bold" style="font-size:1.92em;text-align:center;">Llámanos</div>
+          <img src="assets/images/icons/telefono.svg" style="width:28%;margin:1.5% 0%;">
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> (+51) 920 198 522 </span>
+          
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> (+51) 978 440 034 </span>
+
+      </div>
+          <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
+          <div class="font-bold" style="font-size:1.92em;text-align:center;">Escríbenos</div>
+          <img src="assets/images/icons/email.png" style="width:23%;margin:1.5% 0%;">
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> ventas@beurer.pe </span>
+          <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> ventas1@beurer.pe </span>
+      </div>
+      </div>
+  </div>
 	</div>		
   	<!--Fin de cuerpo-->      
     </main>

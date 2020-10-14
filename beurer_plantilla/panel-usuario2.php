@@ -37,7 +37,7 @@ include 'src\includes\header.php'
         <div class="row cont_datos" id="d_formularios1" align="center" style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
             <div class="col-md-12" style="color:#161616;display:flex;">
             
-            <img src="assets/images/user-solid.svg" style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid #c51152;"> 
+            <img src="assets/images/user-plomo.png" style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid gray;"> 
             
 
             <div style="margin:20px 10px;">
