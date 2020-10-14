@@ -76,7 +76,7 @@ class MY_Controller extends CI_Controller
           
           $this->load->library('email',$config);
           $this->email->set_newline("\r\n");
-          $this->email->from(MAIL_USER, 'Gruponidad'); // change it to yours
+          $this->email->from(MAIL_USER, 'Beurer'); // change it to yours
           $this->email->to($to);// change it to yours
           $this->email->subject($subject);
           $this->email->message($message);
