@@ -131,16 +131,45 @@ class Ajax extends MY_Controller
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $user = $this->input->post('correo');
             $data = ['correo' => $user ];
-
             #query DB
             $query = $this->dbSelect('*','clientes', $data );
+            #si exite el usuario
             if($query){
-                // $this->salt_encrypt($query[0]['id_cliente']);
-                // var_dump($this->salt_encrypt($query[0]['id_cliente']));
+                $id = $this->salt_encrypt($query[0]['id_cliente']);
+                $body = [
+                    "url" => base_url('recovery/'.$id),
+                    "name" => $query[0]['nombre'],
+                    "email" => $query[0]['correo'],
+                    "message"=> "Restauración de contraseña de su cuenta"
+                ];
+                #oculto correo
+                $mail = $query[0]['correo'];
+                $mail = explode('@',$mail);
+                $domain = $mail[1];
+                $mail = substr($mail[0], 0, 1);
+                $mail = $mail.'*****@'.$domain;
+                #Enviarlo
+                $enviar = $this->sendmail($body['email'], $body, $body['message'], 'mail_recovery.php');
 
-                // Enviarlo
-                $enviar = $this->sendmail('jonaser06@gmail.com','',"Gracias por su pedido!");
-                var_dump($enviar);
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->resp['data'] = [
+                    "correo" => $mail
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+
+            }else{
+                $this->resp['message'] = '';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(404)
+                    ->set_output(json_encode($this->resp));
+                    return;
             }
         }
     }

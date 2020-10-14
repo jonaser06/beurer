@@ -62,7 +62,7 @@ class MY_Controller extends CI_Controller
         $output = openssl_decrypt(base64_decode($pass), METHOD, $key, 0, $iv);
         return $output;
     }
-    public function sendmail($to, $data, $subject){
+    public function sendmail($to, $data, $subject,$template){
         $config = [
             'protocol'  => 'smtp', 
             'smtp_host' => 'ssl://smtp.zoho.com', 
@@ -71,16 +71,16 @@ class MY_Controller extends CI_Controller
             'smtp_pass' => MAIL_PASS, 
             'mailtype'  => 'html', 
             'charset'   => 'utf-8'
-          ];
-          $message = $this->load->view('mail/mail_recovery.php',$data, TRUE);
-          
-          $this->load->library('email',$config);
-          $this->email->set_newline("\r\n");
-          $this->email->from(MAIL_USER, 'Beurer'); // change it to yours
-          $this->email->to($to);// change it to yours
-          $this->email->subject($subject);
-          $this->email->message($message);
-          $this->email->send();
+        ];
+        $message = $this->load->view('mail/'.$data, TRUE);
+
+        $this->load->library('email',$config);
+        $this->email->set_newline("\r\n");
+        $this->email->from(MAIL_USER, 'Beurer'); // change it to yours
+        $this->email->to($to);// change it to yours
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
           
     }
 }

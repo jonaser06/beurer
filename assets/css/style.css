@@ -34,7 +34,7 @@ input,select {
 .email-recovery{
     width: 50%;
 }
-.button_recovery{
+.button_recovery, .change_password{
     margin-top: 30px;
     width: 50%;
     background-color: #c51152;
@@ -48,4 +48,12 @@ input,select {
 .err_recovery, .err_mail{
     display: none;
     color: #c51152;
+}
+.res_mail{
+    width: 50%;
+    padding: 20px;
+    border: 1px solid#29ff6a;
+    border-radius: 10px;
+    background: #FAFAFA;
+    color: #000;
 }

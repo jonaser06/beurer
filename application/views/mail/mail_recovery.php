@@ -225,7 +225,7 @@
     </style>
     <div class="x_preheader" style="font-size:1px; display:none!important">
     Has solicitado cambiar tu contraseña de
-        acceso a Falabella.com</div>
+        acceso a Beurer.pe</div>
     <center>
         <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" class="x_deviceWidth" style="min-width:100%">
             <tbody>
@@ -280,48 +280,30 @@
                                                 <tr>
                                                     <td valign="top"
                                                         style="color:inherit; text-align:left; text-decoration:none; padding-bottom:15px">
-                                                        <h1
-                                                            style="font-size:20px; font-weight:300; margin-bottom:15px; font-family:Lato,sans-serif; line-height:100%!important">
-                                                            Hola <span
-                                                                style="font-weight:400; text-transform:capitalize; text-align:left!important">Jonathan</span>,
+                                                        <h1 style="font-size:20px; font-weight:300; margin-bottom:15px; font-family:Lato,sans-serif; line-height:100%!important">
+                                                            Hola 
+                                                            <span style="font-weight:400; text-transform:capitalize; text-align:left!important"><?php echo $name; ?></span>,
                                                         </h1>
                                                         <p
                                                             style="font-size:14px; font-weight:300; line-height:1.5; margin-bottom:15px!important; font-family:Lato,sans-serif">
                                                             Has solicitado cambiar tu contraseña de acceso a
-                                                            Falabella.com</p>
+                                                            Beurer.pe</p>
                                                         <p
                                                             style="font-size:14px; font-weight:300; line-height:1.5; margin-bottom:5px!important; font-family:Lato,sans-serif">
-                                                            Usa esta <span style="font-weight:400">contraseña
-                                                                provisoria</span> para poder iniciar sesión y realizar
-                                                            el cambio: </p>
-                                                        <p
-                                                            style="font-size:28px; font-weight:bold; line-height:1.5; margin-bottom:20px!important; font-family:Lato,sans-serif">
-                                                            svvt</p>
-                                                        <p
-                                                            style="font-size:14px; font-weight:300; line-height:1.5; margin-bottom:5px!important; font-family:Lato,sans-serif">
-                                                            O haz click en el siguiente botón:</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="41" width="263" align="left" valign="middle" style="padding-bottom:10px">
-                                                        <a href="" target="_blank" style="text-decoration:none; text-decoration:none; border-collapse:collapse; border-spacing:0; height:55px">
-                                                            <img data-imagetype="External" src="" width="269" border="0" height="55" style="display:block; border-width:0px">
-                                                        </a>
+                                                            Haz click en el siguiente enlace:</p>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" style="color:inherit; text-align:left; text-decoration:none; padding-top:10px; padding-bottom:25px">
                                                         <p style="font-size:14px; font-weight:300; line-height:1.5; margin-bottom:15px; font-family:Lato,sans-serif">
-                                                            <span style="font-weight:400">¿Problemas con el botón “Restablecer contraseña”?</span> 
-                                                            Copia y pega la siguiente dirección en tu navegador:
-                                                            https://www.falabella.com.pe/falabella-pe/myaccount/passwordRecovery.jsp?passwordRecoveryId=4871415445¶mLast=1C1AA6B2DA75F89E972130E1DEBC4FF8
+                                                            <span style="font-weight:400"><?php echo $url; ?></span> 
                                                         </p>
                                                         <p style="font-size:14px; font-weight:300; line-height:1.5; margin-bottom:15px; font-family:Lato,sans-serif">
                                                             Recuerda que nunca debes entregar tu contraseña a terceros.
                                                         </p>
                                                         <p style="font-size:14px; font-weight:300; line-height:1.5; margin-bottom:0!important; padding-bottom:0!important; font-family:Lato,sans-serif; text-align:left!important">
                                                             Saludos,<br>
-                                                            <strong>Equipo Falabella.com</strong>
+                                                            <strong>Equipo Beurer.pe</strong>
                                                         </p>
                                                     </td>
                                                 </tr>

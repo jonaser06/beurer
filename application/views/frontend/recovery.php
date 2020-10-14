@@ -7,6 +7,7 @@
         <hr>
         <p class="err_recovery">Este e-mail no se encuentra registrado. Por favor, inténtalo nuevamente o crea una nueva cuenta <a href="<?php echo base_url('registro'); ?>">aquí</a>.</p>
         <p class="err_mail">Este correo no es valido!</p>
+        <div class="ajax-resp"></div>
         <label for="">Email</label>
         <input type="text" class="email-recovery">
         <input type="button" value="Continuar" class="button_recovery">

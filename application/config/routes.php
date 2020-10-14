@@ -95,6 +95,7 @@ $route['linea-bebe/(:any)'] = 'frontend/productos/index/$1';
 $route['linea-bebe/(:any)/(:any)'] = 'frontend/productos/show/$2';
 $route['registro'] = 'frontend/auth/index';
 $route['recovery'] = 'frontend/recovery/index';
+$route['recovery/(:any)'] = 'frontend/recovery/restore/$1';
 $route['ajax/(:any)']        = 'ajax/$1';
 
 
