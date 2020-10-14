@@ -42,4 +42,84 @@ class MY_Controller extends CI_Controller
         $_SESSION['id_cliente'] = $data[0]['id_cliente'];
         return;
     }
+    public function get(
+        string $table,
+        ?array $conditions = NULL
+    ): array {
+           return empty($conditions)
+            ? $this->db->get($table)->result_array()
+            : $this->db->get_where($table, $conditions)->row_array();
+    }
+
+    
+    public function dbUpdate(
+         $label, 
+         $table, 
+         array $where ) : bool
+    {
+        $this->db->set($label);
+        $this->db->where($where);
+        $query = $this->db->update($table);
+        if ($query) return true;
+        return false;
+    }
+
+    // Ajax update
+    public function updateUsuario(int $id)
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+            $user = $this->input->post(['nombre', 'apellido_paterno','apellido_materno', 'correo', 'telefono','tipo_documento','documento','politicas','ofertas'], TRUE);
+            
+           
+            $result =  $this->dbUpdate($user, 'clientes', ['id_cliente' => (int)$id]);
+
+            if ($result) {
+                $data = $this->get('clientes', ['id_cliente' => (int)$id]);
+
+                $resp = [
+                    'status'  => true,
+                    'code'    => 200,
+                    'message' => 'Actualizado Correctamente',
+                    'data'    => [
+                        'id_cliente'   => $data['id_cliente'],
+                        'nombre'   => $data['nombre'],
+                        'apellido_paterno' => $data['apellido_paterno'],
+                        'apellido_materno' => $data['apellido_materno'],
+                        'telefono' => $data['telefono'],
+                        'correo' => $data['correo'],
+                        'tipo_documento'   => $data['tipo_documento'],
+                        'documento'   => $data['documento'],
+                        'politicas'   => $data['politicas'],
+                        'ofertas'   => $data['ofertas'],
+                    ]
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            } else {
+                $resp = [
+                    'status'  => true,
+                    'code'    => 404,
+                    'message' => 'Ocurrio un error en el Core',
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(404)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
 }

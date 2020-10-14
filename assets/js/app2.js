@@ -54,13 +54,6 @@ $(document).ready(function () {
 
 
 });
-
-
-
-
-
-
-
 $(document).ready(function () {
 
     class CampoTexto {
@@ -71,9 +64,6 @@ $(document).ready(function () {
 
             this.empezarAEscucharEventos();
         }
-
-
-
         empezarAEscucharEventos() {
             this.nodo.addEventListener('keydown', function (evento) {
                 const teclaPresionada = evento.key;
@@ -109,9 +99,7 @@ $(document).ready(function () {
                 }
             }.bind(this));
         }
-
     }
-
     // new CampoTexto('#c_nombres');
 });
 
@@ -142,7 +130,6 @@ $(document).ready(function () {
 });
 
 //adaptando para el active de los botones del panel de usuario.
-
 $(document).ready(function () {
 
     var btnContainer3 = document.getElementById("p_users");
@@ -165,26 +152,22 @@ $(document).ready(function () {
 
     // Loop through the buttons and add the active class to the current/clicked button
     for (var i = 0; i < btns3.length; i++) {
-
         btns3[i].addEventListener("click", function () {
-
             var current = document.getElementsByClassName("p_user active");
             current[0].className = current[0].className.replace(" active", "");
             this.className += " active";
         });
-
-
     }
-
-
     document.getElementById("back-section-user").addEventListener("click", function () {
         console.log("Hola");
         info.style.display = 'none';
         secciones.style.display = 'block';
     });
 
-    inicio.addEventListener("click", function () {
+    inicio.addEventListener("click", function (e) {
+        console.log(e.target)
         titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
+
         contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
         if (screen && screen.width < 700) {
             secciones.style.display = 'none';
@@ -193,9 +176,82 @@ $(document).ready(function () {
     });
 
     datos.addEventListener("click", function () {
+        
+            
         titulouser.innerHTML = '<p>Datos Personales</p>';
-        contenidouser.innerHTML = '<div class="divTable" style=" width:100%;display:inline-block;" > <div class="divTableBody" style="display:block;"> <div class="divTableRow" id="pn_datos1"> <div class="divTableCell"> <div class="etiquetaFormulario">Nombres </div> <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres1" onkeypress="return soloLetras(event)" value="" >  </div> <div class="divTableCell"> <div class="etiquetaFormulario">Apellidos</div>                <input type="text" size="20" maxlength="20" name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="" >		</div><div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20" maxlength="30" name="campo1"  id="correo"  disabled="true" value="leandroandre1538@gmail.com" readonly  style="border:0 none;"></div></div>    <div class="divTableRow" ><div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad</div><select id="s_tipodoc" onchange="selectTipoDoc();"><option id="di_pn1" value="1" selected >DNI</option><option id="di_pn2" value="2">Pasaporte</option><option id="di_pn3" value="3"> CE</option></select>		</div><div class="divTableCell"> <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required > </div> <div class="divTableCell"> <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9" name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="" > </div> </div>	 </div> </div>   <br> <br> <div  style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em" ><p>Conoce lo último de Beurer.pe</p> </div> <br> <br> <div style="text-align:left !important;" > <div class="checkbox" style="display:inline-block; " id="d_politicas"> <label class="font-light label-pol" style="display:inline;"> <input type="checkbox" id="politicas"   /><i class="helper"></i> </label> <div style="display:inline-block; font-size:1.18em; color:black; "> <span>He leído y acepto las <a href="politicas-de-privacidad" class="span-pol color-primary btn-modals">Políticas de Privacidad</a>.</span></div> </div> </div>  <div style="text-align:left !important;" > <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol" style="display:inline;"> <input type="checkbox" id="publicidad"   /><i class="helper"></i> </label> <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de Beurer en mi e-mail.</span></div> </div> </div>';
-        if (screen && screen.width < 700) {
+        contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
+        <div class="divTableBody" style="display:block;">
+            <div class="divTableRow" id="pn_datos1">
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Nombres </div>
+                    <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
+                        name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
+                        maxlength="30" name="campo1" id="correo" value="${userData.correo}"
+                        style="border:0 none;">
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Tipo Documento Identidad</div>
+                    <select id="s_tipodoc" 
+                        >
+                        <option id="di_pn1" value="1">DNI</option>
+                        <option id="di_pn2" value="2">Pasaporte</option>
+                        <option id="di_pn3" value="3">CE</option>
+                    </select>
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
+                        maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
+                        name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
+                </div>
+            </div>
+        </div>
+    </div> <br> <br>
+    <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
+        <p>Conoce lo último de Beurer.pe</p>
+    </div> <br> <br>
+    <div style="text-align:left !important;">
+        <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
+        <label class="font-light label-pol"style="display:inline;"> 
+        <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
+        </label>
+        <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
+                        href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
+                        Políticas de Privacidad</a>.</span></div>
+        </div>
+    </div>
+    <div style="text-align:left !important;">
+        <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
+                style="display:inline;"> 
+                <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
+            <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
+                    Beurer en mi e-mail.</span></div>
+        </div>
+    </div>
+    <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
+    `;
+    
+      const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(userData.tipo_documento)-1];
+      nodeSelect.setAttribute('selected','selected')
+    //   update obj UserData
+      const tipoDoc = document.querySelector('#s_tipodoc');
+      tipoDoc.addEventListener('change' , event => {
+          userData.tipo_documento = event.target.value
+      })
+    
+
+
+    if (screen && screen.width < 700) {
             secciones.style.display = 'none';
             infouser.style.display = 'block';
         }
@@ -212,7 +268,7 @@ $(document).ready(function () {
 
     direccion.addEventListener("click", function () {
         titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
-        contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+        contenidouser.innerHTML = ``;
         if (screen && screen.width < 700) {
             secciones.style.display = 'none';
             infouser.style.display = 'block';
@@ -398,8 +454,6 @@ if (screen && screen.width > 992) {
 
     });
 }
-
-
 // if (screen && screen.width < 767) {
 //     $(".div-search").mouseover(function(event){
 //         $(".input-search").css({
@@ -463,13 +517,6 @@ $("#btn_nb").click(function () {
     codseg.value = "";
     codseg.focus();
 });
-
-
-
-
-
-
-
 $('#subscribe').submit(function (event) {
     event.preventDefault();
 
@@ -515,10 +562,10 @@ $('#otra-persona').click(function () {
 });
 
 
-$('#politicas').click(function () {
-    var siguiente = document.getElementById("btn_sgt");
-    siguiente.classList.toggle("disabled");
-});
+// $('#politicas').click(function () {
+//     var siguiente = document.getElementById("btn_sgt");
+//     siguiente.classList.toggle("disabled");
+// });
 
 $('#dfactura').click(function () {
     var chequeo2 = document.getElementById("dfactura");

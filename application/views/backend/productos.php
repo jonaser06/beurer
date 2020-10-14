@@ -382,7 +382,7 @@
                     } },
                     { "data": "id", 'render': function(data, type, row){
                        var salida;
-                        salida = "<a href=\"javascript:Exeperu.editProducto("+data+");\" class=\"btn btn-primary btn-sm btn-flat\"><i class=\"fa fa-pencil\"></i></a>";
+                        salida = "<a href=\"javascript:Exeperu.editProducto("+data+");\" class=\"btn editarBtn data-id ="+data+" btn-primary btn-sm btn-flat\"><i class=\"fa fa-pencil\"></i></a>";
                         salida += " | ";
                         salida += "<a href=\"javascript:Exeperu.eliminarProducto("+data+");\" id=\"categoria_"+data+"\" class=\"btn btn-danger btn-sm btn-flat\"><i class=\"fa fa-trash-o\"></i></a>";
                         

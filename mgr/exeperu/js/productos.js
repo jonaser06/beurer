@@ -1525,7 +1525,7 @@ Helpers.prototype.tableComplementosColors = function () {
                     } else {
                         salida = [
                             "<center>",
-                            "<a href=\"javascript: Exeperu.editar_complementocar_color('" + data + "');\" class=\"btn btn-primary btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-pencil\"></i></a>&nbsp;&nbsp;",
+                            "<a href=\"javascript: Exeperu.editar_complementocar_color('" + data + "');\" class=\"btn btn-primary  btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-pencil\"></i></a>&nbsp;&nbsp;",
                             "<a href=\"javascript: Exeperu.eliminar_complementocar_color('" + data + "');\" class=\"btn btn-danger btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-trash-o\"></i></a>",
                             "</center>",
                         ].join('');
@@ -1642,7 +1642,6 @@ Helpers.prototype.guardar_textareacar_color = function () {
     let data = tabla.data().toArray();
     texarea.val(JSON.stringify(data));
 };
-
 
 Helpers.prototype.cancelar_complementocar_color = function () {
     let tabla = this.tables['table_complementos_color'];

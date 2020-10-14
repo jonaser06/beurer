@@ -36,19 +36,22 @@ input {
             style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
             <div class="col-md-12" style="color:#161616;display:flex;">
 
-                <img src="assets/images/user-solid.svg"
+                <img src="<?= base_url('beurer_plantilla/assets/images/user-solid.svg')?>"
                     style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid #c51152;">
-
 
                 <div style="margin:20px 10px;">
                     <span style="font-size:1.3em;font-family:'nexaregularuploaded_file';">HOLA</span>
-                    <p
-                        style="margin-top:5px;font-size:1.4em;margin-bottom:10px;font-weight:bold;font-family:'nexaregularuploaded_file';">
-                        Leandro André Ramos Valdéz</p>
+                    <p   
+                        class="user-name-db"
+                        style="margin-top:5px;font-size:1.4em;margin-bottom:10px;font-weight:bold;
+                        font-family:'nexaregularuploaded_file';">
+                        <?php echo $userData['nombre']." ".$userData['apellido_paterno']." ".$userData['apellido_materno']?>
+                        </p>
                 </div>
 
             </div>
         </div>
+
         <div class="row cont_datos" id="d_formularios1" style="display:inline-block;width:90%;">
             <div id="panel-user1" style="width:27%;float:left;background-color:white;color:#161616;margin-right:1.5%;">
                 <ul id="p_users" style="text-align:left;background-color:white;">
@@ -147,9 +150,7 @@ input {
 
             </div>
         </div>
-
     </div>
-
 
     <div style="text-align:center !important;">
         <div class="checkbox"
@@ -159,6 +160,7 @@ input {
             </div>
         </div>
     </div>
+    <div id="spinner"></div>
 
 
     </div>
@@ -169,17 +171,84 @@ input {
     <div class="linea"></div>
 
     <br>
-
+    
     </div>
+<style>
+    #spinner {
+        visibility: hidden;
+        width: 80px;
+        height: 80px;
+
+        border: 2px solid #f3f3f3;
+        border-top: 3px solid #f25a41;
+        border-radius: 100%;
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 900;
+        animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    #spinner.show {
+        visibility: visible;
+    }
+
+</style>
     <!--Fin de cuerpo-->
+    <?php 
+    switch ($userData['tipo_documento']) {
+        case 'DNI':
+            $tipo = '1';
+            break;
+        case 'PASAPORTE':
+            $tipo = '2';
+            break;
+        case 'CE':
+            $tipo = '3';
+            break;
+        default:
+            break;
+    }
+
+    ?> 
+
+    <input
+    type="hidden" 
+    class="dataUser"
+    data-id_cliente = <?= $_SESSION['id_cliente']?>
+    data-nombre   =<?= $userData['nombre']?>
+    data-apellido_paterno =<?= $userData['apellido_paterno']?>
+    data-apellido_materno      =<?= $userData['apellido_materno']?>
+    data-correo      =<?= $userData['correo']?>
+    data-tipo_documento =<?=$tipo?>
+    data-documento     =<?= $userData['documento']?>
+    data-telefono     =<?= $userData['telefono']?>
+    data-ofertas      =<?= (int)$userData['ofertas']?>
+    data-politicas    =<?= (int)$userData['politicas']?>
+    >
 </main>
 
 <script>
-
-
+    
+   const $inputUser = document.querySelector('.dataUser');
+  let {...userData } = $inputUser.dataset;
+  
+   
 </script>
 
-<!-- <script src="assets/js/registro.js"></script>     -->
+<script src="assets/js/registro.js"></script>
 
 
 <?php
