@@ -31,7 +31,25 @@ ObjMain = {
         }
     },
     changePassword: ()=>{
-        
+        document.querySelector('.change_password').addEventListener('click', ()=>{
+            let contrasena = document.querySelector('.new_password').value;
+            let id = document.querySelector('.idrecovery').value;
+            let formData = new FormData();
+            formData.append('contrasena', contrasena);
+            formData.append('id_cliente', id);
+            ObjMain.ajax_post('POST',DOMAIN+'ajax/new_password', formData)
+            .then((resp)=>{
+                resp = JSON.parse(resp);
+                console.log(resp);
+                let aviso = '<p class="res_mail">'+resp.message+'</p>';
+                document.querySelector('.ajax-resp').innerHTML = aviso;
+                window.location = DOMAIN;
+            })
+            .catch((err)=>{
+                err = JSON.parse(err);
+                document.querySelector('.err_recovery').style.display = 'block';
+            });
+        });
     },
     recovery: () => {
         document.querySelector('.button_recovery').addEventListener('click', ()=>{

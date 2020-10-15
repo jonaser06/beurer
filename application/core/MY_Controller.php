@@ -45,6 +45,16 @@ class MY_Controller extends CI_Controller
         $_SESSION['id_cliente'] = $data[0]['id_cliente'];
         return;
     }
+
+    public function dbUpdate($label, $table, $where)
+    {
+        $this->db->set($label);
+        $this->db->where($where);
+        $query = $this->db->update($table);
+        if ($query) return true;
+        return false;
+    }
+
     public function salt_encrypt($pass){
         $output = FALSE;
         $key = hash('sha256', SECRET_KEY);
@@ -72,7 +82,7 @@ class MY_Controller extends CI_Controller
             'mailtype'  => 'html', 
             'charset'   => 'utf-8'
         ];
-        $message = $this->load->view('mail/'.$data, TRUE);
+        $message = $this->load->view('mail/'.$template, $data,  TRUE);
 
         $this->load->library('email',$config);
         $this->email->set_newline("\r\n");

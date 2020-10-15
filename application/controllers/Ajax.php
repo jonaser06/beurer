@@ -172,5 +172,51 @@ class Ajax extends MY_Controller
                     return;
             }
         }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(404)
+                ->set_output(json_encode($this->resp));
+                return;
+    }
+
+    public function new_password(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $contrasena = hash('sha256',$this->input->post('contrasena'));
+            $id_cliente = $this->input->post('id_cliente');
+            #decrypt
+            $id_cliente = $this->salt_decrypt($id_cliente);
+            $data = ['id_cliente'=> $id_cliente];
+            #query DB
+            $query = $this->dbSelect('*','clientes', $data );
+            $mail = $query[0]['correo'];
+            if($query){
+                $update = ['contrasena'=> $contrasena];
+                $query = $this->dbUpdate($update,'clientes',$data);
+                if($query){
+                    $this->resp['status'] = true;
+                    $this->resp['code'] = 200;
+                    $this->resp['message'] = 'Contraseña cambiada satisfactoriamente';
+                    #Enviarlo
+                    $enviar = $this->sendmail($mail, '', 'Contraseña Cambiada', 'confirm_password.php');
+                    $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+                }
+            }else{
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(404)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }
+            
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($this->resp));
+            return;
     }
 }

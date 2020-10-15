@@ -99,12 +99,12 @@
         </div>
     </footer>
 </div>
-<div class="popup-ini" id="login" style="display: none;">
+<!-- <div class="popup-ini" id="login" style="display: none;">
     <div class="popup-inner">
         <img id="img-popup" src="https://beurer.pe/assets/sources/popup/CANALES%20DE%20ATENCION-02.jpg" class="img-responsive" alt="">
         <button type="button" class="close"><span aria-hidden="true">×</span></button>
     </div>
-</div>		
+</div> -->		
 
 
 <script src="<?= base_url(); ?>assets/js/app.min.js"></script>

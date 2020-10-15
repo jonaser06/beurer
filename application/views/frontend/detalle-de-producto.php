@@ -457,7 +457,7 @@ $(function() {
             <div class="modal-footer"
                 style="text-align:center;border-top:0 none;padding-top:7px;border-bottom:1px solid #c3c3c3;padding-bottom:35px;">
 
-                <a href="carrito.php"><button type="button" class="btn  btn-cmn"
+                <a href="<?php echo base_url('carrito'); ?>"><button type="button" class="btn  btn-cmn"
                         style="width:75%;text-align:center;font-size:1.2rem;padding-top:7px;padding-bottom:7px; padding-left:0px;padding-right:0px; ">IR
                         AL CARRO</button></a>
                 <br>
