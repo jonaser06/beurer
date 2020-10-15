@@ -23,6 +23,40 @@ ObjMain = {
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
         }
+        if(document.querySelector('.email-recovery') != null){
+            ObjMain.recovery();
+        }
+        if(document.querySelector('.change_password') != null){
+            ObjMain.changePassword();
+        }
+    },
+    changePassword: ()=>{
+        
+    },
+    recovery: () => {
+        document.querySelector('.button_recovery').addEventListener('click', ()=>{
+            document.querySelector('.err_mail').style.display = 'none';
+            document.querySelector('.err_recovery').style.display = 'none';
+
+            let correo = document.querySelector('.email-recovery').value;
+            if(!ObjMain.valida_correo(correo)){
+                document.querySelector('.err_mail').style.display = 'block';
+            }else{
+                let formData = new FormData();
+                formData.append('correo', correo);
+                ObjMain.ajax_post('POST',DOMAIN+'ajax/recovery', formData)
+                .then((resp)=>{
+                    resp = JSON.parse(resp);
+                    console.log(resp.data.correo);
+                    let aviso = '<p class="res_mail">Se envio un correo ah: '+resp.data.correo+'</p>';
+                    document.querySelector('.ajax-resp').innerHTML = aviso;
+                })
+                .catch((err)=>{
+                    err = JSON.parse(err);
+                    document.querySelector('.err_recovery').style.display = 'block';
+                });
+            }
+        });
     },
     showSpinner: (spinner) => {
         spinner.className = "show";
@@ -49,11 +83,7 @@ ObjMain = {
         const correo    = document.querySelector('#c_correo1').value ;
         let tipo = document.querySelector('#s_tipodoc').value;
 
-        tipo = (tipo == '1') ? 
-        'DNI':(tipo== '2')? 
-        'PASAPORTE': (tipo== '3') ? 
-        'CE':null;
-
+        
         if (!politicas ) {
             ObjMain.alert_form(false,'Acepte las politicas');
             return;
@@ -75,7 +105,7 @@ ObjMain = {
             console.log(resp.data)
             const spinner = document.getElementById("spinner");
             ObjMain.showSpinner(spinner);
-            document.querySelector('.dataUser').dataset = resp.data;
+            userData = resp.data;
             const $nodeSaludo = document.querySelector('.user-name-db')
             ObjMain.render(
                 $nodeSaludo,

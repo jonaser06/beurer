@@ -133,7 +133,7 @@ window.onload = function() {
         }
 
 
-        setTimeout(myFunction, 1000);
+        setTimeout(myFunction, 0);
        
         
    
@@ -147,6 +147,7 @@ function myFunction(){
     document.getElementById("cabecera").style.display='block';
     document.getElementById("piedepag").style.display='block';
     document.getElementById("cuerpo").style.display='block';   
+    document.getElementById("parte-contacto").style.display='block';   
     document.getElementById("principal").style.backgroundColor='white';   
 }
 

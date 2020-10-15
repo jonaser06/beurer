@@ -1,6 +1,9 @@
 input,select {
     outline: none;
 }
+.wrapper-header{
+    top: 0px;
+}
 .user_menu{
     position: relative;
     z-index: 9999;
@@ -51,5 +54,42 @@ input,select {
 }
 
 #spinner.show {
-	visibility: visible;
+    visibility: visible;
+}
+.content-recovery{
+    width: 100%;
+    height: 500px;
+}
+.row-content-recovery{
+    position: relative; 
+    width: 90%;
+    margin: 160px auto;
+    max-width: 1200px;
+    padding-top: 50px;
+}
+.email-recovery{
+    width: 50%;
+}
+.button_recovery, .change_password{
+    margin-top: 30px;
+    width: 50%;
+    background-color: #c51152;
+    color: #fff;
+    font-family: "nexaheavyuploaded_file";
+    border: none;
+    padding: 10px;
+    height: auto;
+    text-align: center;
+}
+.err_recovery, .err_mail{
+    display: none;
+    color: #c51152;
+}
+.res_mail{
+    width: 50%;
+    padding: 20px;
+    border: 1px solid#29ff6a;
+    border-radius: 10px;
+    background: #FAFAFA;
+    color: #000;
 }

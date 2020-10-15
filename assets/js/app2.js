@@ -177,7 +177,7 @@ $(document).ready(function () {
 
     datos.addEventListener("click", function () {
         
-            
+           
         titulouser.innerHTML = '<p>Datos Personales</p>';
         contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
         <div class="divTableBody" style="display:block;">
@@ -199,11 +199,11 @@ $(document).ready(function () {
             <div class="divTableRow">
                 <div class="divTableCell">
                     <div class="etiquetaFormulario">Tipo Documento Identidad</div>
-                    <select id="s_tipodoc" 
+                    <select id="s_tipodoc" value="${userData.tipo_documento}"
                         >
-                        <option id="di_pn1" value="1">DNI</option>
-                        <option id="di_pn2" value="2">Pasaporte</option>
-                        <option id="di_pn3" value="3">CE</option>
+                        <option id="di_pn1" value="DNI">DNI</option>
+                        <option id="di_pn2" value="PASAPORTE">PASAPORTE</option>
+                        <option id="di_pn3" value="CE">CE</option>
                     </select>
                 </div>
                 <div class="divTableCell">
@@ -240,13 +240,16 @@ $(document).ready(function () {
     </div>
     <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
     `;
-    
-      const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(userData.tipo_documento)-1];
+      let index   = userData.tipo_documento == 'DNI' ? '1' 
+                                :userData.tipo_documento == 'PASAPORTE' ? '2'
+                                : userData.tipo_documento == 'CE' ? '3'
+                                :''
+      const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(index)-1];
       nodeSelect.setAttribute('selected','selected')
     //   update obj UserData
       const tipoDoc = document.querySelector('#s_tipodoc');
       tipoDoc.addEventListener('change' , event => {
-          userData.tipo_documento = event.target.value
+         userData.tipo_documento = event.target.value
       })
     
 

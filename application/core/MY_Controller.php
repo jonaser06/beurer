@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+define('METHOD', 'AES-256-CBC');
+define('SECRET_KEY', '$.//ppp693-');
+define('SECRET_IV', '99326425');
 class MY_Controller extends CI_Controller
 {
     protected $data;
@@ -121,5 +124,44 @@ class MY_Controller extends CI_Controller
             ->set_content_type('application/json')
             ->set_status_header(404)
             ->set_output(json_encode($resp));
+    }
+    
+    public function salt_encrypt($pass){
+        $output = FALSE;
+        $key = hash('sha256', SECRET_KEY);
+        $iv = substr(hash('sha256', SECRET_KEY), 0, 16);
+
+        $output = openssl_encrypt($pass, METHOD, $key, 0, $iv);
+        $output = base64_encode($output);
+        return $output;
+    }
+    public function salt_decrypt($pass){
+
+        $key = hash('sha256', SECRET_KEY);
+        $iv = substr(hash('sha256', SECRET_KEY), 0, 16);
+
+        $output = openssl_decrypt(base64_decode($pass), METHOD, $key, 0, $iv);
+        return $output;
+    }
+    public function sendmail($to, $data, $subject,$template){
+        $config = [
+            'protocol'  => 'smtp', 
+            'smtp_host' => 'ssl://smtp.zoho.com', 
+            'smtp_port' =>  465, 
+            'smtp_user' => MAIL_USER,
+            'smtp_pass' => MAIL_PASS, 
+            'mailtype'  => 'html', 
+            'charset'   => 'utf-8'
+        ];
+        $message = $this->load->view('mail/'.$data, TRUE);
+
+        $this->load->library('email',$config);
+        $this->email->set_newline("\r\n");
+        $this->email->from(MAIL_USER, 'Beurer'); // change it to yours
+        $this->email->to($to);// change it to yours
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+          
     }
 }

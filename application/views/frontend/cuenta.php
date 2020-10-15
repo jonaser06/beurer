@@ -208,19 +208,19 @@ input {
 </style>
     <!--Fin de cuerpo-->
     <?php 
-    switch ($userData['tipo_documento']) {
-        case 'DNI':
-            $tipo = '1';
-            break;
-        case 'PASAPORTE':
-            $tipo = '2';
-            break;
-        case 'CE':
-            $tipo = '3';
-            break;
-        default:
-            break;
-    }
+    // switch ($userData['tipo_documento']) {
+    //     case 'DNI':
+    //         $tipo = '1';
+    //         break;
+    //     case 'PASAPORTE':
+    //         $tipo = '2';
+    //         break;
+    //     case 'CE':
+    //         $tipo = '3';
+    //         break;
+    //     default:
+    //         break;
+    // }
 
     ?> 
 
@@ -232,7 +232,7 @@ input {
     data-apellido_paterno =<?= $userData['apellido_paterno']?>
     data-apellido_materno      =<?= $userData['apellido_materno']?>
     data-correo      =<?= $userData['correo']?>
-    data-tipo_documento =<?=$tipo?>
+    data-tipo_documento =<?=$userData['tipo_documento']?>
     data-documento     =<?= $userData['documento']?>
     data-telefono     =<?= $userData['telefono']?>
     data-ofertas      =<?= (int)$userData['ofertas']?>
@@ -242,8 +242,8 @@ input {
 
 <script>
     
-   const $inputUser = document.querySelector('.dataUser');
-  let {...userData } = $inputUser.dataset;
+    
+  let {...userData } = document.querySelector('.dataUser').dataset;
   
    
 </script>

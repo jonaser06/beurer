@@ -30,23 +30,25 @@ input {
 <main class="main-detail-products">
     <!--Inicio de cuerpo-->
 
-    <div class="formulario" style="background-color:transparent;text-align:center;">
+ 
 
-        <div class="row cont_datos" id="d_formularios1" align="center"
-            style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
+<main class="main-detail-products">
+	<!--Inicio de cuerpo-->
+	
+	<div class="formulario" style="background-color:transparent;text-align:center;" >
+    
+        <div class="row cont_datos" id="d_formularios1" align="center" style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
             <div class="col-md-12" style="color:#161616;display:flex;">
+            
+            <img src="assets/images/user-plomo.png" style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid gray;"> 
+            
 
-                <img src="assets/images/user-solid.svg"
-                    style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid #c51152;">
-
-
-                <div style="margin:20px 10px;">
+            <div style="margin:20px 10px;">
                     <span style="font-size:1.3em;font-family:'nexaregularuploaded_file';">HOLA</span>
                     <p
                         style="margin-top:5px;font-size:1.4em;margin-bottom:10px;font-weight:bold;font-family:'nexaregularuploaded_file';">
                         Leandro André Ramos Valdéz</p>
                 </div>
-
             </div>
         </div>
         <div class="row cont_datos" id="d_formularios1" style="display:inline-block;width:90%;">
