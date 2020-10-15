@@ -662,41 +662,41 @@ $('#trash').click(function () {
 
 // PARA AUMENTAR Y DISMINUIR CON LOS BOTONES y aumente el costo
 
-var inicio = 1; //se inicializa una variable en 0
-var text = document.getElementById("costo-envio");
-var checkBox = document.getElementById("check_envio");
-var subtotal = document.getElementById("subtotal");
-var total = document.getElementById("total");
+// var inicio = 1; //se inicializa una variable en 0
+// var text = document.getElementById("costo-envio");
+// var checkBox = document.getElementById("check_envio");
+// var subtotal = document.getElementById("subtotal");
+// var total = document.getElementById("total");
 
-function aumentar() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id aumentar
+// function aumentar() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id aumentar
 
-    if (document.getElementById('cantidad_prod').value != 10) {
-        var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
-        subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-        total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-
-
-        if (checkBox.checked == true) {
+//     if (document.getElementById('cantidad_prod').value != 10) {
+//         var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
+//         subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+//         total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
 
 
-            text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-            total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+//         if (checkBox.checked == true) {
 
-        }
-    }
-}
 
-function disminuir() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id disminuir
-    if (document.getElementById('cantidad_prod').value > 1) {
-        var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
-        subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-        total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-        if (checkBox.checked == true) {
-            text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-            total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
-        }
-    }
-}
+//             text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+//             total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+
+//         }
+//     }
+// }
+
+// function disminuir() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id disminuir
+//     if (document.getElementById('cantidad_prod').value > 1) {
+//         var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
+//         subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+//         total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+//         if (checkBox.checked == true) {
+//             text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+//             total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
+//         }
+//     }
+// }
 
 // CODIGO DEEL CARRITO DE LOS CHECKS
 
@@ -775,7 +775,7 @@ $(document).ready(function () {
 
     }
 
-    new CampoNumerico('#cantidad_prod');
+    // new CampoNumerico('#cantidad_prod');
 
 });
 
@@ -800,22 +800,22 @@ $('#cupon').click(function () {
 
 //codigo de envio a domicilio
 
-$('#check_envio').click(function () {
+// $('#check_envio').click(function () {
 
-    d_envio = document.getElementById("d_envio");
-    var checkBo = document.getElementById("check_envio");
-    // 	if (checkBo.checked == true){
-    if (checkBo.checked == true) {
+//     d_envio = document.getElementById("d_envio");
+//     var checkBo = document.getElementById("check_envio");
+//     // 	if (checkBo.checked == true){
+//     if (checkBo.checked == true) {
 
-        d_envio.style.display = "block";
+//         d_envio.style.display = "block";
 
 
-    } else {
+//     } else {
 
-        d_envio.style.display = "none";
+//         d_envio.style.display = "none";
 
-    }
-});
+//     }
+// });
 
 
 $('#otra-persona').click(function () {

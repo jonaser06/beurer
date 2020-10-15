@@ -32,39 +32,65 @@ ObjMain = {
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
+        document.querySelector('.carrito-container').innerHTML = ObjMain.item_carrito('', '', '', '', '', '');
     },
-    aumentar: () =>{
-        var inicio = 1; //se inicializa una variable en 0
-        var text = document.getElementById("costo-envio");
-        var checkBox = document.getElementById("check_envio");
-        var subtotal = document.getElementById("subtotal");
-        var total = document.getElementById("total");
-
-        if (document.getElementById('cantidad_prod').value != 10) {
-            var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
-            subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            if (checkBox.checked == true) {
-                text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-                total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-            }
-        }
+    mas:()=>{
+        if(parseInt(document.querySelector('.cantidad').value) < 10){ document.querySelector('.cantidad').value ++ ; };
+        
+        return;
     },
-    disminuir: () =>{
-        var inicio = 1; //se inicializa una variable en 0
-        var text = document.getElementById("costo-envio");
-        var checkBox = document.getElementById("check_envio");
-        var subtotal = document.getElementById("subtotal");
-        var total = document.getElementById("total");
+    menos: ()=>{
+        if(parseInt(document.querySelector('.cantidad').value) > 1){ document.querySelector('.cantidad').value -- ; };
+        
+        return;
+    },
+    recalculo: () =>{
 
-        if (document.getElementById('cantidad_prod').value > 1) {
-            var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
-            subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            if (checkBox.checked == true) {
-                text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-                total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
-            }
+    },
+    item_carrito: (img, title, sku, price, cant, subt)=>{
+        let item = '';
+            item += '<div class="basket-product">'
+            item += '<div class="item">'
+            item += '<a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">'
+            item += '<img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame"></a>'
+            item += '<div class="product-details">'
+            item += '<span>MASAJEADOR ANTICELULÍTICO CM 50</span>'
+            item += '<p>SKU: 232321939</p>'
+            item += '<p>Envío a domicilio</p>'
+            item += '</div>'
+            item += '</div>'
+            item += '<div class="price" id="preuni">'
+            item += '<div class="info-prod" style="display:block;">'
+            item += '<img src="assets/images/precio-online.png">'
+            item += '<div class="font-nexaheav text-left price rprice"> 100.00</div>'
+            item += '</div>'
+            item += '<div class="font-nexaheav">Normal: S/ 25.69</div>'
+            item += '</div>'
+            item += '<div class="quantity">'
+            item += '<button class="count-cant" onclick="ObjMain.menos();">-</button>'
+            item += '<input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>'
+            item += '<button class="count-cant" onclick="ObjMain.mas();">+</button>'
+            item += '</div>'
+            item += '<div class="subtotal rsubtotal" id="subtotal">26.00</div>'
+            item += '<div class="remove">'
+            item += '<a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt=""></a>'
+            item += '</div>'
+            item += '</div>'
+        return item;
+    },
+    delivery: () =>{
+        d_envio = document.getElementById("d_envio");
+        var checkBo = document.getElementById("check_envio");
+        if (checkBo.checked == true) {
+
+            d_envio.style.display = "block";
+            ObjMain.load_ubigeo();
+
+
+        } else {
+
+            d_envio.style.display = "none";
+
         }
     },
     modal:() =>{
@@ -400,7 +426,6 @@ ObjMain = {
     solonumero: (event) =>{
         event.value = event.value.replace(/\D/g, '');
     },
-    
     render:  ( element ,content ) => {
         element.innerHTML = content ;
     },
@@ -423,46 +448,45 @@ ObjMain = {
                 $addCarrito.setAttribute('data-codigo',codigo);
             }
         })
-      },
-      changueQuanty : ( btnAdd,btnDown,nodeQuanty,btnCarrito) =>{
-        document.addEventListener('click', event => {
+    },
+    changueQuanty : ( btnAdd,btnDown,nodeQuanty,btnCarrito) =>{
+    document.addEventListener('click', event => {
 
-            if(event.target.matches(btnAdd)){
-                const $addCarrito = document.querySelector(btnCarrito);
-                const $cantidad = document.querySelector(nodeQuanty)
-                $cantidad.value = parseInt($cantidad.value) + 1
-                $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+        if(event.target.matches(btnAdd)){
+            const $addCarrito = document.querySelector(btnCarrito);
+            const $cantidad = document.querySelector(nodeQuanty)
+            $cantidad.value = parseInt($cantidad.value) + 1
+            $addCarrito.setAttribute('data-cantidad',$cantidad.value);
 
-                
-            }
-            if(event.target.matches(btnDown)){
-                const $addCarrito = document.querySelector(btnCarrito);
-                const $cantidad = document.querySelector(nodeQuanty)
-                $cantidad.value = parseInt($cantidad.value) == 1 ? parseInt($cantidad.value):parseInt($cantidad.value) - 1 ;
-                $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+            
+        }
+        if(event.target.matches(btnDown)){
+            const $addCarrito = document.querySelector(btnCarrito);
+            const $cantidad = document.querySelector(nodeQuanty)
+            $cantidad.value = parseInt($cantidad.value) == 1 ? parseInt($cantidad.value):parseInt($cantidad.value) - 1 ;
+            $addCarrito.setAttribute('data-cantidad',$cantidad.value);
 
+        }
+    })
+    },
+    changueImg : (tagImg , ruta ) => {
+    document.querySelector(tagImg).src = ruta
+    },
+    modalCarrito: (btn , componentModal ) => {
+    const $btnAdd = document.querySelector(btn);
+    if($btnAdd) {
+        $btnAdd.addEventListener('click' , e => {
+            ObjMain.render( 
+            document.querySelector(componentModal),
+            `Cantidad: ${$btnAdd.dataset.cantidad}`
+            );
+            let foto = DOMAIN + $btnAdd.dataset.img;
+            if($btnAdd.dataset.img) {
+                ObjMain.changueImg('.img-modal',foto)
             }
         })
-      },
-      changueImg : (tagImg , ruta ) => {
-        document.querySelector(tagImg).src = ruta
-      },
-      modalCarrito: (btn , componentModal ) => {
-        const $btnAdd = document.querySelector(btn);
-        if($btnAdd) {
-            $btnAdd.addEventListener('click' , e => {
-                ObjMain.render( 
-                document.querySelector(componentModal),
-                `Cantidad: ${$btnAdd.dataset.cantidad}`
-                );
-                let foto = DOMAIN + $btnAdd.dataset.img;
-                if($btnAdd.dataset.img) {
-                    ObjMain.changueImg('.img-modal',foto)
-                }
-            })
-        }
-      },  
-    
+    }
+    },
     valida_correo:(correo) =>{
         var texto = correo;
         var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;

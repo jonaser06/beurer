@@ -53,106 +53,7 @@
                             <li class="subtotal">Subtotal</li>
                         </ul>
                     </div>
-                    <div class="basket-product">
-                        <div class="item">
-                            <a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">
-                                <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame">
-                            </a>
-                            <div class="product-details">
-                                <span>MASAJEADOR ANTICELULÍTICO CM 50</span>
-                                <p>SKU: 232321939</p>
-                                <p>Envío a domicilio</p>
-                            </div>
-                        </div>
-
-                        <div class="price" id="preuni">
-                            <div class="info-prod" style="display:block;">
-                                <img src="assets/images/precio-online.png">
-                                <div class="font-nexaheav text-left price rprice"> 100.00</div>
-                            </div>
-                            <div class="font-nexaheav" style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
-                                Normal: S/ 25.69
-                            </div>
-                        </div>
-
-                        <div class="quantity">
-                            <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
-                            <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>
-                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="ObjMain.aumentar()">+</button>
-                        </div>
-                        <div class="subtotal rsubtotal" id="subtotal">26.00</div>
-
-                        <div class="remove">
-                            <a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt="" style="width:30px; height:30px;align:left;"></a>
-                        </div>
-                    </div>
-
-                    <div class="basket-product">
-                        <div class="item">
-                            <a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">
-                                <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame">
-                            </a>
-                            <div class="product-details">
-                                <span>MASAJEADOR ANTICELULÍTICO CM 50</span>
-                                <p>SKU: 232321939</p>
-                                <p>Envío a domicilio</p>
-                            </div>
-                        </div>
-                        <div class="price" id="preuni">
-                            <div class="info-prod" style="display:block;">
-                                <img src="assets/images/precio-online.png">
-                                <div class="font-nexaheav text-left price rprice"> 100.00</div>
-                            </div>
-
-
-                            <div class="font-nexaheav" style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
-                                Normal: S/ 25.69
-                            </div>
-                        </div>
-                        <div class="quantity">
-                            <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
-                            <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>
-                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="ObjMain.aumentar()">+</button>
-                        </div>
-                        <div class="subtotal rsubtotal" id="subtotal">29.00</div>
-                        <div class="remove">
-                            <a id="trash" href="#">
-                                <img src="assets/images/nuevo/delete.png" alt="" style="width:30px; height:30px;align:left;">
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="basket-product">
-                        <div class="item">
-                            <a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">
-                                <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame">
-                            </a>
-                            <div class="product-details">
-                                <span>MASAJEADOR ANTICELULÍTICO CM 50</span>
-                                <p>SKU: 232321939</p>
-                                <p>Envío a domicilio</p>
-                            </div>
-                        </div>
-                        <div class="price" id="preuni">
-                            <div class="info-prod" style="display:block;">
-                                <img src="assets/images/precio-online.png">
-                                <div class="font-nexaheav text-left price rprice"> 100.00</div>
-                            </div>
-
-
-                            <div class="font-nexaheav" style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">Normal: S/ 25.69</div>
-                        </div>
-                        <div class="quantity">
-                            <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
-                            <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>
-                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="ObjMain.aumentar()">+</button>
-                        </div>
-                        <div class="subtotal rsubtotal" id="subtotal">22.00</div>
-                        <div class="remove">
-                            <a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt="" style="width:30px; height:30px;align:left;"></a>
-                        </div>
-                    </div>
+                    <div class="carrito-container"></div>
 
                 </div>
 
@@ -212,7 +113,7 @@
             <div style="text-align:center;">
                 <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
                     <label class="font-light label-pol" style="display:inline;">
-                        <input type="checkbox" id="check_envio" onclick="funcionEnvio()" /><i class="helper"></i>
+                        <input type="checkbox" id="check_envio" onclick="ObjMain.delivery()" /><i class="helper"></i>
                     </label>
                     <div style="display:inline-block; font-size:1.55em;font-family:'nexaheavyuploaded_file';"> Quiero entrega a domicilio </div>
                 </div>
@@ -220,31 +121,13 @@
 
             <div id="d_envio" style="display:none;text-align:center; ">
                 <div class="tituloTabla1" style="text-align:center;">Departamento</div>
-                <select id="s_depa" style="width:55%" onchange=""></select>
+                <select id="s_depa" style="width:55%" onchange="ObjMain.showProvincesList(this);"></select>
                 <div class="tituloTabla1" style="text-align:center;">Provincia</div>
-                <select id="s_prov" style="width:55%" onchange=""></select>
+                <select id="sprov" style="width:55%" onchange="ObjMain.showDistrictsList(this);"></select>
                 <div class="tituloTabla1" style="text-align:center;">Distrito</div>
-                <select id="s_dist" style="width:55%"></select>
+                <select id="sdist" style="width:55%"></select>
             </div>
             <hr>
-            <div id="campo-cupon" style="text-align:left;padding-left:4%;">
-                <div style="display:inline-flex;">
-                    <label class="font-light label-pol" style="display:inherit; margin-right:2%;">
-                        <input type="text" style="text-align:center;border: 1px solid black;" maxlength="12" /><i
-                            class="helper"></i>
-                    </label>
-                    <br>
-                    <label class="font-light label-pol" style="display:inline;">
-                        <button class="btn btn-primary1" type="button" style="text-align:center;"
-                            maxlength="12">Canjear!</button>
-                    </label>
-                </div>
-                <hr>
-            </div>
-
-
-
-
 
             <div>
                 <div style="font-size:1.9em;font-weight:bold;text-align:center;color:#c51152;font-family:'nexaregularuploaded_file';">RESUMEN DE TU PEDIDO</div>
