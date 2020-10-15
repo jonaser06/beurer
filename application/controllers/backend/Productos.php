@@ -197,6 +197,11 @@ class Productos extends CI_Controller {
 			'og_image' => $input['og_image'],
 			'video' => $input['video'],
 			'active' => $input['active'],
+			'alto' => $input['alto'],
+			'ancho' => $input['ancho'],
+			'largo' => $input['largo'],
+			'peso' => $input['peso'],
+			'stock' => $input['stock'],
 			'relacionados' => $input['relacionados'],
             'orden' => $input['orden']
 		);

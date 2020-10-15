@@ -76,6 +76,12 @@ ObjMain = {
             }
         });
     },
+    showSpinner: (spinner) => {
+        spinner.className = "show";
+        setTimeout(() => {
+            spinner.className = spinner.className.replace("show", "");
+        }, 1000);
+    },
     getDataCarrito : () => {
         return localStorage.getItem('productos')? 
         {
@@ -86,6 +92,51 @@ ObjMain = {
             response : 'No se agregaron al carrito'
         }
         
+    },
+    updateAccount : (id) => {
+       
+        let formData = new FormData();
+        const apellidos = document.querySelector('#c_apep1').value.trim().split(' ');
+        const politicas = (document.querySelector('#politicas').checked )? 1 : 0 ;
+        const correo    = document.querySelector('#c_correo1').value ;
+        let tipo = document.querySelector('#s_tipodoc').value;
+
+        
+        if (!politicas ) {
+            ObjMain.alert_form(false,'Acepte las politicas');
+            return;
+        }
+        formData.append("nombre", document.querySelector('#c_nombres1').value);
+        formData.append("apellido_paterno", apellidos[0]);
+        formData.append("apellido_materno", apellidos[1]);
+        formData.append("correo", correo);
+        formData.append("telefono", document.querySelector('#c_telcel').value);
+        formData.append("tipo_documento",tipo  );
+        formData.append("documento",  document.querySelector('#campo1').value);
+        formData.append("politicas",politicas) ;
+        formData.append("ofertas",(document.querySelector('#publicidad').checked )? 1 : 0  );
+
+        ObjMain.ajax_post('POST',`${DOMAIN}myaccount/update/${id}`, formData)
+        .then((resp)=>{
+            resp = JSON.parse(resp);
+            ObjMain.alert_form(false,'update user');
+            console.log(resp.data)
+            const spinner = document.getElementById("spinner");
+            ObjMain.showSpinner(spinner);
+            userData = resp.data;
+            const $nodeSaludo = document.querySelector('.user-name-db')
+            ObjMain.render(
+                $nodeSaludo,
+                `${userData.nombre} ${userData.apellido_paterno} ${userData.apellido_materno}`);
+
+            document.getElementById("p_datosp").click();
+
+            
+        })
+        .catch((err)=>{
+            err = JSON.parse(err);
+            ObjMain.alert_form(false,err.message);
+        });
     },
     sign_in: () =>{
         if(localStorage.getItem('remember')!= null){
@@ -441,6 +492,9 @@ class Carrito {
         })
     }
 }
+
+
+
 window.addEventListener('load', () => {
     ObjMain.init();
 

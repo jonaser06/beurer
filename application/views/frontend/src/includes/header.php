@@ -37,7 +37,7 @@
     </script>
 </head>
 
-<body>
+<body style='background-color:rgba(255,255,255,0);'>
     <?php  $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));     ?>
     <div class="wrapper-header" id="cabecera">
         <header class="header">

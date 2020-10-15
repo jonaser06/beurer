@@ -78,8 +78,11 @@
                         <a href="#sface" role="tab" id="beneficios-tab" data-toggle="tab" aria-controls="complementos" aria-expanded="false">Facebook</a>
 
                     </li>
-                    <li>
+                    <li class="color-module" style="display:none">
                         <a href="#color-detalle" aria-controls="descripcion" role="tab" data-toggle="tab">Colores</a>
+                    </li>
+                    <li>
+                        <a href="#detalles" aria-controls="descripcion" role="tab" data-toggle="tab">Dimensiones , peso y stock</a>
                     </li>
 
             </ul>
@@ -112,6 +115,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-xs-12">
                                         <div class="form form-group required">
                                             <label for="campo_1" class="control-label">Producto</label>
@@ -145,6 +149,22 @@
                                             <select class="form-control" id="subcategoria" name="productos[subcategoria]">
                                                 
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form form-group">
+                                                <div class="form-check">
+                                                    <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd">
+                                                    <label class="form-check-label" for="colorAdd">colores</label>
+                                                </div>
+                                                <span class="message-color"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 d-none stock-module">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">Stock</label>
+                                                <input type="number" step="1" class="form-control" id="stock" name="productos[stock]" min="0"placeholder="Ingrese el stock" value="<?= $producto['stock']?>">
                                         </div>
                                     </div>
                                 </div>
@@ -573,6 +593,45 @@
 
                             </div>
                         </div>
+
+                        <div role="tabpanel" class="tab-pane" id="detalles">
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form form-group ">
+                                                <label for="campo_1" class="control-label">largo en cm</label>
+                                                <input type="number" step="any" class="form-control medida" id="largo" name="productos[largo]" placeholder="Largo" value="<?= $producto['largo'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form form-group ">
+                                                <label for="campo_1" class="control-label">alto en cm</label>
+                                                <input type="number" step="any"class="form-control medida" id="alto" name="productos[alto]" placeholder="Alto" value="<?= $producto['alto'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form form-group ">
+                                                <label for="campo_1" class="control-label">ancho en cm</label>
+                                                <input type="number" step="any" class="form-control medida" id="ancho" name="productos[ancho]" placeholder="Ancho" value="<?= $producto['ancho'] ?>">
+                                        </div>
+                                    </div>
+                                            <div class="col-xs-12">
+                                                <div class="form form-group ">
+                                                        <label for="campo_1" class="control-label">Volumen </label>
+                                                        <input type="text" class="form-control" id="tipo_paquete" name="productos[tipo_paquete]" placeholder="tamaño de paquete" 
+                                                        value="<?= !$producto['tipo_paquete']
+                                                        ?'tipo de paquete':$producto['tipo_paquete']
+                                                        ?>" readonly>
+                                                </div>
+                                            </div>
+                                    
+                                  
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
                  </div>
@@ -593,13 +652,37 @@
 
           <!--</div>-->
 
-         
+         <script>
+            //  document.querySelectorAll('.editarBtn').forEach(editar => {
+            //      editar.addEventListener('click' , function (e){
+            //     showModule();
+            //  })
+            //  })
+             let showModule = () => { 
+                 let $checkInput =  document.getElementById('colorAdd');
+                 let $message =  document.querySelector('.message-color');
+                // $checkInput.addEventListener('change', function() {
+                let $showStock   = document.querySelector('.stock-module')
+                let $moduleColor = document.querySelector('.color-module');
+                    if ( $checkInput.checked ) {
+                        $message.style.color = 'green';
+                        $message.textContent = 'Diríjase a la sección de colores ';
+                        $showStock.style.display = 'none';
+                        $moduleColor.style.display = 'block'
+                    }else {
+                        $showStock.style.display = 'block';
+                        $moduleColor.style.display = 'none' 
+                        $message.textContent = '';
+
+                    }
+                // });
+            }
+         </script>
 
    
 
   </form>
 
- <!-- REQUIRED JS SCRIPTS -->
 
 
 <script>
@@ -615,6 +698,7 @@ $(document).ready(function(){
     Exeperu.tinyInit();
 
     setCat();
+    
 
     $('#formCrearEditarp').submit(function(event) {
         event.preventDefault();
@@ -705,7 +789,30 @@ $(document).ready(function(){
 
 
 });
-  
+
+
+
+// let calcTipo = () => {
+//     const $inputsMedidas = document.querySelectorAll('.medida')
+//     const $tipoShow = document.querySelector('#tipo_paquete')
+//     $inputsMedidas.forEach(medida => medida.addEventListener('change' , event => {
+//         console.log(event.target)
+//         let tipo;
+//         const alto  = document.getElementById('largo').value;
+//         const ancho = document.getElementById('ancho').value;
+//         const largo = document.getElementById('largo').value;
+//         let volumen = parseFloat(alto)*parseFloat(ancho)*parseFloat(largo);
+//         console.log(volumen)
+//         tipo = volumen < 30 ? 'pequeño'
+//              : volumen < 60 ?'mediano'
+//                     : 'grande'
+//         $tipoShow.value = tipo
+//     }))
+    
+    
+// }
+
+// calcTipo();
 </script>
 
 
