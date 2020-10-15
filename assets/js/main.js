@@ -8,7 +8,8 @@ var ubigeoPeru = {
 	ubigeos: new Array()
 };
 let DOMAIN;
-
+let filterResult = false;
+// 
 ObjMain = {
     init: ()=>{
         DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
@@ -29,6 +30,12 @@ ObjMain = {
         if(document.querySelector('.change_password') != null){
             ObjMain.changePassword();
         }
+        if(document.querySelector('.change_password') != null){
+            ObjMain.changePassword();
+        }
+        ObjMain.comparePass()
+        ObjMain.updatePass()
+        ObjMain.limitPass('#currentPass',5)
     },
     changePassword: ()=>{
         
@@ -102,7 +109,7 @@ ObjMain = {
         .then((resp)=>{
             resp = JSON.parse(resp);
             ObjMain.alert_form(false,'update user');
-            console.log(resp.data)
+            
             const spinner = document.getElementById("spinner");
             ObjMain.showSpinner(spinner);
             userData = resp.data;
@@ -420,8 +427,97 @@ ObjMain = {
             xhr.send(data);
         });
         return promise;
+    },
+    comparePass : () => {
+        const $newPass = document.querySelector('#newPass'),
+        $repeatPass    = document.querySelector('#repeatNewPass'),
+        $btnUpdatePass = document.querySelector('.updatePass');
+
+        if($newPass) {
+            $repeatPass.addEventListener('keyup', event => {
+                const $divContainer = event.target.parentElement;
+        
+                if (event.target.value == $newPass.value) {
+                    $btnUpdatePass.disabled = false;
+                    $divContainer.dataset.content = ' √ Las contraseñas coinciden'
+                    document.documentElement.style.setProperty('--color','green');
+                    filterResult =  true ;
+                }else {
+                    $btnUpdatePass.disabled = true ;
+                    $divContainer.dataset.content = 'x Las contraseñas no coinciden';
+                    document.documentElement.style.setProperty('--color','#C51152');
+                    filterResult=  false;
+                }
+                
+            })
+        }
+        
+    },
+     updatePass: () =>  {
+        const $pass= document.querySelector('.updatePass');
+        const $containerPass = document.querySelector('.passContainer');
+        const $repeat = document.querySelector('.repeat');
+        if($pass) {
+            $pass.addEventListener('click' , e => {
+                e.preventDefault();
+                const { id } = $pass.dataset; 
+                
+               
+                if(filterResult && document.querySelector('#currentPass').value !=='') {
+                    
+                    const $form= document.querySelector('#formPass');
+                    const formData = new FormData($form);
+    
+                    ObjMain.ajax_post('POST',`${DOMAIN}updatePass/${id}`,formData)
+                    .then((resp)=>{
+                        resp = JSON.parse(resp);
+                        $containerPass.dataset.content = resp.message;
+                        document.documentElement.style.setProperty('--colorResponse',`${resp.code == 404 ? '#C51152': 'green'} `);
+                        $form.reset()
+                        $repeat.dataset.content = ''
+                    })
+                    .catch((err)=>{
+                        err = JSON.parse(err);
+                        
+                    });
+                }else {
+                    
+                        document.querySelector('#currentPass').parentElement.dataset.content = 'Escriba una contraseña';
+                        document.documentElement.style.setProperty('--colorResponse','#C51152');
+    
+                    
+                }
+    
+            }
+        )
+        }
+      
+    } ,
+    limitPass : (component , limit ) => {
+        const $currentPass = document.querySelector(component);
+        
+        if($currentPass){
+            $currentPass.addEventListener('keyup', event => {
+                console.log(event.target)
+                const $parent = event.target.parentElement;
+
+                if($currentPass.value.length > limit ) {
+                    $parent.dataset.content = '√ constraseña segura';
+                    document.documentElement.style.setProperty('--colorResponse','green');
+                    
+                    return
+                }else {
+                    $parent.dataset.content = 'constraseña muy corta';
+                    document.documentElement.style.setProperty('--colorResponse','blue');
+                    return
+                }
+            })
+        }
+        
+
     }
 }
+
 
 class Carrito {
     constructor (btnAddCarrito) {
@@ -438,6 +534,7 @@ class Carrito {
         const DomTokenProd = {...this.$btnAddCarrito.dataset};
         delete DomTokenProd.target ;
         delete DomTokenProd.toggle ;
+        DomTokenProd.subtotal = parseFloat(DomTokenProd.precio )* parseInt(DomTokenProd.cantidad );
         return DomTokenProd;
     }
     add() {

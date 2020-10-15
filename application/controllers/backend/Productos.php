@@ -175,7 +175,11 @@ class Productos extends CI_Controller {
 		$input = $this->input->post('productos');
 
 		//var_dump($input);
-		
+		$stock = null;
+		$detalles = json_decode($input["colores"],true);		
+		foreach ($detalles as $key => $value) {
+			$stock += $value['stock'];
+		}
 		$data_in = array(
 			'categoria_id' => (empty($input['subcategoria']))? '3': $input['subcategoria'],
 			'titulo' => $input['producto'],
@@ -201,7 +205,7 @@ class Productos extends CI_Controller {
 			'ancho' => $input['ancho'],
 			'largo' => $input['largo'],
 			'peso' => $input['peso'],
-			'stock' => $input['stock'],
+			'stock' => $stock,
 			'relacionados' => $input['relacionados'],
             'orden' => $input['orden']
 		);

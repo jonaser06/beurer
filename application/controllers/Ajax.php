@@ -173,4 +173,63 @@ class Ajax extends MY_Controller
             }
         }
     }
+
+    public function updatePass(int $id)
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+           
+            $pass = hash('sha256',$this->input->post('currentPass'));
+            $newPass = hash('sha256', $this->input->post('newPass'));
+            $result = $this->get('clientes',['contrasena' => $pass ,'id_cliente' => (int)$id ]);
+            
+            if (!empty($result)) {
+                $result =  $this->dbUpdate(['contrasena' => $newPass ], 'clientes', ['id_cliente' => (int)$id]);
+                if($result) {
+                    $resp = [
+                        'status'  => true,
+                        'code'    => 200,
+                        'message' => 'Contraseña Actualizada.',
+                    ];
+                    $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(200)
+                        ->set_output(json_encode($resp));
+                    return;
+                }else {
+                    $resp = [
+                        'status'  => true,
+                        'code'    => 404,
+                        'message' => 'No se pudo actualizar intentelo otra vez',
+                    ];
+                    $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(404)
+                        ->set_output(json_encode($resp));
+                    return;
+                }
+                
+            } else {
+                $resp = [
+                    'status'  => true,
+                    'code'    => 404,
+                    'message' => 'x La contraseña no es correcta.'
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
 }

@@ -132,22 +132,23 @@ $(document).ready(function () {
 //adaptando para el active de los botones del panel de usuario.
 $(document).ready(function () {
 
-    var btnContainer3 = document.getElementById("p_users");
-    var secciones = document.getElementById("panel-user1");
-    var infouser = document.getElementById("info_puser");
-    var titulouser = document.getElementById("title-info-user");
-    var contenidouser = document.getElementById("cont-info-user");
-    var back = document.getElementById("back-section-user");
-    var inicio = document.getElementById("p_inicio");
-    var datos = document.getElementById("p_datosp");
-    var orden = document.getElementById("p_misord");
-    var direccion = document.getElementById("p_misdir");
-    var info = document.getElementById("info_puser");
-    var comprobante = document.getElementById("p_miscomp");
+    let btnContainer3 = document.getElementById("p_users");
+    let secciones = document.getElementById("panel-user1");
+    let infouser = document.getElementById("info_puser");
+    let titulouser = document.getElementById("title-info-user");
+    let contenidouser = document.getElementById("cont-info-user");
+    let back = document.getElementById("back-section-user");
+    let inicio = document.getElementById("p_inicio");
+    let datos = document.getElementById("p_datosp");
+    let orden = document.getElementById("p_misord");
+    let direccion = document.getElementById("p_misdir");
+    let info = document.getElementById("info_puser");
+    let comprobante = document.getElementById("p_miscomp");
+    let seccionPass = document.getElementById("panel_pass");
 
     // Get all buttons with class="btn" inside the container
 
-    var btns3 = btnContainer3.getElementsByClassName("p_user");
+    let btns3 = btnContainer3.getElementsByClassName("p_user");
 
 
     // Loop through the buttons and add the active class to the current/clicked button
@@ -175,9 +176,7 @@ $(document).ready(function () {
         }
     });
 
-    datos.addEventListener("click", function () {
-        
-           
+    datos.addEventListener("click", function () { 
         titulouser.innerHTML = '<p>Datos Personales</p>';
         contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
         <div class="divTableBody" style="display:block;">
@@ -287,11 +286,52 @@ $(document).ready(function () {
             infouser.style.display = 'block';
         }
     });
+    seccionPass.addEventListener("click", function () {
+        titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
+        contenidouser.innerHTML = `<form id ="formPass" method="POST">
+                <div class="input-group passContainer">
+                    <label for="currentPass">Actual</label>
+                    <input
+                    type="password" name="currentPass" id="currentPass" placeholder="Contraseña actual"required>
+                    <img class="eyes"
+                    src="https://img2.freepng.es/20180501/bee/kisspng-computer-icons-password-blind-vector-5ae856af60c0e4.3327567715251759833963.jpg">
+                </div>
+                <div class="input-group">
+                    <label for="newPass">Nueva</label>
+                    <input type="password" name="newPass" id="newPass">
+                    <img class="eyes"
+                    src="https://img2.freepng.es/20180501/bee/kisspng-computer-icons-password-blind-vector-5ae856af60c0e4.3327567715251759833963.jpg">
+                </div>
+                <div class="input-group repeat"
+                >
+                    <label for="repeatNewPass">Repetir contraseña nueva</label>
+                    <input type="password" name="repeatNewPass" id="repeatNewPass">
+                    <img class="eyes"
+                    src="https://img2.freepng.es/20180501/bee/kisspng-computer-icons-password-blind-vector-5ae856af60c0e4.3327567715251759833963.jpg">
+                </div>
+                <hr>
+                <button 
+                data-id = '${userData.id_cliente}'
+                type="submit" class="btn btn-small updatePass" >Guardar cambios</button>
+        </form> `;
+        if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
 
+        ObjMain.comparePass()
+        ObjMain.updatePass()
+        ObjMain.limitPass('#currentPass',5)
+        
+			document.addEventListener("click", (e) => {
+				if (e.target.matches(".eyes")) {
+					let $pass = e.target.parentElement.children[1]
+					$pass.type = $pass.type == "password" ? "text" : "password";
+				}
+			});
+    });
+    
 });
-
-
-
 
 // adaptando codigo de envio-pago para botones de colores
 $(document).ready(function () {

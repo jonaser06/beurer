@@ -70,6 +70,14 @@ input {
                                 <h3>></h3>
                             </div>
                         </button></li>
+                    <li><button id="panel_pass" class="btn btnprimary1 p_user">
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <h3>Contraseña Sesion</h3>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                <h3>></h3>
+                            </div>
+                        </button></li>
                     <li><button id="p_misord" class="btn btnprimary1 p_user">
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <h3>Mis Pedidos</h3>
@@ -106,20 +114,10 @@ input {
                 </ul>
             </div>
 
-            <!-- <div id="info_puser" style="text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
-                <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;"> 
-                <div id="back-section-user" style="font-size:1.6em;margin-right:4%;display:none;width:10%;float:left;border-right:2px solid whitesmoke;">
-                <p> < </p>
-                </div>
-                
-                <div id="title-info-user" style="width:90%;float:left;margin:auto 0px;" ><p>Bienvenido al Panel de Administración del Cliente BEURER</p> </div> 
-                </div>
-                <div id="cont-info-user">
-                <h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p></div>
-                            
-            </div>             -->
-
-            <div id="info_puser"
+            <script>
+              
+            </script>
+             <div id="info_puser"
                 style="text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
                 <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;">
                     <div id="back-section-user"
@@ -148,7 +146,7 @@ input {
                 </div>
 
 
-            </div>
+            </div> 
         </div>
     </div>
 
@@ -248,7 +246,7 @@ input {
    
 </script>
 
-<script src="assets/js/registro.js"></script>
+<!-- <script src="assets/js/registro.js"></script> -->
 
 
 <?php

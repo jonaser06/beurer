@@ -48,7 +48,7 @@ class MY_Controller extends CI_Controller
     public function get(
         string $table,
         ?array $conditions = NULL
-    ): array {
+    ) {
            return empty($conditions)
             ? $this->db->get($table)->result_array()
             : $this->db->get_where($table, $conditions)->row_array();

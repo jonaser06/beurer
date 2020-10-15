@@ -154,7 +154,10 @@
                                     <div class="col-xs-12">
                                         <div class="form form-group">
                                                 <div class="form-check">
-                                                    <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd">
+                                                    <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd"
+                                                    <?= isset($producto['detalles-multimedia']) 
+                                                        ? 'checked':'';  ?>
+                                                    >
                                                     <label class="form-check-label" for="colorAdd">colores</label>
                                                 </div>
                                                 <span class="message-color"></span>
@@ -579,7 +582,7 @@
                                         <table id="table_complementos_color" class="table table-striped table-responsive">
                                             <thead>
                                                 <tr>
-                                                    <th>Código Sku</th>                                                            
+                                                    <th>stock</th>                                                            
                                                     <th>Imagen</th>                                                            
                                                     <th>Color</th>                                                                                                         
                                                     <th>estado</th>                                                                                                         
@@ -645,7 +648,7 @@
               </div>
 
           <input type="hidden" id="idp" name="productos[idproducto]" value="<?= isset($producto['id']) ? $producto['id'] : '';?>">
-
+           <input type="hidden" id="flag" name="flag" value="">                                
           <input type="hidden"  name="productos[complemento]" value="0">
 
               </div>
@@ -664,19 +667,23 @@
                 // $checkInput.addEventListener('change', function() {
                 let $showStock   = document.querySelector('.stock-module')
                 let $moduleColor = document.querySelector('.color-module');
+                let $stock = document.querySelector('#stock');
+                // let $flag = document.querySelector('#flag');
                     if ( $checkInput.checked ) {
                         $message.style.color = 'green';
                         $message.textContent = 'Diríjase a la sección de colores ';
-                        $showStock.style.display = 'none';
-                        $moduleColor.style.display = 'block'
+                       
+                        $stock.disabled = true ;
+                        $moduleColor.style.display = 'block';
                     }else {
-                        $showStock.style.display = 'block';
+                        $stock.disabled = false;
                         $moduleColor.style.display = 'none' 
                         $message.textContent = '';
-
                     }
                 // });
             }
+            
+            showModule();
          </script>
 
    
@@ -702,7 +709,9 @@ $(document).ready(function(){
 
     $('#formCrearEditarp').submit(function(event) {
         event.preventDefault();
-
+        // let $quanty = document.querySelector('#stock');
+        // let $flag = document.querySelector('#flag');
+        // $flag.value= $quanty.disabled ?  1: 0;
 
         $('#modalCreateEdit').modal('hide');
         $('#modalLoading').modal('show');
