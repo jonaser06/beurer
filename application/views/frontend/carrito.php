@@ -1,6 +1,6 @@
 <?php include 'src/includes/header.php' ?>
 
-<main class="main-detail-products" id="cuerpo">
+<main class="main-detail-products" id="cuerpo" style="display:none;" >
 
     <section class="sct-detail-products">
         <div class="container cont-detail-products">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="basket-product">
                         <div class="item">
-                            <a class="product-image" data-toggle="modal" onclick="modal()" data-target="#exampleModal">
+                            <a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">
                                 <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame">
                             </a>
                             <div class="product-details">
@@ -78,7 +78,7 @@
                         <div class="quantity">
                             <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
                             <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>
-                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
+                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="ObjMain.aumentar()">+</button>
                         </div>
                         <div class="subtotal rsubtotal" id="subtotal">26.00</div>
 
@@ -89,7 +89,7 @@
 
                     <div class="basket-product">
                         <div class="item">
-                            <a class="product-image" data-toggle="modal" onclick="modal()" data-target="#exampleModal">
+                            <a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">
                                 <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame">
                             </a>
                             <div class="product-details">
@@ -112,7 +112,7 @@
                         <div class="quantity">
                             <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
                             <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>
-                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
+                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="ObjMain.aumentar()">+</button>
                         </div>
                         <div class="subtotal rsubtotal" id="subtotal">29.00</div>
                         <div class="remove">
@@ -125,7 +125,7 @@
 
                     <div class="basket-product">
                         <div class="item">
-                            <a class="product-image" data-toggle="modal" onclick="modal()" data-target="#exampleModal">
+                            <a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">
                                 <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame">
                             </a>
                             <div class="product-details">
@@ -146,7 +146,7 @@
                         <div class="quantity">
                             <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
                             <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1" readonly>
-                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
+                            <button id="aum" style="width:42px; margin: 0 8%;" onclick="ObjMain.aumentar()">+</button>
                         </div>
                         <div class="subtotal rsubtotal" id="subtotal">22.00</div>
                         <div class="remove">
@@ -218,11 +218,11 @@
                 </div>
             </div>
 
-            <div id="d_envio" style="text-align:center; ">
+            <div id="d_envio" style="display:none;text-align:center; ">
                 <div class="tituloTabla1" style="text-align:center;">Departamento</div>
-                <select id="s_depa" style="width:55%" onchange="selectDep();"></select>
+                <select id="s_depa" style="width:55%" onchange=""></select>
                 <div class="tituloTabla1" style="text-align:center;">Provincia</div>
-                <select id="s_prov" style="width:55%" onchange="selectProv();"></select>
+                <select id="s_prov" style="width:55%" onchange=""></select>
                 <div class="tituloTabla1" style="text-align:center;">Distrito</div>
                 <select id="s_dist" style="width:55%"></select>
             </div>
@@ -333,13 +333,11 @@
         <div class="modal-dialog modal-dialog-centered" id="modal_foto" role="document">
             <div class="modal-content" style="width:100%">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalCenterTitle"
-                        style="text-align:center;font-size:1.8em;font-weight:bold;">MASAJEADOR ANTICELULÍTICO CM 50</h1>
+                    <h1 class="modal-title" id="exampleModalCenterTitle" style="text-align:center;font-size:1.8em;font-weight:bold;">MASAJEADOR ANTICELULÍTICO CM 50</h1>
 
                 </div>
                 <div class="modal-body">
-                    <img src="https://beurer.pe/assets/sources/CM50_01.jpg"
-                        style="box-shadow:-3px 3px 25px -3px rgba(0,0,0,0.3); " alt="Placholder Image 2">
+                    <img src="https://beurer.pe/assets/sources/CM50_01.jpg" style="width: 100%;box-shadow:-3px 3px 25px -3px rgba(0,0,0,0.3); " alt="Placholder Image 2">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary1" style="font-size:1.4em;"
@@ -376,19 +374,8 @@
 
 
 
-<script src="assets/js/registro.js"></script>
 
-<script>
-    function modal() {
-        var prueba = document.getElementById("modal_foto");
-        prueba.style.paddingTop = $(window).scrollTop() + 100 + "px";
-        console.log($(window).scrollTop());
-
-    }
-</script>
-
-
-<div class="row" id="parte-contacto" style="width:80%;margin:auto;display:block;">
+<div class="row" id="parte-contacto" style="width:80%;margin:auto;display:none;">
     <div class="col-md-12" style="display:inline-block;">
         <div class="col-md-4 section-contacto"
             style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">

@@ -1,4 +1,4 @@
-<div class="wrapper-footer">
+<div class="wrapper-footer" <?php echo (isset($carrito) && $carrito )?'id="piedepag" style="display:none;"':''; ?>>
     <footer class="container-fluid">
         <div class="container">
             <div class="row">
@@ -115,7 +115,6 @@
 <script src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/fancybox.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/fullpage.js"></script>
-
 <script src="<?= base_url(); ?>assets/js/main.js"></script>
 
 <script>

@@ -1,56 +1,9 @@
 // rastrea pedido campo
 
 $(document).ready(function () {
-    class CampoNumerico2 {
+    
 
-        constructor(selector) {
-            this.nodo = document.querySelector(selector);
-            this.valor = '';
-
-            this.empezarAEscucharEventos();
-        }
-
-        empezarAEscucharEventos() {
-            this.nodo.addEventListener('keydown', function (evento) {
-                const teclaPresionada = evento.key;
-                const teclaPresionadaEsUnNumero =
-                    Number.isInteger(parseInt(teclaPresionada));
-
-                const sePresionoUnaTeclaNoAdmitida =
-                    teclaPresionada != 'ArrowDown' &&
-                    teclaPresionada != 'ArrowUp' &&
-                    teclaPresionada != 'ArrowLeft' &&
-                    teclaPresionada != 'ArrowRight' &&
-                    teclaPresionada != 'Backspace' &&
-                    teclaPresionada != 'Delete' &&
-                    teclaPresionada != 'Enter' &&
-                    !teclaPresionadaEsUnNumero;
-                const comienzaPorCero =
-                    this.nodo.value.length === 0 &&
-                    teclaPresionada == 0;
-
-                if (sePresionoUnaTeclaNoAdmitida || comienzaPorCero) {
-                    evento.preventDefault();
-                } else if (teclaPresionadaEsUnNumero) {
-                    this.valor += String(teclaPresionada);
-                }
-
-            }.bind(this));
-
-            this.nodo.addEventListener('input', function (evento) {
-                const cumpleFormatoEsperado = new RegExp(/+^[0-9]+/).test(this.nodo.value);
-
-                if (!cumpleFormatoEsperado) {
-                    this.nodo.value = this.valor;
-                } else {
-                    this.valor = this.nodo.value;
-                }
-            }.bind(this));
-        }
-
-    }
-
-    new CampoNumerico2('#cod_seg');
+    // new CampoNumerico2('#cod_seg');
 
 
 });
@@ -108,187 +61,187 @@ $(document).ready(function () {
 //codigo js de envio-pago
 
 
-$(document).ready(function () {
-    var btnContainer = document.getElementById("div-fechas");
+// $(document).ready(function () {
+//     var btnContainer = document.getElementById("div-fechas");
 
 
-    // Get all buttons with class="btn" inside the container
-    var btns = btnContainer.getElementsByClassName("fecha");
+//     // Get all buttons with class="btn" inside the container
+//     var btns = btnContainer.getElementsByClassName("fecha");
 
 
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns.length; i++) {
+//     // Loop through the buttons and add the active class to the current/clicked button
+//     for (var i = 0; i < btns.length; i++) {
 
-        btns[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
+//         btns[i].addEventListener("click", function () {
+//             var current = document.getElementsByClassName("active");
+//             current[0].className = current[0].className.replace(" active", "");
+//             this.className += " active";
+//         });
+//     }
 
 
-});
+// });
 
 //adaptando para el active de los botones del panel de usuario.
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    var btnContainer3 = document.getElementById("p_users");
-    var secciones = document.getElementById("panel-user1");
-    var infouser = document.getElementById("info_puser");
-    var titulouser = document.getElementById("title-info-user");
-    var contenidouser = document.getElementById("cont-info-user");
-    var back = document.getElementById("back-section-user");
-    var inicio = document.getElementById("p_inicio");
-    var datos = document.getElementById("p_datosp");
-    var orden = document.getElementById("p_misord");
-    var direccion = document.getElementById("p_misdir");
-    var info = document.getElementById("info_puser");
-    var comprobante = document.getElementById("p_miscomp");
+//     var btnContainer3 = document.getElementById("p_users");
+//     var secciones = document.getElementById("panel-user1");
+//     var infouser = document.getElementById("info_puser");
+//     var titulouser = document.getElementById("title-info-user");
+//     var contenidouser = document.getElementById("cont-info-user");
+//     var back = document.getElementById("back-section-user");
+//     var inicio = document.getElementById("p_inicio");
+//     var datos = document.getElementById("p_datosp");
+//     var orden = document.getElementById("p_misord");
+//     var direccion = document.getElementById("p_misdir");
+//     var info = document.getElementById("info_puser");
+//     var comprobante = document.getElementById("p_miscomp");
 
-    // Get all buttons with class="btn" inside the container
+//     // Get all buttons with class="btn" inside the container
 
-    var btns3 = btnContainer3.getElementsByClassName("p_user");
+//     var btns3 = btnContainer3.getElementsByClassName("p_user");
 
 
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns3.length; i++) {
-        btns3[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("p_user active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
-    document.getElementById("back-section-user").addEventListener("click", function () {
-        console.log("Hola");
-        info.style.display = 'none';
-        secciones.style.display = 'block';
-    });
+//     // Loop through the buttons and add the active class to the current/clicked button
+//     for (var i = 0; i < btns3.length; i++) {
+//         btns3[i].addEventListener("click", function () {
+//             var current = document.getElementsByClassName("p_user active");
+//             current[0].className = current[0].className.replace(" active", "");
+//             this.className += " active";
+//         });
+//     }
+//     document.getElementById("back-section-user").addEventListener("click", function () {
+//         console.log("Hola");
+//         info.style.display = 'none';
+//         secciones.style.display = 'block';
+//     });
 
-    inicio.addEventListener("click", function (e) {
-        console.log(e.target)
-        titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
+//     inicio.addEventListener("click", function (e) {
+//         console.log(e.target)
+//         titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
 
-        contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-        if (screen && screen.width < 700) {
-            secciones.style.display = 'none';
-            infouser.style.display = 'block';
-        }
-    });
+//         contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+//         if (screen && screen.width < 700) {
+//             secciones.style.display = 'none';
+//             infouser.style.display = 'block';
+//         }
+//     });
 
-    datos.addEventListener("click", function () {
+//     datos.addEventListener("click", function () {
         
            
-        titulouser.innerHTML = '<p>Datos Personales</p>';
-        contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
-        <div class="divTableBody" style="display:block;">
-            <div class="divTableRow" id="pn_datos1">
-                <div class="divTableCell">
-                    <div class="etiquetaFormulario">Nombres </div>
-                    <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
-                </div>
-                <div class="divTableCell">
-                    <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
-                        name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
-                </div>
-                <div class="divTableCell">
-                    <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
-                        maxlength="30" name="campo1" id="correo" value="${userData.correo}"
-                        style="border:0 none;">
-                </div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell">
-                    <div class="etiquetaFormulario">Tipo Documento Identidad</div>
-                    <select id="s_tipodoc" value="${userData.tipo_documento}"
-                        >
-                        <option id="di_pn1" value="DNI">DNI</option>
-                        <option id="di_pn2" value="PASAPORTE">PASAPORTE</option>
-                        <option id="di_pn3" value="CE">CE</option>
-                    </select>
-                </div>
-                <div class="divTableCell">
-                    <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
-                        maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
-                </div>
-                <div class="divTableCell">
-                    <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
-                        name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
-                </div>
-            </div>
-        </div>
-    </div> <br> <br>
-    <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-        <p>Conoce lo último de Beurer.pe</p>
-    </div> <br> <br>
-    <div style="text-align:left !important;">
-        <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
-        <label class="font-light label-pol"style="display:inline;"> 
-        <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
-        </label>
-        <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
-                        href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
-                        Políticas de Privacidad</a>.</span></div>
-        </div>
-    </div>
-    <div style="text-align:left !important;">
-        <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
-                style="display:inline;"> 
-                <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
-            <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
-                    Beurer en mi e-mail.</span></div>
-        </div>
-    </div>
-    <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
-    `;
-      let index   = userData.tipo_documento == 'DNI' ? '1' 
-                                :userData.tipo_documento == 'PASAPORTE' ? '2'
-                                : userData.tipo_documento == 'CE' ? '3'
-                                :''
-      const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(index)-1];
-      nodeSelect.setAttribute('selected','selected')
-    //   update obj UserData
-      const tipoDoc = document.querySelector('#s_tipodoc');
-      tipoDoc.addEventListener('change' , event => {
-         userData.tipo_documento = event.target.value
-      })
+//         titulouser.innerHTML = '<p>Datos Personales</p>';
+//         contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
+//         <div class="divTableBody" style="display:block;">
+//             <div class="divTableRow" id="pn_datos1">
+//                 <div class="divTableCell">
+//                     <div class="etiquetaFormulario">Nombres </div>
+//                     <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
+//                 </div>
+//                 <div class="divTableCell">
+//                     <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
+//                         name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
+//                 </div>
+//                 <div class="divTableCell">
+//                     <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
+//                         maxlength="30" name="campo1" id="correo" value="${userData.correo}"
+//                         style="border:0 none;">
+//                 </div>
+//             </div>
+//             <div class="divTableRow">
+//                 <div class="divTableCell">
+//                     <div class="etiquetaFormulario">Tipo Documento Identidad</div>
+//                     <select id="s_tipodoc" value="${userData.tipo_documento}"
+//                         >
+//                         <option id="di_pn1" value="DNI">DNI</option>
+//                         <option id="di_pn2" value="PASAPORTE">PASAPORTE</option>
+//                         <option id="di_pn3" value="CE">CE</option>
+//                     </select>
+//                 </div>
+//                 <div class="divTableCell">
+//                     <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
+//                         maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
+//                 </div>
+//                 <div class="divTableCell">
+//                     <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
+//                         name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
+//                 </div>
+//             </div>
+//         </div>
+//     </div> <br> <br>
+//     <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
+//         <p>Conoce lo último de Beurer.pe</p>
+//     </div> <br> <br>
+//     <div style="text-align:left !important;">
+//         <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
+//         <label class="font-light label-pol"style="display:inline;"> 
+//         <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
+//         </label>
+//         <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
+//                         href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
+//                         Políticas de Privacidad</a>.</span></div>
+//         </div>
+//     </div>
+//     <div style="text-align:left !important;">
+//         <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
+//                 style="display:inline;"> 
+//                 <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
+//             <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
+//                     Beurer en mi e-mail.</span></div>
+//         </div>
+//     </div>
+//     <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
+//     `;
+//       let index   = userData.tipo_documento == 'DNI' ? '1' 
+//                                 :userData.tipo_documento == 'PASAPORTE' ? '2'
+//                                 : userData.tipo_documento == 'CE' ? '3'
+//                                 :''
+//       const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(index)-1];
+//       nodeSelect.setAttribute('selected','selected')
+//     //   update obj UserData
+//       const tipoDoc = document.querySelector('#s_tipodoc');
+//       tipoDoc.addEventListener('change' , event => {
+//          userData.tipo_documento = event.target.value
+//       })
     
 
 
-    if (screen && screen.width < 700) {
-            secciones.style.display = 'none';
-            infouser.style.display = 'block';
-        }
-    });
+//     if (screen && screen.width < 700) {
+//             secciones.style.display = 'none';
+//             infouser.style.display = 'block';
+//         }
+//     });
 
-    orden.addEventListener("click", function () {
-        titulouser.innerHTML = '<p style="margin: auto;">Mis órdenes</p>';
-        contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-        if (screen && screen.width < 700) {
-            secciones.style.display = 'none';
-            infouser.style.display = 'block';
-        }
-    });
+//     orden.addEventListener("click", function () {
+//         titulouser.innerHTML = '<p style="margin: auto;">Mis órdenes</p>';
+//         contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+//         if (screen && screen.width < 700) {
+//             secciones.style.display = 'none';
+//             infouser.style.display = 'block';
+//         }
+//     });
 
-    direccion.addEventListener("click", function () {
-        titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
-        contenidouser.innerHTML = ``;
-        if (screen && screen.width < 700) {
-            secciones.style.display = 'none';
-            infouser.style.display = 'block';
-        }
-    });
+//     direccion.addEventListener("click", function () {
+//         titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
+//         contenidouser.innerHTML = ``;
+//         if (screen && screen.width < 700) {
+//             secciones.style.display = 'none';
+//             infouser.style.display = 'block';
+//         }
+//     });
 
-    comprobante.addEventListener("click", function () {
-        titulouser.innerHTML = '<p style="margin: auto;">Mis comprobantes</p>';
-        contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-        console.log(document.getElementById("back-section-user"));
-        if (screen && screen.width < 700) {
-            secciones.style.display = 'none';
-            infouser.style.display = 'block';
-        }
-    });
+//     comprobante.addEventListener("click", function () {
+//         titulouser.innerHTML = '<p style="margin: auto;">Mis comprobantes</p>';
+//         contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+//         console.log(document.getElementById("back-section-user"));
+//         if (screen && screen.width < 700) {
+//             secciones.style.display = 'none';
+//             infouser.style.display = 'block';
+//         }
+//     });
 
-});
+// });
 
 
 
@@ -296,50 +249,50 @@ $(document).ready(function () {
 // adaptando codigo de envio-pago para botones de colores
 $(document).ready(function () {
 
-    var btnContainer2 = document.getElementById("div-colors");
+    // var btnContainer2 = document.getElementById("div-colors");
     var principali = document.getElementById("principal-img");
     var secondaryi = document.getElementById("secondary-img");
     var imgs = ['<img src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt="">', '<img  src="assets/sources/61sJPfVV7BL._AC_SL1500__11.jpg" alt="">', '<img  src="assets/sources/61sJPfVV7BL._AC_SL1500__12.jpg" alt="">']
     var imgs = ['<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt="">', '<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__11.jpg" alt="">', '<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__12.jpg" alt="">']
     // Get all buttons with class="btn" inside the container
 
-    var btns2 = btnContainer2.getElementsByClassName("color");
+    // var btns2 = btnContainer2.getElementsByClassName("color");
     var imgsmall = document.getElementsByClassName("animated fadeInLeftShort tabs_goto go");
     var imglarge = document.getElementsByClassName("tabs_section animated growIn go");
 
     // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns2.length; i++) {
+    // for (var i = 0; i < btns2.length; i++) {
 
-        btns2[i].addEventListener("click", function () {
+    //     btns2[i].addEventListener("click", function () {
 
-            var current = document.getElementsByClassName("color active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-            var c = 0;
-            for (var valor of btns2) {
-                if (valor.classList.value == "btn btnprimary1 color active") {
-                    principali.innerHTML = imgs[c];
-                    secondaryi.innerHTML = imgs[c];
-                    for (var valor1 of imgsmall) {
-                        if (valor1.classList.value == "animated fadeInLeftShort tabs_goto go -active") {
-                            valor1.classList.remove("-active");
-                            for (var valor2 of imglarge) {
-                                if (valor2.classList.value == "tabs_section animated growIn go -open") {
-                                    valor2.classList.remove("-open");
-                                }
-                            }
-                            imglarge[0].classList.add("-open");
-                        }
-                    }
-                    imgsmall[0].classList.add("-active");
+    //         var current = document.getElementsByClassName("color active");
+    //         current[0].className = current[0].className.replace(" active", "");
+    //         this.className += " active";
+    //         var c = 0;
+    //         for (var valor of btns2) {
+    //             if (valor.classList.value == "btn btnprimary1 color active") {
+    //                 principali.innerHTML = imgs[c];
+    //                 secondaryi.innerHTML = imgs[c];
+    //                 for (var valor1 of imgsmall) {
+    //                     if (valor1.classList.value == "animated fadeInLeftShort tabs_goto go -active") {
+    //                         valor1.classList.remove("-active");
+    //                         for (var valor2 of imglarge) {
+    //                             if (valor2.classList.value == "tabs_section animated growIn go -open") {
+    //                                 valor2.classList.remove("-open");
+    //                             }
+    //                         }
+    //                         imglarge[0].classList.add("-open");
+    //                     }
+    //                 }
+    //                 imgsmall[0].classList.add("-active");
 
-                }
-                c++;
-            }
-        });
+    //             }
+    //             c++;
+    //         }
+    //     });
 
 
-    }
+    // }
 
 
 });

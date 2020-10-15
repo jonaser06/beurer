@@ -29,6 +29,59 @@ ObjMain = {
         if(document.querySelector('.change_password') != null){
             ObjMain.changePassword();
         }
+        if(document.querySelector('#container10') != null){
+            ObjMain.overload();
+        }
+    },
+    aumentar: () =>{
+        var inicio = 1; //se inicializa una variable en 0
+        var text = document.getElementById("costo-envio");
+        var checkBox = document.getElementById("check_envio");
+        var subtotal = document.getElementById("subtotal");
+        var total = document.getElementById("total");
+
+        if (document.getElementById('cantidad_prod').value != 10) {
+            var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
+            subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+            total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+            if (checkBox.checked == true) {
+                text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+                total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+            }
+        }
+    },
+    disminuir: () =>{
+        var inicio = 1; //se inicializa una variable en 0
+        var text = document.getElementById("costo-envio");
+        var checkBox = document.getElementById("check_envio");
+        var subtotal = document.getElementById("subtotal");
+        var total = document.getElementById("total");
+
+        if (document.getElementById('cantidad_prod').value > 1) {
+            var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
+            subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+            total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+            if (checkBox.checked == true) {
+                text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+                total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
+            }
+        }
+    },
+    modal:() =>{
+        var prueba = document.getElementById("modal_foto");
+        prueba.style.paddingTop = $(window).scrollTop() - 150 + "px";
+        console.log($(window).scrollTop());
+    },
+    overload(){
+        setTimeout(ObjMain.myFunction(), 0);
+    },
+    myFunction: () =>{
+        document.getElementById("container10").style.display='none';
+        document.getElementById("cabecera").style.display='block';
+        document.getElementById("piedepag").style.display='block';
+        document.getElementById("cuerpo").style.display='block';   
+        document.getElementById("parte-contacto").style.display='block';   
+        document.getElementById("principal").style.backgroundColor='white'; 
     },
     changePassword: ()=>{
         document.querySelector('.change_password').addEventListener('click', ()=>{
@@ -492,8 +545,6 @@ class Carrito {
         })
     }
 }
-
-
 
 window.addEventListener('load', () => {
     ObjMain.init();

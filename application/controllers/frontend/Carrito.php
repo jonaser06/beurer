@@ -21,7 +21,8 @@ class Carrito extends MY_Controller
         $this->data['uri'] = $uri;
         $this->data['confif'] = $this->contenido->getContenido(1);
         $this->data['menu'] = $this->contenido->getMenu();
-        
+        $this->data['carrito'] = true;
+
         $output = $this->load->view("frontend/carrito.php", $this->data, TRUE);
 
         echo $output;
