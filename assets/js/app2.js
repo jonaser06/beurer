@@ -816,7 +816,7 @@ $(document).ready(function () {
 
     }
 
-    new CampoNumerico('#cantidad_prod');
+    // new CampoNumerico('#cantidad_prod');
 
 });
 
@@ -841,22 +841,22 @@ $('#cupon').click(function () {
 
 //codigo de envio a domicilio
 
-$('#check_envio').click(function () {
+// $('#check_envio').click(function () {
 
-    d_envio = document.getElementById("d_envio");
-    var checkBo = document.getElementById("check_envio");
-    // 	if (checkBo.checked == true){
-    if (checkBo.checked == true) {
+//     d_envio = document.getElementById("d_envio");
+//     var checkBo = document.getElementById("check_envio");
+//     // 	if (checkBo.checked == true){
+//     if (checkBo.checked == true) {
 
-        d_envio.style.display = "block";
+//         d_envio.style.display = "block";
 
 
-    } else {
+//     } else {
 
-        d_envio.style.display = "none";
+//         d_envio.style.display = "none";
 
-    }
-});
+//     }
+// });
 
 
 $('#otra-persona').click(function () {
