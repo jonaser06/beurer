@@ -6,8 +6,9 @@
         <p>Ingresa la nueva contraseña de tu cuenta de Beurer.pe</p>
         <hr>
         <label for="">Nueva Contraseña</label>
-        <input type="hidden" name="id" value="<?php echo $id['key']; ?>">
-        <input type="password" class="email-recovery">
+        <div class="ajax-resp"></div>
+        <input type="hidden" name="id" class="idrecovery" value="<?php echo $id['key']; ?>">
+        <input type="password" class="new_password">
         <input type="button" value="Cambiar" class="change_password">
     </div>
 </div>

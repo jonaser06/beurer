@@ -53,8 +53,7 @@ class MY_Controller extends CI_Controller
             ? $this->db->get($table)->result_array()
             : $this->db->get_where($table, $conditions)->row_array();
     }
-
-    
+ 
     public function dbUpdate(
          $label, 
          $table, 
@@ -153,7 +152,7 @@ class MY_Controller extends CI_Controller
             'mailtype'  => 'html', 
             'charset'   => 'utf-8'
         ];
-        $message = $this->load->view('mail/'.$data, TRUE);
+        $message = $this->load->view('mail/'.$template, $data,  TRUE);
 
         $this->load->library('email',$config);
         $this->email->set_newline("\r\n");

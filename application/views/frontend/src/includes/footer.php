@@ -1,4 +1,4 @@
-<div class="wrapper-footer">
+<div class="wrapper-footer" <?php echo (isset($carrito) && $carrito )?'id="piedepag" style="display:none;"':''; ?>>
     <footer class="container-fluid">
         <div class="container">
             <div class="row">
@@ -99,23 +99,22 @@
         </div>
     </footer>
 </div>
-<div class="popup-ini" id="login" style="display: none;">
+<!-- <div class="popup-ini" id="login" style="display: none;">
     <div class="popup-inner">
         <img id="img-popup" src="https://beurer.pe/assets/sources/popup/CANALES%20DE%20ATENCION-02.jpg" class="img-responsive" alt="">
         <button type="button" class="close"><span aria-hidden="true">×</span></button>
     </div>
-</div>		
+</div> -->		
 
 
 <script src="<?= base_url(); ?>assets/js/app.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/app2.js"></script>
+<!-- <script src="<?= base_url(); ?>assets/js/app2.js"></script> -->
 
 <script src="<?= base_url(); ?>assets/js/libraries/animate-it.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/fancybox.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/fullpage.js"></script>
-
 <script src="<?= base_url(); ?>assets/js/main.js"></script>
 
 <script>

@@ -1,56 +1,9 @@
 // rastrea pedido campo
 
 $(document).ready(function () {
-    class CampoNumerico2 {
+    
 
-        constructor(selector) {
-            this.nodo = document.querySelector(selector);
-            this.valor = '';
-
-            this.empezarAEscucharEventos();
-        }
-
-        empezarAEscucharEventos() {
-            this.nodo.addEventListener('keydown', function (evento) {
-                const teclaPresionada = evento.key;
-                const teclaPresionadaEsUnNumero =
-                    Number.isInteger(parseInt(teclaPresionada));
-
-                const sePresionoUnaTeclaNoAdmitida =
-                    teclaPresionada != 'ArrowDown' &&
-                    teclaPresionada != 'ArrowUp' &&
-                    teclaPresionada != 'ArrowLeft' &&
-                    teclaPresionada != 'ArrowRight' &&
-                    teclaPresionada != 'Backspace' &&
-                    teclaPresionada != 'Delete' &&
-                    teclaPresionada != 'Enter' &&
-                    !teclaPresionadaEsUnNumero;
-                const comienzaPorCero =
-                    this.nodo.value.length === 0 &&
-                    teclaPresionada == 0;
-
-                if (sePresionoUnaTeclaNoAdmitida || comienzaPorCero) {
-                    evento.preventDefault();
-                } else if (teclaPresionadaEsUnNumero) {
-                    this.valor += String(teclaPresionada);
-                }
-
-            }.bind(this));
-
-            this.nodo.addEventListener('input', function (evento) {
-                const cumpleFormatoEsperado = new RegExp(/+^[0-9]+/).test(this.nodo.value);
-
-                if (!cumpleFormatoEsperado) {
-                    this.nodo.value = this.valor;
-                } else {
-                    this.valor = this.nodo.value;
-                }
-            }.bind(this));
-        }
-
-    }
-
-    new CampoNumerico2('#cod_seg');
+    // new CampoNumerico2('#cod_seg');
 
 
 });
@@ -108,30 +61,30 @@ $(document).ready(function () {
 //codigo js de envio-pago
 
 
-$(document).ready(function () {
-    var btnContainer = document.getElementById("div-fechas");
+// $(document).ready(function () {
+//     var btnContainer = document.getElementById("div-fechas");
 
 
-    // Get all buttons with class="btn" inside the container
-    var btns = btnContainer.getElementsByClassName("fecha");
+//     // Get all buttons with class="btn" inside the container
+//     var btns = btnContainer.getElementsByClassName("fecha");
 
 
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns.length; i++) {
+//     // Loop through the buttons and add the active class to the current/clicked button
+//     for (var i = 0; i < btns.length; i++) {
 
-        btns[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
+//         btns[i].addEventListener("click", function () {
+//             var current = document.getElementsByClassName("active");
+//             current[0].className = current[0].className.replace(" active", "");
+//             this.className += " active";
+//         });
+//     }
 
 
-});
+// });
 
 //adaptando para el active de los botones del panel de usuario.
 $(document).ready(function () {
-
+    console.log('rerererre')
     let btnContainer3 = document.getElementById("p_users");
     let secciones = document.getElementById("panel-user1");
     let infouser = document.getElementById("info_puser");
@@ -215,30 +168,30 @@ $(document).ready(function () {
                 </div>
             </div>
         </div>
-    </div> <br> <br>
-    <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-        <p>Conoce lo último de Beurer.pe</p>
-    </div> <br> <br>
-    <div style="text-align:left !important;">
-        <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
-        <label class="font-light label-pol"style="display:inline;"> 
-        <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
-        </label>
-        <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
-                        href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
-                        Políticas de Privacidad</a>.</span></div>
-        </div>
-    </div>
-    <div style="text-align:left !important;">
-        <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
-                style="display:inline;"> 
-                <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
-            <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
-                    Beurer en mi e-mail.</span></div>
-        </div>
-    </div>
-    <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
-    `;
+            </div> <br> <br>
+            <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
+                <p>Conoce lo último de Beurer.pe</p>
+            </div> <br> <br>
+            <div style="text-align:left !important;">
+                <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
+                <label class="font-light label-pol"style="display:inline;"> 
+                <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
+                </label>
+                <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
+                                href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
+                                Políticas de Privacidad</a>.</span></div>
+                </div>
+            </div>
+            <div style="text-align:left !important;">
+                <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
+                        style="display:inline;"> 
+                        <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
+                    <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
+                            Beurer en mi e-mail.</span></div>
+                </div>
+            </div>
+            <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
+            `;
       let index   = userData.tipo_documento == 'DNI' ? '1' 
                                 :userData.tipo_documento == 'PASAPORTE' ? '2'
                                 : userData.tipo_documento == 'CE' ? '3'
@@ -336,50 +289,51 @@ $(document).ready(function () {
 // adaptando codigo de envio-pago para botones de colores
 $(document).ready(function () {
 
-    var btnContainer2 = document.getElementById("div-colors");
+    // var btnContainer2 = document.getElementById("div-colors");
     var principali = document.getElementById("principal-img");
     var secondaryi = document.getElementById("secondary-img");
     var imgs = ['<img src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt="">', '<img  src="assets/sources/61sJPfVV7BL._AC_SL1500__11.jpg" alt="">', '<img  src="assets/sources/61sJPfVV7BL._AC_SL1500__12.jpg" alt="">']
     var imgs = ['<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt="">', '<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__11.jpg" alt="">', '<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__12.jpg" alt="">']
     // Get all buttons with class="btn" inside the container
 
-    var btns2 = btnContainer2.getElementsByClassName("color");
+    // var btns2 = btnContainer2.getElementsByClassName("color");
     var imgsmall = document.getElementsByClassName("animated fadeInLeftShort tabs_goto go");
     var imglarge = document.getElementsByClassName("tabs_section animated growIn go");
 
     // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns2.length; i++) {
+    // for (var i = 0; i < btns2.length; i++) {
 
-        btns2[i].addEventListener("click", function () {
+    //     btns2[i].addEventListener("click", function () {
 
-            var current = document.getElementsByClassName("color active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-            var c = 0;
-            for (var valor of btns2) {
-                if (valor.classList.value == "btn btnprimary1 color active") {
-                    principali.innerHTML = imgs[c];
-                    secondaryi.innerHTML = imgs[c];
-                    for (var valor1 of imgsmall) {
-                        if (valor1.classList.value == "animated fadeInLeftShort tabs_goto go -active") {
-                            valor1.classList.remove("-active");
-                            for (var valor2 of imglarge) {
-                                if (valor2.classList.value == "tabs_section animated growIn go -open") {
-                                    valor2.classList.remove("-open");
-                                }
-                            }
-                            imglarge[0].classList.add("-open");
-                        }
-                    }
-                    imgsmall[0].classList.add("-active");
+    //         var current = document.getElementsByClassName("color active");
+    //         current[0].className = current[0].className.replace(" active", "");
+    //         this.className += " active";
+    //         var c = 0;
+    //         for (var valor of btns2) {
+    //             if (valor.classList.value == "btn btnprimary1 color active") {
+    //                 principali.innerHTML = imgs[c];
+    //                 secondaryi.innerHTML = imgs[c];
+    //                 for (var valor1 of imgsmall) {
+    //                     if (valor1.classList.value == "animated fadeInLeftShort tabs_goto go -active") {
+    //                         valor1.classList.remove("-active");
+    //                         for (var valor2 of imglarge) {
+    //                             if (valor2.classList.value == "tabs_section animated growIn go -open") {
+    //                                 valor2.classList.remove("-open");
+    //                             }
+    //                         }
+    //                         imglarge[0].classList.add("-open");
+    //                     }
+    //                 }
+    //                 imgsmall[0].classList.add("-active");
 
-                }
-                c++;
-            }
-        });
+    //             }
+
+    //             c++;
+    //         }
+    //     });
 
 
-    }
+    // }
 
 
 });
@@ -749,41 +703,41 @@ $('#trash').click(function () {
 
 // PARA AUMENTAR Y DISMINUIR CON LOS BOTONES y aumente el costo
 
-var inicio = 1; //se inicializa una variable en 0
-var text = document.getElementById("costo-envio");
-var checkBox = document.getElementById("check_envio");
-var subtotal = document.getElementById("subtotal");
-var total = document.getElementById("total");
+// var inicio = 1; //se inicializa una variable en 0
+// var text = document.getElementById("costo-envio");
+// var checkBox = document.getElementById("check_envio");
+// var subtotal = document.getElementById("subtotal");
+// var total = document.getElementById("total");
 
-function aumentar() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id aumentar
+// function aumentar() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id aumentar
 
-    if (document.getElementById('cantidad_prod').value != 10) {
-        var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
-        subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-        total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-
-
-        if (checkBox.checked == true) {
+//     if (document.getElementById('cantidad_prod').value != 10) {
+//         var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
+//         subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+//         total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
 
 
-            text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-            total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+//         if (checkBox.checked == true) {
 
-        }
-    }
-}
 
-function disminuir() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id disminuir
-    if (document.getElementById('cantidad_prod').value > 1) {
-        var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
-        subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-        total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-        if (checkBox.checked == true) {
-            text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-            total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
-        }
-    }
-}
+//             text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+//             total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+
+//         }
+//     }
+// }
+
+// function disminuir() { // se crean la funcion y se agrega al evento onclick en en la etiqueta button con id disminuir
+//     if (document.getElementById('cantidad_prod').value > 1) {
+//         var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
+//         subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+//         total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
+//         if (checkBox.checked == true) {
+//             text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
+//             total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
+//         }
+//     }
+// }
 
 // CODIGO DEEL CARRITO DE LOS CHECKS
 
