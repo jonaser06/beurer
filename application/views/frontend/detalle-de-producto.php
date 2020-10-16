@@ -152,7 +152,7 @@
                                                         style="background-color:'.$value['color'].';"
                                                         data-img = "'.$value['foto'].'"
                                                         data-color =  "'.$value['color'].'"
-                                                        data-codigo =  "'.$value['codigo'].'"
+                                                        data-stock =  "'.$value['stock'].'"
                                                         ></li>';
                                                     }
                                                     

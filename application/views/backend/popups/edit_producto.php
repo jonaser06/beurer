@@ -641,7 +641,7 @@
                                     <div class="col-xs-12">
                                         <div class="form form-group">
                                                 <label for="campo_1" class="control-label">Código Sku</label>
-                                                <input type="number" step="any" class="form-control medida" id="sku" name="productos[producto_sku]" placeholder="codigo sku" value="<?= $producto['producto_sku'] ?>">
+                                                <input type="text"  class="form-control medida" id="sku" name="productos[producto_sku]" placeholder="codigo sku" value="<?= $producto['producto_sku'] ?>">
                                         </div>
                                         
                                         
