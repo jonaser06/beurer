@@ -1,6 +1,7 @@
 :root {
     --color: brown;
     --colorResponse : #C51152;
+    --colorSave : #C51152;
 }
 
 input,select {
@@ -146,14 +147,20 @@ input,select {
         bottom:-14px;
         left:0;
 
-        color: attr(data-color);
         margin-left: 5px;
     }
+    .saveUser::after{
+      content: attr(data-content);
+      color: var(--colorSave);
+      margin-left: 5px;
+  }
     /* ojito show  */
     .eyes {
     height:20px; cursor:pointer;
     
 }
+
+
 .font-nexaheav{
   font-size:1.1em;
   text-align:center;
@@ -181,7 +188,7 @@ input,select {
   background-color: transparent !important;
 }
 
-@charset "utf-8";
+/* @charset "utf-8"; */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
@@ -221,14 +228,15 @@ h1 {
 }
 
 input,
-button {
-  border: 0 none;
-  outline: 0 none;
+button,select {
+  font-size: .85em !important;
+  /* border: 0 none;
+  outline: 0 none; */
 }
 
 button {
 
-  color: #fff;
+  /* color: #fff; */
 }
 
 
@@ -243,7 +251,7 @@ button {
 }
 
 
-main2 {
+.main2 {
   clear: both;
   font-size: 0.75rem;
   margin: 0 auto;

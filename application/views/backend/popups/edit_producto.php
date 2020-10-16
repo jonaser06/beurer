@@ -164,12 +164,25 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 d-none stock-module">
+                                    <div class="col-xs-7 d-none stock-module">
                                         <div class="form form-group">
                                                 <label for="campo_1" class="control-label">Stock</label>
                                                 <input type="number" step="1" class="form-control" id="stock" name="productos[stock]" min="0"placeholder="Ingrese el stock" value="<?= $producto['stock']?>">
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-xs-6">
+                                        <div class="form form-group requiered">
+                                                <label for="campo_1" class="control-label">Precio Online</label>
+                                                <input type="number" step="any" class="form-control" id="stock" name="productos[precio]" min="0"placeholder="Precio Online" value="<?= $producto['precio']?>">
+                                        </div>
+                                    </div><div class="col-xs-6">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">precio  </label>
+                                                <input type="number" step="any" class="form-control" id="stock" name="productos[precio_anterior]" min="0"placeholder="Precio" value="<?= $producto['precio_anterior']?>">
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
 
@@ -563,10 +576,10 @@
                                 <div class="form-group" style="position: relative;">
                                     <label for="ft_prod">Colores</label>
 
-                                    <textarea class="form-control" 
+                                    <textarea class="form-control " 
                                     name="productos[colores]" 
                                     id="color_prod" rows="3" 
-                                    style="display: block;"
+                                    style="display: none;"
                                     >
                                     <?= isset($producto['detalles-multimedia']) 
                                     ? $producto['detalles-multimedia']:'[]'; 
@@ -619,15 +632,21 @@
                                                 <input type="number" step="any" class="form-control medida" id="ancho" name="productos[ancho]" placeholder="Ancho" value="<?= $producto['ancho'] ?>">
                                         </div>
                                     </div>
-                                            <div class="col-xs-12">
-                                                <div class="form form-group ">
-                                                        <label for="campo_1" class="control-label">Volumen </label>
-                                                        <input type="text" class="form-control" id="tipo_paquete" name="productos[tipo_paquete]" placeholder="tamaño de paquete" 
-                                                        value="<?= !$producto['tipo_paquete']
-                                                        ?'tipo de paquete':$producto['tipo_paquete']
-                                                        ?>" readonly>
-                                                </div>
-                                            </div>
+                                    <div class="col-xs-12">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">Peso kg</label>
+                                                <input type="number" step="any" class="form-control medida" id="peso" name="productos[peso]" placeholder="Peso" value="<?= $producto['peso'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">Código Sku</label>
+                                                <input type="number" step="any" class="form-control medida" id="sku" name="productos[producto_sku]" placeholder="codigo sku" value="<?= $producto['producto_sku'] ?>">
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                           
                                     
                                   
                                 </div>

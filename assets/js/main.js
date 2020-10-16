@@ -155,7 +155,7 @@ ObjMain = {
         
     },
     updateAccount : (id) => {
-       
+        const $btnSave = document.querySelector('.saveUser')
         let formData = new FormData();
         const apellidos = document.querySelector('#c_apep1').value.trim().split(' ');
         const politicas = (document.querySelector('#politicas').checked )? 1 : 0 ;
@@ -164,7 +164,8 @@ ObjMain = {
 
         
         if (!politicas ) {
-            ObjMain.alert_form(false,'Acepte las politicas');
+            $btnSave.dataset.content = 'x Acepte las Politicas';
+            // document.documentElement.style.setProperty('--colorSave','#C51152');            
             return;
         }
         formData.append("nombre", document.querySelector('#c_nombres1').value);
@@ -180,8 +181,9 @@ ObjMain = {
         ObjMain.ajax_post('POST',`${DOMAIN}myaccount/update/${id}`, formData)
         .then((resp)=>{
             resp = JSON.parse(resp);
-            ObjMain.alert_form(false,'update user');
-            
+            $btnSave.dataset.content = '√ Datos Actualizados';
+            document.documentElement.style.setProperty('--colorSave','green');  
+
             const spinner = document.getElementById("spinner");
             ObjMain.showSpinner(spinner);
             userData = resp.data;
@@ -669,6 +671,7 @@ const perfil = () => {
                 this.className += " active";
             });
         }
+        
         document.getElementById("back-section-user").addEventListener("click", function () {
             console.log("Hola");
             info.style.display = 'none';
