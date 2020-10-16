@@ -86,14 +86,7 @@ input {
                                 <h3>></h3>
                             </div>
                         </button></li>
-                    <li><button id="p_miscomp" class="btn btnprimary1 p_user">
-                            <div class="col-md-10 col-sm-10 col-xs-10">
-                                <h3>Mis Comprobantes</h3>
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <h3>></h3>
-                            </div>
-                        </button></li>
+                   
                     <li><button id="p_misdir" class="btn btnprimary1 p_user">
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <h3>Mis Direcciones</h3>
@@ -226,7 +219,7 @@ input {
     type="hidden" 
     class="dataUser"
     data-id_cliente = <?= $_SESSION['id_cliente']?>
-    data-nombre   =<?= $userData['nombre']?>
+    data-nombre   ="<?= $userData['nombre']?>"
     data-apellido_paterno =<?= $userData['apellido_paterno']?>
     data-apellido_materno      =<?= $userData['apellido_materno']?>
     data-correo      =<?= $userData['correo']?>
@@ -235,6 +228,8 @@ input {
     data-telefono     =<?= $userData['telefono']?>
     data-ofertas      =<?= (int)$userData['ofertas']?>
     data-politicas    =<?= (int)$userData['politicas']?>
+    data-direccion    ="<?= $userData['direccion']?>"
+    
     >
 </main>
 

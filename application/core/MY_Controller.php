@@ -76,7 +76,7 @@ class MY_Controller extends CI_Controller
         ];
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
-            $user = $this->input->post(['nombre', 'apellido_paterno','apellido_materno', 'correo', 'telefono','tipo_documento','documento','politicas','ofertas'], TRUE);
+            $user = $this->input->post(['nombre', 'apellido_paterno','apellido_materno', 'correo', 'telefono','tipo_documento','documento','politicas','ofertas','direccion'], TRUE);
             
            
             $result =  $this->dbUpdate($user, 'clientes', ['id_cliente' => (int)$id]);
@@ -98,6 +98,7 @@ class MY_Controller extends CI_Controller
                         'tipo_documento'   => $data['tipo_documento'],
                         'documento'   => $data['documento'],
                         'politicas'   => $data['politicas'],
+                        'direccion'   => $data['direccion'],
                         'ofertas'   => $data['ofertas'],
                     ]
                 ];

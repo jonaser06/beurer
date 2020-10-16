@@ -37,6 +37,7 @@ ObjMain = {
         ObjMain.comparePass()
         ObjMain.updatePass()
         ObjMain.limitPass('#currentPass',5)
+        ObjMain.showPass('.eyes')
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
@@ -161,6 +162,7 @@ ObjMain = {
         const politicas = (document.querySelector('#politicas').checked )? 1 : 0 ;
         const correo    = document.querySelector('#c_correo1').value ;
         let tipo = document.querySelector('#s_tipodoc').value;
+        let direccion= document.querySelector('#locationUser').value;
 
         
         if (!politicas ) {
@@ -176,6 +178,7 @@ ObjMain = {
         formData.append("tipo_documento",tipo  );
         formData.append("documento",  document.querySelector('#campo1').value);
         formData.append("politicas",politicas) ;
+        formData.append("direccion",direccion) ;
         formData.append("ofertas",(document.querySelector('#publicidad').checked )? 1 : 0  );
 
         ObjMain.ajax_post('POST',`${DOMAIN}myaccount/update/${id}`, formData)
@@ -589,7 +592,22 @@ ObjMain = {
         }
         
 
+    },
+    showPass : (component) => {
+        const $showPass = document.querySelectorAll(component);
+        
+        if($showPass){
+           $showPass.forEach( show => {
+               show.addEventListener('click', event => {
+                let $pass = event.target.parentElement.children[1]
+                $pass.type = $pass.type == "password" ? "text" : "password";
+               })
+           })
+        }
+        
+
     }
+
 }
 
 
@@ -662,7 +680,6 @@ const perfil = () => {
         let orden = document.getElementById("p_misord");
         let direccion = document.getElementById("p_misdir");
         let info = document.getElementById("info_puser");
-        let comprobante = document.getElementById("p_miscomp");
         let seccionPass = document.getElementById("panel_pass");
         for (var i = 0; i < btns3.length; i++) {
             btns3[i].addEventListener("click", function () {
@@ -705,7 +722,7 @@ const perfil = () => {
                     <div class="divTableCell">
                         <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
                             maxlength="30" name="campo1" id="correo" value="${userData.correo}"
-                            style="border:0 none;">
+                            style="">
                     </div>
                 </div>
                 <div class="divTableRow">
@@ -727,7 +744,21 @@ const perfil = () => {
                             name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
                     </div>
                 </div>
-            </div>
+                
+                <div class="divTableRow" style="display:flex;flex-wrap:wrap">
+                <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
+                <p>Mis Direcciones:</p>
+                 </div> <br> <br>
+                    <div class="divTableCell" style="display:block">
+                        <div class="etiquetaFormulario">Domicilio</div>
+                        <input type="text" name="campo1"id="locationUser" onkeypress="return soloLetras(event)" value="${userData.direccion}">
+                    </div>
+                    <div class="divTableCell" style="display:block">
+                        <div class="etiquetaFormulario">Dirección de Envio</div> 
+                        <input type="text" size="20" maxlength="20"name="campo1" id="envio"  value="direccion de entrega">
+                    </div>
+                    
+                 </div>
                 </div> <br> <br>
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
                     <p>Conoce lo último de Beurer.pe</p>
@@ -790,15 +821,7 @@ const perfil = () => {
             }
         });
     
-        comprobante.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Mis comprobantes</p>';
-            contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-            console.log(document.getElementById("back-section-user"));
-            if (screen && screen.width < 700) {
-                secciones.style.display = 'none';
-                infouser.style.display = 'block';
-            }
-        });
+     
         seccionPass.addEventListener("click", function () {
             titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
             contenidouser.innerHTML = `<form id ="formPass" method="POST">
@@ -835,13 +858,8 @@ const perfil = () => {
             ObjMain.comparePass()
             ObjMain.updatePass()
             ObjMain.limitPass('#currentPass',5)
-            
-                document.addEventListener("click", (e) => {
-                    if (e.target.matches(".eyes")) {
-                        let $pass = e.target.parentElement.children[1]
-                        $pass.type = $pass.type == "password" ? "text" : "password";
-                    }
-                });
+            ObjMain.showPass('.eyes')
+               
         });
         
     }
