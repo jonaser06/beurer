@@ -1,5 +1,5 @@
 <?php
-include 'src\includes\header.php'
+include 'src\includes\header.php';
 ?>
 
 <style>
@@ -72,7 +72,7 @@ input {
                         </button></li>
                     <li><button id="panel_pass" class="btn btnprimary1 p_user">
                             <div class="col-md-10 col-sm-10 col-xs-10">
-                                <h3>Contraseña Sesion</h3>
+                                <h3>Cambiar Contraseña</h3>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-2">
                                 <h3>></h3>
@@ -246,6 +246,6 @@ input {
 
 <?php
 
-include 'src\includes\footer.php'
+include 'src\includes\footer.php';
 
 ?>
