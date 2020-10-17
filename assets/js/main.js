@@ -32,7 +32,9 @@ ObjMain = {
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
-        document.querySelector('.carrito-container').innerHTML = ObjMain.item_carrito('', '', '', '', '', '');
+        if(document.querySelector('#checkout_crumb') != null){
+            document.querySelector('.carrito-container').innerHTML = ObjMain.item_carrito('', '', '', '', '', '');
+        }
     },
     mas:()=>{
         if(parseInt(document.querySelector('.cantidad').value) < 10){ document.querySelector('.cantidad').value ++ ; };
