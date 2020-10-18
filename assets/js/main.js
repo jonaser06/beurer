@@ -9,12 +9,11 @@ var ubigeoPeru = {
 };
 let DOMAIN;
 let filterResult = false;
-// 
+
 
 ObjMain = {
     init: ()=>{
         DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
-        console.log(DOMAIN);
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
         ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal');
@@ -412,8 +411,7 @@ ObjMain = {
     },
     solonumero: (event) =>{
         event.value = event.value.replace(/\D/g, '');
-    },
-    
+    },   
     render:  ( element ,content ) => {
         element.innerHTML = content ;
     },
@@ -426,18 +424,18 @@ ObjMain = {
              $addCarrito = document.querySelector(btnCarrito)
              tabs = document.querySelectorAll('.tabs_section');
              
-             const { img , color, codigo }= event.target.dataset;
+             const { img , color, producto_sku }= event.target.dataset;
              tabs.forEach(tab => tab.classList.remove('-open'))
              $visor.classList.add('-open')
              ObjMain.render($visor , `<img src=${DOMAIN}${img}>`);
                 
                 $addCarrito.setAttribute('data-color',color);
                 $addCarrito.setAttribute('data-img',img);
-                $addCarrito.setAttribute('data-codigo',codigo);
+                $addCarrito.setAttribute('data-producto_sku',producto_sku);
             }
         })
       },
-      changueQuanty : ( btnAdd,btnDown,nodeQuanty,btnCarrito) =>{
+    changueQuanty : ( btnAdd,btnDown,nodeQuanty,btnCarrito) =>{
         document.addEventListener('click', event => {
 
             if(event.target.matches(btnAdd)){
@@ -456,11 +454,11 @@ ObjMain = {
 
             }
         })
-      },
-      changueImg : (tagImg , ruta ) => {
+    },
+    changueImg : (tagImg , ruta ) => {
         document.querySelector(tagImg).src = ruta
-      },
-      modalCarrito: (btn , componentModal ) => {
+    },
+    modalCarrito: (btn , componentModal ) => {
         const $btnAdd = document.querySelector(btn);
         if($btnAdd) {
             $btnAdd.addEventListener('click' , e => {
@@ -474,7 +472,7 @@ ObjMain = {
                 }
             })
         }
-      },  
+    },  
     
     valida_correo:(correo) =>{
         var texto = correo;
@@ -575,13 +573,11 @@ ObjMain = {
         
         if($currentPass){
             $currentPass.addEventListener('keyup', event => {
-                console.log(event.target)
                 const $parent = event.target.parentElement;
 
                 if($currentPass.value.length > limit ) {
                     $parent.dataset.content = '√ constraseña segura';
                     document.documentElement.style.setProperty('--colorResponse','green');
-                    
                     return
                 }else {
                     $parent.dataset.content = 'constraseña muy corta';
@@ -604,8 +600,6 @@ ObjMain = {
                })
            })
         }
-        
-
     }
 
 }
@@ -621,7 +615,6 @@ class Carrito {
         this.$btnAddCarrito  = document.querySelector(btnAddCarrito);
         this.TRIGGUER();
     }
-    
     filter(){
         const DomTokenProd = {...this.$btnAddCarrito.dataset};
         delete DomTokenProd.target ;
@@ -635,11 +628,9 @@ class Carrito {
             this.stateCarrito.productos = JSON.parse(localStorage.getItem('productos'));
             this.addState(producto);
             this.addStorage();
-            console.log(localStorage)
         }else {
             this.addState(producto);
             this.addStorage();
-            console.log(localStorage)
 
         }
     }
@@ -667,7 +658,6 @@ class Carrito {
 
 const perfil = () => {
     let btns3 = document.querySelectorAll('.p_user')
-    console.log(btns3)
     if(btns3){
         let btnContainer3 = document.getElementById("p_users");
         let secciones = document.getElementById("panel-user1");
@@ -690,13 +680,11 @@ const perfil = () => {
         }
         
         document.getElementById("back-section-user").addEventListener("click", function () {
-            console.log("Hola");
             info.style.display = 'none';
             secciones.style.display = 'block';
         });
     
         inicio.addEventListener("click", function (e) {
-            console.log(e.target)
             titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
     
             contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
@@ -747,7 +735,7 @@ const perfil = () => {
                 
                 <div class="divTableRow" style="display:flex;flex-wrap:wrap">
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-                <p>Mis Direcciones:</p>
+                <p>Conoce lo último de Beurer.pe</p>
                  </div> <br> <br>
                     <div class="divTableCell" style="display:block">
                         <div class="etiquetaFormulario">Domicilio</div>
@@ -866,13 +854,12 @@ const perfil = () => {
 
     
 }
+
 window.addEventListener('load', () => {
     ObjMain.init();
-
-   
-        perfil()
-    
-
+    if( window.location.href== ( `${DOMAIN}myaccount` ) ){
+        perfil();
+    }
    $btncarrito = document.querySelector('.btnAddCarrito')
     if($btncarrito) {
         new Carrito('.btnAddCarrito');

@@ -1509,6 +1509,7 @@ Helpers.prototype.tableComplementosColors = function () {
         "rowId": "idcolumn",
         "data": data,
         "columns": [
+            {"data": "producto_sku"},
             {"data": "stock"},
             {"data": "foto"} ,  
             {"data": "color"} ,  
@@ -1548,6 +1549,7 @@ Helpers.prototype.crear_complemento_color = function (idmodelo) {
     var next = total + 1;
 
     tabla.row.add({
+        "producto_sku": '',
         "stock": '',
         "foto": '',
         "color": '',
@@ -1577,6 +1579,9 @@ Helpers.prototype.editar_complementocar_color = function (iditem) {
             case 'idcolumn':
            //case 'idmodelo':
                 var valuex = value;
+                break;
+            case 'producto_sku':
+                var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
                 break;
             case 'stock':
                 var valuex = '<input type="number" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
