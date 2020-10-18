@@ -40,40 +40,93 @@ ObjMain = {
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
-    },
-    aumentar: () =>{
-        var inicio = 1; //se inicializa una variable en 0
-        var text = document.getElementById("costo-envio");
-        var checkBox = document.getElementById("check_envio");
-        var subtotal = document.getElementById("subtotal");
-        var total = document.getElementById("total");
-
-        if (document.getElementById('cantidad_prod').value != 10) {
-            var cantidad = document.getElementById('cantidad_prod').value = ++inicio; //se obtiene el valor del input, y se incrementa en 1 el valor que tenga.
-            subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            if (checkBox.checked == true) {
-                text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-                total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-            }
+        if(document.querySelector('#checkout_crumb') != null){
+            ObjMain.listar_items(); 
         }
     },
-    disminuir: () =>{
-        var inicio = 1; //se inicializa una variable en 0
-        var text = document.getElementById("costo-envio");
-        var checkBox = document.getElementById("check_envio");
-        var subtotal = document.getElementById("subtotal");
-        var total = document.getElementById("total");
+    recalculo: () =>{
 
-        if (document.getElementById('cantidad_prod').value > 1) {
-            var cantidad = document.getElementById('cantidad_prod').value = --inicio; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
-            subtotal.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            total.innerHTML = (parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2);
-            if (checkBox.checked == true) {
-                text.innerHTML = "+" + parseFloat(document.getElementById('cantidad_prod').value * 12.5);
-                total.innerHTML = parseFloat((parseFloat($('#preuni').text()) * document.getElementById('cantidad_prod').value).toFixed(2)) + parseFloat((parseFloat(document.getElementById('cantidad_prod').value * 12.5)).toFixed(2));
-            }
+    },
+    listar_items: () => {
+        let item = localStorage.getItem('productos');
+        if(item){
+            item = JSON.parse(item);
+            item.forEach((p)=>{
+                console.log(p.cantidad);
+                document.querySelector('.carrito-container').innerHTML += ObjMain.item_carrito(p.id, p.cantidad, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
+            });
+        }else{
+            console.log('Sin productos en el carrito');
         }
+    },
+    item_carrito: (id, cant, precio, precio_online, producto_sku, subtotal, title)=>{
+        let item = '';
+            item += '<div class="basket-product">'
+            item += '<div class="item">'
+            item += '<a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">'
+            item += '<img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame"></a>'
+            item += '<div class="product-details">'
+            item += '<span>'+title+'</span>'
+            item += '<p>SKU: '+producto_sku+'</p>'
+            item += '<p>EnvÃ­o a domicilio</p>'
+            item += '</div>'
+            item += '</div>'
+            item += '<div class="price" id="preuni">'
+            item += '<div class="info-prod" style="display:block;">'
+            item += '<img src="assets/images/precio-online.png">'
+            item += '<div class="font-nexaheav text-left price rprice"> '+precio_online+'</div>'
+            item += '<input type="hidden" class="precio-'+id+'" value="'+precio_online+'">'
+            item += '</div>'
+            item += '<div class="font-nexaheav">Normal: S/ '+precio+'</div>'
+            item += '</div>'
+            item += '<div class="quantity">'
+            item += '<button class="count-cant" onclick="ObjMain.menos('+id+');">-</button>'
+            item += '<input class="form-control-field cantidad cant-'+id+'" name="pwd" value="'+parseInt(cant)+'" type="text" id="cantidad_prod" min="1" readonly>'
+            item += '<button class="count-cant" onclick="ObjMain.mas('+id+');">+</button>'
+            item += '</div>'
+            item += '<div class="subtotal rsubtotal sub-'+id+'" id="subtotal">'+subtotal+'</div>'
+            item += '<div class="remove">'
+            item += '<a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt=""></a>'
+            item += '</div>'
+            item += '</div>'
+        return item;
+    },
+    delivery: () =>{
+        d_envio = document.getElementById("d_envio");
+        var checkBo = document.getElementById("check_envio");
+        if (checkBo.checked == true) {
+
+            d_envio.style.display = "block";
+            ObjMain.load_ubigeo();
+
+
+        } else {
+
+            d_envio.style.display = "none";
+
+        }
+    },
+    mas:(id)=>{
+        if(parseInt(document.querySelector('.cant-'+id).value) < 10){ 
+            let cantidad = parseInt(document.querySelector('.cant-'+id).value) + 1; 
+            let precio   = parseFloat(document.querySelector('.precio-'+id).value).toFixed(2);
+            let subtotal = (cantidad*precio).toFixed(2);
+            document.querySelector('.cant-'+id).value = cantidad;
+            document.querySelector('.sub-'+id).innerHTML = subtotal;
+        };
+        
+        return;
+    },
+    menos: (id)=>{
+        if(parseInt(document.querySelector('.cant-'+id).value) > 1){ 
+            let cantidad = parseInt(document.querySelector('.cant-'+id).value) - 1; 
+            let precio   = parseFloat(document.querySelector('.precio-'+id).value).toFixed(2);
+            let subtotal = (cantidad*precio).toFixed(2);
+            document.querySelector('.cant-'+id).value = cantidad;
+            document.querySelector('.sub-'+id).innerHTML = subtotal;
+        };
+        
+        return;
     },
     modal:() =>{
         var prueba = document.getElementById("modal_foto");
@@ -528,7 +581,7 @@ ObjMain = {
         }
         
     },
-     updatePass: () =>  {
+    updatePass: () =>  {
         const $pass= document.querySelector('.updatePass');
         const $containerPass = document.querySelector('.passContainer');
         const $repeat = document.querySelector('.repeat');
