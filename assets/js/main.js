@@ -361,8 +361,12 @@ ObjMain = {
                 option.name = 'distrito';
                 option.value = ubigeo.distrito;
                 option.setAttribute('data-name',ubigeo.nombre);
+                if(ubigeo.small_price) {
+                    option.dataset.small_price = ubigeo.small_price; 
+                    option.dataset.big_price = ubigeo.big_price; 
+                    option.dataset.days = ubigeo.days; 
+                }
                 option.textContent = ubigeo.nombre;
-
                 document.querySelector('#sdist').appendChild(option);
             }
         });
@@ -526,7 +530,6 @@ ObjMain = {
             })
         }
     },  
-    
     valida_correo:(correo) =>{
         var texto = correo;
         var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;

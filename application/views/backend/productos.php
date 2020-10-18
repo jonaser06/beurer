@@ -286,6 +286,7 @@
                           $("#liscategorias").append(html);
                        });
                    },complete: function(data) {
+                        
                         if($(localStorage.getItem('categoria'))) {
                             const list=  document.querySelectorAll('#liscategorias > option')
                             list.forEach(option => {
@@ -323,18 +324,27 @@
                     }
                 });
             }
-
             $("#lissubcategorias").change(function() {
                 table.columns( 2 )
                     .search( this.value )
                     .draw();
+                    console.log(this.value)
                 localStorage.setItem('subcategoria',this.value)
             });
 
             $("#liscategorias").change(function(e){
+                
                 e.preventDefault();
-                let idcat=$(this).val();
-                localStorage.setItem('categoria',idcat)
+                let idcat = $(this).val();
+                let search = "";
+                let categorias = document.querySelectorAll('#liscategorias > option');
+                categorias.forEach( cat => {
+                    if( cat.value == idcat ){
+                        search = cat.innerText;     
+                    }
+                })
+                
+                localStorage.setItem( 'categoria',idcat )
                 let content ='<option value="">Seleccione una subcategoría...</option>';
                 $("#lissubcategorias").html(content);
                  $.ajax({
@@ -342,7 +352,6 @@
                     type:'post',
                     data:{'idcat':idcat},
                     success:function(response){
-                        //let obj=JSON.parse(response);
                         $.each(response, function(i,item){
                            let html='<option  value="'+item.titulo+'">'+item.titulo+'</option>'; 
                            $("#lissubcategorias").append(html);
@@ -350,6 +359,10 @@
                     }
                  });
                  $("#lissubcategorias").val(0);
+               
+                    
+                   
+                
              });
 
                 let table = $('#table_productos').DataTable({
