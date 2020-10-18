@@ -152,7 +152,7 @@
                                                         style="background-color:'.$value['color'].';"
                                                         data-img = "'.$value['foto'].'"
                                                         data-color =  "'.$value['color'].'"
-                                                        data-codigo =  "'.$value['codigo'].'"
+                                                        data-stock =  "'.$value['stock'].'"
                                                         ></li>';
                                                     }
                                                     
@@ -179,6 +179,8 @@
                                 data-title="<?php echo $product['titulo']?>"
                                 data-id       = "<?php echo $product['id']?>"
                                 data-precio   = "<?php echo $product['precio']?>"
+                                data-producto_sku   = "<?php echo $product['producto_sku']?>"
+                                data-precio_online   = "<?php echo $product['precio_anterior']?>"
                                 data-cantidad ="1">
                                 <a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1"
                                 >AÑADIR AL CARRO
@@ -235,8 +237,6 @@
 
 
                         </div>
-
-
 
 
                         <!--div class="tabs-info-product col-xs-12 px-0">

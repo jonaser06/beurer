@@ -45,11 +45,15 @@ class MY_Controller extends CI_Controller
         $_SESSION['id_cliente'] = $data[0]['id_cliente'];
         return;
     }
-    public function get( string $table, ?array $conditions = NULL ): array {
-           return empty($conditions) ? $this->db->get($table)->result_array() : $this->db->get_where($table, $conditions)->row_array();
+    public function get(
+        string $table,
+        ?array $conditions = NULL
+    ) {
+           return empty($conditions)
+            ? $this->db->get($table)->result_array()
+            : $this->db->get_where($table, $conditions)->row_array();
     }
-
-    
+ 
     public function dbUpdate(
          $label, 
          $table, 
@@ -72,7 +76,7 @@ class MY_Controller extends CI_Controller
         ];
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
-            $user = $this->input->post(['nombre', 'apellido_paterno','apellido_materno', 'correo', 'telefono','tipo_documento','documento','politicas','ofertas'], TRUE);
+            $user = $this->input->post(['nombre', 'apellido_paterno','apellido_materno', 'correo', 'telefono','tipo_documento','documento','politicas','ofertas','direccion'], TRUE);
             
            
             $result =  $this->dbUpdate($user, 'clientes', ['id_cliente' => (int)$id]);
@@ -94,6 +98,7 @@ class MY_Controller extends CI_Controller
                         'tipo_documento'   => $data['tipo_documento'],
                         'documento'   => $data['documento'],
                         'politicas'   => $data['politicas'],
+                        'direccion'   => $data['direccion'],
                         'ofertas'   => $data['ofertas'],
                     ]
                 ];

@@ -83,168 +83,208 @@ $(document).ready(function () {
 // });
 
 //adaptando para el active de los botones del panel de usuario.
-// $(document).ready(function () {
+$(document).ready(function () {
+    console.log('rerererre')
+    let btnContainer3 = document.getElementById("p_users");
+    let secciones = document.getElementById("panel-user1");
+    let infouser = document.getElementById("info_puser");
+    let titulouser = document.getElementById("title-info-user");
+    let contenidouser = document.getElementById("cont-info-user");
+    let back = document.getElementById("back-section-user");
+    let inicio = document.getElementById("p_inicio");
+    let datos = document.getElementById("p_datosp");
+    let orden = document.getElementById("p_misord");
+    let direccion = document.getElementById("p_misdir");
+    let info = document.getElementById("info_puser");
+    let comprobante = document.getElementById("p_miscomp");
+    let seccionPass = document.getElementById("panel_pass");
 
-//     var btnContainer3 = document.getElementById("p_users");
-//     var secciones = document.getElementById("panel-user1");
-//     var infouser = document.getElementById("info_puser");
-//     var titulouser = document.getElementById("title-info-user");
-//     var contenidouser = document.getElementById("cont-info-user");
-//     var back = document.getElementById("back-section-user");
-//     var inicio = document.getElementById("p_inicio");
-//     var datos = document.getElementById("p_datosp");
-//     var orden = document.getElementById("p_misord");
-//     var direccion = document.getElementById("p_misdir");
-//     var info = document.getElementById("info_puser");
-//     var comprobante = document.getElementById("p_miscomp");
+    // Get all buttons with class="btn" inside the container
 
-//     // Get all buttons with class="btn" inside the container
-
-//     var btns3 = btnContainer3.getElementsByClassName("p_user");
+    let btns3 = btnContainer3.getElementsByClassName("p_user");
 
 
-//     // Loop through the buttons and add the active class to the current/clicked button
-//     for (var i = 0; i < btns3.length; i++) {
-//         btns3[i].addEventListener("click", function () {
-//             var current = document.getElementsByClassName("p_user active");
-//             current[0].className = current[0].className.replace(" active", "");
-//             this.className += " active";
-//         });
-//     }
-//     document.getElementById("back-section-user").addEventListener("click", function () {
-//         console.log("Hola");
-//         info.style.display = 'none';
-//         secciones.style.display = 'block';
-//     });
+    // Loop through the buttons and add the active class to the current/clicked button
+    for (var i = 0; i < btns3.length; i++) {
+        btns3[i].addEventListener("click", function () {
+            var current = document.getElementsByClassName("p_user active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+    }
+    document.getElementById("back-section-user").addEventListener("click", function () {
+        console.log("Hola");
+        info.style.display = 'none';
+        secciones.style.display = 'block';
+    });
 
-//     inicio.addEventListener("click", function (e) {
-//         console.log(e.target)
-//         titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
+    inicio.addEventListener("click", function (e) {
+        console.log(e.target)
+        titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
 
-//         contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-//         if (screen && screen.width < 700) {
-//             secciones.style.display = 'none';
-//             infouser.style.display = 'block';
-//         }
-//     });
+        contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+        if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
+    });
 
-//     datos.addEventListener("click", function () {
-        
-           
-//         titulouser.innerHTML = '<p>Datos Personales</p>';
-//         contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
-//         <div class="divTableBody" style="display:block;">
-//             <div class="divTableRow" id="pn_datos1">
-//                 <div class="divTableCell">
-//                     <div class="etiquetaFormulario">Nombres </div>
-//                     <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
-//                 </div>
-//                 <div class="divTableCell">
-//                     <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
-//                         name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
-//                 </div>
-//                 <div class="divTableCell">
-//                     <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
-//                         maxlength="30" name="campo1" id="correo" value="${userData.correo}"
-//                         style="border:0 none;">
-//                 </div>
-//             </div>
-//             <div class="divTableRow">
-//                 <div class="divTableCell">
-//                     <div class="etiquetaFormulario">Tipo Documento Identidad</div>
-//                     <select id="s_tipodoc" value="${userData.tipo_documento}"
-//                         >
-//                         <option id="di_pn1" value="DNI">DNI</option>
-//                         <option id="di_pn2" value="PASAPORTE">PASAPORTE</option>
-//                         <option id="di_pn3" value="CE">CE</option>
-//                     </select>
-//                 </div>
-//                 <div class="divTableCell">
-//                     <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
-//                         maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
-//                 </div>
-//                 <div class="divTableCell">
-//                     <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
-//                         name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
-//                 </div>
-//             </div>
-//         </div>
-//     </div> <br> <br>
-//     <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-//         <p>Conoce lo último de Beurer.pe</p>
-//     </div> <br> <br>
-//     <div style="text-align:left !important;">
-//         <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
-//         <label class="font-light label-pol"style="display:inline;"> 
-//         <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
-//         </label>
-//         <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
-//                         href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
-//                         Políticas de Privacidad</a>.</span></div>
-//         </div>
-//     </div>
-//     <div style="text-align:left !important;">
-//         <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
-//                 style="display:inline;"> 
-//                 <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
-//             <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
-//                     Beurer en mi e-mail.</span></div>
-//         </div>
-//     </div>
-//     <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
-//     `;
-//       let index   = userData.tipo_documento == 'DNI' ? '1' 
-//                                 :userData.tipo_documento == 'PASAPORTE' ? '2'
-//                                 : userData.tipo_documento == 'CE' ? '3'
-//                                 :''
-//       const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(index)-1];
-//       nodeSelect.setAttribute('selected','selected')
-//     //   update obj UserData
-//       const tipoDoc = document.querySelector('#s_tipodoc');
-//       tipoDoc.addEventListener('change' , event => {
-//          userData.tipo_documento = event.target.value
-//       })
+    datos.addEventListener("click", function () { 
+        titulouser.innerHTML = '<p>Datos Personales</p>';
+        contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
+        <div class="divTableBody" style="display:block;">
+            <div class="divTableRow" id="pn_datos1">
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Nombres </div>
+                    <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
+                        name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
+                        maxlength="30" name="campo1" id="correo" value="${userData.correo}"
+                        style="border:0 none;">
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Tipo Documento Identidad</div>
+                    <select id="s_tipodoc" value="${userData.tipo_documento}"
+                        >
+                        <option id="di_pn1" value="DNI">DNI</option>
+                        <option id="di_pn2" value="PASAPORTE">PASAPORTE</option>
+                        <option id="di_pn3" value="CE">CE</option>
+                    </select>
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
+                        maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
+                </div>
+                <div class="divTableCell">
+                    <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
+                        name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
+                </div>
+            </div>
+        </div>
+            </div> <br> <br>
+            <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
+                <p>Conoce lo último de Beurer.pe</p>
+            </div> <br> <br>
+            <div style="text-align:left !important;">
+                <div class="checkbox" style="display:inline-block;" id="d_politicas"> 
+                <label class="font-light label-pol"style="display:inline;"> 
+                <input type="checkbox" id="politicas" ${userData.politicas == 1 ? 'checked':''} /><i class="helper"></i> 
+                </label>
+                <div style="display:inline-block; font-size:1.18em; color:black;"><span>He leído y acepto las <a
+                                href="politicas-de-privacidad" class="span-pol color-primary btn-modals">
+                                Políticas de Privacidad</a>.</span></div>
+                </div>
+            </div>
+            <div style="text-align:left !important;">
+                <div class="checkbox" style="display:inline-block; " id="d_publicidad"> <label class="font-light label-pol"
+                        style="display:inline;"> 
+                        <input type="checkbox" id="publicidad" ${userData.ofertas == 1 ? 'checked':''} /><i class="helper"></i> </label>
+                    <div style="display:inline-block; font-size:1.18em; color:black;"> <span>Deseo recibir ofertas y novedades de
+                            Beurer en mi e-mail.</span></div>
+                </div>
+            </div>
+            <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
+            `;
+      let index   = userData.tipo_documento == 'DNI' ? '1' 
+                                :userData.tipo_documento == 'PASAPORTE' ? '2'
+                                : userData.tipo_documento == 'CE' ? '3'
+                                :''
+      const nodeSelect = document.querySelectorAll('#s_tipodoc > option')[parseInt(index)-1];
+      nodeSelect.setAttribute('selected','selected')
+    //   update obj UserData
+      const tipoDoc = document.querySelector('#s_tipodoc');
+      tipoDoc.addEventListener('change' , event => {
+         userData.tipo_documento = event.target.value
+      })
     
 
 
-//     if (screen && screen.width < 700) {
-//             secciones.style.display = 'none';
-//             infouser.style.display = 'block';
-//         }
-//     });
+    if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
+    });
 
-//     orden.addEventListener("click", function () {
-//         titulouser.innerHTML = '<p style="margin: auto;">Mis órdenes</p>';
-//         contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-//         if (screen && screen.width < 700) {
-//             secciones.style.display = 'none';
-//             infouser.style.display = 'block';
-//         }
-//     });
+    orden.addEventListener("click", function () {
+        titulouser.innerHTML = '<p style="margin: auto;">Mis órdenes</p>';
+        contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+        if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
+    });
 
-//     direccion.addEventListener("click", function () {
-//         titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
-//         contenidouser.innerHTML = ``;
-//         if (screen && screen.width < 700) {
-//             secciones.style.display = 'none';
-//             infouser.style.display = 'block';
-//         }
-//     });
+    direccion.addEventListener("click", function () {
+        titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
+        contenidouser.innerHTML = ``;
+        if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
+    });
 
-//     comprobante.addEventListener("click", function () {
-//         titulouser.innerHTML = '<p style="margin: auto;">Mis comprobantes</p>';
-//         contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
-//         console.log(document.getElementById("back-section-user"));
-//         if (screen && screen.width < 700) {
-//             secciones.style.display = 'none';
-//             infouser.style.display = 'block';
-//         }
-//     });
+    comprobante.addEventListener("click", function () {
+        titulouser.innerHTML = '<p style="margin: auto;">Mis comprobantes</p>';
+        contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+        console.log(document.getElementById("back-section-user"));
+        if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
+    });
+    seccionPass.addEventListener("click", function () {
+        titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
+        contenidouser.innerHTML = `<form id ="formPass" method="POST">
+                <div class="input-group passContainer">
+                    <label for="currentPass">Actual</label>
+                    <input
+                    type="password" name="currentPass" id="currentPass" placeholder="Contraseña actual"required>
+                    <img class="eyes"
+                    src="https://img2.freepng.es/20180501/bee/kisspng-computer-icons-password-blind-vector-5ae856af60c0e4.3327567715251759833963.jpg">
+                </div>
+                <div class="input-group">
+                    <label for="newPass">Nueva</label>
+                    <input type="password" name="newPass" id="newPass">
+                    <img class="eyes"
+                    src="https://img2.freepng.es/20180501/bee/kisspng-computer-icons-password-blind-vector-5ae856af60c0e4.3327567715251759833963.jpg">
+                </div>
+                <div class="input-group repeat"
+                >
+                    <label for="repeatNewPass">Repetir contraseña nueva</label>
+                    <input type="password" name="repeatNewPass" id="repeatNewPass">
+                    <img class="eyes"
+                    src="https://img2.freepng.es/20180501/bee/kisspng-computer-icons-password-blind-vector-5ae856af60c0e4.3327567715251759833963.jpg">
+                </div>
+                <hr>
+                <button 
+                data-id = '${userData.id_cliente}'
+                type="submit" class="btn btn-small updatePass" >Guardar cambios</button>
+        </form> `;
+        if (screen && screen.width < 700) {
+            secciones.style.display = 'none';
+            infouser.style.display = 'block';
+        }
 
-// });
-
-
-
+        ObjMain.comparePass()
+        ObjMain.updatePass()
+        ObjMain.limitPass('#currentPass',5)
+        
+			document.addEventListener("click", (e) => {
+				if (e.target.matches(".eyes")) {
+					let $pass = e.target.parentElement.children[1]
+					$pass.type = $pass.type == "password" ? "text" : "password";
+				}
+			});
+    });
+    
+});
 
 // adaptando codigo de envio-pago para botones de colores
 $(document).ready(function () {
@@ -287,6 +327,7 @@ $(document).ready(function () {
     //                 imgsmall[0].classList.add("-active");
 
     //             }
+
     //             c++;
     //         }
     //     });

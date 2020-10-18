@@ -466,6 +466,7 @@ class Contenido extends CI_Model {
             $data['contenido'] = $rows['contenido'];
             $data['descripcion'] = $rows['descripcion'];
             $data['accesorios'] = $rows['accesorios'];
+            $data['producto_sku'] = $rows['producto_sku'];
             $data['precio']=$rows['precio'];
             $data['precio_anterior']=$rows['precio_anterior'];
             $data['relacionados'] = $rows['relacionados'];

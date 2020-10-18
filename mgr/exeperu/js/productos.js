@@ -1509,7 +1509,7 @@ Helpers.prototype.tableComplementosColors = function () {
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "codigo"},
+            {"data": "stock"},
             {"data": "foto"} ,  
             {"data": "color"} ,  
             {"data": "estado"} ,  
@@ -1548,7 +1548,7 @@ Helpers.prototype.crear_complemento_color = function (idmodelo) {
     var next = total + 1;
 
     tabla.row.add({
-        "codigo": '',
+        "stock": '',
         "foto": '',
         "color": '',
         "estado": '',
@@ -1578,8 +1578,8 @@ Helpers.prototype.editar_complementocar_color = function (iditem) {
            //case 'idmodelo':
                 var valuex = value;
                 break;
-            case 'codigo':
-                var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
+            case 'stock':
+                var valuex = '<input type="number" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
                 break;
             case 'estado':
                 var valuex = '<select name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%"><option value="activo">activo</option><option value="inactivo">inactivo</option></select>';

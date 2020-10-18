@@ -154,19 +154,35 @@
                                     <div class="col-xs-12">
                                         <div class="form form-group">
                                                 <div class="form-check">
-                                                    <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd">
+                                                    <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd"
+                                                    <?= isset($producto['detalles-multimedia']) 
+                                                        ? 'checked':'';  ?>
+                                                    >
                                                     <label class="form-check-label" for="colorAdd">colores</label>
                                                 </div>
                                                 <span class="message-color"></span>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6 d-none stock-module">
+                                    <div class="col-xs-7 d-none stock-module">
                                         <div class="form form-group">
                                                 <label for="campo_1" class="control-label">Stock</label>
                                                 <input type="number" step="1" class="form-control" id="stock" name="productos[stock]" min="0"placeholder="Ingrese el stock" value="<?= $producto['stock']?>">
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-xs-6">
+                                        <div class="form form-group requiered">
+                                                <label for="campo_1" class="control-label">Precio Online</label>
+                                                <input type="number" step="any" class="form-control" id="stock" name="productos[precio]" min="0"placeholder="Precio Online" value="<?= $producto['precio']?>">
+                                        </div>
+                                    </div><div class="col-xs-6">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">precio  </label>
+                                                <input type="number" step="any" class="form-control" id="stock" name="productos[precio_anterior]" min="0"placeholder="Precio" value="<?= $producto['precio_anterior']?>">
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
 
@@ -560,10 +576,10 @@
                                 <div class="form-group" style="position: relative;">
                                     <label for="ft_prod">Colores</label>
 
-                                    <textarea class="form-control" 
+                                    <textarea class="form-control " 
                                     name="productos[colores]" 
                                     id="color_prod" rows="3" 
-                                    style="display: block;"
+                                    style="display: none;"
                                     >
                                     <?= isset($producto['detalles-multimedia']) 
                                     ? $producto['detalles-multimedia']:'[]'; 
@@ -579,7 +595,7 @@
                                         <table id="table_complementos_color" class="table table-striped table-responsive">
                                             <thead>
                                                 <tr>
-                                                    <th>Código Sku</th>                                                            
+                                                    <th>stock</th>                                                            
                                                     <th>Imagen</th>                                                            
                                                     <th>Color</th>                                                                                                         
                                                     <th>estado</th>                                                                                                         
@@ -616,15 +632,21 @@
                                                 <input type="number" step="any" class="form-control medida" id="ancho" name="productos[ancho]" placeholder="Ancho" value="<?= $producto['ancho'] ?>">
                                         </div>
                                     </div>
-                                            <div class="col-xs-12">
-                                                <div class="form form-group ">
-                                                        <label for="campo_1" class="control-label">Volumen </label>
-                                                        <input type="text" class="form-control" id="tipo_paquete" name="productos[tipo_paquete]" placeholder="tamaño de paquete" 
-                                                        value="<?= !$producto['tipo_paquete']
-                                                        ?'tipo de paquete':$producto['tipo_paquete']
-                                                        ?>" readonly>
-                                                </div>
-                                            </div>
+                                    <div class="col-xs-12">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">Peso kg</label>
+                                                <input type="number" step="any" class="form-control medida" id="peso" name="productos[peso]" placeholder="Peso" value="<?= $producto['peso'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form form-group">
+                                                <label for="campo_1" class="control-label">Código Sku</label>
+                                                <input type="text"  class="form-control medida" id="sku" name="productos[producto_sku]" placeholder="codigo sku" value="<?= $producto['producto_sku'] ?>">
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                           
                                     
                                   
                                 </div>
@@ -645,7 +667,7 @@
               </div>
 
           <input type="hidden" id="idp" name="productos[idproducto]" value="<?= isset($producto['id']) ? $producto['id'] : '';?>">
-
+           <input type="hidden" id="flag" name="flag" value="">                                
           <input type="hidden"  name="productos[complemento]" value="0">
 
               </div>
@@ -664,19 +686,23 @@
                 // $checkInput.addEventListener('change', function() {
                 let $showStock   = document.querySelector('.stock-module')
                 let $moduleColor = document.querySelector('.color-module');
+                let $stock = document.querySelector('#stock');
+                // let $flag = document.querySelector('#flag');
                     if ( $checkInput.checked ) {
                         $message.style.color = 'green';
                         $message.textContent = 'Diríjase a la sección de colores ';
-                        $showStock.style.display = 'none';
-                        $moduleColor.style.display = 'block'
+                       
+                        $stock.disabled = true ;
+                        $moduleColor.style.display = 'block';
                     }else {
-                        $showStock.style.display = 'block';
+                        $stock.disabled = false;
                         $moduleColor.style.display = 'none' 
                         $message.textContent = '';
-
                     }
                 // });
             }
+            
+            showModule();
          </script>
 
    
@@ -702,7 +728,9 @@ $(document).ready(function(){
 
     $('#formCrearEditarp').submit(function(event) {
         event.preventDefault();
-
+        // let $quanty = document.querySelector('#stock');
+        // let $flag = document.querySelector('#flag');
+        // $flag.value= $quanty.disabled ?  1: 0;
 
         $('#modalCreateEdit').modal('hide');
         $('#modalLoading').modal('show');
