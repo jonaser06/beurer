@@ -53,7 +53,7 @@ ObjMain = {
             item = JSON.parse(item);
             item.forEach((p)=>{
                 console.log(p.cantidad);
-                document.querySelector('.carrito-container').innerHTML += ObjMain.item_carrito(p.id, p.cantidad, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
+                document.querySelector('.carrito-container').innerHTML += ObjMain.item_carrito(p.id, p.cantidad, p.img, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
             });
         }else{
             console.log('Sin productos en el carrito');
@@ -67,12 +67,12 @@ ObjMain = {
         pedido += '<td class="subtotalr" id="subtotal">26.00</td>';
         pedido += '</tr>';
     },
-    item_carrito: (id, cant, precio, precio_online, producto_sku, subtotal, title)=>{
+    item_carrito: (id, cant, img, precio, precio_online, producto_sku, subtotal, title)=>{
         let item = '';
             item += '<div class="basket-product">'
             item += '<div class="item">'
             item += '<a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">'
-            item += '<img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame"></a>'
+            item += '<img src="'+DOMAIN+img+'" alt="Placholder Image 2" class="product-frame"></a>'
             item += '<div class="product-details">'
             item += '<span>'+title+'</span>'
             item += '<p>SKU: '+producto_sku+'</p>'
