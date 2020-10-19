@@ -60,6 +60,14 @@ ObjMain = {
             console.log('Sin productos en el carrito');
         }
     },
+    pedido: ()=>{
+        let pedido = '';
+        pedido += '<tr>';
+        pedido += '<td scope="row">1</td>';
+        pedido += '<td style="text-align:left;">Masajeador Anticelulítico CM 50</td>';
+        pedido += '<td class="subtotalr" id="subtotal">26.00</td>';
+        pedido += '</tr>';
+    },
     item_carrito: (id, cant, precio, precio_online, producto_sku, subtotal, title)=>{
         let item = '';
             item += '<div class="basket-product">'

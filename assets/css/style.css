@@ -26,8 +26,40 @@ input,select {
 .response_sesion{
     color: #c51152;
 }
-
-
+.head-resumen{
+  display: flex;
+  font-size: 1.4em;
+  font-weight: bold;
+  font-family: 'nexaregularuploaded_file';
+}
+.body-resumen{
+  display: flex;
+  font-size: 1.3em;
+  font-family: 'nexaregularuploaded_file';
+}
+.n-resumen, .ind-resumen{
+  text-align: left;
+  width: 15%;
+}
+.product-resumen, .name-resumen{
+  text-align: left;
+  width: 55%;
+}
+.sub-resumen, .cost-partial{
+  text-align: left;
+  width: 30%;
+}
+.cost-partial::before{
+  content: 'S/ ';
+}
+.head-cupon{
+  font-size: 1.9em;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  font-family: 'nexaregularuploaded_file';
+}
 /* spinner  */ 
 
 

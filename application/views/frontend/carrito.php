@@ -132,6 +132,22 @@
             <div>
                 <div style="font-size:1.9em;font-weight:bold;text-align:center;color:#c51152;font-family:'nexaregularuploaded_file';">RESUMEN DE TU PEDIDO</div>
                 <div class="d_montos">
+                    <div class="head-resumen">
+                        <div class="n-resumen">#</div>
+                        <div class="product-resumen">PRODUCTO</div>
+                        <div class="sub-resumen">SUBTOTAL</div>
+                    </div>
+                    <div class="body-resumen">
+                        <div class="ind-resumen">1</div>
+                        <div class="name-resumen">Masajeador Anticelulítico CM 50</div>
+                        <div class="cost-partial">26.00</div>
+                    </div>
+                    <div class="head-cupon">Ingrese aquí su cupón de descuento</div>
+                    <div class="input-cupon" style="display:flex;">
+                        <input type="text" placeholder="Ej. 6W79H6" style="width:70%; border: 1px solid black;font-size:1.3em;" maxlength="12">
+                        
+                    </div>
+                    <div class="footer-resumen"></div>
                     <table class="table tbl-resumen" style="font-size:1.4em;">
                         <thead>
                             <tr>
