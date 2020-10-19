@@ -87,7 +87,7 @@ input {
                             </div>
                         </button></li>
                    
-                    <li><button id="p_misdir" class="btn btnprimary1 p_user">
+                    <li style="display: none;"><button id="p_misdir" class="btn btnprimary1 p_user">
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <h3>Mis Direcciones</h3>
                             </div>

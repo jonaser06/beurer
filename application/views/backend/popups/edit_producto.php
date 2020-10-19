@@ -595,6 +595,7 @@
                                         <table id="table_complementos_color" class="table table-striped table-responsive">
                                             <thead>
                                                 <tr>
+                                                    <th>código sku</th> 
                                                     <th>stock</th>                                                            
                                                     <th>Imagen</th>                                                            
                                                     <th>Color</th>                                                                                                         

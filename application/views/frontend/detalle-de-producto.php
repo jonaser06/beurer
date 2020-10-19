@@ -153,6 +153,7 @@
                                                         data-img = "'.$value['foto'].'"
                                                         data-color =  "'.$value['color'].'"
                                                         data-stock =  "'.$value['stock'].'"
+                                                        data-producto_sku =  "'.$value['producto_sku'].'"
                                                         ></li>';
                                                     }
                                                     
@@ -181,6 +182,7 @@
                                 data-precio   = "<?php echo $product['precio']?>"
                                 data-producto_sku   = "<?php echo $product['producto_sku']?>"
                                 data-precio_online   = "<?php echo $product['precio_anterior']?>"
+                                data-img   = "<?= $product['imagen'][0] ?>"
                                 data-cantidad ="1">
                                 <a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1"
                                 >AÑADIR AL CARRO
