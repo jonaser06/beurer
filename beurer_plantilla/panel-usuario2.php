@@ -34,10 +34,10 @@ include 'src\includes\header.php'
 	
 	<div class="formulario" style="background-color:transparent;text-align:center;" >
     
-        <div class="row cont_datos" id="d_formularios1" align="center" style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
+        <div class="row cont_datos" id="d_formularios1" align="center" style="border-radius:20px;background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
             <div class="col-md-12" style="color:#161616;display:flex;">
             
-            <img src="assets/images/user-plomo.png" style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid gray;"> 
+            <img src="assets/images/user-plomo.png" style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:3px solid gray;"> 
             
 
             <div style="margin:20px 10px;">
@@ -48,15 +48,15 @@ include 'src\includes\header.php'
             </div>            
         </div>
 
-        <div class="row cont_datos" id="d_formularios1"  style="display:inline-block;width:90%;">
-            <div  id="panel-user1" style="width:27%;float:left;background-color:white;color:#161616;margin-right:1.5%;">
-                <ul  id="p_users" style="text-align:left;background-color:white;">
-                    <li><button id="p_inicio" class="btn btnprimary1 p_user active" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Inicio</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3</div></button></li>    
+        <div class="row cont_datos" id="d_formularios1"  style="border-radius:20px;display:inline-block;width:90%;">
+            <div  id="panel-user1" style="width:27%;float:left;background-color:transparent;color:#161616;margin-right:1.5%;">
+                <ul  id="p_users" style="text-align:left;background-color:transparent;">
+                    <li><button id="p_inicio" class="btn btnprimary1 p_user active" style="border-radius: 20px 20px 0px 0px;" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Inicio</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3</div></button></li>    
                     <li><button id="p_datosp" class="btn btnprimary1 p_user" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Datos Personales</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3></div></button></li>
                     <li><button id="p_misord" class="btn btnprimary1 p_user" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Mis Pedidos</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3></div></button></li>
                     <li><button id="p_miscomp" class="btn btnprimary1 p_user" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Mis Comprobantes</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3></div></button></li>
                     <li><button id="p_misdir" class="btn btnprimary1 p_user" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Mis Direcciones</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3></div></button></li>
-                    <li><button class="btn btnprimary1 p_user" ><a href="producto.php" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Cerrar Sesión</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3></div></a></button></li>
+                    <li><button class="btn btnprimary1 p_user" style="border-radius: 0px 0px 20px 20px;"><a href="producto.php" ><div class="col-md-10 col-sm-10 col-xs-10"><h3>Cerrar Sesión</h3></div><div class="col-md-2 col-sm-2 col-xs-2"><h3>></h3></div></a></button></li>
                     
                 </ul>                
             </div>            
@@ -74,7 +74,7 @@ include 'src\includes\header.php'
                             
             </div>             -->
 
-            <div id="info_puser" style="text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
+            <div id="info_puser" style="border-radius:20px;text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
                 <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;"> 
                 <div id="back-section-user" style="font-size:1.6em;margin-right:4%;display:none;width:10%;float:left;border-right:2px solid whitesmoke;">
                 <p> < </p>

@@ -132,7 +132,7 @@ include 'src\includes\header.php'
                             </div>
                             <br> <br>
                             <button type="button" class="btn btn-cmn" data-toggle="modal"
-                                data-target=""><a href="#"
+                                data-target="#DetalleProducto"><a href="#"
                                     style="color:white;border: 2px solid #c51152;" tabindex="-1">AÑADIR AL
                                     CARRO</a></button>
 
@@ -281,7 +281,7 @@ include 'src\includes\header.php'
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-5 col-xs-5"><img src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt=""
+                    <div class="col-md-5 col-xs-5"><img src="assets/sources/BF198.jpg" alt=""
                             style="width:100%; height:auto;align:left;"></div>
                     <div class="col-md-7 col-xs-7" style=" display: flex;
                     justify-content: center;

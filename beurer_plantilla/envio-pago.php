@@ -61,13 +61,13 @@
 			
 	<div class="formulario" style="background-color:transparent;">
 	    <br>
-        <div class="font-nexaheavy" style="height:100%;font-weight:bold;font-size:2.5rem;background-image:url('assets/images/fondo1.png');background-color:white;color:#c51152;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;" >Información de Pedido </div>
+        <div class="font-nexaheavy" style="height:100%;font-size:2.5rem;background-image:url('assets/images/fondo1.png');background-color:white;color:#c51152;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;" >Información de Pedido </div>
         <br></br>
         <div style="text-align:center;">
         <div class="row paso3" style="text-align:left; margin:auto; width:85%">
         <div class="col-md-6 col-sm-12">
-            <ul style="list-style-image: url('assets/images/check-solid.svg');background-color:white;border-radius:8%; font-size:1.3em;padding:6% 7%;">     
-                <li class="font-nexaheavy"   style="font-weight:bold;list-style:none;font-size:1.4em;">INFORMACIÓN DE ENVÍO</li>    
+            <ul style="list-style-image: url('assets/images/check-solid.svg');background-color:white;border-radius:8%; font-size:1.2em;padding:6% 7%;">     
+                <li class="font-nexaheavy"   style="list-style:none;font-size:1.4em;">INFORMACIÓN DE ENVÍO</li>    
                 <div>LIMA LIMA </div>
                 <div>SANTIAGO DE SURCO </div>
                 <div> Av. Caminos del Inca Nº 257 Tienda Nº 149 Santiago de Surco - Lima </div>
@@ -76,12 +76,12 @@
                 <!-- <div style="font-weight:bold;">Importe por envío: S/ 26. 00 </div> -->
                 <br><br>
 
-                <li class="font-nexaheavy" style="font-weight:bold;list-style:none;font-size:1.4em;">COMPRA A NOMBRE DE </li>
+                <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">COMPRA A NOMBRE DE </li>
                 <div>DNI: 72812417 </div>
                 <div>Leandro André Ramos Valdéz </div>   
                 <br> <br>
 
-                <li class="font-nexaheavy" style="font-weight:bold;list-style:none;font-size:1.4em;">RESUMEN DEL PEDIDO</li>
+                <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">RESUMEN DEL PEDIDO</li>
                 <div>Cantidad de productos: 8 </div>
                 <div>Importe Sub Total: S/ 234. 00 </div>   
                 <br>
@@ -89,8 +89,7 @@
             </ul>
 
     <br>
-	
-    </div>
+     </div>
         <div class="col-md-6 col-sm-12" style="background-color:white;border-radius:8%">
         <div  class="resumen-pedido3" style="padding:5% 12%;">
     <div class="titulo font-nexaheavy" style="text-align:center;color:#c51152" >RESUMEN DE TU PEDIDO</div>
@@ -138,18 +137,13 @@
       <td class="subtotalr" id="total" style="text-align:right;">15.00</td>
     </tr>
 
-    <tr style="background-color:white;font-weight:bold;color:white;font-size:1.3em;">
-    <td ></td>  
-    <td scope="row"  style="padding:3%;"></td>
-      
-      <td style="padding:3%" ></td>
-    </tr>
+    
 
-    <tr style="background-color:white;font-weight:bold;color:white;font-size:1.3em;">
+    <tr style="background-color:white;font-weight:bold;color:black;font-size:1.3em;">
     <td ></td>  
-    <td scope="row"  style="padding:3%;background-color:rgba(197,17,82,0.9);vertical-align:middle;border-radius:20px 0px 0px 20px;">TOTAL A PAGAR</td>
+    <td scope="row"  style="padding:3%;vertical-align:middle;">TOTAL A PAGAR</td>
       
-      <td class="subtotalr" style="padding:3%;text-align:right;background-color:rgba(197,17,82,0.9);border-radius:0% 20px 20px 0%;" >615.00</td>
+      <td class="subtotalr" style="text-align:right;" >615.00</td>
     </tr>
   
   </tbody>
@@ -175,7 +169,7 @@
         <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;min-height:14rem;width:29.33333333%;margin:2%;padding:2em;">
         <div class="font-bold" style="font-size:1.92em;text-align:center;">Chatea con nosotros</div>
         <img src="assets/images/icons/mensajero.svg" style="width:20%;margin:5% 0%;"><br>
-        <span class="font-light" style="font-size:1.2em;padding:0% 16%;display:table-cell;"> Facebook Messenger de Beurer Perú </span>
+        <span class="font-light" style="font-size:1.2em;padding:0% 16%;display:block;"> Facebook Messenger de Beurer Perú </span>
     </div>
         <div class="col-md-4 section-contacto" style="background-color:white;border-radius:8%;min-height:14rem;width:29.33333333%;margin:2%;padding:2em;">
         <div class="font-bold" style="font-size:1.92em;text-align:center;">Llámanos</div>
