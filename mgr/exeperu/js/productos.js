@@ -1509,7 +1509,8 @@ Helpers.prototype.tableComplementosColors = function () {
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "codigo"},
+            {"data": "producto_sku"},
+            {"data": "stock"},
             {"data": "foto"} ,  
             {"data": "color"} ,  
             {"data": "estado"} ,  
@@ -1525,7 +1526,7 @@ Helpers.prototype.tableComplementosColors = function () {
                     } else {
                         salida = [
                             "<center>",
-                            "<a href=\"javascript: Exeperu.editar_complementocar_color('" + data + "');\" class=\"btn btn-primary btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-pencil\"></i></a>&nbsp;&nbsp;",
+                            "<a href=\"javascript: Exeperu.editar_complementocar_color('" + data + "');\" class=\"btn btn-primary  btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-pencil\"></i></a>&nbsp;&nbsp;",
                             "<a href=\"javascript: Exeperu.eliminar_complementocar_color('" + data + "');\" class=\"btn btn-danger btn-xs btn-flat\" data-id=\"" + data + "\"><i class=\"fa fa-trash-o\"></i></a>",
                             "</center>",
                         ].join('');
@@ -1548,7 +1549,8 @@ Helpers.prototype.crear_complemento_color = function (idmodelo) {
     var next = total + 1;
 
     tabla.row.add({
-        "codigo": '',
+        "producto_sku": '',
+        "stock": '',
         "foto": '',
         "color": '',
         "estado": '',
@@ -1578,8 +1580,11 @@ Helpers.prototype.editar_complementocar_color = function (iditem) {
            //case 'idmodelo':
                 var valuex = value;
                 break;
-            case 'codigo':
+            case 'producto_sku':
                 var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
+                break;
+            case 'stock':
+                var valuex = '<input type="number" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
                 break;
             case 'estado':
                 var valuex = '<select name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%"><option value="activo">activo</option><option value="inactivo">inactivo</option></select>';
@@ -1642,7 +1647,6 @@ Helpers.prototype.guardar_textareacar_color = function () {
     let data = tabla.data().toArray();
     texarea.val(JSON.stringify(data));
 };
-
 
 Helpers.prototype.cancelar_complementocar_color = function () {
     let tabla = this.tables['table_complementos_color'];

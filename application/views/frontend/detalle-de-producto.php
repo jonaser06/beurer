@@ -152,7 +152,8 @@
                                                         style="background-color:'.$value['color'].';"
                                                         data-img = "'.$value['foto'].'"
                                                         data-color =  "'.$value['color'].'"
-                                                        data-codigo =  "'.$value['codigo'].'"
+                                                        data-stock =  "'.$value['stock'].'"
+                                                        data-producto_sku =  "'.$value['producto_sku'].'"
                                                         ></li>';
                                                     }
                                                     
@@ -179,6 +180,9 @@
                                 data-title="<?php echo $product['titulo']?>"
                                 data-id       = "<?php echo $product['id']?>"
                                 data-precio   = "<?php echo $product['precio']?>"
+                                data-producto_sku   = "<?php echo $product['producto_sku']?>"
+                                data-precio_online   = "<?php echo $product['precio_anterior']?>"
+                                data-img   = "<?= $product['imagen'][0] ?>"
                                 data-cantidad ="1">
                                 <a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1"
                                 >AÑADIR AL CARRO
@@ -235,8 +239,6 @@
 
 
                         </div>
-
-
 
 
                         <!--div class="tabs-info-product col-xs-12 px-0">
@@ -457,7 +459,7 @@ $(function() {
             <div class="modal-footer"
                 style="text-align:center;border-top:0 none;padding-top:7px;border-bottom:1px solid #c3c3c3;padding-bottom:35px;">
 
-                <a href="carrito.php"><button type="button" class="btn  btn-cmn"
+                <a href="<?php echo base_url('carrito'); ?>"><button type="button" class="btn  btn-cmn"
                         style="width:75%;text-align:center;font-size:1.2rem;padding-top:7px;padding-bottom:7px; padding-left:0px;padding-right:0px; ">IR
                         AL CARRO</button></a>
                 <br>

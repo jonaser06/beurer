@@ -43,7 +43,7 @@ class Mcategorias extends CI_Model {
         $query=$this->db->get('paginas');
         return $query->result_array();
     }
-     
+    
      public function deletecategoria($idcategoria=0){
          $this->db->where('idcategoria',$idcategoria);
          return $this->db->delete('categorias');

@@ -1,3 +1,9 @@
+:root {
+    --color: brown;
+    --colorResponse : #C51152;
+    --colorSave : #C51152;
+}
+
 input,select {
     outline: none;
 }
@@ -20,6 +26,42 @@ input,select {
 .response_sesion{
     color: #c51152;
 }
+
+
+/* spinner  */ 
+
+
+#spinner {
+	visibility: hidden;
+	width: 80px;
+	height: 80px;
+
+	border: 2px solid #f3f3f3;
+	border-top: 3px solid #f25a41;
+	border-radius: 100%;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	z-index: 900;
+	animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+#spinner.show {
+    visibility: visible;
+}
 .content-recovery{
     width: 100%;
     height: 500px;
@@ -31,10 +73,10 @@ input,select {
     max-width: 1200px;
     padding-top: 50px;
 }
-.email-recovery{
+.email-recovery, .new_password{
     width: 50%;
 }
-.button_recovery{
+.button_recovery, .change_password{
     margin-top: 30px;
     width: 50%;
     background-color: #c51152;
@@ -48,4 +90,100 @@ input,select {
 .err_recovery, .err_mail{
     display: none;
     color: #c51152;
+}
+.res_mail{
+    width: 50%;
+    padding: 20px;
+    border: 1px solid#29ff6a;
+    border-radius: 10px;
+    background: #FAFAFA;
+    color: #000;
+}
+
+/* section pass -PERFIL USER */
+#formPass {
+    margin-top: 1.4rem;
+}
+    .updatePass {
+        color: #fff;
+        background-color: #C51152;
+        padding: 8px ;
+        margin-top : 15px;
+        border-radius : 9px;
+    }
+
+    .input-group {
+        width: fit-content;
+        display: flex;
+        margin-bottom: 4px;
+        align-items: center;
+        
+    }
+    .input-group label {
+        width: 150px;
+        text-align: right;
+        padding-right: 10px;
+    }
+    .input-group label::after {
+        margin-left: 10px;
+        content: '(*)';
+        color:#C51152
+    }
+    .input-group input {
+        width: 230px;
+    }
+    .input-group:nth-child(1) {
+        margin-bottom: 23px;
+    }
+    .input-group:nth-child(1)::after{
+        content: attr(data-content);
+        color: var(--colorResponse);
+        margin-left: 5px;
+    }
+    .input-group:nth-child(3)::after{
+        content: attr(data-content);
+        color: var(--color);
+        position:absolute;
+        bottom:-14px;
+        left:0;
+
+        margin-left: 5px;
+    }
+    .saveUser::after{
+      content: attr(data-content);
+      color: var(--colorSave);
+      margin-left: 5px;
+  }
+    /* ojito show  */
+    .eyes {
+    height:20px; cursor:pointer;
+    
+}
+
+
+.font-nexaheav{
+  font-size:1.1em;
+  text-align:center;
+  font-weight:bold;
+  font-family:'nexa-lightuploaded_file';
+}
+#trash img{
+  width:30px;
+  height:30px;
+  align:left;
+}
+#cantidad_prod{
+  width: 35px;
+}
+.count-cant {
+  width: 54px;
+  height: 51px;
+  margin: 0 5%;
+  border-radius: 50%;
+  color: #161616;
+  border: 1px solid black;
+  outline: 0 none;
+  font-weight: bold;
+  font-size: 13px;
+  background-color: transparent !important;
 }

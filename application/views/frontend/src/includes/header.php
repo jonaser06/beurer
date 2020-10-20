@@ -37,9 +37,9 @@
     </script>
 </head>
 
-<body>
+<body style='background-color:rgba(255,255,255,0);'>
     <?php  $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));     ?>
-    <div class="wrapper-header" id="cabecera">
+    <div class="wrapper-header" id="cabecera" <?php echo (isset($carrito) && $carrito )?'style="display:none;"':''; ?> >
         <header class="header">
             <div class="container-fluid menu-one px-0">
                 <div class="container" style="width:100% !important; padding-left:5%;">
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-xs-3 col-sm-4 col-md-4 pos-mob hidden-xs">
                             <div class="utl1">
-                                <a href="carrito.php"><img src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt="" style="max-width:36px;"></a>
+                                <a href="<?= base_url('carrito') ?>"><img src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt="" style="max-width:36px;"></a>
                             </div>
                             <div class="utl2">
                                 <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:36px;"></a>

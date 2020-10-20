@@ -131,17 +131,151 @@ class Ajax extends MY_Controller
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $user = $this->input->post('correo');
             $data = ['correo' => $user ];
-
             #query DB
             $query = $this->dbSelect('*','clientes', $data );
+            #si exite el usuario
             if($query){
-                // $this->salt_encrypt($query[0]['id_cliente']);
-                // var_dump($this->salt_encrypt($query[0]['id_cliente']));
+                $id = $this->salt_encrypt($query[0]['id_cliente']);
+                $body = [
+                    "url" => base_url('recovery/'.$id),
+                    "name" => $query[0]['nombre'],
+                    "email" => $query[0]['correo'],
+                    "message"=> "Restauración de contraseña de su cuenta"
+                ];
+                #oculto correo
+                $mail = $query[0]['correo'];
+                $mail = explode('@',$mail);
+                $domain = $mail[1];
+                $mail = substr($mail[0], 0, 1);
+                $mail = $mail.'*****@'.$domain;
+                #Enviarlo
+                $enviar = $this->sendmail($body['email'], $body, $body['message'], 'mail_recovery.php');
 
-                // Enviarlo
-                $enviar = $this->sendmail('jonaser06@gmail.com','',"Gracias por su pedido!");
-                var_dump($enviar);
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->resp['data'] = [
+                    "correo" => $mail
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+
+            }else{
+                $this->resp['message'] = '';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(404)
+                    ->set_output(json_encode($this->resp));
+                    return;
             }
         }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(404)
+                ->set_output(json_encode($this->resp));
+                return;
+    }
+
+    public function new_password(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $contrasena = hash('sha256',$this->input->post('contrasena'));
+            $id_cliente = $this->input->post('id_cliente');
+            #decrypt
+            $id_cliente = $this->salt_decrypt($id_cliente);
+            $data = ['id_cliente'=> $id_cliente];
+            #query DB
+            $query = $this->dbSelect('*','clientes', $data );
+            $mail = $query[0]['correo'];
+            if($query){
+                $update = ['contrasena'=> $contrasena];
+                $query = $this->dbUpdate($update,'clientes',$data);
+                if($query){
+                    $this->resp['status'] = true;
+                    $this->resp['code'] = 200;
+                    $this->resp['message'] = 'Contraseña cambiada satisfactoriamente';
+                    #Enviarlo
+                    $enviar = $this->sendmail($mail, '', 'Contraseña Cambiada', 'confirm_password.php');
+                    $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+                }
+            }else{
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(404)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }
+            
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($this->resp));
+            return;
+    }
+
+    public function updatePass(int $id)
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+           
+            $pass = hash('sha256',$this->input->post('currentPass'));
+            $newPass = hash('sha256', $this->input->post('newPass'));
+            $result = $this->get('clientes',['contrasena' => $pass ,'id_cliente' => (int)$id ]);
+            
+            if (!empty($result)) {
+                $result =  $this->dbUpdate(['contrasena' => $newPass ], 'clientes', ['id_cliente' => (int)$id]);
+                if($result) {
+                    $resp = [
+                        'status'  => true,
+                        'code'    => 200,
+                        'message' => 'Contraseña Actualizada.',
+                    ];
+                    $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(200)
+                        ->set_output(json_encode($resp));
+                    return;
+                }else {
+                    $resp = [
+                        'status'  => true,
+                        'code'    => 404,
+                        'message' => 'No se pudo actualizar intentelo otra vez',
+                    ];
+                    $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(404)
+                        ->set_output(json_encode($resp));
+                    return;
+                }
+                
+            } else {
+                $resp = [
+                    'status'  => true,
+                    'code'    => 404,
+                    'message' => 'x La contraseña no es correcta.'
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
     }
 }
