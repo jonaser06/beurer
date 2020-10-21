@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-xs-8 col-sm-5 pos-inh box-search">
                             <div class="text-right txt-mob derecho" style="margin-right:-3%;">
-                                <form class="div-search d-in-block ocult" method="POST" action="productos/resultado/" >
+                                <form class="div-search d-in-block ocult" method="POST" action="productos/resultado/" style="padding-top:12px;" >
                                     <input type="text" class="input-search search_get" name="search_get" placeholder="¿Qué estas buscando?" autocomplete="off"  style="font-size:0.9em; text-align:center; width:0px;">
                                     <span class="icon-h icon-lupa btn-search"></span>
                                     <button type="submit" class="bsc-btn hidden-md hidden-lg font-nexaregular">BUSCAR</button>
@@ -85,7 +85,7 @@
                                 <a href="carrito.php"><img src="assets/images/nuevo/carrito.png" alt="" style="max-width:36px;"></a>
                             </div>
                             <div class="utl2">
-                                <a onclick="loginn()"><img src="assets/images/nuevo/login.png" alt="" style="max-width:36px;"></a>
+                                <a onclick="loginn()"><img src="assets/images/nuevo/login.png" alt="" style="max-width:26px;"></a>
                             </div>
                             <div class="utl3">    
                                 <a href="rastrea-pedido.php"><img src="assets/images/nuevo/delivery.png" alt="" style="max-width:48px;"></a>
@@ -105,10 +105,10 @@
                                                 </label>
                                             <div style="display:inline-block; font-size:.9em;">Recuérdame   </div>
                                             </div>
-                                            <p style="padding-top:0px !important;margin-top:0px;"><input class="btn btn-primary1" type="submit" value="Iniciar sesión" style="padding:0;"></p>
+                                            <p style="padding-top:0px !important;margin-top:0px;padding-bottom:0px !important;margin-bottom:4px !important;"><input class="btn btn-cmn" type="submit" value="Iniciar sesión" style="padding:0;"></p>
                                             <p><a href="#">¿Ha olvidado la contraseña?</a></p>
                                             <hr style="margin-top:0px;">
-                                            <div style="text-align:center;"><a class="btn btn-primary1" href="#" style="color:white;">
+                                            <div style="text-align:center;"><a class="btn btn-cmn" href="#" style="color:white;">
                                             Deseo registrarme
                                             </a></div>
                                         </form>
