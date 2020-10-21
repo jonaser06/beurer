@@ -66,35 +66,22 @@ class Request extends CI_Controller {
 		
 		$uri_segment = $this->uri->segment_array();
 		$uri = implode('/',$uri_segment);
-		
-		//print_r(gettype($uri));exit();
-
-		//print_r($uri));exit();
-
-
-
-		$pagina=$this->taxonomia->getPaginaurl($uri);
-
-
-	
+		$pagina = $this->taxonomia->getPaginaurl($uri);
 
         // echo "<pre>";
 		//print_r($pagina);exit();
-		/*if(empty($pagina) && !isset($pagina)){
-			return $this->pageError();
-		}*/ 
+		// if(empty($pagina) && !isset($pagina)){
+		// 	return $this->pageError();
+		// }
 		//echo $this->uri->uri_string;
 		//it;
 		
 
 		//$data_rel = $this->contenido->getContenido(1);
 
-		$data['confif'] = $this->contenido->getContenido(1);
-
-		$data['pagina']=$pagina;
-
-		$data['contenido'] = $this->contenido->getContenido($pagina['idpagina']);
-		
+		$data['confif'] = $this->contenido->getContenido(1);  // RETURN VIDEO
+		$data['pagina'] = $pagina;//RETURN URI PAGINA
+		$data['contenido'] = $this->contenido->getContenido($pagina['idpagina']);// RETURN VALUES :TYPE DATA OR OTHER
 		$data['varify_product'] = false;
 		
         $a = $pagina['idpagina'];
@@ -104,9 +91,8 @@ class Request extends CI_Controller {
 		endif;
 
 		$data['menu'] = $this->contenido->getMenu();
-
+		
 		if($pagina['idpagina'] == 1){
-
 			foreach ($data['contenido']['destacado'] as $row) {
 			$data['dstcd'][] = $this->mproductos->getOneProductos($row['producto']);
 			}
@@ -171,7 +157,6 @@ class Request extends CI_Controller {
 		}
 		
 		$output = $this->load->view('frontend/'.$pag.'', $data, TRUE);
-		//print_r($data);exit;
         $this->output->set_header('Access-Control-Allow-Origin: *');
         return $this->__output($output);
 	}

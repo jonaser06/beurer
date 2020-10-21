@@ -95,6 +95,15 @@ $route['linea-bebe/(:any)'] = 'frontend/productos/index/$1';
 $route['linea-bebe/(:any)/(:any)'] = 'frontend/productos/show/$2';
 
 
+#categorias
+
+// $route['(:any)'] = 'categorias/seccion/$1';
+
+// $route['(:any)/(:any)'] = 'categorias/proveedor/$1/$2';
+
+// $route['(:any)/(:any)/(:any)'] = 'categorias/innerproducto/$3';
+
+
 $route['carrito'] = 'frontend/carrito/index/';
 $route['registro'] = 'frontend/auth/index';
 $route['updatePass/(:num)'] = 'ajax/updatePass/$1';

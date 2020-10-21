@@ -272,26 +272,25 @@
 
 
         <script>
+
         $(document).ready(function(){      
             liscategorias();
             function liscategorias(){                
                 let html='<option value="0">Seleccione una categoría...</option>';
                 $("#liscategorias").html(html);
-
                 $.ajax({
                    url:'<?= base_url('categorias/list/'); ?>',
                    success:function(response){
                        $.each(response ,function(i,item){
-                          let html = '<option  value="'+item.idpagina+'">'+item.pagina+'</option>'; 
+                          let html = `<option  value="${ item.idpagina }">${ item.pagina }</option>`; 
                           $("#liscategorias").append(html);
                        });
                    },complete: function(data) {
-                        
+
                         if($(localStorage.getItem('categoria'))) {
                             const list=  document.querySelectorAll('#liscategorias > option')
                             list.forEach(option => {
                                 if(option.value == localStorage.getItem('categoria')) {
-                                
                                     option.setAttribute('selected','selected');
                                     $.ajax({
                                         url:'<?= base_url('categorias/lissubcategorias'); ?>',
@@ -299,14 +298,16 @@
                                         data:{'idcat': option.value},
                                         success:function(response){
 
-                                            $.each(response, function(i,item){
-                                            let html='<option  value="'+item.titulo+'">'+item.titulo+'</option>'; 
+                                            $.each(response, function(i , item){
+
+                                            let html=`<option  value="${ item.titulo }">${ item.titulo }</option>`; 
                                             $("#lissubcategorias").append(html);
                                             });
-                                            if(localStorage.getItem('subcategoria')){
-                                                const subCat =  document.querySelectorAll('#lissubcategorias > option')
-                                                subCat.forEach(sub => {
-                                                    if(sub.textContent == localStorage.getItem('subcategoria')){
+
+                                            if( localStorage.getItem('subcategoria') ){
+                                                const $subCats =  document.querySelectorAll('#lissubcategorias > option');
+                                                $subCats.forEach( sub => {
+                                                    if( sub.textContent == localStorage.getItem('subcategoria')){
                                                         sub.setAttribute('selected','selected')
                                                         table.columns( 2 )
                                                         .search( sub.textContent )
@@ -325,22 +326,22 @@
                 });
             }
             $("#lissubcategorias").change(function() {
-                table.columns( 2 )
+                    table.columns( 2 )
                     .search( this.value )
                     .draw();
-                    console.log(this.value)
                 localStorage.setItem('subcategoria',this.value)
             });
 
             $("#liscategorias").change(function(e){
-                
+                table.columns(2).search( "" ).draw();
                 e.preventDefault();
                 let idcat = $(this).val();
-                let search = "";
+                
                 let categorias = document.querySelectorAll('#liscategorias > option');
                 categorias.forEach( cat => {
-                    if( cat.value == idcat ){
-                        search = cat.innerText;     
+                    if( cat.value == idcat && cat.value !== '0'){
+                        let search = cat.textContent;     
+                        table.search( search ).draw();
                     }
                 })
                 
@@ -360,9 +361,6 @@
                  });
                  $("#lissubcategorias").val(0);
                
-                    
-                   
-                
              });
 
                 let table = $('#table_productos').DataTable({
@@ -397,7 +395,31 @@
                         } },
                     ]
                 });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         });
+
 
         var t = $('#tabla_descripcion').DataTable();
 

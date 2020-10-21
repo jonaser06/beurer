@@ -301,7 +301,7 @@
 
 
         <script>
-        <!--// Add Subcategoría //-->
+        // Add Subcategoría //-->
         function addsubcategory(){
             $('#modalLoading').modal('show');
             $('#subcatid').val('');

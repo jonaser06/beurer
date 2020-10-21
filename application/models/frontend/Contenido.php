@@ -7,31 +7,26 @@ class Contenido extends CI_Model {
     }
 
     public function getContenido($pagina = 0) {
-        $this->db->where(array(
-            'idpagina' => $pagina,
-        ));
+        $this->db->where( ['idpagina' => $pagina] );
         $this->db->order_by('orden', 'ASC');
-
         $result = $this->db->get('contenido');
 		//$str = $this->db->last_query();
 		//echo $str; 
 		//exit;
         return $this->salida($result->result_array());
     }
-    
-    public function salida($data = array()) {
+    //  FILTRAMOS EL TIPO DE CONTENT RETORNADO DESDE EL CONTENIDO DE CADA PÁGINA
+    public function salida( $data = array()) {
         $salida = array();
-
         foreach ($data as $key => $value) {
             switch ($value['tipo']) {
                 case 'data':
-                    $valor = json_decode($value['valor'], TRUE);
+                    $valor = json_decode( $value['valor'], TRUE );
                     break;
                 default:
                     $valor = $value['valor'];
                     break;
             }
-
             $salida[$value['nombre']] = $valor;
         }
 
@@ -351,11 +346,10 @@ class Contenido extends CI_Model {
     }
 
 
-    public function getCategoriaProd($id=0){
+    public function getCategoriaProd($id = 0){
         $this->db->select('contenido.*');
         //$this->db->join('templates','paginas.id=templates.idpagina');
         $this->db->join('contenido','contenido.idpagina=paginas.idpagina');
-        //$this->db->where('paginas.idparent',$id);
         $this->db->where('paginas.idparent',$id);
         $result= $this->db->get('paginas');
 
@@ -531,39 +525,37 @@ class Contenido extends CI_Model {
         $this->db->select('*');
         $this->db->where('idparent', 2);
         $this->db->order_by('orden asc');
-        $pg=$this->db->get('paginas');
+        $paginas = $this->db->get('paginas')->result_array();
         $pp = 0;
-        foreach ($pg->result_array() as $row) {
-            
+        foreach ( $paginas as $row) {
+            $n = 0;
+            $subcat = $this->db->where('idpagina', $row['idpagina'])
+                                ->get('categorias')
+                                ->result_array();
+           if($subcat) {
+               foreach ( $subcat as $value ) {
+                   $s = 0;
+                   $productos = $this->db->where('categoria_id', $value['id'])->where('active', 1)->get('productos');
+                   $qry_productos = $productos->result_array();
 
-            $n=0;
-            $subcat = $this->db->where('idpagina', $row['idpagina'])->get('categorias');
+                   $dat[$n] = ['titulo' => $value['titulo'], 'url'=>$value['url'], 'cantidad' => count($qry_productos)];
+                   $n++;
+               }
+               $data['menu_list'][$pp] = [
+                   'id' => $row['idpagina'],
+                   'cat' => $row['pagina'],
+                   'subcat' => isset($dat) ? $dat : 0 
+               ]; 
 
-            
-                foreach ($subcat->result_array() as $value) {
-                    $s = 0;
-                    $productos = $this->db->where('categoria_id', $value['id'])->where('active', 1)->get('productos');
-                    $qry_productos = $productos->result_array();
+               $dat = [] ;
+               $pp++;
 
-
-
-                    $dat[$n] = ['titulo' => $value['titulo'], 'url'=>$value['url'], 'cantidad' => count($qry_productos)];
-                    $n++;
-                }
+           }
             
                 
-
-            $data['menu_list'][$pp] = [
-                'id' => $row['idpagina'],
-                'cat' => $row['pagina'],
-                'cat' => $row['pagina'],
-                'subcat' => $dat
-            ]; 
-            $dat =[];
-            $pp++;
         }
-
         return $data;
+
     }
 
 
@@ -660,7 +652,7 @@ class Contenido extends CI_Model {
         return $query->row_array();
     }
 
-    public function getcat($id=0)
+    public function getcat($id = 0 )
     {
         $this->db->select('sitemap.*');
         $this->db->where('paginas.idpagina',$id);

@@ -14,13 +14,8 @@ class Categorias extends CI_Controller {
 
 	public function liscategorias()
     {
-        //$consult = array('idpagina' => 3, 'idpagina' => 4, 'idpagina' => 5, 'idpagina' => 6, 'idpagina' => 4);
         $this->db->select('paginas.*, sitemap.url');
-        $this->db->where('idpagina', 3);
-        $this->db->or_where('idpagina', 4);
-        $this->db->or_where('idpagina', 5);
-        $this->db->or_where('idpagina', 6);
-        $this->db->or_where('idpagina', 7);
+        $this->db->where('idparent', 2);
         $this->db->join('sitemap', 'sitemap.idsitemap = paginas.idsitemap');
         $qry = $this->db->get('paginas');
 

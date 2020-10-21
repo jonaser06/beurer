@@ -147,7 +147,7 @@
                                     <div class="row">
                                         
                                         <input type="hidden" name="sitemap[idsitemap]" value="<?= isset($datapagina['idsitemap']) ? $datapagina['idsitemap'] :'' ?>">
-                                        <!--<input type="hidden" name="sitemap[idpagina]" value="<?/*= isset($datapagina['idpagina']) ? $datapagina['idpagina'] :'' */?>">-->
+                                        
 										<div class="col-xs-12">
 											<h4 style="text-align:center"><b>Texto en Español</b></h4>
                                             <div class="col-xs-12">
