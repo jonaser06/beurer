@@ -132,7 +132,42 @@
             <div>
                 <div style="font-size:1.9em;font-weight:bold;text-align:center;color:#c51152;font-family:'nexaregularuploaded_file';">RESUMEN DE TU PEDIDO</div>
                 <div class="d_montos">
-                    <table class="table tbl-resumen" style="font-size:1.4em;">
+                    <div class="head-resumen">
+                        <div class="n-resumen">#</div>
+                        <div class="product-resumen">PRODUCTO</div>
+                        <div class="sub-resumen">SUBTOTAL</div>
+                    </div>
+                    <div class="body-resumen">
+                        
+                    </div>
+                    <div class="head-cupon">Ingrese aquí su cupón de descuento</div>
+                    <div class="input-cupon" style="display:flex;">
+                        <input type="text" placeholder="Ej. 6W79H6" style="width: 58%; border: 1px solid black;" maxlength="12">
+                        <a href="#" class="cup-btn">CANJEAR</a>
+                    </div>
+                    <div class="footer-resumen">
+                        <div class="item-resumen">
+                            <div class="n-ind"></div>
+                            <div class="n-subtotal_name">SUBTOTAL</div>
+                            <div class="sub_cost">600.00</div>
+                        </div>
+                        <div class="item-resumen">
+                            <div class="n-ind"></div>
+                            <div class="shipped_name">COSTO DEL ENVÍO</div>
+                            <div class="cost_shipped">15.00</div>
+                        </div>
+                        <div class="item-resumen" style="color:#c51152;">
+                            <div class="n-ind"></div>
+                            <div class="descont_name">DESCUENTO</div>
+                            <div class="descont_cost">20.00</div>
+                        </div>
+                        <div class="item-resumen" style="color:#c51152;font-weight: bold;">
+                            <div class="n-ind"></div>
+                            <div class="total_name">TOTAL A PAGAR</div>
+                            <div class="total_cost">615.00</div>
+                        </div>
+                    </div>
+                    <!-- <table class="table tbl-resumen" style="font-size:1.4em;">
                         <thead>
                             <tr>
                                 <th style="padding-right:8%;" scope="col">#</th>
@@ -199,7 +234,7 @@
                                 <td class="subtotalr">615.00</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
             </div>
             <span><a class="btn btn-cmn" href="producto.php" tabindex="2">Seguir comprando</a></span>
@@ -209,7 +244,6 @@
 
     </div>
     <!--Fin de cuerpo-->
-
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">

@@ -51,44 +51,56 @@ ObjMain = {
         let item = localStorage.getItem('productos');
         if(item){
             item = JSON.parse(item);
-            item.forEach((p)=>{
-                console.log(p.cantidad);
-                document.querySelector('.carrito-container').innerHTML += ObjMain.item_carrito(p.id, p.cantidad, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
+            item.forEach((p,index)=>{
+                document.querySelector('.carrito-container').innerHTML += ObjMain.item_carrito(index, p.id, p.cantidad, p.img, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
+                document.querySelector('.body-resumen').innerHTML += ObjMain.pedido(index,p.id, p.cantidad, p.img, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
             });
         }else{
             console.log('Sin productos en el carrito');
         }
     },
-    item_carrito: (id, cant, precio, precio_online, producto_sku, subtotal, title)=>{
+    pedido: (index, id, cantidad, img, precio, precio_online, producto_sku, subtotal, title)=>{
+        index = index+1;
+        precio_online = precio_online * cantidad;
+        let pedido = '';
+            pedido += '<div class="item-body-resumen ibr-'+id+'">';
+            pedido += '<div class="ind-resumen">'+index+'</div>'; 
+            pedido += '<div class="name-resumen">'+title+'</div>'; 
+            pedido += '<div class="cost-partial" id="res-'+id+'">'+(precio_online).toFixed(2)+'</div>'; 
+            pedido += '</div>'; 
+        return pedido;
+    },
+    item_carrito: (index, id, cant, img, precio, precio_online, producto_sku, subtotal, title)=>{
+        subtotal = (precio_online * cant).toFixed(2);
         let item = '';
-            item += '<div class="basket-product">'
-            item += '<div class="item">'
-            item += '<a class="product-image" data-toggle="modal" onclick="ObjMain.modal()" data-target="#exampleModal">'
-            item += '<img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2" class="product-frame"></a>'
-            item += '<div class="product-details">'
-            item += '<span>'+title+'</span>'
-            item += '<p>SKU: '+producto_sku+'</p>'
-            item += '<p>EnvÃ­o a domicilio</p>'
-            item += '</div>'
-            item += '</div>'
-            item += '<div class="price" id="preuni">'
-            item += '<div class="info-prod" style="display:block;">'
-            item += '<img src="assets/images/precio-online.png">'
-            item += '<div class="font-nexaheav text-left price rprice"> '+precio_online+'</div>'
-            item += '<input type="hidden" class="precio-'+id+'" value="'+precio_online+'">'
-            item += '</div>'
-            item += '<div class="font-nexaheav">Normal: S/ '+precio+'</div>'
-            item += '</div>'
-            item += '<div class="quantity">'
-            item += '<button class="count-cant" onclick="ObjMain.menos('+id+');">-</button>'
-            item += '<input class="form-control-field cantidad cant-'+id+'" name="pwd" value="'+parseInt(cant)+'" type="text" id="cantidad_prod" min="1" readonly>'
-            item += '<button class="count-cant" onclick="ObjMain.mas('+id+');">+</button>'
-            item += '</div>'
-            item += '<div class="subtotal rsubtotal sub-'+id+'" id="subtotal">'+subtotal+'</div>'
-            item += '<div class="remove">'
-            item += '<a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt=""></a>'
-            item += '</div>'
-            item += '</div>'
+            item += '<div class="basket-product" data-id="'+id+'">';
+            item += '<div class="item">';
+            item += '<a class="product-image" data-toggle="modal" onclick=ObjMain.modal("'+img+'") data-target="#exampleModal">';
+            item += '<img src="'+DOMAIN+img+'" alt="Placholder Image 2" class="product-frame"></a>';
+            item += '<div class="product-details">';
+            item += '<span>'+title+'</span>';
+            item += '<p>SKU: '+producto_sku+'</p>';
+            item += '<p>Envío a domicilio</p>';
+            item += '</div>';
+            item += '</div>';
+            item += '<div class="price" id="preuni">';
+            item += '<div class="info-prod" style="display:block;">';
+            item += '<img src="assets/images/precio-online.png">';
+            item += '<div class="font-nexaheav text-left price rprice"> '+precio_online+'</div>';
+            item += '<input type="hidden" class="precio-'+id+'" value="'+precio_online+'">';
+            item += '</div>';
+            item += '<div class="font-nexaheav">Normal: S/ '+precio+'</div>';
+            item += '</div>';
+            item += '<div class="quantity">';
+            item += '<button class="count-cant" onclick="ObjMain.menos('+id+');">-</button>';
+            item += '<input class="form-control-field cantidad cant-'+id+'" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
+            item += '<button class="count-cant" onclick="ObjMain.mas('+id+');">+</button>';
+            item += '</div>';
+            item += '<div class="subtotal rsubtotal sub-'+id+'" id="subtotal">'+subtotal+'</div>';
+            item += '<div class="remove">';
+            item += '<a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt="" onclick=ObjMain.delete(event)></a>';
+            item += '</div>';
+            item += '</div>';
         return item;
     },
     delivery: () =>{
@@ -106,29 +118,72 @@ ObjMain = {
 
         }
     },
+    delete: (event)=>{
+        event.preventDefault();
+        let id = event.path[3].getAttribute('data-id');
+        event.path[3].remove();
+        document.querySelector('.ibr-'+id).remove();
+        
+        // console.log(event.path[3]);
+        // document.querySelector('.item-prod-'+id).remove();
+    },
     mas:(id)=>{
         if(parseInt(document.querySelector('.cant-'+id).value) < 10){ 
-            let cantidad = parseInt(document.querySelector('.cant-'+id).value) + 1; 
+            let cantidad = parseInt(document.querySelector('.cant-'+id).value);
+            let ncantidad = cantidad + 1; 
             let precio   = parseFloat(document.querySelector('.precio-'+id).value).toFixed(2);
-            let subtotal = (cantidad*precio).toFixed(2);
-            document.querySelector('.cant-'+id).value = cantidad;
+            let subtotal = (ncantidad*precio).toFixed(2);
+            document.querySelector('.cant-'+id).value = ncantidad;
             document.querySelector('.sub-'+id).innerHTML = subtotal;
+            document.querySelector('#res-'+id).innerHTML = subtotal;
+            /* update productos */
+            let productos = localStorage.getItem('productos');
+            if(productos){
+                productos = JSON.parse(productos);
+                for(let i = 0; i < productos.length ; i++){
+                    if(productos[i].cantidad == cantidad){
+                        productos[i].cantidad = ncantidad;
+                        break;
+                    }
+                }
+            }
+            localStorage.removeItem('productos');
+            localStorage.setItem('productos',JSON.stringify(productos));
         };
         
         return;
     },
     menos: (id)=>{
         if(parseInt(document.querySelector('.cant-'+id).value) > 1){ 
-            let cantidad = parseInt(document.querySelector('.cant-'+id).value) - 1; 
+            let cantidad = parseInt(document.querySelector('.cant-'+id).value);
+            let ncantidad = cantidad  - 1;  
             let precio   = parseFloat(document.querySelector('.precio-'+id).value).toFixed(2);
-            let subtotal = (cantidad*precio).toFixed(2);
-            document.querySelector('.cant-'+id).value = cantidad;
+            let subtotal = (ncantidad*precio).toFixed(2);
+            document.querySelector('.cant-'+id).value = ncantidad;
             document.querySelector('.sub-'+id).innerHTML = subtotal;
+            document.querySelector('#res-'+id).innerHTML = subtotal;
+            /* update productos */
+            let productos = localStorage.getItem('productos');
+            if(productos){
+                productos = JSON.parse(productos);
+                for(let i = 0; i < productos.length ; i++){
+                    if(productos[i].cantidad == cantidad){
+                        productos[i].cantidad = ncantidad;
+                        break;
+                    }
+                }
+            }
+            localStorage.removeItem('productos');
+            localStorage.setItem('productos',JSON.stringify(productos));
         };
         
         return;
     },
-    modal:() =>{
+    modal:(img) =>{
+        console.log(img);
+        let imgmodal = '<img src="'+DOMAIN+img+'" style="width: 100%;box-shadow:-3px 3px 25px -3px rgba(0,0,0,0.3); " alt="Placholder Image 2"></img>';
+        document.querySelector('.modal-body').innerHTML = imgmodal;
+
         var prueba = document.getElementById("modal_foto");
         prueba.style.paddingTop = $(window).scrollTop() - 150 + "px";
         console.log($(window).scrollTop());

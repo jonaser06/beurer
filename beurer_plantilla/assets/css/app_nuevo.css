@@ -1194,6 +1194,7 @@ select
 	  #tab-registro .divTableCell{
 		  display:inline-block;
 		  width:48.5%;
+		  border-color:transparent;
 	  }
 
 	  #tab-registro .one-column{

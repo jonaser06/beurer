@@ -89,10 +89,10 @@
             <div class="col-xs-3 col-sm-4 col-md-4 pos-mob hidden-xs ">
 
               <div class="utl1">
-                <a href="carrito.php"><img src="assets/images/nuevo/carrito.png" alt="" style="max-width:36px;"></a>
+                <a href="carrito.php"><img src="assets/images/nuevo/carrito.png" alt="" style="max-width:33px;"></a>
               </div>
               <div class="utl2">
-                <a onclick="loginn()"><img src="assets/images/nuevo/login.png" alt="" style="max-width:36px;"></a>
+                <a onclick="loginn()"><img src="assets/images/nuevo/login.png" alt="" style="max-width:26px;"></a>
               </div>
               <div class="utl3">
                 <a href="rastrea-pedido.php"><img src="assets/images/nuevo/delivery.png" alt=""

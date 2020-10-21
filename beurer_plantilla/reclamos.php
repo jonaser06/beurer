@@ -10,16 +10,18 @@ include 'src\includes\header.php'
         		
 			
 		<br>
-		
+	
+<div class="font-nexaheavy" style="height:100%;font-size:2.5rem;background-image:url('assets/images/fondo1.png');background-color:white;color:#c51152;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;" >Libro de Reclamaciones </div>   
+
+    <br>
+
 	<div class="formulario" style="text-align:center;padding-top: 0px;
     max-width: 920px;
     border-radius: 4%;
     margin: auto;
     padding-bottom: 2%;" >
 	
-    <h1 style="background-color:#c51152; color:white;font-size:2.65em;font-weight:bold; padding-top:1%;padding-bottom:1%;padding-left:2%;margin-top:0px;border-radius: 25px 25px 1px 1px;">LIBRO DE RECLAMACIONES</h1>
-
-	<div class="linea"></div>	<br>
+    	<br>
     
 <br>
     
@@ -43,7 +45,7 @@ include 'src\includes\header.php'
             <div class="divTableBody" style="display:block;">
 
             <div class="divTableRow" >
-                                <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">*</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad: <div class="d_ob">*</div></div>
                     
                                     <select id="s_tipodoc" onchange="selectTipoDoc();">
                                     <option id="di_pn1" value="1" selected >DNI</option>
@@ -54,7 +56,7 @@ include 'src\includes\header.php'
                                 </div>
                                 
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">*</div></div>
+                                    <div class="etiquetaFormulario">Número Documento Identidad: <div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required >
                     
                                 </div>
@@ -64,7 +66,7 @@ include 'src\includes\header.php'
                     
                     <div class="divTableCell" style="width:99%;">
                     
-                        <div class="etiquetaFormulario">Número de Orden<div class="d_ob">*</div></div>
+                        <div class="etiquetaFormulario">Número de Orden: <div class="d_ob">*</div></div>
                         <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" >
                     
                     </div>
@@ -74,7 +76,7 @@ include 'src\includes\header.php'
             <div class="divTableRow" id="pn_datos1">
             
                 <div class="divTableCell">
-                    <div class="etiquetaFormulario">Nombres <div class="d_ob">*</div></div>
+                    <div class="etiquetaFormulario">Nombres : <div class="d_ob">*</div></div>
                     
                     <input type="text" size="20" maxlength="20" name="campo1" id="c_apep" onkeypress="return soloLetras(event)" value="" >		
                     
@@ -87,12 +89,12 @@ include 'src\includes\header.php'
             <div class="divTableRow" id="pn_datos2">
             
                 <div class="divTableCell">
-                    <div class="etiquetaFormulario">Apellido Paterno<div class="d_ob">*</div></div>
+                    <div class="etiquetaFormulario">Apellido Paterno: <div class="d_ob">*</div></div>
                     
                     <input type="text" size="20" maxlength="20" name="campo1" id="c_apep" onkeypress="return soloLetras(event)" value="" >		
                     
                 </div>
-                <div class="divTableCell"><div class="etiquetaFormulario">Apellido Materno<div class="d_ob">*</div></div>
+                <div class="divTableCell"><div class="etiquetaFormulario">Apellido Materno: <div class="d_ob">*</div></div>
                 
                 <input type="text" size="20" maxlength="20" name="campo1" id="c_apem" onkeypress="return soloLetras(event)" value="" >	
                 
@@ -105,20 +107,20 @@ include 'src\includes\header.php'
                        <div class="etiquetaFormulario">Teléfono/Celular</div>
                        <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij" onkeypress="return soloNumeros(event)" value="" >		
                     </div>
-                    <div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico<div class="d_ob">*</div></div> 
+                    <div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div> 
                     <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="" >
                     </div>                                
             </div>
 
             
                 <div class="divTableRow">
-                    <div class="divTableCell" style="width:99%;"> <div class="etiquetaFormulario" style="font-size:12px;font-weight: normal;">En caso no coloque una dirección de correo electrónico no podremos enviarle por dicha vía una copia de la presente hoja de reclamación virtual, de conformidad con el artículo 4-B del Reglamento del Libro de Reclamaciones. No obstante, ello no impedirá que pueda concluir satisfactoriamente el proceso de ingreso de su reclamo o queja</div> 
+                    <div class="divTableCell" style="width:99%;"> <div  style="text-align:left;justify-content:center;font-size:11px;font-style:italic;font-weight: normal;">En caso no coloque una dirección de correo electrónico no podremos enviarle por dicha vía una copia de la presente hoja de reclamación virtual, de conformidad con el artículo 4-B del Reglamento del Libro de Reclamaciones. No obstante, ello no impedirá que pueda concluir satisfactoriamente el proceso de ingreso de su reclamo o queja.</div> 
                     
                     </div>                    
                 </div>
 
                 <div class="divTableRow">
-                <div class="divTableCell" style="width:32%;"><div class="etiquetaFormulario">Departamento<div class="d_ob">*</div></div>
+                <div class="divTableCell" style="width:32%;"><div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div></div>
                                     <select  id="s_depa" onchange="selectDep();">
                                         <option value="1"> Amazonas</option>
                                         <option value="2">Ancash</option>
@@ -147,7 +149,7 @@ include 'src\includes\header.php'
                                     </select>    
                     </div>
 
-                    <div class="divTableCell" style="width:32%;"><div class="etiquetaFormulario">Provincia<div class="d_ob">*</div></div>
+                    <div class="divTableCell" style="width:32%;"><div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div></div>
                                     <select id="s_prov" onchange="selectProv();">
                                         <option>-</option>  
                 
@@ -373,7 +375,7 @@ include 'src\includes\header.php'
                                         
                                     </select>   
                                 </div>
-                    <div class="divTableCell" style="width:32%;"><div class="etiquetaFormulario">Distrito<div class="d_ob">*</div></div>
+                    <div class="divTableCell" style="width:32%;"><div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div></div>
                         <select id="s_dist" >
                             <option  selected >-</option> 
                         </select>
@@ -381,7 +383,7 @@ include 'src\includes\header.php'
                 </div>
 
                 <div class="divTableRow">
-                    <div class="divTableCell" style="width:99%;"> <div class="etiquetaFormulario">Dirección<div class="d_ob">*</div></div> 
+                    <div class="divTableCell" style="width:99%;"> <div class="etiquetaFormulario">Dirección: <div class="d_ob">*</div></div> 
                     <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="" >
                     </div>                    
                 </div>
@@ -400,7 +402,7 @@ include 'src\includes\header.php'
         <div class="divTableRow" id="pn_datos1">
             
                 <div class="divTableCell" style="width:99%;">
-                    <div class="etiquetaFormulario">Coloca el nombre de tu padre, madre o apoderado <div class="d_ob">*</div></div>
+                    <div class="etiquetaFormulario">Coloca el nombre de tu padre, madre o apoderado : <div class="d_ob">*</div></div>
                     
                     <input type="text" size="20" maxlength="20" name="campo1" id="c_apep" onkeypress="return soloLetras(event)" value="" >		
                     
@@ -412,7 +414,7 @@ include 'src\includes\header.php'
 
 
         <div class="divTableRow" >
-                                <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">*</div></div>
+                                <div class="divTableCell"><div class="etiquetaFormulario">Tipo Documento Identidad: <div class="d_ob">*</div></div>
                     
                                     <select id="s_tipodoc" onchange="selectTipoDoc();">
                                     <option id="di_pn1" value="1" selected >DNI</option>
@@ -423,7 +425,7 @@ include 'src\includes\header.php'
                                 </div>
                                 
                                 <div class="divTableCell">
-                                    <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">*</div></div>
+                                    <div class="etiquetaFormulario">Número Documento Identidad: <div class="d_ob">*</div></div>
                                     <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required >
                     
                                 </div>
@@ -435,7 +437,7 @@ include 'src\includes\header.php'
                       <div class="etiquetaFormulario">Teléfono/Celular</div>
                         <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij" onkeypress="return soloNumeros(event)" value="" >		
                       </div>
-                    <div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico<div class="d_ob">*</div></div> 
+                    <div class="divTableCell"> <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div> 
                     <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="" >
                     </div>    
                                 
@@ -446,7 +448,7 @@ include 'src\includes\header.php'
                     
                     <div class="divTableCell" style="width:99%;">
                     
-                        <div class="etiquetaFormulario">Número de Orden<div class="d_ob">*</div></div>
+                        <div class="etiquetaFormulario">Número de Orden: <div class="d_ob">*</div></div>
                         <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" >
                     
                     </div>
@@ -483,7 +485,7 @@ include 'src\includes\header.php'
     <div class="tabs2 col-xs-12" style="display:block !important;" id="tab-registro">
         <div class="tab-button-outer">
             <ul id="tab-button2">
-                <li id="icon-description2" class="is-active"><a >INFORMACIÓN DEL BIEN CONTRATADO</a></li>     
+                <li id="icon-description2" class="is-active"><a  style="background-image:none !important;padding:.5em;">INFORMACIÓN DEL BIEN CONTRATADO</a></li>     
             </ul>
         </div>
         <div class="content">
@@ -491,7 +493,7 @@ include 'src\includes\header.php'
                 <div id="receptor">
                     <br>
                     <div class="divTable" style=" width:100%;display:inline-block;" >
-                    <div class="etiquetaFormulario" style="text-align:center; font-size:medium;">SELECCIONE UN TIPO DE SERVICIO: </div> 
+                    <div class="etiquetaFormulario" style="text-align:center;">SELECCIONE UN TIPO DE SERVICIO: </div> 
                         <div class="divTableBody" style="display:block;">
                         <div class="divTableRow" id="radios_1">
                         <label>
@@ -506,7 +508,7 @@ include 'src\includes\header.php'
                         </div>
                         
                         <div class="divTableRow">
-                    <div class="divTableCell" style="width:99%;" colspan="2"> <div class="etiquetaFormulario">Monto reclamado ( S/. )<div class="d_ob">*</div></div> 
+                    <div class="divTableCell" style="width:99%;" colspan="2"> <div class="etiquetaFormulario">Monto reclamado ( S/. ): <div class="d_ob">*</div></div> 
                 
                     <input type="text" size="4" maxlength="4" name="campo1" id="campo1" onkeypress="return soloNumeros(event)" value="" >
                 </div>
@@ -515,9 +517,9 @@ include 'src\includes\header.php'
                 
                 
                 <div class="divTableRow">
-                    <div class="divTableCell" style="width:100%;"><div class="etiquetaFormulario">Descripción del producto o servicio adquirido<div class="d_ob">*</div></div>
+                    <div class="divTableCell" style="width:100%;"><div class="etiquetaFormulario">Descripción del producto o servicio adquirido: <div class="d_ob">*</div></div>
                     
-                    <textarea class="form-control" style="width:100%;height:8vh;background-color:whitesmoke;"; aria-label="With textarea"></textarea>		
+                    <textarea class="form-control" style="width:100%;height:8vh;background-color:white;"; aria-label="With textarea"></textarea>		
                     
                     </div>
                     
@@ -537,7 +539,7 @@ include 'src\includes\header.php'
     <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
         <div class="tab-button-outer">
             <ul id="tab-button2">
-                <li id="icon-description2" class="is-active"><a >DETALLE DE LA QUEJA O RECLAMO</a></li>     
+                <li id="icon-description2" class="is-active"><a style="background-image:none !important;padding:.5em;" >DETALLE DE LA QUEJA O RECLAMO</a></li>     
             </ul>
         </div>
         <div class="content">
@@ -545,7 +547,7 @@ include 'src\includes\header.php'
                 <div id="receptor">
                     <br>
                     <div class="divTable" style=" width:100%;display:inline-block;" >
-                    <div class="etiquetaFormulario" style="text-align:center; font-size:medium;">SELECCIONE UN TIPO: </div> 
+                    <div class="etiquetaFormulario" style="text-align:center;">SELECCIONE UN TIPO: </div> 
                         <div class="divTableBody" style="display:block;">
                         <div class="divTableRow" id="radios_1">
                         <label>
@@ -560,7 +562,7 @@ include 'src\includes\header.php'
                         </div>
                         
                         <div class="divTableRow">
-                    <div class="divTableCell" style="width:99%;" colspan="2"> <div class="etiquetaFormulario">DESCRIPCIÓN<div class="d_ob">*</div></div> 
+                    <div class="divTableCell" style="width:99%;" colspan="2"> <div class="etiquetaFormulario">DESCRIPCIÓN: <div class="d_ob">*</div></div> 
                 
                     <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="" >
                 </div>
@@ -568,9 +570,9 @@ include 'src\includes\header.php'
                 
                 
                 <div class="divTableRow">
-                    <div class="divTableCell" style="width:100%;"><div class="etiquetaFormulario">PEDIDO<div class="d_ob">*</div></div>
+                    <div class="divTableCell" style="width:100%;"><div class="etiquetaFormulario">PEDIDO: <div class="d_ob">*</div></div>
                     
-                    <textarea class="form-control" style="width:100%;height:21vh;background-color:whitesmoke;"; aria-label="With textarea"></textarea>		
+                    <textarea class="form-control" style="width:100%;height:21vh;background-color:white;"; aria-label="With textarea"></textarea>		
                     
                     </div>
                     
@@ -590,7 +592,7 @@ include 'src\includes\header.php'
     
     </div>
         
-       <div class="linea"></div>	
+       
     
         <br>
         <br>
