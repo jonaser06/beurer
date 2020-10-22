@@ -583,7 +583,7 @@ figure.effect-selena:hover p {
 	.item-desplegable{font-size: 14px;min-height: 0px;margin-bottom: 15px;}
 	.tabs_goto, .video-circle{width: 5em;height: 5em;}
 	.foto-sticky{position: sticky;}
-	.menus{top: -20px;}
+	.menus{top: -30px;}
 	.item-desplegable a{background-size: 8px;}
 	.carousel-home-general .item-carosuel .info-slider-home .title-big-slider{font-size: 2.3em;}
 	.carousel-home-general .item-carosuel .info-slider-home .subtile-slider{font-size: 1.8em;}
@@ -949,8 +949,8 @@ select
 
 	#aum , #dism
 	{
-		width:42px;
-    height: 42px;
+		width:54px;
+    height: 51px;
 	margin: 0 5%;
 	border-radius:50%;
 	color: #161616;
@@ -961,16 +961,6 @@ select
 	background-color:transparent !important;
 	}
 
-
-main2 {
-      clear: both;
-      font-size: 0.75rem;
-      margin: 0 auto;
-      overflow: hidden;
-      padding: 1rem 0;
-      width: 960px;
-    }
-
 	#cantidad_prod{
 		background:transparent;
 		border: 0 none;
@@ -978,7 +968,7 @@ main2 {
 		color:black;
 		padding-left:0%;
 		vertical-align:middle;
-		font-size:2em !important;
+		font-size:2em;
 		font-family: "nexaheavyuploaded_file";
 	}
 
@@ -1070,7 +1060,7 @@ main2 {
     
 	border-top-left-radius: 10px;
 	border-top-right-radius:10px;
-	/* border:1px solid #c51152; */
+	border:1px solid #c51152;
 	  }
 
 	.login-container {
@@ -1204,7 +1194,6 @@ main2 {
 	  #tab-registro .divTableCell{
 		  display:inline-block;
 		  width:48.5%;
-		  border-color:transparent;
 	  }
 
 	  #tab-registro .one-column{
@@ -1212,15 +1201,8 @@ main2 {
 		width:98% !important;
 	}
 
-	/*Provisional */
-	 /* .menu-enl  .menu-mobile{
-		display:none ; */
-	} 
-	/*Provisional */
-
 	.colors {
 		height:100%;
-		text-align:right;
 	}
 
 	.colors .color{
@@ -1610,7 +1592,7 @@ li.subtotal:before {
     margin-left:0% !important;
   }
   #aum,#dism{
-	  height:42px;
+	  height:2.5em;
   }
   .basket-labels {
     display: none;
@@ -2206,12 +2188,4 @@ background-color:#c51152 !important;
 
 .paso3 li{
 	color:black;
-  }
-
-  .sub_cost,.cost_shipped,.descont_cost,.total_cost
-  {
-  	text-align:right !important;
-  }
-
-
-
+}
