@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BEURER - <?php if(isset($product['titulo'])){ echo ucfirst(mb_strtolower($product['titulo'])); } if ($varify_product == 1) { echo $product['pagetitle']; }elseif($varify_product == 0){ echo $pagina['pagetitle']; }else{ echo $category[0]['titulo']; } ?>
     </title>
-    <meta name="description"
+    <!-- <meta name="description"
         content="<?php if ($varify_product == 1) { echo $product['meta_description']; }elseif($varify_product == 0){ echo $pagina['meta_description']; } ?>" />
     <meta name="keywords"
         content="<?php if ($varify_product == 1) { echo $product['meta_keyword']; }elseif($varify_product == 0){ echo $pagina['meta_keyword']; } ?>" />
@@ -16,7 +16,13 @@
     <meta property="og:description"
         content="<?php if ($varify_product == 1) { echo $product['og_description']; }elseif($varify_product == 0){ echo $pagina['og_description']; } ?>" />
     <meta property="og:image"
-        content="<?php if ($varify_product == 1) { echo $product['og_image']; }elseif($varify_product == 0){ echo $pagina['og_imagen']; } ?>" />
+        content="<?php if ($varify_product == 1) { echo $product['og_image']; }elseif($varify_product == 0){ echo $pagina['og_imagen']; } ?>" /> -->
+
+        <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />                     
 
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/images/logos/favicon.ico'); ?>" />
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css'); ?>">
@@ -81,7 +87,7 @@
                                 <a href="<?= base_url('carrito') ?>"><img src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt="" style="max-width:36px;"></a>
                             </div>
                             <div class="utl2">
-                                <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:36px;"></a>
+                                <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:26px;"></a>
                             </div>
                             <div class="utl3">    
                                 <a href="rastrea-pedido.php"><img src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt="" style="max-width:48px;"></a>

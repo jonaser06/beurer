@@ -11937,8 +11937,7 @@ html ul {
   top: 120px;
 }
 .menus .info-subm {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 3em;
 }
 
 #button-menu {
@@ -12046,16 +12045,14 @@ html ul {
 }
 
 .submenu- {
-  position: relative;
+  position: absolute;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 0;
-  top: 65px;
+  top: 53px;
   display: none;
   z-index: 1001;
   transition: 0.3s 1s;
-  -webkit-transform: translateY(-65px);
-          transform: translateY(-65px);
 }
 .submenu- .icon-cerrar {
   position: absolute;
@@ -12076,6 +12073,10 @@ html ul {
 
 .content-nav {
   transition: linear 0.3s;
+}
+
+.content-nav.caida {
+  height: 100vh !important;
 }
 
 .content-nav.caida.caida1 {
@@ -12109,26 +12110,8 @@ html ul {
   top: 120px;
 }
 
-.menus.menu-salud {
-  background-color: rgba(80, 144, 200, 0.95);
-}
-.menus.menu-bienestar {
-  background-color: rgba(240, 138, 0, 0.95);
-}
-.menus.menu-belleza {
-  background-color: rgba(126, 18, 98, 0.95);
-}
-.menus.menu-actividad {
-  background-color: rgba(122, 181, 30, 0.95);
-}
-.menus.menu-linea-bb {
-  background-color: #e6b900;
-}
-
 .content-nav.caida.caida1 .d-menu1 .submenu- {
   display: block;
-  -webkit-transform: translate(10px);
-          transform: translate(10px);
 }
 .content-nav.caida.caida1 .d-menu1 .submenu- .content-img-menu {
   opacity: 1;
@@ -12136,26 +12119,20 @@ html ul {
 
 .content-nav.caida.caida2 .d-menu2 .submenu- {
   display: block;
-  -webkit-transform: translate(10px);
-          transform: translate(10px);
+  height: 100vh;
 }
 
 .content-nav.caida.caida3 .d-menu3 .submenu- {
   display: block;
-  -webkit-transform: translate(10px);
-          transform: translate(10px);
+  height: 100vh;
 }
 
 .content-nav.caida.caida4 .d-menu4 .submenu- {
   display: block;
-  -webkit-transform: translate(10px);
-          transform: translate(10px);
 }
 
 .content-nav.caida.caida5 .d-menu5 .submenu- {
   display: block;
-  -webkit-transform: translate(10px);
-          transform: translate(10px);
 }
 
 .input-search {
@@ -12701,7 +12678,7 @@ button:focus {
   cursor: pointer;
   padding-left: 2em;
   text-align: left;
-  color: #999999;
+  color: #999999  ;
   display: block;
   font-size: 0.85rem;
 }
@@ -12715,9 +12692,9 @@ button:focus {
 }
 
 .checkbox .helper {
-  color: white;;
+  color: #c51152    ;
   position: absolute;
-  background-color:#c51152;
+  background-color:white;
   
   top: 0px;
   left: 0;
@@ -12737,7 +12714,7 @@ button:focus {
   position: absolute;
   height: 0;
   width: 0.09rem;
-  background-color: white;
+  background-color: #c51152;
   display: block;
   -webkit-transform-origin: left top;
   transform-origin: left top;
