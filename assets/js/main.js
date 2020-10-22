@@ -44,13 +44,20 @@ ObjMain = {
             ObjMain.listar_items(); 
         }
     },
-    recalculo: () =>{
-
+    recalculo: (item) =>{
+        let cost = 0 ;
+        item.forEach((p,index)=>{
+            let subt = parseFloat(p.precio_online) * parseInt(p.cantidad);
+            cost = cost + subt;
+        });
+        document.querySelector('.sub_cost').innerHTML = (cost).toFixed(2);
+        console.log('Total: '+cost);
     },
     listar_items: () => {
         let item = localStorage.getItem('productos');
         if(item){
             item = JSON.parse(item);
+            ObjMain.recalculo(item);
             item.forEach((p,index)=>{
                 document.querySelector('.carrito-container').innerHTML += ObjMain.item_carrito(index, p.id, p.cantidad, p.img, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
                 document.querySelector('.body-resumen').innerHTML += ObjMain.pedido(index,p.id, p.cantidad, p.img, p.precio, p.precio_online, p.producto_sku, p.subtotal, p.title);
@@ -123,9 +130,26 @@ ObjMain = {
         let id = event.path[3].getAttribute('data-id');
         event.path[3].remove();
         document.querySelector('.ibr-'+id).remove();
-        
-        // console.log(event.path[3]);
-        // document.querySelector('.item-prod-'+id).remove();
+        /* eliminar de localstorage */
+        let productos = localStorage.getItem('productos');
+        if(productos){
+            productos = JSON.parse(productos);
+            for(let i = 0; i < productos.length ; i++){
+                if(productos[i].id == id){
+                    console.log('--------Eliminando--------');
+                    delete productos[i];
+                }
+            }
+        }
+        productos = productos.filter(function (e) { return e != null; });
+
+        localStorage.setItem('productos',JSON.stringify(productos));
+
+        /* recalcular */
+        let item = localStorage.getItem('productos');
+        item = JSON.parse(item);
+        ObjMain.recalculo(item);
+
     },
     mas:(id)=>{
         if(parseInt(document.querySelector('.cant-'+id).value) < 10){ 
@@ -147,8 +171,11 @@ ObjMain = {
                     }
                 }
             }
-            localStorage.removeItem('productos');
             localStorage.setItem('productos',JSON.stringify(productos));
+            /* recalcular */
+            let item = localStorage.getItem('productos');
+            item = JSON.parse(item);
+            ObjMain.recalculo(item);
         };
         
         return;
@@ -173,8 +200,11 @@ ObjMain = {
                     }
                 }
             }
-            localStorage.removeItem('productos');
             localStorage.setItem('productos',JSON.stringify(productos));
+            /* recalcular */
+            let item = localStorage.getItem('productos');
+            item = JSON.parse(item);
+            ObjMain.recalculo(item);
         };
         
         return;
