@@ -123,6 +123,18 @@ ObjMain = {
         let id = event.path[3].getAttribute('data-id');
         event.path[3].remove();
         document.querySelector('.ibr-'+id).remove();
+        /* eliminar de localstorage */
+        console.log(event);
+        /* let productos = localStorage.getItem('productos');
+        if(productos){
+            productos = JSON.parse(productos);
+            for(let i = 0; i < productos.length ; i++){
+                if(productos[i].cantidad == cantidad){
+                    productos[i].cantidad = ncantidad;
+                    break;
+                }
+            }
+        } */
         
         // console.log(event.path[3]);
         // document.querySelector('.item-prod-'+id).remove();
@@ -147,7 +159,6 @@ ObjMain = {
                     }
                 }
             }
-            localStorage.removeItem('productos');
             localStorage.setItem('productos',JSON.stringify(productos));
         };
         
@@ -173,7 +184,6 @@ ObjMain = {
                     }
                 }
             }
-            localStorage.removeItem('productos');
             localStorage.setItem('productos',JSON.stringify(productos));
         };
         

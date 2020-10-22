@@ -53,79 +53,7 @@
                             <li class="subtotal">Subtotal</li>
                         </ul>
                     </div>
-                    <div class="basket-product">
-                      <div class="item">
-                        <a class="product-image" data-toggle="modal" onclick="modal()" data-target="#exampleModal">
-                          <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2"
-                            class="product-frame">
-                        </a>
-                        <div class="product-details">
-                          <span>MASAJEADOR ANTICELULÍTICO CM 50</span>
-                          <p>SKU: 232321939</p>
-                          <p>Envío a domicilio</p>
-                        </div>
-                      </div>
-
-                      <div class="price" id="preuni">
-                        <div class="info-prod" style="display:block;">
-                          <img src="assets/images/precio-online.png">
-                          <div class="font-nexaheav text-left price rprice"> 100.00</div>
-                        </div>
-                        <div class="font-nexaheav  "
-                          style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
-                          Normal: S/ 25.69</div>
-                      </div>
-
-                      <div class="quantity">
-                        <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
-                        <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1"
-                          readonly>
-                        <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
-                      </div>
-                      <div class="subtotal rsubtotal" id="subtotal">26.00</div>
-
-                      <div class="remove">
-                        <a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt=""
-                            style="width:30px; height:30px;align:left;"></a>
-                      </div>
-                    </div>
-
-                    <div class="basket-product">
-                      <div class="item">
-                        <a class="product-image" data-toggle="modal" onclick="modal()" data-target="#exampleModal">
-                          <img src="https://beurer.pe/assets/sources/CM50_01.jpg" alt="Placholder Image 2"
-                            class="product-frame">
-                        </a>
-                        <div class="product-details">
-                          <span>MASAJEADOR ANTICELULÍTICO CM 50</span>
-                          <p>SKU: 232321939</p>
-                          <p>Envío a domicilio</p>
-                        </div>
-                      </div>
-
-                      <div class="price" id="preuni">
-                        <div class="info-prod" style="display:block;">
-                          <img src="assets/images/precio-online.png">
-                          <div class="font-nexaheav text-left price rprice"> 100.00</div>
-                        </div>
-                        <div class="font-nexaheav  "
-                          style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
-                          Normal: S/ 25.69</div>
-                      </div>
-
-                      <div class="quantity">
-                        <button id="dism" style="width:42px; margin: 0 8%;" onclick="disminuir()">-</button>
-                        <input class="form-control-field cantidad" name="pwd" value="1" type="text" id="cantidad_prod" min="1"
-                          readonly>
-                        <button id="aum" style="width:42px; margin: 0 8%;" onclick="aumentar()">+</button>
-                      </div>
-                      <div class="subtotal rsubtotal" id="subtotal">26.00</div>
-
-                      <div class="remove">
-                        <a id="trash" href="#"><img src="assets/images/nuevo/delete.png" alt=""
-                            style="width:30px; height:30px;align:left;"></a>
-                      </div>
-                    </div>
+                    <div class="carrito-container"></div>
 
                 </div>  
 
@@ -210,17 +138,7 @@
                         <div class="sub-resumen">SUBTOTAL</div>
                     </div>
                     <div class="body-resumen">
-                        <div class="item-resumen">
-                            <div class="n-ind">1</div>
-                            <div class="n-subtotal_name">Masajeador Anticelulítico CM 50</div>
-                            <div class="sub_cost">26.00</div>
-                        </div>
-
-                        <div class="item-resumen">
-                            <div class="n-ind">2</div>
-                            <div class="n-subtotal_name">Masajeador Anticelulítico CM 50</div>
-                            <div class="sub_cost">26.00</div>
-                        </div>
+                    
                     </div>
                     <div class="head-cupon">Ingrese aquí su cupón de descuento</div>
                     <div class="input-cupon" style="display:flex;">
