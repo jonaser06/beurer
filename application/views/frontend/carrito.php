@@ -149,92 +149,24 @@
                         <div class="item-resumen">
                             <div class="n-ind"></div>
                             <div class="n-subtotal_name">SUBTOTAL</div>
-                            <div class="sub_cost">600.00</div>
+                            <div class="sub_cost">-</div>
                         </div>
                         <div class="item-resumen">
                             <div class="n-ind"></div>
                             <div class="shipped_name">COSTO DEL ENVÍO</div>
-                            <div class="cost_shipped">15.00</div>
+                            <div class="cost_shipped">-</div>
                         </div>
                         <div class="item-resumen" style="color:#c51152;">
                             <div class="n-ind"></div>
                             <div class="descont_name">DESCUENTO</div>
-                            <div class="descont_cost">20.00</div>
+                            <div class="descont_cost">-</div>
                         </div>
                         <div class="item-resumen" style="color:#c51152;font-weight: bold;">
                             <div class="n-ind"></div>
                             <div class="total_name">TOTAL A PAGAR</div>
-                            <div class="total_cost">615.00</div>
+                            <div class="total_cost">-</div>
                         </div>
                     </div>
-                    <!-- <table class="table tbl-resumen" style="font-size:1.4em;">
-                        <thead>
-                            <tr>
-                                <th style="padding-right:8%;" scope="col">#</th>
-                                <th scope="col">PRODUCTO</th>
-
-                                <th scope="col " style="text-align:right;">SUBTOTAL</th>
-                            </tr>
-                        </thead>
-                        <tbody style="font-size:0.9em;">
-                            <tr>
-                                <td scope="row">1</td>
-                                <td style="text-align:left;">Masajeador Anticelulítico CM 50</td>
-                                <td class="subtotalr" id="subtotal">26.00</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">2</td>
-                                <td style="text-align:left;">Cepillo Facial FS 50</td>
-                                <td class="subtotalr">104.00</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">3</td>
-                                <td style="text-align:left;">Oxímetro XNS 20</td>
-                                <td class="subtotalr">104.00</td>
-                            </tr>
-
-                            <tr style="background-color:white;border-bottom:0 none;">
-                                <th scope="row" colspan="3" style="font-size:1.35em;color:black;text-align:center;font-weight:bold;vertical-align:middle;">Ingrese aquí su cupón de descuento</th>
-                            </tr>
-
-                            <tr style="background-color:white">
-                                <th scope="row" colspan="2" style="text-align:right; vertical-align:middle;">
-                                    <input type="text" placeholder="Ej. 6W79H6" style="border: 1px solid black;font-size:1.3em;" maxlength="12" />
-                                    <i class="helper"></i>
-                                </th>
-
-                                <td id="d_costonvio" style="color:#c51152; font-size:1.2em;">
-                                    <label class="font-light label-pol" style="display:inline;">
-                                        <a class="btn btn-cmn" style="font-size:0.75em;padding:5px 25px;">CANJEAR</a>
-                                    </label>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td scope="row" style=" text-align:left;vertical-align:middle;">SUBTOTAL</td>
-                                <td class="subtotalr" id="total">600.00</td>
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td scope="row" style=" text-align:left;vertical-align:middle;">COSTO DEL ENVÍO</td>
-                                <td class="subtotalr" id="total">15.00</td>
-                            </tr>
-
-                            <tr style="background-color:white; color:#c51152;">
-                                <td></td>
-                                <td scope="row" style="vertical-align:middle;">DESCUENTO</td>
-                                <td class="subtotalr">20.00</td>
-                            </tr>
-
-                            <tr style="background-color:white; color:#c51152;font-weight:bold;font-size:1.1em;">
-                                <td></td>
-                                <td scope="row" style="vertical-align:middle;">TOTAL A PAGAR</td>
-                                <td class="subtotalr">615.00</td>
-                            </tr>
-                        </tbody>
-                    </table> -->
                 </div>
             </div>
             <span><a class="btn btn-cmn" href="producto.php" tabindex="2">Seguir comprando</a></span>
