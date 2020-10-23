@@ -433,14 +433,6 @@
             </div>
         </div>
 
-        <div style="text-align:center !important;">
-            <div class="checkbox" style="display:inline-block; " id="d_publicidad">
-                <label class="font-light label-pol" style="display:inline;">
-                    <input type="checkbox" id="publicidad" /><i class="helper"></i>
-                </label>
-                
-            </div>
-        </div>
 
         <br>
 

@@ -933,11 +933,7 @@ const perfil = () => {
                         <div class="etiquetaFormulario">Domicilio</div>
                         <input type="text" name="campo1"id="locationUser" onkeypress="return soloLetras(event)" value="${userData.direccion}">
                     </div>
-                    <div class="divTableCell" style="display:block">
-                        <div class="etiquetaFormulario">Dirección de Envio</div> 
-                        <input type="text" size="20" maxlength="20"name="campo1" id="envio"  value="direccion de entrega">
-                    </div>
-                    
+                   
                  </div>
                 </div> <br> <br>
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">

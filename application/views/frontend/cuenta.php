@@ -51,9 +51,9 @@ input {
             </div>
         </div>
 
-        <div class="row cont_datos" id="d_formularios1" style="display:inline-block;width:90%;">
-            <div id="panel-user1" style="width:27%;float:left;background-color:white;color:#161616;margin-right:1.5%;">
-                <ul id="p_users" style="text-align:left;background-color:white;">
+        <div class="row cont_datos" id="d_formularios1" style="border-radius:20px;display:inline-block;width:90%;">
+            <div id="panel-user1" style="width:27%;float:left;background-color:transparent;color:#161616;margin-right:1.5%;">
+                <ul id="p_users"  style="text-align:left;background-color:transparent;">
                     <li><button id="p_inicio" class="btn btnprimary1 p_user active">
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <h3>Inicio</h3>
@@ -126,9 +126,9 @@ input {
 
                     <h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus
                         gestiones con nosotros.</h4>
-                    <h4>Contamos con 3 secciones a tu disposición:</h4>
+                    <h4>Contamos con este panel a tu disposición:</h4>
                     <p>
-                    <ul style="font-size:1.2em;line-height:50px;">
+                    <ul style="font-size:1.2em;line-height:50px; display:none">
                         <li>1. Datos Personales</li>
                         <li>2. Mis órdenes</li>
                         <li>3. Mis Direcciones</li>

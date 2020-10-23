@@ -69,7 +69,7 @@
                             <span class="font-light">¿Eres nuevo? Regístrate aquí y compra ahora. </span>
                             <br><br>
                             <span>
-                                <a class="btn btn-cmn" href="#" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
+                                <a class="btn btn-cmn" href="<?php echo base_url('registro'); ?>" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
                             </span>
 
                         </div>
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </div>
-            <span><a class="btn btn-cmn" href="producto.php" tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
+            <span><a class="btn btn-cmn" href="<?php echo base_url(); ?>" tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
             <?php if ( $sesion ): ?>
             <span><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;">Comprar</a></span>
             <?php endif; ?>
