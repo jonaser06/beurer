@@ -115,7 +115,7 @@
                     <label class="font-light label-pol" style="display:inline;">
                         <input type="checkbox" id="check_envio" onclick="ObjMain.delivery()" /><i class="helper"></i>
                     </label>
-                    <div style="display:inline-block; font-size:1.2em;font-family:'nexaheavyuploaded_file';"> Quiero entrega a domicilio </div>
+                    <div style="display:inline-block; font-size:1.55em;font-family:'nexaheavyuploaded_file';"> Quiero entrega a domicilio </div>
                 </div>
             </div>
 
@@ -130,8 +130,8 @@
             <hr>
 
             <div>
-                <div style="font-size:1.5em;font-weight:bold;text-align:center;color:#c51152;font-family:'nexaregularuploaded_file';">RESUMEN DE TU PEDIDO</div>
-                <div class="d_montos" style="font-size: 0.6em;">
+                <div style="font-size:1.9em;font-weight:bold;text-align:center;color:#c51152;font-family:'nexaregularuploaded_file';">RESUMEN DE TU PEDIDO</div>
+                <div class="d_montos">
                     <div class="head-resumen">
                         <div class="n-resumen">#</div>
                         <div class="product-resumen">PRODUCTO</div>

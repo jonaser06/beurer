@@ -78,7 +78,7 @@ select {
 .descont_cost,
 .total_cost {
   padding: 10px 0;
-  text-align: left;
+  text-align: right;
   width: 30%;
 }
 
@@ -283,8 +283,8 @@ select {
 }
 
 .count-cant {
-  width: 54px;
-  height: 51px;
+  width: 42px;
+  height: 42px;
   margin: 0 5%;
   border-radius: 50%;
   color: #161616;
@@ -347,30 +347,9 @@ button {
   /* color: #fff; */
 }
 
-
-
-
-
-
-
-
 .hide {
   display: none;
 }
-
-
-.main2 {
-  clear: both;
-  font-size: 0.75rem;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 1rem 0;
-  width: 960px;
-}
-
-
-
-
 
 @media (min-width: 576px) {
 
