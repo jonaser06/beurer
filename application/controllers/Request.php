@@ -387,9 +387,9 @@ class Request extends CI_Controller {
     }    
     
     private function __output($html = NULL) {
-	    if (ENVIRONMENT === 'production') {
-	        $html = minifyHtml($html);
-	    }
+	    // if (ENVIRONMENT === 'production') {
+	    //     $html = minifyHtml($html);
+	    // }
 
 	    $this->output->set_output($html);
 	}

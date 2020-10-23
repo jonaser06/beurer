@@ -76,6 +76,7 @@ $route['manager/paginas/(:num)/(:num)/(:num)'] = 'backend/Paginas/edit/$1/$2/$3'
 $route['manager'] = 'backend/login';
 $route['manager/(.*)'] = 'backend/$1';
 $route['gatoslocos'] = 'html';
+
 //$route['(:any)/(:any)']='request/detallearticulo/$2';
 //$route['(.*)'] = 'welcome';
 
@@ -106,6 +107,8 @@ $route['linea-bebe/(:any)/(:any)'] = 'frontend/productos/show/$2';
 
 $route['carrito'] = 'frontend/carrito/index/';
 $route['registro'] = 'frontend/auth/index';
+$route['facturacion'] = 'frontend/carrito/register';
+
 $route['updatePass/(:num)'] = 'ajax/updatePass/$1';
 
 $route['myaccount'] = 'frontend/perfil';

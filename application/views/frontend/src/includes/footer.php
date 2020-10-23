@@ -107,8 +107,8 @@
 </div> -->		
 
 
-<script src="<?= base_url(); ?>assets/js/app.min.js"></script>
-<!-- <script src="<?= base_url(); ?>assets/js/app2.js"></script> -->
+<script src="<?= base_url(); ?>assets/js/app.js"></script>
+<script src="<?= base_url(); ?>assets/js/app2.js"></script>
 
 <script src="<?= base_url(); ?>assets/js/libraries/animate-it.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
