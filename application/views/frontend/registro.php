@@ -12,10 +12,12 @@
     </section>
     
     <br>
+    <div class="font-nexaheavy" style="height:100%;font-size:2.5rem;background-image:url('assets/images/fondo1.png');background-color:white;color:#c51152;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;" >Registro de Cliente Beurer </div>   
+    <br>
     <div class="formulario" style="text-align:center;padding-top: 0px; max-width: 920px; border-radius: 8%; margin: auto; padding-bottom: 2%;">
-        <h1 style="background-color:#c51152; color:white;font-size:2.3em;font-weight:bold; padding-top:1%;padding-bottom:1%;padding-left:2%;margin-top:0px;border-radius: 25px 25px 1px 1px;"> REGISTRO DE CLIENTE BEURER</h1>
+        
 
-        <div class="linea"></div> <br><br>
+        <br>
         <br>
         <div class="row cont_datos" id="d_formularios1" align="center" style="display:inline-block;width:46em;">
             <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
@@ -32,7 +34,7 @@
                                 <div class="divTableBody" style="display:block;">
                                     <div class="divTableRow">
                                         <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Tipo Documento Identidad<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Tipo Documento Identidad: <div class="d_ob">*</div>
                                             </div>
 
                                             <select id="s_tipodoc">
@@ -44,7 +46,7 @@
                                         </div>
 
                                         <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Número Documento Identidad<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Número Documento Identidad: <div class="d_ob">*</div>
                                             </div>
                                             <input id="n_documento" type="text" size="20" maxlength="20" value="" required onkeyup="ObjMain.solonumero(this);" onchange="ObjMain.solonumero(this);">
                                         </div>
@@ -52,13 +54,13 @@
 
                                     <div class="divTableRow" id="pn_datos1">
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Nombres <div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Nombres: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="30" id="c_nombres1" value="">
 
                                         </div>
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Apellido Paterno<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Apellido Paterno: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" id="c_apep1" value="">
 
@@ -68,24 +70,24 @@
                                     <div class="divTableRow" id="pn_datos2">
 
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Apellido Materno<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Apellido Materno: <div class="d_ob">*</div></div>
                                             <input type="text" size="20" maxlength="20" id="c_apem1" value="">
                                         </div>
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Correo electrónico<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div>
                                             <input type="email" id="c_correo1" size="20" maxlength="30" id="correo" value="" required >
                                         </div>
                                     </div>
 
                                     <div class="divTableRow">
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Contraseña<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Contraseña: <div class="d_ob">*</div></div>
                                             <input type="password" size="20" maxlength="45" value="" id="passw" >
                                             <div class="passalert" style="display:none;color: #c51152;font-size: 0.8rem;text-align: left;">Las contraseñas no coinciden</div>
                                         </div>
 
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Repita la contraseña<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Repita la contraseña: <div class="d_ob">*</div></div>
                                             <input type="password" size="20" maxlength="45" value="" id="confpassw" >
                                             <div class="passalert2" style="display:none;color: #c51152;font-size: 0.8rem;text-align: left;">Las contraseñas no coinciden</div>
                                         </div>
@@ -94,14 +96,14 @@
                                     <div class="divTableRow">
 
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Departamento<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div></div>
                                             <select id="s_depa" onchange="ObjMain.showProvincesList(this);">
                                                 <option disabled selected>Seleccione departamento</option>
                                             </select>
                                         </div>
 
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Provincia<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div>
                                             </div>
                                             <select id="sprov" onchange="ObjMain.showDistrictsList(this);">
                                                 <option disabled selected>Seleccione provincia</option>
@@ -113,13 +115,13 @@
                                     <div class="divTableRow">
 
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Distrito<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div></div>
                                             <select id="sdist">
                                                 <option disabled selected>Seleccione distrito</option>
                                             </select>
                                         </div>
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Dirección<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Dirección: <div class="d_ob">*</div></div>
                                             <input type="text" id="direction" size="20" maxlength="45" value="">
                                         </div>
 
@@ -127,12 +129,12 @@
 
                                     <div class="divTableRow">
                                         <div class="divTableCell">
-                                            <div class="tituloTabla1">Referencia</div>
+                                            <div class="etiquetaFormulario">Referencia</div>
                                             <input type="text" id="referencia" size="20" maxlength="45" value="">
                                         </div>
 
                                         <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Teléfono<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Teléfono: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" id="telephone" size="9" maxlength="9" id="c_telcel" value="">
                                         </div>
@@ -144,7 +146,7 @@
                                         <div class="etiquetaFormulario" style="margin-left:1%;">FECHA DE NACIMIENTO
                                         </div>
                                         <div class="divTableCell" style="width:18%;">
-                                            <div class="tituloTabla1">Día<div class="d_ob">(*)</div></div>
+                                            <div class="etiquetaFormulario">Día: <div class="d_ob">*</div></div>
                                             <select name="dia" id="dia">
                                                 <?php for($i = 1 ; $i<=31 ; $i++): ?>
                                                     <option value='<?php echo $i; ?>'><?php echo $i; ?></option>
@@ -152,7 +154,7 @@
                                             </select>
                                         </div>
                                         <div class="divTableCell" style="width:48%;">
-                                            <div class="etiquetaFormulario">Mes<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Mes: <div class="d_ob">*</div>
                                             </div>
 
                                             <select name="mes" id="mes">
@@ -166,7 +168,7 @@
                                             </select>
                                         </div>
                                         <div class="divTableCell" style="width:28%;">
-                                            <div class="etiquetaFormulario">Año<div class="d_ob">(*)</div>
+                                            <div class="etiquetaFormulario">Año: <div class="d_ob">*</div>
                                             </div>
                                             <select name="anyo" id="anyo">
                                                 <option value=""></option>
@@ -187,7 +189,7 @@
                                     <div class="divTableRow" style="width:100%;">
                                         <div class="divTableCell"
                                             style="text-align:left; color:black;font-size:1.3em;font-weight:bold;">
-                                            <div class="d_ob">(*)</div> <span>Datos obligatorios.</span>
+                                            <div class="d_ob">*</div> <span>Datos obligatorios.</span>
                                         </div>
                                     </div>
                                 </div>
