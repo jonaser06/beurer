@@ -103,7 +103,7 @@ ObjMain = {
             item += '</div>';
             item += '<div class="quantity">';
             item += '<button class="count-cant" onclick="ObjMain.menos('+id+');">-</button>';
-            item += '<input class="form-control-field cantidad cant-'+id+'" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
+            item += '<input class="form-control-field cantidad cant-'+id+'" id="cantidad_prod" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
             item += '<button class="count-cant" onclick="ObjMain.mas('+id+');">+</button>';
             item += '</div>';
             item += '<div class="subtotal rsubtotal sub-'+id+'" id="subtotal">'+subtotal+'</div>';
