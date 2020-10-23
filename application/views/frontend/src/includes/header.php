@@ -96,18 +96,13 @@
                         <div class="menu-hamb" style=" justify-content:right; display:grid; right:70%; padding-right:2%;">                            
                             <div class="row">
                                 <div class="col-md-3 offset-md-6" style="width:auto; top:-6%;">
-                                    <?php 
-                                    if ( isset($_SESSION['status']) && $_SESSION['status']) : 
-                                        $sesion = true;
-                                    else : $sesion = false;
-                                    endif;
-                                    ?>
+                                    <?php  $sesion = ( isset($_SESSION['status']) && $_SESSION['status'])?true:false; ?>
                                     <?php if ( !$sesion ): ?>
                                     <!-- inicio de sesion -->
                                     <div class="login" style="display:none;">
                                         <h2 class="login-header">INICIA SESIÓN</h2>
                                         <form class="login-container" >
-                                            <p><input type="text" id="username_" style="text-align:center;" placeholder="Email o DNI"></p>
+                                            <p><input type="text" id="username_" style="text-align:center;" placeholder="Email"></p>
                                             <p><input type="password" id="pasword_" style="text-align:center;" placeholder="Contraseña"></p>
                                             <p class="response_sesion"></p>
                                             <div class="checkbox" style=" text-align:left; padding-left:5px;">

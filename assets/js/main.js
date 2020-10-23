@@ -27,6 +27,9 @@ ObjMain = {
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
         }
+        if(document.querySelector('.lcc') != null){
+            ObjMain.sign_in_cart();
+        }
         if(document.querySelector('.email-recovery') != null){
             ObjMain.recovery();
         }
@@ -382,6 +385,30 @@ ObjMain = {
                 });
             });
         }
+    },
+    sign_in_cart: () =>{
+        document.querySelector('.lcc').addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let user = document.querySelector("#username__").value;
+            let pass = document.querySelector("#pasword__").value;
+            
+            let formData = new FormData();
+            formData.append("username", user);
+            formData.append("contrasena", pass);
+            ObjMain.ajax_post('POST',DOMAIN+'ajax/login', formData )
+            .then((resp)=>{
+                resp = JSON.parse(resp);
+                if(resp.status){
+                    window.location = DOMAIN+'carrito';
+                }
+            })
+            .catch((err)=>{
+                err = JSON.parse(err);
+                let message = document.querySelector(".response_sesion");
+                message.innerHTML = err.message;
+
+            });
+        });
     },
     login: ()=>{
         let ventanalogin = document.getElementsByClassName("login")[0];
