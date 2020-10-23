@@ -1,6 +1,5 @@
-<?php
-include 'src\includes\header.php';
-?>
+<?php include 'src/includes/header.php' ?>
+
 
 <style>
 .p_user h3 {
@@ -226,10 +225,5 @@ input {
 </script>
 
 <!-- <script src="assets/js/registro.js"></script> -->
+<?php include 'src/includes/footer.php' ?>
 
-
-<?php
-
-include 'src\includes\footer.php';
-
-?>
