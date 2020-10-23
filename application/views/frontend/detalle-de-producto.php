@@ -464,7 +464,7 @@ $(function() {
                         AL CARRO</button></a>
                 <br>
                 <br>
-                <a href="producto.php"
+                <a href="<?php echo base_url('belleza/cuidado-del-rostro'); ?>"
                     style="font-size: 0.95rem;font-weight:bold;text-decoration-line:underline;">Seguir comprando</a>
             </div>
             <?php 
