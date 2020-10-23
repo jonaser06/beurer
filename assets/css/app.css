@@ -12715,9 +12715,9 @@ button:focus {
 }
 
 .checkbox .helper {
-  color: white;;
+  color: #c51152;
   position: absolute;
-  background-color:#c51152;
+  background-color:white ;
   
   top: 0px;
   left: 0;
@@ -12737,7 +12737,7 @@ button:focus {
   position: absolute;
   height: 0;
   width: 0.09rem;
-  background-color: white;
+  background-color:#c51152;
   display: block;
   -webkit-transform-origin: left top;
   transform-origin: left top;

@@ -1,7 +1,7 @@
 html{
 	background-color:#f6f6f6 !important;
 }
-body{font-family:'nexaregularuploaded_file'; }
+body{font-family:'nexaregularuploaded_file' !important; }
 .menus .list-submenu .item-submenu .list-prd-sub .item-pdr-sub {-o-transition: all linear 0.15s;transition: all linear 0.15s;-webkit-transition: all linear 0.15s;-moz-transition: all linear 0.15s;}
 .menus .list-submenu .item-submenu .list-prd-sub .item-pdr-sub:hover {margin-left: 5px;}
 .menus .list-submenu .item-submenu .list-prd-sub .item-pdr-sub:hover .link-pdr-sub{opacity: 1;}
@@ -968,7 +968,7 @@ select
 		color:black;
 		padding-left:0%;
 		vertical-align:middle;
-		font-size:2em;
+		font-size:2em !important;
 		font-family: "nexaheavyuploaded_file";
 	}
 
@@ -1194,6 +1194,7 @@ select
 	  #tab-registro .divTableCell{
 		  display:inline-block;
 		  width:48.5%;
+		  border-color:transparent;
 	  }
 
 	  #tab-registro .one-column{
@@ -2188,4 +2189,8 @@ background-color:#c51152 !important;
 
 .paso3 li{
 	color:black;
+}
+
+.buy{
+	font-size:1.5em !important;
 }

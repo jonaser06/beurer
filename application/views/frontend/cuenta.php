@@ -214,7 +214,6 @@ input {
     data-ofertas      =<?= (int)$userData['ofertas']?>
     data-politicas    =<?= (int)$userData['politicas']?>
     data-direccion    ="<?= $userData['direccion']?>"
-    
     >
 </main>
 
