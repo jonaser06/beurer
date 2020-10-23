@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2020 a las 07:22:56
+-- Tiempo de generación: 23-10-2020 a las 08:59:20
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.33
 
@@ -303,6 +303,25 @@ CREATE TABLE `cupon` (
   `fecha_uso` datetime DEFAULT NULL,
   `cupon_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dimensiones`
+--
+
+CREATE TABLE `dimensiones` (
+  `id_dimension` int(10) NOT NULL,
+  `margen_volumen` float(10,2) DEFAULT NULL,
+  `margen_peso` float(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dimensiones`
+--
+
+INSERT INTO `dimensiones` (`id_dimension`, `margen_volumen`, `margen_peso`) VALUES
+(1, 120.20, 99.99);
 
 -- --------------------------------------------------------
 
@@ -1665,6 +1684,12 @@ ALTER TABLE `cupon`
   ADD PRIMARY KEY (`id_cupon`);
 
 --
+-- Indices de la tabla `dimensiones`
+--
+ALTER TABLE `dimensiones`
+  ADD PRIMARY KEY (`id_dimension`);
+
+--
 -- Indices de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
@@ -1833,6 +1858,12 @@ ALTER TABLE `contenedor`
 --
 ALTER TABLE `contenido`
   MODIFY `idcontenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- AUTO_INCREMENT de la tabla `dimensiones`
+--
+ALTER TABLE `dimensiones`
+  MODIFY `id_dimension` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes`
