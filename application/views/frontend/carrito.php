@@ -82,7 +82,7 @@
                             </span>
                             <br><br><br>
                             <span>
-                                <a class="btn btn-cmn" href="#" style="width:80%;padding:7px 0px;font-size:1em;">
+                                <a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" style="width:80%;padding:7px 0px;font-size:1em;">
                                     CONTINUAR SIN REGISTRARSE
                                 </a>
                             </span>
@@ -171,7 +171,7 @@
             </div>
             <span><a class="btn btn-cmn" href="producto.php" tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
             <?php if ( $sesion ): ?>
-            <span><a class="btn btn-cmn" href="producto.php" tabindex="2" style="width:100%;margin: 0px 0px;">Comprar</a></span>
+            <span><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;">Comprar</a></span>
             <?php endif; ?>
             <br>
 
