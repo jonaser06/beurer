@@ -5,26 +5,19 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            <!-- Main Header -->
             <?= $this->load->view('backend/chunks/header', array(), TRUE) ?>
-            <!-- Left side column. contains the logo and sidebar -->
             <?= $this->load->view('backend/chunks/sidebar', array(), TRUE) ?>
 
-            <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
 
                 <section class="content-header">
-                    <?php if($permiso['ver']==1){?>
                     <h1>
                         Administrador de Categorías
                     </h1>
-                    <?php }?>
                 </section>
 
                 <!-- Main content -->
                 <section class="content container-fluid">
-                    <?php if($permiso['ver']==1){?>
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <!--<h3 class="box-title">Filtrar</h3>-->
@@ -34,14 +27,12 @@
                         </div>
                         <div class="box-body">
                             <div class="nav-tabs-custom">
-                                <?php if($permiso['editar']==1){?>
                                 <a href="javascript: Exeperu.addCategoria()" class="btn btn-xs btn-info btn-flat"><i class="glyphicon glyphicon-plus"></i> Agregar</a><br><br>
-                                <?php }?>
-                                <table id="table_categorias" class="table table-bordered table-striped table-hover">
+                                <table id="table_categorias" class="table table-bordered table-striped table-hover nowrap dataTable dtr-inline collapsed">
                                     <thead>
                                         <tr>
                                             <th>Categoría</th>
-                                            <th>Orden</th>
+                                            <th>Color</th>
                                             <th>Estado</th>
                                             <th></th>
                                         </tr>
@@ -51,7 +42,6 @@
                             </div>
                         </div>
                     </div>
-                    <?php }else{?>
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"><strong>NO TIENES ACCESO A ESTE MÓDULO</strong></h3>
@@ -62,31 +52,66 @@
                             </div>
                         </div>
                     </div>
-                    <?php }?>
                 </section>
 
-                <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
 
             <!-- Main Footer -->
             <?= $this->load->view('backend/chunks/footer', array(), TRUE) ?>
         </div>
-        <!-- ./wrapper -->
 
         <?= $this->load->view('backend/chunks/modalLoading', array(), TRUE) ?>
 
         <!-- REQUIRED JS SCRIPTS -->
         <?= $this->load->view('backend/chunks/scripts', array(), TRUE) ?>
 
-        <script src="<?= getFilex('mgr/exeperu/js/categorias.js') ?>"></script>
-
+       <script src=" <?= getFilex('mgr/exeperu/js/categorias.js') ?>"></script>
         <script>
-            $(document).ready(function () {
-                Exeperu.init({
-                    'url': 'manager/categorias/read'
-                });
+          
+        </script> 
+        <script>
+            
+            let table = $('#table_categorias').DataTable({
+            "ajax": "manager/categorias/readCat",
+                "columns": [
+                    { "data": "pagina" },
+                    { "data": "color" ,'render' : function (data , type , row ) {
+                        if(data){
+                            return `<div style=" ;width:20px;height:20px;border-radius:50px;padding:3px;background:${data}"></div>`
+                        }
+                        return `<span class="label label-warning"> sin color </span>`;
+                    }},
+                    { "data": "estado" , 'render' : function (data , type , row ) {
+                        let salida ;
+                        salida = `<span class="label 
+                        ${data == 1 ? 'label-success' : 'label-danger'}
+                        ">
+                        ${data == 1 ? 'Activado' : 'Desactivado'}
+                        </span>`;
+                        return salida;
+                    } },
+                    { "data": "idpagina", 'render': function(data, type, row){
+                       var salida;
+                        salida = "<a href=\"javascript:Exeperu.editCategoria("+data+");\" class=\"btn btn-primary btn-sm btn-flat\"><i class=\"fa fa-pencil\"></i></a>";
+                        salida += " | ";
+                        salida += "<a href=\"javascript:eliminarCategory("+data+");\" id=\"categoria_"+data+"\" class=\"btn btn-danger btn-sm btn-flat\"><i class=\"fa fa-trash-o\"></i></a>";
+                        
+                        return  salida;
+                    } },
+                ]
             });
+            
+           class TableCategorias {
+                constructor(  ) {
+                    
+                }
+                 addCategoria() {
+                     
+                 }
+           }
+
         </script>
+
+    
     </body>
 </html>

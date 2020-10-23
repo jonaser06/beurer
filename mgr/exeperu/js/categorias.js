@@ -58,12 +58,12 @@ Helpers.prototype.editCategoria = function (idcategoria) {
 };
 
 Helpers.prototype.addCategoria = function () {
+    console.log(this);
     this.sendAjax('manager/categorias/edit', {"idcategoria": 0}, 'loadResponse');
 };
 
 Helpers.prototype.reloadTableCategorias = function (response) {
     $('#modalCreateEdit').modal('toggle');
-
     return this.tables['table_categorias'].ajax.reload();
 };
 

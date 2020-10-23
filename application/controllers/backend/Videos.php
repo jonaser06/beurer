@@ -153,8 +153,6 @@ class Videos extends CI_Controller {
     }
 	
 	public function savecategoria(){
-
-		
 		$post=$this->input->post();
 		//print_r($post);exit;
         $jm=array();

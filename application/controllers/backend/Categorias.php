@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Categorias extends CI_Controller {
+class Categorias extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -16,33 +16,60 @@ class Categorias extends CI_Controller {
         } else {
             redirect('manager');
         }
-    }
-
+    } 
     public function index() {
-        $user=$this->manager['user']['idperfil'];
-        $idmodulo=8;
-        
-        $data = array();
-        $data['permiso']=$this->sistema->getPermisos($user,$idmodulo);
-        $data['modulos']=$this->sistema->getModulos($user);
-        
+        $user = $this->manager['user']['idperfil']; 
+        $data['pags'] = $this->sistema->getPaginas();
+        $data['mods'] = $this->sistema->getModulos($user);
+        $key = null;
+        foreach ($data['pags'] as $key => $pag0) {            
+            $hijos = $this->sistema->getHijos($pag0['idpagina']);
+            if ($hijos) {
+                $data['pags'][$key]['hijos'] = $hijos;              
+            }
+        }
+        foreach( $data['mods'] as $modu){
+            $modulosjm[]=$modu['idmodulo'];
+        }
+
+        $data['modulosjm'] = isset( $modulosjm ) ? $modulosjm : [] ;
         $output = $this->load->view('backend/categorias', $data, TRUE);
-
         return $this->__output($output);
     }
 
-    
-    public function edit() {
-        $idcategoria = $this->input->post('id', TRUE);
+    public function readCat(){
 
-        $data = array(
-            'categoria' => $this->mcategorias->getCategoria($idcategoria),
-            'paginas'=>$this->mcategorias->getPaginas()
-        );
-        $output = $this->load->view('backend/popups/edit_categoria', $data, TRUE);
-
-        return $this->__output($output);
+        $categories = $this->mcategorias->getAll();
+        return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output( json_encode( ['data'=> $categories ] ));
+                    
     }
+    public function savecategoria(){
+		$post = $this->input->post();
+		print_r($post);exit;
+        $jm = array();
+        if(empty($post['categoria']['nombre'])){
+            $errores[]="nombre";
+        }else{
+            $jm[]="nombre";
+        }
+        
+        if(isset($errores) && !empty($errores)){
+            $mensaje=array("mensaje"=>"Faltan registrar datos importantes","tipo"=>2,"errores"=>json_encode($errores),"jm"=>json_encode($jm));
+        }else{
+            if((int)$post['categoria']['idcategoria_video']>0){
+                $this->mvideos->updateCategoria($post);
+                $mensaje=array("mensaje"=>"Categoría editada correctamente","tipo"=>1);
+            }else{
+                $this->mvideos->saveCategoria($post);
+                $mensaje=array("mensaje"=>"Categoría registrada correctamente","tipo"=>1);
+            }
+        }     
+        echo json_encode($mensaje);      
+  
+    }
+   
     
     public function categorianom(){
         $idcategoria=$this->input->post('idcategoria');
@@ -54,34 +81,75 @@ class Categorias extends CI_Controller {
     public function save(){
         $post=$this->input->post();
         $jm=array();
-        if(empty($post['categorias']['apellidos'])){
-            $errores[]="apellidos";
+    
+        if(empty($post['categoria']['nombre'])){
+            $errores[]="nombre";
         }else{
-            $jm[]="apellidos";
-        }
-        
-        if(empty($post['categorias']['nombres'])){
-            $errores[]="nombres";
-        }else{
-            $jm[]="nombres";
+            $jm[]="nombre";
         }
         
         if(isset($errores) && !empty($errores)){
             $mensaje=array("mensaje"=>"Faltan registrar datos importantes","tipo"=>2,"errores"=>json_encode($errores),"jm"=>json_encode($jm));
         }else{
-            if((int)$post['categorias']['idcategoria']>0){
-                $this->mcategorias->updateautor($post);
-                $mensaje=array("mensaje"=>"Autor editado correctamente","tipo"=>1);
-            }else{
-                $this->mcategorias->saveautor($post);
-                $mensaje=array("mensaje"=>"Autor registrado correctamente","tipo"=>1);
-            }
-        }
+            if( (int) $post['categoria']['idsitemap'] > 0) {
 
-        echo json_encode($mensaje);
-        
+                $data = [
+                    'pagetitle' => $post['categoria']['nombre'],
+                    'url'       => $this->generateUrl($post['categoria']['nombre'])
+                ];
+                $respuesta = $this->dbUpdate($data , 'sitemap' , ['idsitemap' =>(int)$post['categoria']['idsitemap']]);
+                if($respuesta) {
+                    $pagina['categorias'] = [
+                        'pagina' => $post['categoria']['nombre'],
+                        'estado' => $post['categoria']['estado'],
+                        'color' => $post['categoria']['color']
+                    ];
+                    $categoriaDB = $this->mcategorias->oneCategoria([ 'idsitemap' => (int)$post['categoria']['idsitemap'] ]);
+                    
+                    $this->mcategorias->updatecategoria( $pagina , $categoriaDB['idpagina']);
+                    $mensaje=array("mensaje"=>"Categoría editada correctamente","tipo"=> 1);
+                }else {
+                    $mensaje=array("mensaje"=>"Ocurrio algún error ","tipo"=> 2);
+                }
+               
+            }else{
+                $data = [
+                    'pagetitle' => $post['categoria']['nombre'],
+                    'url'       => $this->generateUrl($post['categoria']['nombre'])
+                ];
+                $id_sitemap = $this->mcategorias->insertSitemap($data);
+                
+                $pagina['categorias'] = [
+                    'pagina' => $post['categoria']['nombre'],
+                    'header' => 1 ,
+                    'footer' => 1 ,
+                    'color' => $post['categoria']['color'] ,
+                    'estado' => $post['categoria']['estado'],
+                    'idparent' => 2,
+                    'idmodulo' => 1,
+                    'idsitemap' => $id_sitemap  
+                ];
+                $this->mcategorias->savecategoria($pagina);
+
+                $mensaje = [
+                    "mensaje"=>"Categoría registrada correctamente",
+                    "tipo" => 1 
+                ];
+            }
+        }     
+        echo json_encode($mensaje);      
     }
-    
+   
+
+    public function edit() {
+        $idcategoria = $this->input->post('id', TRUE);
+        $data = array(
+            'categoria' => $this->mcategorias->getCategoria($idcategoria),
+            'paginas'=>$this->mcategorias->getPaginas()
+        );
+        $output = $this->load->view('backend/popups/edit_categoria', $data, TRUE);
+        return $this->__output($output);
+    }
 
     public function read() {
         $draw = $this->input->post('draw', TRUE);
@@ -90,10 +158,9 @@ class Categorias extends CI_Controller {
         $length = (int) $this->input->post('length', TRUE);
         
         $user=$this->manager['user']['idperfil'];
-        $idmodulo=8;
+        $idmodulo = 8;
         
-        $permiso=$this->sistema->getPermisos($user,$idmodulo);
-        
+        $permiso = $this->sistema->getPermisos($user,$idmodulo);
         $categorias = $this->mcategorias->getcategorias($search['value'], $length, $start);
         
         $data = array();
@@ -129,10 +196,6 @@ class Categorias extends CI_Controller {
     }
 
     private function __output($html = NULL) {
-        if (ENVIRONMENT === 'production') {
-            $html = minifyHtml($html);
-        }
-
         $this->output->set_output($html);
     }
 

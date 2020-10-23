@@ -12,7 +12,8 @@
                 <!-- Status -->
                 <a href="manager/perfil/editar"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
-        </div>
+		</div>
+		
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MÓDULOS</li>

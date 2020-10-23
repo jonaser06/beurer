@@ -27,7 +27,7 @@ input {
 }
 </style>
 
-<main class="main-detail-products">
+<main class="main-detail-products" style="overflow: hidden;">
     <!--Inicio de cuerpo-->
 
     <div class="formulario" style="background-color:transparent;text-align:center;">
@@ -95,7 +95,7 @@ input {
                                 <h3>></h3>
                             </div>
                         </button></li>
-                    <li><button class="btn btnprimary1 p_user"><a href="producto.php">
+                    <li><button class="btn btnprimary1 p_user"><a href=<?= base_url('ajax/logout')?>>
                                 <div class="col-md-10 col-sm-10 col-xs-10">
                                     <h3>Cerrar Sesión</h3>
                                 </div>
@@ -198,22 +198,7 @@ input {
 
 </style>
     <!--Fin de cuerpo-->
-    <?php 
-    // switch ($userData['tipo_documento']) {
-    //     case 'DNI':
-    //         $tipo = '1';
-    //         break;
-    //     case 'PASAPORTE':
-    //         $tipo = '2';
-    //         break;
-    //     case 'CE':
-    //         $tipo = '3';
-    //         break;
-    //     default:
-    //         break;
-    // }
-
-    ?> 
+   
 
     <input
     type="hidden" 
@@ -229,7 +214,6 @@ input {
     data-ofertas      =<?= (int)$userData['ofertas']?>
     data-politicas    =<?= (int)$userData['politicas']?>
     data-direccion    ="<?= $userData['direccion']?>"
-    
     >
 </main>
 

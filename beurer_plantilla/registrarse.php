@@ -2,7 +2,7 @@
 include 'src\includes\header.php'
 ?>  
 
-<main class="main-detail-products">
+<main class="main-detail-products" style="overflow: hidden;">
 	<!--Inicio de cuerpo-->
 	
         <section class="sct-detail-products">

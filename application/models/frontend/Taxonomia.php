@@ -78,7 +78,7 @@ class Taxonomia extends CI_Model {
     }
     
     public function getPaginaurl($url=NULL){
-        $this->db->select('paginas.*,templates.template,sitemap.*');
+        $this->db->select('paginas.*,templates.template, sitemap.*');
         $this->db->join('templates','paginas.idpagina=templates.idpagina');
         $this->db->join('sitemap','paginas.idsitemap=sitemap.idsitemap');
         $this->db->where('sitemap.url',$url);

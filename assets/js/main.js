@@ -21,6 +21,9 @@ ObjMain = {
             console.log('Pagina de registro');
             ObjMain.load_ubigeo();
         }
+        if(window.location.href == ( `${DOMAIN}facturacion` ) ){
+            ObjMain.load_ubigeo();
+        }
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
         }
@@ -741,6 +744,27 @@ ObjMain = {
                })
            })
         }
+    },
+    taps: () => {
+        let tabs = Array.prototype.slice.apply(document.querySelectorAll('.tap'));
+        let panels = Array.prototype.slice.apply(document.querySelectorAll('.panel'));
+        document.getElementById('taps').addEventListener('click', (e) => {
+            if (e.target.tagName == 'LI') {
+                let i = tabs.indexOf(e.target);
+                tabs.map(tab => tab.classList.remove('active'));
+                tabs[i].classList.add('active');
+
+                panels.map(panel => panel.classList.remove('active'));
+                panels[i].classList.add('active');
+            }
+        });
+    },
+    dataFacturacion : () => {
+        return {
+            comprador : JSON.parse(localStorage.getItem('comprador')),
+            factura : localStorage.getItem('factura')? JSON.parse(localStorage.getItem('factura')):'no solicito factura',
+            destinatario : localStorage.getItem('destinatario')?JSON.parse(localStorage.getItem('destinatario')):'el destinatario es unico',
+        }
     }
 
 }
@@ -876,7 +900,7 @@ const perfil = () => {
                 
                 <div class="divTableRow" style="display:flex;flex-wrap:wrap">
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-                <p>Conoce lo último de Beurer.pe</p>
+                <p>Mis direcciones</p>
                  </div> <br> <br>
                     <div class="divTableCell" style="display:block">
                         <div class="etiquetaFormulario">Domicilio</div>
@@ -933,12 +957,99 @@ const perfil = () => {
         });
     
         orden.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Mis órdenes</p>';
-            contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+            titulouser.innerHTML = '<p style="margin: auto;">Mis Ultimas Compras</p>';
+            contenidouser.innerHTML = `
+            <ul class="taps" id="taps">
+                <li class="tap  active" style="font-weight:bold;">
+                    Ultimas Compras
+
+                </li>
+                <li class="tap">Detalles</li>
+            </ul>
+            <br>
+            <div class="panels">
+                <section class="panel active">
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        </figure>
+                        <div class="item-data">
+                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
+                            <span class="item-price"> S/.24.50</span>
+                            <br>
+                            <span class="item-price"> Total : S/.72.50</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            01 de Octubre de 2020
+                        </div>
+                    </article>
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        </figure>
+                        <div class="item-data">
+                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
+                            <span class="item-price"> S/.24.50</span>
+                            <br>
+                            <span class="item-price"> Total : S/.72.50</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            01 de Octubre de 2020
+                        </div>
+                    </article>
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        </figure>
+                        <div class="item-data">
+                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
+                            <span class="item-price"> S/.24.50</span>
+                            <br>
+                            <span class="item-price"> Total : S/.72.50</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            01 de Octubre de 2020
+                        </div>
+                    </article>
+                
+                </section>
+                <section class="panel">
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                            <span class="item-title">Color : rojo</span>
+
+                        </figure>
+                        <div class="item-data">
+                            <span class="detalle">Envio: Calle Electra AV. Andormeda andromeda</span>
+                            <span class="detalle">Distrito : Chorrillos</span>
+                            <br>
+                            <span class="detalle">Precio: S/ 23.40</span>
+                            <span class="detalle">Cantidad: 3 unidades.</span>
+                            <span class="detalle">Total : 70.20</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            <span>01 de Octubre de 2020</span>
+                            <span>Estado : entregado</span>
+                            <span>Receptor : Renzo Lopez Galarza</span>
+                        </div>
+                    </article>
+                </section>
+        
+        </div>`;
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
             }
+            ObjMain.taps();
         });
     
         direccion.addEventListener("click", function () {
@@ -949,8 +1060,7 @@ const perfil = () => {
                 infouser.style.display = 'block';
             }
         });
-    
-     
+ 
         seccionPass.addEventListener("click", function () {
             titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
             contenidouser.innerHTML = `<form id ="formPass" method="POST">

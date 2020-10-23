@@ -37,7 +37,6 @@ class Paginas extends CI_Controller {
 		
         $data['permiso']=$this->sistema->getPermisos($user,$idmodulo);
         $data['mods']=$this->sistema->getModulos($user);
-        
         $output = $this->load->view('backend/paginas', $data, TRUE);
 
         return $this->__output($output);
@@ -88,13 +87,12 @@ class Paginas extends CI_Controller {
     }
     
     public function  saveanuncios(){
-        $post=$this->input->post();
+        $post = $this->input->post();
         $pres = $post['anuncios_paginas']['anuncios_paginas'];
         
-//        print_r($pres); exit;
+
         if(isset($pres) && !empty($pres)){
             $dec = json_decode($pres,TRUE);
-//            print_r($dec); exit;
             $this->mcontenido->deleteanuncios($post['paginas']['idpagina']);
             foreach ($dec as $d) {
                 $postp['anuncios'] = array("idcategoria" => $post['paginas']['idpagina'],
@@ -120,7 +118,6 @@ class Paginas extends CI_Controller {
         $data['idpagina']=$idpagina;
         $anuncios_paginas = $this->mcontenido->getAnunciosPaginas($idpagina);
         $data['anuncios_paginas'] = json_encode($anuncios_paginas);
-//        print_r($data['anuncios_paginas']); exit;
         $dimensiones = $this->mblogs->getDimensiones();
         $data['dimensiones']=json_encode($dimensiones);
         
@@ -260,55 +257,51 @@ class Paginas extends CI_Controller {
         echo json_encode($mensaje);
         
     }
-    
     public function savecategoria(){
         $post= $this->input->post();
-        //print_r($post); exit;
         $this->sistema->updatecategoria($post);
-
         $pagina=$this->sistema->getpaginasit($post['categorias']['idsitemap']);
         
-        $mensaje=array("mensaje"=>"Datos registrados correctamente","idpagina"=>$pagina['idpagina']);
-//        echo 1;
+        $mensaje = [ 
+             "mensaje"=> "Datos registrados correctamente", 
+             "idpagina" => $pagina['idpagina'] 
+            ];
         echo json_encode($mensaje);
         
     }
-    
-    public function saveedit(){
+    public function saveedit()
+    {
         $post= $this->input->post();
-        //print_r($post); exit;
-        $can_mdescription=strlen($post['sitemap']['meta_description']);
-        $can_ptitle=strlen($post['sitemap']['pagetitle']);
-        $jm=array();
+        $can_mdescription = strlen( $post['sitemap']['meta_description'] );
+        $can_ptitle         = strlen($post['sitemap']['pagetitle']);
+        $jm = array();
         if($can_ptitle>67){
             $errores[]="pagetitlejm";
         }else{
             $jm[]="pagetitlejm";
         }
-        
         if($can_mdescription>155){
             $errores[]="meta_descriptionjm";
         }else{
             $jm[]="meta_descriptionjm";
         }
-        
         if(isset($errores) && !empty($errores)){
             $mensaje=array(
                 "mensaje"=>"Ha superado la cantidad de caracteres",
-                "tipo"=>2,
+                "tipo"=> 2 ,
                 "errores"=>json_encode($errores),
                 "jm"=>json_encode($jm));
         }else{
-//            $categoria=$this->sistema->getCategoria($post['sitemap']['idsitemap']);
-//            if(isset($categoria) && !empty($categoria)){
-//                $jm=array("idcategoria"=>$categoria['idcategoria'],"categoria"=>$post['paginas']['pagina']);
-//        //        print_r($jm); exit;
-//                $this->sistema->updatecategoria($jm);
-//            }
-            //$this->sistema->editpagina($post);
+    //        $categoria=$this->sistema->getCategoria($post['sitemap']['idsitemap']);
+    //        if(isset($categoria) && !empty($categoria)){
+    //            $jm=array("idcategoria"=>$categoria['idcategoria'],"categoria"=>$post['paginas']['pagina']);
+    //    //        print_r($jm); exit;
+    //            $this->sistema->updatecategoria($jm);
+    //        }
+    //         $this->sistema->editpagina($post);
             $this->sistema->editsitemap($post);
 
-            $mensaje=array(
+            $mensaje = array(
                 "mensaje"=>"Datos registrados correctamente",
                 "tipo"=>1,
                 "idpagina"=>$post['sitemap']['idsitemap'],
@@ -322,7 +315,6 @@ class Paginas extends CI_Controller {
 
     public function guardar() {
         $post = $this->input->post(NULL, FALSE);
-//        print_r($post); exit;
         $pagina = $this->input->post('pagina', TRUE);
         $datapagina=$this->sistema->verpagina($pagina);
         $datapaginajm=$this->sistema->verpagina($datapagina['idpagina']);
@@ -364,9 +356,9 @@ class Paginas extends CI_Controller {
     }
 
     private function __output($html = NULL) {
-        if (ENVIRONMENT === 'production') {
-            $html = minifyHtml($html);
-        }
+        // if (ENVIRONMENT === 'production') {
+        //     $html = minifyHtml($html);
+        // }
 
         $this->output->set_output($html);
     }
