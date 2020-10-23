@@ -820,9 +820,21 @@ figure.effect-selena:hover p {
 
 input
 {
-	position: relative;
+	position:relative;
+
+	/*width: 30vh;	*/
+	width:100%;
 	height: 30px;
+	border: 1px solid #999;
+	font-size: 18px;
+	color: #161616;
+	font-family:'nexa-lightuploaded_file';
+	background-color:white;
+	border-radius: 20px;
+	/* box-shadow: 4px 4px #ccc; */
 	resize: vertical;
+	text-align:left;
+	padding:2px 20px;
 
 }
 
@@ -950,13 +962,13 @@ select
 	}
 
 	#cantidad_prod{
-		background: transparent;
+		background:transparent;
 		border: 0 none;
-		text-align: center;
-		color: black;
-		padding-left: 0%;
-		vertical-align: middle;
-		font-size: 2em;
+		text-align:center;
+		color:black;
+		padding-left:0%;
+		vertical-align:middle;
+		font-size:2em !important;
 		font-family: "nexaheavyuploaded_file";
 	}
 
@@ -1844,12 +1856,7 @@ li.subtotal:before {
 	color:white;
 }
 .cantidad{
-	width: 10%;
-    padding: 0px;
-    text-align: center;
-    border: 0;
-    background-color: white;
-    border-radius: 0%;
+	width:10%; padding:0px;text-align:center; border:0; background-color:white; border-radius:0%;
 }
 
 .btn-cmn{
@@ -2015,7 +2022,7 @@ input::placeholder{
     text-align: center;
     position: relative;
     z-index: 1;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .step_off1, .step_on1{
