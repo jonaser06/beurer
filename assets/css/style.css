@@ -283,15 +283,12 @@ select {
 }
 
 .count-cant {
-  width: 54px;
-  height: 51px;
+  width: 42px;
+  height: 42px;
   margin: 0 5%;
   border-radius: 50%;
   color: #161616;
   border: 1px solid black;
-  outline: 0 none;
-  font-weight: bold;
-  font-size: 13px;
   background-color: transparent !important;
 }
 
@@ -309,7 +306,7 @@ body {
   background-color: #fff;
 
   font-family: 'Open Sans', sans-serif;
-  font-size: 62.5%;
+  
   margin: 0 auto;
 }
 
@@ -337,7 +334,7 @@ h1 {
 input,
 button,
 select {
-  font-size: .85em !important;
+  
   /* border: 0 none;
 outline: 0 none; */
 }
