@@ -605,7 +605,7 @@
                             this.$btn_sgt.disabled = false ;
                             this.addComprador();
                         }else {
-                            this.alert_form(false,'complete los datos del comprador');
+                            this.alert_form(false,'Debe llenar los datos del comprador para poder continuar.');
                         }
                     }
                     if(this.$destinatario.checked && !this.$factura.checked){
@@ -617,7 +617,7 @@
                             this.addComprador();
                             this.addDestinatario();
                         }else {
-                            this.alert_form(false,'complete los datos del destinatario');
+                            this.alert_form(false,'Debe llenar los datos del destinatario para poder continuar.');
                         }
                     }
                     if(!this.$destinatario.checked && this.$factura.checked ){
@@ -629,7 +629,7 @@
                             this.addComprador();
                             this.addFactura();
                         }else {
-                            this.alert_form(false,'complete los datos la factura');
+                            this.alert_form(false,'Debe llenar los datos de la factura para poder continuar.');
                         }
                     }
                     if(this.$destinatario.checked && this.$factura.checked ){
@@ -644,7 +644,7 @@
                             this.addDestinatario();
                             this.addFactura();
                         }else {
-                            this.alert_form(false,'complete los datos requeridos en facturacion o destinatario');
+                            this.alert_form(false,'Todos los datos obligatorios (*) deben estar completos para poder continuar');
                         }
                     }
                 })}
