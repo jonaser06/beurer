@@ -297,7 +297,7 @@ select {
 
 /* @charset "utf-8"; */
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+@import url(https://fonts.googleapis.com/css?family=OpenSans:400,700,600);
 
 html,
 html a {
@@ -1072,3 +1072,99 @@ section2 {
     background-color: #ffc7bd;
   }
 }
+
+
+
+/* PERFIL DETALLE PEDIDO PEDIDOS  */
+.taps {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap
+  }
+  .taps > * {
+  display: flex;
+  list-style: none;
+  }
+  
+  .taps .tap {
+  cursor: pointer;
+  transition: .5s all ease-in-out;
+  }
+  .taps .active {
+  list-style-image: url('assets/images/check-solid.svg'); 
+  font-size:1.1em;
+  color: #C51152;
+  border-bottom: 1px solid #C51152;
+  }
+  .panels .panel {
+  position: absolute;
+  left: 5000px;
+  transition: 0.3s;
+  }
+  .panels .active {
+  position: relative !important;
+  left: 0px !important;
+  }
+  .panel-content ,.default-panel{
+  transition : 1s ease-in-out ;
+  }
+  .panel-content.active {
+  display: block;
+  }
+  
+      .item-shop{
+          border-top: 1px solid #f2f2f2;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+      }
+      .item-imagen , 
+      .item-data,
+      .item-fecha {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+      }
+      .item-imagen{
+          text-align: center;
+          flex: 1;
+          justify-content: center;
+      }
+    .item-imagen .item-img{
+          margin: 0 auto;
+         width:100px;
+          height: auto;
+      }
+      .item-imagen  .item-title {
+          font-size: 13px;
+          font-weight: 700;
+          max-width: 180px;
+          margin: 0 auto;
+  
+      }
+      .item-data {
+          display: flex;
+          justify-content: center;
+          padding-top:10px;
+          flex:1;
+          font-size:13px;
+      }
+      .item-fecha {
+          flex:1;
+          font-size:13px;
+          padding-top:10px;
+    }
+    .item-price {
+        width: 100%;
+        text-align: center;
+         font-size: 13px;
+         font-weight: bold;
+    }
+     .detalle {
+         text-align: left;
+         font-weight: bold;
+    }
