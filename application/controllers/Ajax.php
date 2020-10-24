@@ -301,7 +301,7 @@ class Ajax extends MY_Controller
                 $this->output
                     ->set_content_type('application/json')
                     ->set_status_header(200)
-                    ->set_output(json_encode($resp));
+                    ->set_output(json_encode($this->resp));
                 return;
                 
             } else {
