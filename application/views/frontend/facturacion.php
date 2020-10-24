@@ -4,9 +4,12 @@
 <input
     type="hidden" 
     class="dataUser"
-    data-id = <?= $session = isset($_SESSION['id_cliente']) ? $_SESSION['id_cliente']: false ;?>
+    data-id = "<?php echo isset($_SESSION['id_cliente']) ? $_SESSION['id_cliente']: false ;?>"
     data-tipo_documento =<?=$session?  $userData['tipo_documento']:''?>
     data-documento =<?= $userData ? $userData['documento'] : '' ?>
+    data-nombre =<?= $userData ? $userData['nombre'] : '' ?>
+    data-apellido_paterno ="<?= $userData ? $userData['apellido_paterno'] : '' ?>"
+    data-apellido_materno ="<?= $userData ? $userData['apellido_materno'] : '' ?>"
     data-direccion    ="<?= $session? $userData['direccion'] :'' ?>"
     data-departamento    ="<?= $session? $userData['departamento'] :'' ?>"
     data-provincia    ="<?= $session? $userData['provincia'] :'' ?>"
@@ -136,7 +139,7 @@
                                             <div class="etiquetaFormulario">Nombres: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres1"
-                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['nombre'] : ''?>">
+                                                onkeypress="return soloLetras(event)" value="">
 
                                         </div>
 
@@ -144,7 +147,7 @@
                                             <div class="etiquetaFormulario">Apellidos: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" name="campo1" id="c_apep1"
-                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['apellido_paterno'].$userData['apellido_materno'] : ''?>">
+                                                onkeypress="return soloLetras(event)" value="">
 
                                         </div>
                                     </div>
@@ -156,14 +159,14 @@
                                                 </div>
                                             </div>
                                             <input type="email" id="c_correo1" size="20" maxlength="30" name="campo1"
-                                                id="correo" value="<?= $userData ? $userData['nombre'] : ''?>" required>
+                                                id="correo" value="" required>
                                         </div>
 
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div>
                                             </div>
                                             <select id="s_depa" onchange="ObjMain.showProvincesList(this);">
-                                                <option disabled selected> <?php echo $userData ? $userData['departamento'] : 'Seleccione departamento'?>  </option>
+                                                <option disabled selected>  </option>
                                             </select>
                                         </div>
                                     </div>
@@ -173,14 +176,14 @@
                                             <div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div>
                                             </div>
                                             <select id="sprov" onchange="ObjMain.showDistrictsList(this);">
-                                                <option disabled selected><?php echo $userData ? $userData['provincia'] : 'Seleccione Provincia'?> </option>
+                                                <option disabled selected> </option>
                                             </select>
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div>
                                             </div>
                                             <select id="sdist">
-                                                <option disabled selected><?php echo $userData ? $userData['distrito'] : 'Seleccione distrito'?> </option>
+                                                <option disabled selected></option>
                                             </select>
                                         </div>
                                     </div>
@@ -204,7 +207,7 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono fijo</div>
                                             <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij"
-                                                 value="<?= $userData ? $userData['telefono'] : ''?>">
+                                                 value="">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono celular: <div class="d_ob">*</div>
@@ -490,15 +493,17 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         const $destinatarioForm  = document.querySelector('#d_formularios1');
-        let factura = localStorage.getItem('facturaCheck');
-        let domicilio = localStorage.getItem('domicilioCheck');
+        let factura = localStorage.getItem('factura');
+        let domicilio = localStorage.getItem('domicilio');
         let session = document.querySelector('.dataUser').dataset.id;
+        console.log(session)
 
-        if(domicilio === 'true' && factura==='false' ) {
+        
+        if(session && domicilio && !factura ) {
             $destinatarioForm.style.display = 'none'
 
         }
-        if(domicilio ==='true' && factura === 'true') {
+        if(session && domicilio && factura) {
             $destinatarioForm.style.display = 'none'
             document.querySelector('#d_fact').style.display = 'none'
             document.querySelector('#factura').style.display = 'inline-block'
@@ -521,16 +526,27 @@
     
            class Facturacion {
                constructor() {
-                   this.$destinatario = document.querySelector('#otra-persona');
+                //    this.$destinatario = document.querySelector('#otra-persona');
                    this.$factura      = document.querySelector('#dfactura');
+                   this.$politicas      = document.querySelector('#politicas');
                    this.$btn_sgt      = document.querySelector('#btn_sgt');
+                   this.session       = document.querySelector('.dataUser').dataset.id;
+                   this.estadoDomicilio = localStorage.getItem('domicilio')
+                   this.estadoFactura = localStorage.getItem('factura')
                    this.estado = false ;
 
                    this.$btn_sgt.disabled = true;
                    this.TRIGGUER()
                }
-                getComprador () {
-                    this.dataComprador = {
+                getComprador() {
+                    const { ...data } = document.querySelector('.dataUser').dataset
+                    return data;
+                }
+                addComprador () {
+                    localStorage.setItem('Comprador' , JSON.stringify(this.getComprador()) )
+                }
+                getDestinatario () {
+                    this.dataDestinatario = {
                         tipo_doc :  document.getElementById('s_tipodoc').value ,
                         number_doc :  document.getElementById('campo1').value ,
                         nombres :  document.getElementById('c_nombres1').value ,
@@ -544,16 +560,7 @@
                         fijo :  document.getElementById('c_telfij').value ,
                         cell :  document.getElementById('c_telcel').value ,
                     }
-                }
-                getDestinatario () {
-                    this.dataDestinatario = {
-                        tipo_doc_dest :  document.getElementById('tipo_doc_destinatario').value ,
-                        number_doc_dest :  document.getElementById('number_doc_dest').value ,
-                        nombres_dest :  document.getElementById('c_nombres_des').value ,
-                        apellidos_dest :  document.getElementById('c_ape_dest').value ,
-                        telefono_dest :  document.getElementById('c_telcel_dest').value ,
-                    }
-                }
+                }             
                 getFactura () {
                     this.dataFactura = {
                         ruc :  document.getElementById('ruc').value ,
@@ -561,13 +568,8 @@
                         r_fiscal :  document.getElementById('d_fiscal').value ,
                     }
                 }
-                addComprador() {
-                    localStorage.setItem('comprador' , JSON.stringify(this.dataComprador) )
-
-                }
-                addDestinatario(){
-                    localStorage.setItem('destinatario' , JSON.stringify(this.dataDestinatario) )
-
+                addDestinatario() {
+                    localStorage.setItem('Destinatario' , JSON.stringify(this.dataDestinatario) )
                 }
                 addFactura() {
                     localStorage.setItem('factura' , JSON.stringify(this.dataFactura) )
@@ -590,59 +592,152 @@
                     }
 
                 }
+
                TRIGGUER () {
                    this.$btn_sgt.addEventListener('click' , event => {
-                    
-                    if( !this.$destinatario.checked && !this.$factura.checked ) {
-                        this.getComprador();
+
+                    if(this.session && this.estadoFactura){
+                        this.$btn_sgt.disabled = true ;
+                        this.getFactura();
+                        if(this.filter(this.dataFactura)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+
+                                this.addComprador();
+                                this.addFactura();
+                                return
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                            }
+                            
+                        }else {
+                            this.alert_form(false,'Debe llenar los datos de la factura para poder continuar.');
+                            return
+                        }
+                    }
+                    if( !this.session && !this.$factura.checked ) {
+                        this.getDestinatario();
                         this.$btn_sgt.disabled = true ;
 
-                        if(this.filter(this.dataComprador)) {
-                            this.$btn_sgt.disabled = false ;
-                            this.addComprador();
+                        if(this.filter(this.dataDestinatario)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addDestinatario();
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                            }
+                            
                         }else {
                             this.alert_form(false,'Debe llenar los datos del comprador para poder continuar.');
                         }
                     }
-                    if(this.$destinatario.checked && !this.$factura.checked){
+                    if(!this.session && this.$factura.checked){
                         this.$btn_sgt.disabled = true ;
-                        this.getComprador();
-                        this.getDestinatario();
-                        if(this.filter(this.dataDestinatario)) {
-                            this.$btn_sgt.disabled = false ;
-                            this.addComprador();
-                            this.addDestinatario();
-                        }else {
-                            this.alert_form(false,'Debe llenar los datos del destinatario para poder continuar.');
-                        }
-                    }
-                    if(!this.$destinatario.checked && this.$factura.checked ){
-                        this.$btn_sgt.disabled = true ;
-                        this.getComprador();
-                        this.getFactura();
-                        if(this.filter(this.dataFactura)) {
-                            this.$btn_sgt.disabled = false ;
-                            this.addComprador();
-                            this.addFactura();
-                        }else {
-                            this.alert_form(false,'Debe llenar los datos de la factura para poder continuar.');
-                        }
-                    }
-                    if(this.$destinatario.checked && this.$factura.checked ){
-                        this.$btn_sgt.disabled = true ;
-                        this.getComprador();
                         this.getDestinatario();
                         this.getFactura();
-
                         if(this.filter(this.dataDestinatario) && this.filter(this.dataFactura)) {
-                            this.$btn_sgt.disabled = false ;
-                            this.addComprador();
-                            this.addDestinatario();
-                            this.addFactura();
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addDestinatario();
+                                this.addFactura();
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas poder continuar.');
+                            }
+                           
                         }else {
                             this.alert_form(false,'Todos los datos obligatorios (*) deben estar completos para poder continuar');
                         }
                     }
+                    // sesion , entrega a domicilio con la segunda factura desmarcada  y en el paso 2 da check;
+                    if(this.session && this.estadoDomicilio &&this.$factura.checked ){
+                        this.$btn_sgt.disabled = true ;
+                        this.getFactura();
+                        if(this.filter(this.dataFactura)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addComprador();
+                                this.addFactura();
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas poder continuar.');
+                            }
+                            
+                        }else {
+                            this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                        }
+                    }
+                    // sesion , entrega a domicilio con la segunda factura desmarcada da continuar sin marcar;
+                    if(this.session && this.estadoDomicilio && !this.estadoFactura &&!this.$factura.checked ){
+                        this.$btn_sgt.disabled = true ;
+                        
+                        if(this.$politicas.checked) {
+                            this.$btn_sgt.disabled = false ;
+                            this.addComprador();
+                            return
+                        }else {
+
+                            this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                            return
+                        }
+                    }
+                    if(this.session && this.estadoDomicilio && this.$factura.checked ){
+                        this.$btn_sgt.disabled = true ;
+                        this.getFactura();
+                        this.getDestinatario()
+                        if(this.filter(this.dataFactura)&& this.filter(this.dataDestinatario)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addComprador();
+                                this.addDestinatario();
+                                this.addFactura();
+                                return
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                                return
+                            }
+                            
+                        }else {
+                            this.alert_form(false,'Todos los datos obligatorios (*) deben estar completos para poder continuar');
+                        }
+                    }
+                   
+                    if(this.session && !this.$factura.checked && !this.estadoFactura ){
+                        this.$btn_sgt.disabled = true ;
+                        this.getDestinatario();
+
+                        if(this.filter(this.dataDestinatario)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addComprador();
+                                this.addDestinatario();
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                            }
+                        }else {
+                            this.alert_form(false,'Debe llenar los datos del destinatario poder continuar.');
+                        }
+                    }
+                    if(this.session && !this.estadoDomicilio  && this.$factura.checked ){
+                        this.$btn_sgt.disabled = true ;
+                        this.getFactura();
+                        this.getDestinatario()
+                        if(this.filter(this.dataFactura)&& this.filter(this.dataDestinatario)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addComprador();
+                                this.addDestinatario();
+                                this.addFactura();
+                                return
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                                return
+                            }
+                            
+                        }else {
+                            this.alert_form(false,'Todos los datos obligatorios (*) deben estar completos para poder continuar');
+                        }
+                    }
+
+                  
                 })}
             }
            new Facturacion();
