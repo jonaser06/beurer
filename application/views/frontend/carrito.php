@@ -69,7 +69,7 @@
                             <span class="font-light">¿Eres nuevo? Regístrate aquí y compra ahora. </span>
                             <br><br>
                             <span>
-                                <a class="btn btn-cmn" href="<?php echo base_url('registro'); ?>" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
+                                <a class="btn btn-cmn" onclick="ObjMain.register_cart(event);" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
                             </span>
 
                         </div>
@@ -110,6 +110,7 @@
         </main2>
 
         <div class="aside" style="display: inline-block;text-align: left;padding-left: 4%;">
+            <?php if ( $sesion ): ?>
             <div style="text-align:center;">
                 <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
                     <label class="font-light label-pol" style="display:inline;">
@@ -120,13 +121,21 @@
             </div>
 
             <div id="d_envio" style="display:none;text-align:center; ">
-                <div class="tituloTabla1" style="text-align:center;">Departamento</div>
+                <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
+                    <label class="font-light label-pol" style="display:inline;">
+                        <input type="checkbox" id="check_factura" onclick="ObjMain.factura()" /><i class="helper"></i>
+                    </label>
+                    <div style="display:inline-block; font-size:1.55em;font-family:'nexaheavyuploaded_file';">Deseo una factura</div>
+                </div>
+                <!-- <div class="tituloTabla1" style="text-align:center;">Departamento</div>
                 <select id="s_depa" style="width:55%;font-size:16px !important;" onchange="ObjMain.showProvincesList(this);"></select>
                 <div class="tituloTabla1" style="text-align:center;">Provincia</div>
                 <select id="sprov" style="width:55%;font-size:16px !important;" onchange="ObjMain.showDistrictsList(this);"></select>
                 <div class="tituloTabla1" style="text-align:center;">Distrito</div>
-                <select id="sdist" style="width:55%;font-size:16px !important;"></select>
+                <select id="sdist" style="width:55%;font-size:16px !important;"></select> -->
             </div>
+            <?php endif; ?>
+
             <hr>
 
             <div>
@@ -143,7 +152,7 @@
                     <div class="head-cupon">Ingrese aquí su cupón de descuento</div>
                     <div class="input-cupon" style="display:flex;">
                         <input class="cod-cupon" utype="text" placeholder="Ej. 6W79H6" style="width: 58%; border: 1px solid black;" maxlength="12">
-                        <a href="<?= base_url('ajax/cupon')?>" class="cup-btn">CANJEAR</a>
+                        <a href="#" onclick="ObjMain.cupon(event);" class="cup-btn">CANJEAR</a>
                     </div>
                     <div class="footer-resumen">
                         <div class="item-resumen">

@@ -9,7 +9,7 @@ var ubigeoPeru = {
 };
 let DOMAIN;
 let filterResult = false;
-
+let intento = 1;
 
 ObjMain = {
     init: ()=>{
@@ -49,18 +49,48 @@ ObjMain = {
         }
         if(document.querySelector('#checkout_crumb') != null){
             ObjMain.listar_items(); 
-            ObjMain.cupon();
-
         }
     },
+    register_cart: (e)=>{
+        e.preventDefault();
+        let url = window.location.href;
+        localStorage.setItem('reg-redir', url);
+        window.location = DOMAIN+'registro';
+    },
     recalculo: (item) =>{
-        let cost = 0 ;
+        let sub = 0 ;
+        let vol = 0;
+        let weight = 0;
+        /* table vol */
+        let vol_big = parseFloat(120.20);
+        let vol_small = parseFloat(90.50);
+        /* table weight */
+        let weight_big = parseFloat(50.00);
+        let weight_small = parseFloat(30.00);
+
         item.forEach((p,index)=>{
-            let subt = parseFloat(p.precio_online) * parseInt(p.cantidad);
-            cost = cost + subt;
+            /* precioproducto x cantidad */
+            let ppxc = parseFloat(p.precio_online) * parseInt(p.cantidad);
+            sub = sub + ppxc;
+            /* volumen x cantidad */
+            let vxc = parseFloat(p.volumen) * parseInt(p.cantidad);
+            vol = vol + vxc;
+            /* peso x cantidad */
+            let pxc = parseFloat(p.peso) * parseInt(p.cantidad);
+            weight = weight + pxc;
         });
-        document.querySelector('.sub_cost').innerHTML = (cost).toFixed(2);
-        console.log('Total: '+cost);
+        /* comparar con la tabla */
+        /* costo del volumen */
+        
+        /* costo del peso */
+        document.querySelector('.sub_cost').innerHTML = (sub).toFixed(2);
+        // console.log('Total: '+cost);
+        ObjMain.costo_total(sub, 0, 0);
+
+    },
+    costo_total: (sub, envio, desc) => {
+        let costo_total = sub + envio + desc;
+        localStorage.setItem('costo_total', costo_total);
     },
     listar_items: () => {
         let item = localStorage.getItem('productos');
@@ -109,7 +139,7 @@ ObjMain = {
             item += '</div>';
             item += '<div class="quantity">';
             item += '<button class="count-cant" onclick="ObjMain.menos('+id+');">-</button>';
-            item += '<input class="form-control-field cantidad cant-'+id+'" id="cantidad_prod" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
+            item += '<input class="form-control-field cantidad cant-'+id+' cantidad_prod" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
             item += '<button class="count-cant" onclick="ObjMain.mas('+id+');">+</button>';
             item += '</div>';
             item += '<div class="subtotal rsubtotal sub-'+id+'" id="subtotal">'+subtotal+'</div>';
@@ -123,15 +153,20 @@ ObjMain = {
         d_envio = document.getElementById("d_envio");
         var checkBo = document.getElementById("check_envio");
         if (checkBo.checked == true) {
-
             d_envio.style.display = "block";
-            ObjMain.load_ubigeo();
-
-
+            // ObjMain.load_ubigeo();
+            localStorage.setItem('domicilio', true);
         } else {
-
             d_envio.style.display = "none";
-
+            localStorage.removeItem('domicilio');
+        }
+    },
+    factura: () =>{
+        var fact = document.getElementById("check_factura");
+        if (fact.checked == true) {
+            localStorage.setItem('factura', true);
+        } else {
+            localStorage.removeItem('factura');
         }
     },
     delete: (event)=>{
@@ -557,7 +592,18 @@ ObjMain = {
                         ObjMain.ajax_post('POST',DOMAIN+'ajax/setregister', formData)
                         .then((resp)=>{
                             resp = JSON.parse(resp);
-                            window.location = DOMAIN;
+
+                            /* login */
+                            let formData2 = new FormData();
+                            formData2.append("username", correo);
+                            formData2.append("contrasena", pass1);
+                            ObjMain.ajax_post('POST',DOMAIN+'ajax/login', formData2 ).then((resp)=>{});
+
+                            let redirect = localStorage.getItem('reg-redir');
+                            if(redirect){
+                                localStorage.removeItem('reg-redir');
+                                window.location = redirect;
+                            }
                         })
                         .catch((err)=>{
                             err = JSON.parse(err);
@@ -823,34 +869,44 @@ ObjMain = {
                     nodeParent.insertBefore(childNode ,document.querySelectorAll('#sdist > option')[0]);
            } ,200)
     },
-    cupon: () => {
-        const $inputCupon = document.querySelector('.cup-btn')
-        $inputCupon.addEventListener('click' , event => {
-            event.preventDefault();
+    cupon: (event) => {
+        event.preventDefault();
+        const $inputCupon = document.querySelector('.cup-btn');
+        if(intento == 1 ){
+            console.log(intento);
             const $cupon = document.querySelector('.cod-cupon');
             const $descuento = document.querySelector('.descont_cost');
             const $total = document.querySelector('.total_cost');
-            const ruta   = event.target.href;
             const formData = new FormData();
-
             
             formData.append('codigo' ,$cupon.value);
-
-            ObjMain.ajax_post('POST', ruta , formData)
+            ObjMain.ajax_post('POST', 'ajax/cupon' , formData)
             .then( res => {
                 res = JSON.parse(res);
-                console.log(res)
-                // $descuento.textContent = `- ${res.}`
-               
+                if(res.status){
+                    intento++;
+                    let tipo = parseInt(res.data.tipon_cupon);
+                    let desc;
+                    let total; 
+                    if(tipo == 1){
+                        desc = parseFloat(res.data.descuento) / 100;
+                        total = parseFloat(localStorage.getItem('costo_total'));
+                        total = total * desc
+                    }else{
+                        desc = parseFloat(res.data.descuento);
+                        total = parseFloat(localStorage.getItem('costo_total'));
+                        total = total - desc;
+                    }
+                    ObjMain.costo_total(total, 0, 0);
+                }
+            
             })
             .catch((err)=>{
                 // err = JSON.parse(err);
                 console.log(err)
-               
+            
             });
-           
-        })
-        
+        }
     }
 }
 

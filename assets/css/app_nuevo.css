@@ -961,7 +961,7 @@ select
 	background-color:transparent !important;
 	}
 
-	#cantidad_prod{
+	.cantidad_prod{
 		background:transparent;
 		border: 0 none;
 		text-align:center;
