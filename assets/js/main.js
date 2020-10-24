@@ -3,6 +3,8 @@
 *  ObjMain.ajax_post : objeto para peticiones ajax
 *
 *  ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
+*  ObjMain.caclEnvio( float :vol ,float : peso )    => vol : volumen total del carrito , peso : peso total del carrito
+* return : RETORNA UN OBJETO con el coste_envio como attr
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
@@ -874,7 +876,7 @@ ObjMain = {
         event.preventDefault();
         const $inputCupon = document.querySelector('.cup-btn');
         const $resCupon = document.querySelector('.res-cup');
-        if(true ){
+        if(true){
             console.log(intento);
             const $cupon = document.querySelector('.cod-cupon');
             const $descuento = document.querySelector('.descont_cost');
@@ -887,7 +889,6 @@ ObjMain = {
             ObjMain.ajax_post('POST', 'ajax/cupon' , formData)
             .then( res => {
                 res = JSON.parse(res);
-                console.log(res)
                 if(res.status){
                     intento++;
                     let tipo = parseInt(res.data.tipon_cupon);
@@ -904,7 +905,7 @@ ObjMain = {
                         // total = parseFloat(localStorage.getItem('costo_total'));
                         total = $sub
                         total = total - desc;
-                        desc =`-${desc } `
+                        desc =`-${desc}`
                     }
 
                     $total.textContent = `${total}`
@@ -925,6 +926,40 @@ ObjMain = {
                 console.log(err)
             
             });
+        }
+    },
+    calcEnvio :( vol, peso ) => {
+        const peso_small = 20 ;
+        const peso_big   = 50 ;
+        const vol_small  = 60 ;
+        const vol_big    = 100 ;
+        const paq_small = 20;
+        const paq_big = 20;
+        
+        if(peso < peso_small && vol < vol_small ) {
+            return {
+                paquete_small : 1,
+                total_coste : paq_small
+            }
+        }
+        if((peso > peso_small && peso < peso_big) && (vol > vol_small && vol < vol_big ) ) {
+            return {
+                paquete_big : 1,
+                total_coste : paq_big
+            }
+        }
+        if( peso > peso_big && vol > vol_big ) {
+            const resPeso = peso % peso_big ;
+            let caja_small = 0;
+            let caja = parseInt(peso / peso_big); 
+            resPeso < peso_small ? caja_small++ : caja++ 
+            return  {
+                paquete_big : caja,
+                paquete_small : caja_small,
+                coste_small : caja_small * paq_small,
+                coste_big : caja * paq_big,
+                total_coste : caja_small * paq_small + caja * paq_big,
+            }
         }
     }
 }
