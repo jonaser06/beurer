@@ -24,6 +24,7 @@ ObjMain = {
         }
         if(window.location.href == ( `${DOMAIN}facturacion` ) ){
             ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
         }
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
@@ -840,7 +841,7 @@ ObjMain = {
             .then( res => {
                 res = JSON.parse(res);
                 console.log(res)
-                // $descuento.textContent = `- ${res.}`
+                
                
             })
             .catch((err)=>{

@@ -4,7 +4,9 @@
 <input
     type="hidden" 
     class="dataUser"
+    data-id = <?= $session = isset($_SESSION['id_cliente']) ? $_SESSION['id_cliente']: false ;?>
     data-tipo_documento =<?=$session?  $userData['tipo_documento']:''?>
+    data-documento =<?= $userData ? $userData['documento'] : '' ?>
     data-direccion    ="<?= $session? $userData['direccion'] :'' ?>"
     data-departamento    ="<?= $session? $userData['departamento'] :'' ?>"
     data-provincia    ="<?= $session? $userData['provincia'] :'' ?>"
@@ -94,7 +96,7 @@
             <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
                 <div class="tab-button-outer">
                     <ul id="tab-button2">
-                        <li id="icon-description2" class="is-active"><a>DATOS DEL COMPRADOR</a></li>
+                        <li id="icon-description2" class="is-active"><a>DATOS DEL DESTINATARIO</a></li>
                     </ul>
                 </div>
                 <div class="content">
@@ -122,7 +124,7 @@
                                                     class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" name="campo1" id="campo1" 
-                                                value=" <?= $userData ? $userData['documento'] : '' ?>"
+                                                value=""
                                                 required
                                             >
 
@@ -231,7 +233,7 @@
         <br>
         <br>
 
-        <div>
+        <!-- <div>
             <div class="checkbox" style="display:inline-block;">
                 <label class="font-light label-pol" style="display:inline;">
                     <input type="checkbox" id="otra-persona" /><i class="helper"></i>
@@ -241,12 +243,12 @@
                     Marque esta casilla, si el destinatario del pedido será una tercera persona</div>
             </div>
 
-        </div>
+        </div> -->
 
 
 
 
-        <div class="row cont_datos" id="d_formularios2" align="center" style="display:none;width:46em;">
+        <!-- <div class="row cont_datos" id="d_formularios2" align="center" style="display:none;width:46em;">
             <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
                 <div class="tab-button-outer">
                     <ul id="tab-button2">
@@ -325,12 +327,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
 
 
-
+       
         <div style="text-align:center !important;">
             <div class="checkbox"
                 style="display:inline-block;  border:3px solid #c51152; background-color:whitesmoke; display:none;"
@@ -342,7 +344,7 @@
 
         <div style="text-align:center !important;">
             <div class="checkbox" style="display:inline-block; " id="d_fact">
-                <label class="font-light label-pol" style="display:inline;">
+                <label class="factCheck font-light label-pol" style="display:inline;">
                     <input type="checkbox" id="dfactura" /><i class="helper"></i>
                 </label>
                 <div
@@ -350,8 +352,7 @@
                     Deseo una factura</div>
             </div>
         </div>
-
-
+        
 
 
         <div class="row cont_datos" id="factura" align="center" style="display:none;width:46em;">
@@ -487,6 +488,23 @@
 
 
     document.addEventListener('DOMContentLoaded', () => {
+
+        const $destinatarioForm  = document.querySelector('#d_formularios1');
+        let factura = localStorage.getItem('facturaCheck');
+        let domicilio = localStorage.getItem('domicilioCheck');
+        let session = document.querySelector('.dataUser').dataset.id;
+
+        if(domicilio === 'true' && factura==='false' ) {
+            $destinatarioForm.style.display = 'none'
+
+        }
+        if(domicilio ==='true' && factura === 'true') {
+            $destinatarioForm.style.display = 'none'
+            document.querySelector('#d_fact').style.display = 'none'
+            document.querySelector('#factura').style.display = 'inline-block'
+        }
+        
+
         const {...userData} = document.querySelector('.dataUser').dataset;
           let index   = userData.tipo_documento == 'DNI' ? '1' 
                                     :userData.tipo_documento == 'PASAPORTE' ? '2'
@@ -497,29 +515,7 @@
                nodeSelect.setAttribute('selected','selected')
             }
       
-          setTimeout(function () {
-            
-            document.querySelectorAll('#s_depa > option').forEach(depa => {
-              if( depa.textContent == userData.departamento ){
-                depa.setAttribute('selected','selected');
-            } 
-             });
-             $('#s_depa').trigger('change')
-
-            document.querySelectorAll('#sprov > option').forEach(prov => {
-                if( prov.textContent == userData.provincia ){
-                    prov.setAttribute('selected','selected');
-                }
-            });
-
-            $('#sprov').trigger('change')
-            document.querySelectorAll('#sdist > option').forEach(dist => {
-                if( dist.textContent == userData.distrito ) {
-                    dist.setAttribute('selected','selected');
-                }
-            });
-
-           } ,500)
+      
          
 
     
