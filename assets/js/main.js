@@ -3,8 +3,11 @@
 *  ObjMain.ajax_post : objeto para peticiones ajax
 *
 *  ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
-*  ObjMain.caclEnvio( float :vol ,float : peso )    => vol : volumen total del carrito , peso : peso total del carrito
-* return : RETORNA UN OBJETO con el coste_envio como attr
+
+*      ObjMain.caclEnvio( float :vol ,float : peso ) 
+****    vol : volumen total del carrito 
+****    peso : peso total del carrito
+****    return : RETORNA UN OBJETO con el coste_envio como attr
 */
 var ubigeoPeru = {
 	ubigeos: new Array()
