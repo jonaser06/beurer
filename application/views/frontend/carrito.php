@@ -142,8 +142,8 @@
                     </div>
                     <div class="head-cupon">Ingrese aquí su cupón de descuento</div>
                     <div class="input-cupon" style="display:flex;">
-                        <input type="text" placeholder="Ej. 6W79H6" style="width: 58%; border: 1px solid black;" maxlength="12">
-                        <a href="#" class="cup-btn">CANJEAR</a>
+                        <input class="cod-cupon" utype="text" placeholder="Ej. 6W79H6" style="width: 58%; border: 1px solid black;" maxlength="12">
+                        <a href="<?= base_url('ajax/cupon')?>" class="cup-btn">CANJEAR</a>
                     </div>
                     <div class="footer-resumen">
                         <div class="item-resumen">

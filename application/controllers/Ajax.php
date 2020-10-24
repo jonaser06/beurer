@@ -278,4 +278,48 @@ class Ajax extends MY_Controller
             ->set_status_header(404)
             ->set_output(json_encode($resp));
     }
+    public function cupon ()
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+            $codigo = $this->input->post('codigo');
+            $result = $this->get('cupon',['cupon_codigo' =>$codigo ]);
+            
+            if (!empty($result)) {
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'cupon encontrado !';
+                $this->resp['data'] = [
+                    "tipon_cupon" => $result['tipo_cupon'],
+                    "descuento" => $result['cupon_precio'],
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+                
+            } else {
+                $resp = [
+                    'status'  => true,
+                    'code'    => 404,
+                    'message' => 'x El cupon no es valido.'
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
 }

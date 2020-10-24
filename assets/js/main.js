@@ -20,6 +20,7 @@ ObjMain = {
         if(window.location.href== ( DOMAIN+'registro' ) ){
             console.log('Pagina de registro');
             ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
         }
         if(window.location.href == ( `${DOMAIN}facturacion` ) ){
             ObjMain.load_ubigeo();
@@ -48,6 +49,8 @@ ObjMain = {
         }
         if(document.querySelector('#checkout_crumb') != null){
             ObjMain.listar_items(); 
+            ObjMain.cupon();
+
         }
     },
     recalculo: (item) =>{
@@ -792,8 +795,63 @@ ObjMain = {
             factura : localStorage.getItem('factura')? JSON.parse(localStorage.getItem('factura')):'no solicito factura',
             destinatario : localStorage.getItem('destinatario')?JSON.parse(localStorage.getItem('destinatario')):'el destinatario es unico',
         }
-    }
+    },
+    defaultUbigeo : () => {
+        setTimeout(function () {
+            
+            document.querySelectorAll('#s_depa > option').forEach(depa => {
+              if( depa.textContent == 'Lima' ){
+                depa.setAttribute('selected','selected');
+                document.querySelector('#s_depa').disabled = true;
+            } 
+             });
+             $('#s_depa').trigger('change')
 
+            document.querySelectorAll('#sprov > option').forEach(prov => {
+                if( prov.textContent == 'Lima' ){
+                    prov.setAttribute('selected','selected');
+                    document.querySelector('#sprov').disabled = true;
+                }
+            });
+            
+            $('#sprov').trigger('change')
+            
+            const nodeParent =  document.querySelectorAll('#sdist > option')[0].parentNode;
+            const childNode  =  document.createElement('option')
+            childNode.textContent= 'SELECCIONE DISTRITO';
+            childNode.setAttribute('selected','selected')
+                    nodeParent.insertBefore(childNode ,document.querySelectorAll('#sdist > option')[0]);
+           } ,200)
+    },
+    cupon: () => {
+        const $inputCupon = document.querySelector('.cup-btn')
+        $inputCupon.addEventListener('click' , event => {
+            event.preventDefault();
+            const $cupon = document.querySelector('.cod-cupon');
+            const $descuento = document.querySelector('.descont_cost');
+            const $total = document.querySelector('.total_cost');
+            const ruta   = event.target.href;
+            const formData = new FormData();
+
+            
+            formData.append('codigo' ,$cupon.value);
+
+            ObjMain.ajax_post('POST', ruta , formData)
+            .then( res => {
+                res = JSON.parse(res);
+                console.log(res)
+                // $descuento.textContent = `- ${res.}`
+               
+            })
+            .catch((err)=>{
+                // err = JSON.parse(err);
+                console.log(err)
+               
+            });
+           
+        })
+        
+    }
 }
 
 
