@@ -472,6 +472,10 @@ class Contenido extends CI_Model {
             $data['active'] = $rows['active'];
             // DETAILS FOR PRODUCTO 
             $data['detalles-multimedia'] = $rows['detalles-multimedia'] ? json_decode($rows['detalles-multimedia'],true): FALSE;
+            // dimensiones
+            $data['volumen'] = $rows['alto']*$rows['alto']*$rows['alto'];
+            $data['peso'] = $rows['peso'];
+            
             // SUGERIDOS FOR MODAL
             $data['sugeridos'] = $rows['relacionados'] ? json_decode($rows['relacionados'],true): FALSE;
             //Categoria
