@@ -306,7 +306,7 @@ class Ajax extends MY_Controller
                 
             } else {
                 $resp = [
-                    'status'  => true,
+                    'status'  => false,
                     'code'    => 404,
                     'message' => 'x El cupon no es valido.'
                 ];

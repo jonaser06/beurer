@@ -279,7 +279,7 @@ select {
   align: left;
 }
 
-#cantidad_prod {
+.cantidad_prod {
   width: 35px;
 }
 
