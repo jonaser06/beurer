@@ -1074,7 +1074,14 @@ section2 {
   }
 }
 
-
+/* cupon */
+.res-cup {
+  width: 100%;
+  margin-top:5px;
+  text-align: center;
+  display: block;
+  color: #C51152;
+}
 
 /* PERFIL DETALLE PEDIDO PEDIDOS  */
 .taps {

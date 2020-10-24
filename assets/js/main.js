@@ -873,10 +873,13 @@ ObjMain = {
     cupon: (event) => {
         event.preventDefault();
         const $inputCupon = document.querySelector('.cup-btn');
-        if(intento == 1 ){
+        const $resCupon = document.querySelector('.res-cup');
+        if(true ){
             console.log(intento);
             const $cupon = document.querySelector('.cod-cupon');
             const $descuento = document.querySelector('.descont_cost');
+            const $sub = parseFloat(document.querySelector('.sub_cost').textContent);
+            console.log($sub)
             const $total = document.querySelector('.total_cost');
             const formData = new FormData();
             
@@ -884,6 +887,7 @@ ObjMain = {
             ObjMain.ajax_post('POST', 'ajax/cupon' , formData)
             .then( res => {
                 res = JSON.parse(res);
+                console.log(res)
                 if(res.status){
                     intento++;
                     let tipo = parseInt(res.data.tipon_cupon);
@@ -891,14 +895,28 @@ ObjMain = {
                     let total; 
                     if(tipo == 1){
                         desc = parseFloat(res.data.descuento) / 100;
-                        total = parseFloat(localStorage.getItem('costo_total'));
+                        // total = parseFloat(localStorage.getItem('costo_total'));
+                        total = $sub
                         total = total * desc
+                        desc =`-${desc *100 } %`
                     }else{
                         desc = parseFloat(res.data.descuento);
-                        total = parseFloat(localStorage.getItem('costo_total'));
+                        // total = parseFloat(localStorage.getItem('costo_total'));
+                        total = $sub
                         total = total - desc;
+                        desc =`-${desc } `
                     }
+
+                    $total.textContent = `${total}`
+                    $descuento.textContent = desc
+                    $resCupon.style.color = 'green';
+                    $resCupon.textContent = res.message;
+
                     ObjMain.costo_total(total, 0, 0);
+                }else {
+                    $resCupon.textContent = res.message;
+                    $resCupon.style.color = '#C51152';
+                    $cupon.value ="";
                 }
             
             })
