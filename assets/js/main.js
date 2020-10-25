@@ -85,18 +85,35 @@ ObjMain = {
             let pxc = parseFloat(p.peso) * parseInt(p.cantidad);
             weight = weight + pxc;
         });
-        /* comparar con la tabla */
-        /* costo del volumen */
-        
-        /* costo del peso */
         document.querySelector('.sub_cost').innerHTML = (sub).toFixed(2);
-        // console.log('Total: '+cost);
-        ObjMain.costo_total(sub, 0, 0);
+        const {...resp }  = ObjMain.calcEnvio(vol,weight)
+        localStorage.setItem('subtotal' , sub );
+        localStorage.setItem('costo_envio' ,+resp.total_coste );
+        document.querySelector('.cost_shipped').textContent = parseFloat(resp.total_coste).toFixed(2)
+        localStorage.removeItem('descuento')
+        ObjMain.costo_total();
 
     },
-    costo_total: (sub, envio, desc) => {
-        let costo_total = sub + envio + desc;
-        localStorage.setItem('costo_total', costo_total);
+    costo_total: () => {
+        
+        let total = 0; 
+        const sub   = parseFloat(localStorage.getItem('subtotal'))
+        const envio = parseFloat(localStorage.getItem('costo_envio'));
+        let desc    = localStorage.getItem('descuento') ? parseFloat( localStorage.getItem('descuento')) : 0;
+        const tipo  = parseInt(localStorage.getItem('tipo'));
+
+        // const cupon = localStorage.getItem('cupon') ? localStorage.getItem('cupon') : 0 ;
+        if(tipo == 1){
+            total = sub * (desc/100 )
+            
+        }else{
+            total = sub
+            total = total - desc;
+        }
+        console.log(total , envio)
+        let costo_total = total + envio 
+        document.querySelector('.total_cost').textContent = costo_total.toFixed(2);
+        
     },
     listar_items: () => {
         let item = localStorage.getItem('productos');
@@ -876,15 +893,14 @@ ObjMain = {
            } ,200)
     },
     cupon: (event) => {
+        
         event.preventDefault();
         const $inputCupon = document.querySelector('.cup-btn');
         const $resCupon = document.querySelector('.res-cup');
         if(true){
-            console.log(intento);
             const $cupon = document.querySelector('.cod-cupon');
             const $descuento = document.querySelector('.descont_cost');
-            const $sub = parseFloat(document.querySelector('.sub_cost').textContent);
-            console.log($sub)
+            const $sub = parseFloat(document.querySelector('.sub_cost').textContent); // tomando en duro
             const $total = document.querySelector('.total_cost');
             const formData = new FormData();
             
@@ -897,35 +913,21 @@ ObjMain = {
                     let tipo = parseInt(res.data.tipon_cupon);
                     let desc;
                     let total; 
-                    if(tipo == 1){
-                        desc = parseFloat(res.data.descuento) / 100;
-                        // total = parseFloat(localStorage.getItem('costo_total'));
-                        total = $sub
-                        total = total * desc
-                        desc =`-${desc *100 } %`
-                    }else{
-                        desc = parseFloat(res.data.descuento);
-                        // total = parseFloat(localStorage.getItem('costo_total'));
-                        total = $sub
-                        total = total - desc;
-                        desc =`-${desc}`
-                    }
-
-                    $total.textContent = `${total}`
-                    $descuento.textContent = desc
+                    localStorage.setItem('tipo' , tipo );
+                    localStorage.setItem('descuento' ,res.data.descuento );
+                    $descuento.textContent = tipo == 1 ? `${res.data.descuento} %`:`${res.data.descuento}`
                     $resCupon.style.color = 'green';
                     $resCupon.textContent = res.message;
 
-                    ObjMain.costo_total(total, 0, 0);
                 }else {
                     $resCupon.textContent = res.message;
                     $resCupon.style.color = '#C51152';
                     $cupon.value ="";
                 }
+                ObjMain.costo_total();
             
             })
             .catch((err)=>{
-                // err = JSON.parse(err);
                 console.log(err)
             
             });
