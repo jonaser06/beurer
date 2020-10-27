@@ -331,37 +331,148 @@ class Ajax extends MY_Controller
             'message' => 'Metodo POST requerido',
         ];
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
-
-            
-            if (!empty($result)) {
-                $this->resp['status'] = true;
-                $this->resp['code'] = 200;
-                $this->resp['message'] = '';
-                $this->resp['data'] = [
-                    
-                ];
+            try
+            { 
+                include_once APPPATH.'third_party/request/library/Requests.php';
+                Requests::register_autoloader();
+                include_once APPPATH.'third_party/culqi/lib/culqi.php';
+    
+              $SECRET_KEY = "sk_test_zwggqXQXiQk0eaip";
+              $culqi = new Culqi\Culqi(array('api_key' => $SECRET_KEY));
+        
+              $charge = $culqi->Charges->create(
+                        [
+                            "amount"        =>$this->input->post('total_coste'),
+                            "capture"       =>true,
+                            "currency_code" =>"PEN",
+                            "description"   => $this->input->post('id_productos') ,
+                            "installments"  => 0,
+                            "source_id"     => $this->input->post('token'),
+                            "email"         =>$this->input->post('correo'),
+                            "metadata"=>[
+                                "id_session" =>$this->input->post('id_session'),
+                                "tipo_documento" =>$this->input->post('tipo_documento'),
+                                "numero_documento" =>$this->input->post('numero_documento'),
+                                "correo" =>$this->input->post('correo'),
+                                "distrito"    => $this->input->post('distrito'),
+                                "nombres" => $this->input->post('nombres'),
+                                "apellidos" => $this->input->post('apellidos'),
+                                "telefono" => $this->input->post('telefono'),
+                                "d_envio" => $this->input->post('d_envio'),
+                                "referencia" => $this->input->post('referencia'),
+                                "id_productos" =>$this->input->post('id_productos'),
+                                "cantidades" =>$this->input->post('cantidades'),
+                                "subtotales" =>$this->input->post('subtotales'),
+                                "cantidad_total" =>$this->input->post('cantidad_total'),
+                                "envio" =>$this->input->post('envio_coste'),
+                                "subtotal" =>$this->input->post('subtotal_coste')
+                                
+                            ],
+                            "antifraud_details"=>[
+                                "address"    => $this->input->post('distrito'),
+                                "first_name" => $this->input->post('nombres'),
+                                "last_name" => $this->input->post('apellidos'),
+                                "phone" => $this->input->post('telefono'),
+                            ]
+                        ]
+                );    
+                $response = $charge ? json_encode($charge) :null;
                 $this->output
-                    ->set_content_type('application/json')
-                    ->set_status_header(200)
-                    ->set_output(json_encode($this->resp));
-                return;
+                        ->set_content_type('application/json')
+                        ->set_status_header(200)
+                        ->set_output(json_encode($response));
+                    return;
+            } catch (Exception $e) {
+                $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(200)
+                        ->set_output(json_encode($e->getMessage()));
+                    return;
                 
-            } else {
-                $resp = [
-                    'status'  => false,
-                    'code'    => 404,
-                    'message' => ''
-                ];
-                $this->output
-                    ->set_content_type('application/json')
-                    ->set_status_header(200)
-                    ->set_output(json_encode($resp));
-                return;
+                
+               
             }
+            
         }
         $this->output
             ->set_content_type('application/json')
             ->set_status_header(404)
             ->set_output(json_encode($resp));
     }
+    public function purchase () 
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+           #evaluamos si la compra está aprobada //en culqui si existe un token actual-registro de comtra current
+            $id_productos = explode('-',$this->input->post('id_productos'));
+            $cantidades   = explode('-',$this->input->post('cantidades'));
+            $subtotales   = explode('-',$this->input->post('subtotales'));
+
+            $data =[ 
+                         'id_cliente' => $this->input->post('id_cliente'),
+                         'nombres'   => $this->input->post('nombres'),
+                         'apellidos' => $this->input->post('apellidos'),
+                         'correo'    => $this->input->post('correo'),
+                         'telefono'    => $this->input->post('telefono'),
+                         'tipo_documento'=> $this->input->post('tipo_documento'),
+                         'numero_documento'=> $this->input->post('numero_documento'),
+                         'provincia'=> $this->input->post('provincia'),
+                         'distrito'=> $this->input->post('distrito'),
+                         'dir_envio'=> $this->input->post('d_envio'),
+                         'referencia'=> $this->input->post('referencia'),
+                         'entrega_precio'=> $this->input->post('entrega_precio'),
+                         'productos_precio'=> $this->input->post('subtotal'),
+                         'pedido_fecha'=> date('d-m-Y'),
+                         'pedido_estado'=> 1 ,
+                    
+            ];
+            $id_pedido = $this->savePedido($data);
+            
+            for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
+                $datos = [
+                    'id_pedido'   => (int)$id_pedido,
+                    'id_producto' => (int)$id_productos[$i],
+                    'cantidad'    => (int)$cantidades[$i],
+                    'subtotal_precio' => $subtotales[$i],
+                ];
+                $response = $this->dbInsert('pedido_detalle',$datos);
+                
+                if($response){
+                    $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
+                    $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
+                    $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
+                    
+                }else{
+
+                    $this->resp = [
+                        'message' => 'error'
+                    ];
+                    $this->output
+                     ->set_content_type('application/json')
+                     ->set_status_header(404)
+                     ->set_output(json_encode($this->resp));
+                     return;
+                }
+            }
+            $this->resp = [
+                'message' => 'exito'
+            ];
+            $this->output
+                     ->set_content_type('application/json')
+                     ->set_status_header(200)
+                     ->set_output(json_encode($this->resp));
+                     return;
+            
+          }else {
+            $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+          }
+    }
+ 
 }

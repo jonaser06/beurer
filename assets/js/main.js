@@ -950,31 +950,38 @@ ObjMain = {
         const paq_small = 10;
         const paq_big = 20;
         
-        if(peso < peso_small && vol < vol_small ) {
-            return {
-                paquete_small : 1,
-                total_coste : paq_small
-            }
-        }
-        if((peso > peso_small && peso < peso_big) && (vol > vol_small && vol < vol_big ) ) {
-            return {
-                paquete_big : 1,
-                total_coste : paq_big
-            }
-        }
-        if( peso > peso_big && vol > vol_big ) {
-            const resPeso = peso % peso_big ;
-            let caja_small = 0;
-            let caja = parseInt(peso / peso_big); 
-            resPeso < peso_small ? caja_small++ : caja++ 
-            return  {
-                paquete_big : caja,
-                paquete_small : caja_small,
-                coste_small : caja_small * paq_small,
-                coste_big : caja * paq_big,
-                total_coste : caja_small * paq_small + caja * paq_big,
-            }
-        }
+        // if(peso < peso_small && vol < vol_small ) {
+        //     return {
+        //         paquete_small : 1,
+        //         total_coste : paq_small
+        //     }
+        // }
+        // if((peso > peso_small && peso < peso_big) && (vol > vol_small && vol < vol_big ) ) {
+        //     return {
+        //         paquete_big : 1,
+        //         total_coste : paq_big
+        //     }
+        // }
+        // if( peso > peso_big && vol > vol_big ) {
+        //     const resPeso = peso % peso_big ;
+        //     let caja_small = 0;
+        //     let caja = parseInt(peso / peso_big); 
+        //     resPeso < peso_small ? caja_small++ : caja++ 
+        //     return  {
+        //         paquete_big : caja,
+        //         paquete_small : caja_small,
+        //         coste_small : caja_small * paq_small,
+        //         coste_big : caja * paq_big,
+        //         total_coste : caja_small * paq_small + caja * paq_big,
+        //     }
+        // }
+        return  {
+                    paquete_big : 1,
+                    paquete_small : 1,
+                    coste_small : 0,
+                    coste_big : 20,
+                    total_coste : 10
+                }
     },
     getDataSales :(sesion) => { 
         const comprador    =  localStorage.getItem('Comprador')? JSON.parse(localStorage.getItem('Comprador')) : null

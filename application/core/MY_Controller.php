@@ -184,6 +184,11 @@ class MY_Controller extends CI_Controller
         $title = str_replace(STR_SPACE, STR_GUION, $title);
         $title = trim($title);
         return $title;
+    } 
+
+    public function savePedido ( array $data = []  ){
+        $this->db->insert('pedido', $data );
+        return $this->db->insert_id();
     }
 
 }

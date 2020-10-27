@@ -67,7 +67,7 @@
             <div class="row paso3" style="text-align:left; margin:auto; width:85%">
                 <div class="col-md-6 col-sm-12">
                     <ul
-                        style="list-style-image: url('assets/images/check-solid.svg');background-color:white;border-radius:8%; font-size:1.2em;padding:6% 7%;">
+                        style="list-style-image: url(<?= base_url('beurer_plantilla/assets/images/check-solid.svg')?>);background-color:white;border-radius:8%; font-size:1.2em;padding:6% 7%;">
                         <li class="font-nexaheavy" style="list-style:none;font-size:1.4em;">INFORMACIÓN DE ENVÍO</li>
 
                         <div class="dataComprador">
@@ -200,29 +200,160 @@
 
 
 <script src="https://checkout.culqi.com/js/v3"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+
+<script>
+        Culqi.publicKey ='pk_test_9rNJzJYDhq1KxhH4';
+
+</script>
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', event => {
-        Culqi.publicKey ='pk_test_YPmVwqqQhPqlLWqJ';
 
+        const session       = parseInt(document.querySelector('.dataUser').dataset.id);
+        const productos     = localStorage.getItem('productos') ? JSON.parse(localStorage.getItem('productos')) :[]
         const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
         const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
         const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
         
-    Culqi.publicKey = 'Aquí inserta tu llave pública';
-    Culqi.settings({
-        title: 'BEURER',
-        currency: 'PEN',
-        description: 'Completamos tu pago con toda la seguridad que tú necesitas',
-        amount: (parseFloat(subtotal) + parseFloat(envio)).toFixed(2)*100
-    });
-    $('#buy').on('click', function(e) {
+        const user          = localStorage.getItem('domicilio')  ? JSON.parse(localStorage.getItem('Comprador')): JSON.parse(localStorage.getItem('Destinatario'))
+        const total         = (parseFloat(subtotal) + parseFloat(envio)).toFixed(2)*100
+        
+
+        // FORMULARIO SETTINGS CULQI DEFAULT 
+        Culqi.settings({
+            title: 'BEURER',
+            currency: 'PEN',
+            description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+            amount: total
+        });
+        document.getElementById('buy').addEventListener('click', event => {
+            Culqi.open();
+            $('html, body').animate({scrollTop:0}, 'slow');
+            event.preventDefault();
+            
+
+        })
         $('html, body').animate({scrollTop:0}, 'slow');
-      
-        Culqi.open();
-        e.preventDefault();
-    });
-    })
+
+        function converter () {
+            let id_products = [] , cant_products = [] , subtotal_products=[]
+            productos.forEach(prod => {
+                id_products.push(prod.id);
+                cant_products.push(prod.cantidad);
+                subtotal_products.push(prod.subtotal);
+            })
+            return {
+                id_products   : id_products.join('-'),
+                cant_products : cant_products.join('-'),
+                subtotal_products : subtotal_products.join('-')
+            }
+        }
+        function dataFormPurchase ( charge ) {
+            const formData = new FormData();
+            formData.append('nombres' ,charge.nombres );
+            formData.append('apellidos' , charge.apellidos );
+            formData.append('correo' , charge.correo );
+            formData.append('tipo_documento' , charge.tipo_documento);
+            formData.append('numero_documento' , charge.number_documento);
+            formData.append('provincia' , 'Lima');
+            formData.append('distrito' , charge.distrito);
+            formData.append('telefono' , charge.telefono);
+            formData.append('dir_envio' , charge.d_envio);
+            formData.append('referencia' , charge.referencia);
+            formData.append('entrega_precio' ,charge.envio );
+            formData.append('productos_precio' ,charge.subtotal );
+            formData.append('id_cliente' ,charge.session);
+
+            formData.append('id_productos' , charge.id_productos);
+            formData.append('cantidades' , charge.cantidades);
+            formData.append('subtotales' , charge.subtotales);
+            
+            
+            return formData;
+        }
+        function dataFormSend (token,email) {
+           
+            
+            const formData = new FormData();
+            formData.append('token' , token );
+            formData.append('correo' , email );
+            formData.append('id_session' , session );
+            formData.append('nombres' , `${user.nombres}`);
+            formData.append('apellidos' , `${user.apellido_paterno} ${user.apellido_materno}`);
+            formData.append('telefono' , user.telefono );
+            formData.append('distrito' , `${user.distrito} ${user.provincia}`);
+            formData.append('d_envio' , user.d_envio);
+            formData.append('referencia' , user.referencia);
+            formData.append('tipo_documento' , user.tipo_doc);
+            formData.append('numero_documento' ,user.number_doc );
+
+            formData.append('id_productos' , JSON.stringify( converter().id_products ));
+            formData.append('cantidades' , JSON.stringify( converter().cant_products));
+            formData.append('subtotales' , JSON.stringify( converter().subtotal_products));
+
+            formData.append('cantidad_total' , cantidad );
+            formData.append('subtotal_coste' , subtotal );
+            formData.append('envio_coste' , envio );
+            formData.append('total_coste' , total );
+            
+            return formData;
+        }
+        function modalCheckout (title , icon ,message , color) {
+            Swal.fire({
+            icon: icon ,
+            title: title,
+            text: message ,
+           
+})
+            
+        }
+        function culqi() {
+
+        
+        if (Culqi.token) { 
+             const token  = Culqi.token.id;
+             const email = Culqi.token.email;
+             const formSend   = dataFormSend(token,email)
+
+            ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/createCharge`, formSend)
+                    .then( resp => {
+                        resp = JSON.parse(resp);
+                        resp = JSON.parse(resp)
+                        if(resp.object == 'charge') {
+                            
+                            const {...charge } = resp;  
+                            if(charge.outcome.type == "venta_exitosa" ) { 
+                                // tomamos los metadatos de el cargo y se hace un Request a controller Finalizar Sales
+                                const { metadata } = charge ;
+                                
+                                const formCharge = dataFormPurchase(metadata);
+                                ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchase`, formCharge)
+                                .then( resp => {})
+                                .catch();
+
+                                modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
+                            }
+                        }else{
+                            modalCheckout( 'Error' ,'error',`${resp.user_message}`,'#C5115')
+                        }
+                    })
+                    .catch( err =>{
+                       console.log(err)
+                        
+                    });
+        } else { 
+            console.log(Culqi.error);
+            alert(Culqi.error.user_message);
+        }
+        };
+
+        
+        
+         
+  
+
+    
 
 </script>

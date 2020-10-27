@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2020 a las 04:51:03
+-- Tiempo de generación: 27-10-2020 a las 21:50:23
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.33
 
@@ -139,7 +139,8 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido_paterno`, `apellido_materno`, `correo`, `contrasena`, `departamento`, `provincia`, `distrito`, `direccion`, `referencia`, `telefono`, `fecha_nacimiento`, `tipo_documento`, `documento`, `idperfil`, `politicas`, `ofertas`) VALUES
 (128, 'renzo', 'lopez', 'galarza', 'test@gmail.com', 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', 'Lima', 'Lima', 'Ate', 'calle perseo la molina', 'calle', 989848484, '1993-01-01', 'PASAPORTE', 434534535, 4, 1, 0),
-(129, 'renzo', 'patana', 'lopez', 'testrenzo@gmail.com', 'fe44cf7c8086d9252bd158a3b388dad680a26e467a241624dc3a8bb630c1a443', 'Lima', 'Lima', 'Ate', 'renzo', 'calle electra', 232433243, '1997-01-01', 'DNI', 93939933, 4, 1, 0);
+(129, 'renzo', 'patana', 'lopez', 'testrenzo@gmail.com', 'fe44cf7c8086d9252bd158a3b388dad680a26e467a241624dc3a8bb630c1a443', 'Lima', 'Lima', 'Ate', 'renzo', 'calle electra', 232433243, '1997-01-01', 'DNI', 93939933, 4, 1, 0),
+(130, 'renzo', 'patana', 'lopez', 'renzoedward23@gmail.com', '7f2845915145895b788bdd6bd7c5418ac958e376ea79e6d6e7c37a9873bfa5c6', 'Lima', 'Lima', 'La Victoria', 'calle electra', 'avenida faisanes', 232332323, '1995-01-01', 'DNI', 2147483647, 4, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -310,7 +311,7 @@ CREATE TABLE `cupon` (
 
 INSERT INTO `cupon` (`id_cupon`, `cupon_codigo`, `descripcion`, `tipo_cupon`, `cupon_precio`, `fecha_creacion`, `fecha_uso`, `cupon_estado`) VALUES
 (0, 'DAUUM', 'porcentaje', 1, '50.00', NULL, NULL, 1),
-(1, 'DA#UUL', 'descuento sub', 2, '10.00', NULL, NULL, 1);
+(1, 'DA#UUL', 'descuento sub', 2, '1.00', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1025,16 +1026,33 @@ INSERT INTO `paginas` (`idpagina`, `pagina`, `orden`, `header`, `footer`, `color
 
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
-  `id_tipo_documento` int(11) DEFAULT NULL,
+  `nombres` text DEFAULT NULL,
+  `apellidos` text DEFAULT NULL,
+  `telefono` text DEFAULT NULL,
+  `apellido_paterno` text DEFAULT NULL,
+  `apellido_materno` text DEFAULT NULL,
+  `correo` int(11) DEFAULT NULL,
+  `tipo_documento` text DEFAULT NULL,
   `numero_documento` varchar(20) DEFAULT NULL,
-  `id_ubigeo_entrega` varchar(10) DEFAULT NULL,
+  `provincia` text DEFAULT NULL,
+  `distrito` text DEFAULT NULL,
+  `dir_envio` varchar(100) DEFAULT NULL,
   `cupon_codigo` varchar(20) DEFAULT NULL,
   `cupon_descuento` decimal(4,2) DEFAULT NULL,
   `entrega_precio` decimal(4,2) DEFAULT NULL,
   `productos_precio` decimal(4,2) DEFAULT NULL,
   `pedido_fecha` datetime DEFAULT NULL,
-  `pedido_estado` int(11) DEFAULT NULL
+  `pedido_estado` int(11) DEFAULT NULL,
+  `id_cliente` int(10) DEFAULT NULL,
+  `referencia` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id_pedido`, `nombres`, `apellidos`, `telefono`, `apellido_paterno`, `apellido_materno`, `correo`, `tipo_documento`, `numero_documento`, `provincia`, `distrito`, `dir_envio`, `cupon_codigo`, `cupon_descuento`, `entrega_precio`, `productos_precio`, `pedido_fecha`, `pedido_estado`, `id_cliente`, `referencia`) VALUES
+(0, 'renzo', 'lopez galarza', 'undefined', NULL, NULL, 0, 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00 00:00:00', 1, 0, 'calle');
 
 -- --------------------------------------------------------
 
@@ -1052,6 +1070,13 @@ CREATE TABLE `pedido_detalle` (
   `cantidad` decimal(4,2) DEFAULT NULL,
   `subtotal_precio` decimal(4,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedido_detalle`
+--
+
+INSERT INTO `pedido_detalle` (`id_pedido_detalle`, `id_pedido`, `id_producto`, `producto_sku`, `producto_nombre`, `producto_precio`, `cantidad`, `subtotal_precio`) VALUES
+(0, 0, 0, NULL, NULL, NULL, '0.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -1849,7 +1874,7 @@ ALTER TABLE `categorias_video`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT de la tabla `colecciones`
