@@ -37,7 +37,7 @@
 
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Número Documento Identidad: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required>
+                                            <input type="text" size="20" maxlength="20" name="campo1" value="" required>
                                         </div>
                                     </div>
 
@@ -45,7 +45,7 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Nombres : <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="c_apep" value="">
+                                            <input type="text" size="20" maxlength="20" name="campo1" value="">
                                         </div>
                                     </div>
 
@@ -54,7 +54,7 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Apellido Paterno: <div class="d_ob">*</div></div>
 
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="c_apep" value="">
+                                            <input type="text" size="20" maxlength="20" name="campo1" value="">
 
                                         </div>
                                         <div class="divTableCell">
@@ -70,11 +70,11 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono/Celular</div>
-                                            <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij" value="">
+                                            <input type="text" size="9" maxlength="9" name="campo1" value="">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="">
+                                            <input type="text" size="20" maxlength="30" name="campo1" value="">
                                         </div>
                                     </div>
 
@@ -88,25 +88,29 @@
                                         <div class="divTableCell" style="width:32%;">
                                             <div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div>
                                             </div>
-                                            <select id="s_depa"></select>
+                                            <select id="s_depa" onchange="ObjMain.showProvincesList(this);">
+                                                <option disabled selected>Seleccione departamento</option>
+                                            </select>
                                         </div>
 
                                         <div class="divTableCell" style="width:32%;">
                                             <div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div>
                                             </div>
-                                            <select id="s_prov"></select>
+                                            <select id="sprov" onchange="ObjMain.showDistrictsList(this);">
+                                                <option disabled selected>Seleccione provincia</option>
+                                            </select>
                                         </div>
                                         <div class="divTableCell" style="width:32%;">
                                             <div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div>
                                             </div>
-                                            <select id="s_dist"></select>
+                                            <select id="sdist"></select>
                                         </div>
                                     </div>
 
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:99%;">
                                             <div class="etiquetaFormulario">Dirección: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="">
+                                            <input type="text" size="20" maxlength="30" name="campo1" value="">
                                         </div>
                                     </div>
                                     <br>
@@ -123,7 +127,7 @@
                                         <div class="divTableRow" id="pn_datos1">
                                             <div class="divTableCell" style="width:99%;">
                                                 <div class="etiquetaFormulario">Coloca el nombre de tu padre, madre o apoderado : <div class="d_ob">*</div></div>
-                                                <input type="text" size="20" maxlength="20" name="campo1" id="c_apep" value="">
+                                                <input type="text" size="20" maxlength="20" name="campo1" value="">
                                             </div>
                                         </div>
 
@@ -143,7 +147,7 @@
                                                 <div class="etiquetaFormulario">Número Documento Identidad: <div
                                                         class="d_ob">*</div>
                                                 </div>
-                                                <input type="text" size="20" maxlength="20" name="campo1" id="campo1" value="" required>
+                                                <input type="text" size="20" maxlength="20" name="campo1" value="" required>
                                             </div>
                                         </div>
 
@@ -151,11 +155,11 @@
                                         <div class="divTableRow">
                                             <div class="divTableCell">
                                                 <div class="etiquetaFormulario">Teléfono/Celular</div>
-                                                <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij" value="">
+                                                <input type="text" size="9" maxlength="9" name="campo1" value="">
                                             </div>
                                             <div class="divTableCell">
                                                 <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div>
-                                                <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="">
+                                                <input type="text" size="20" maxlength="30" name="campo1" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -196,7 +200,7 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:99%;" colspan="2">
                                             <div class="etiquetaFormulario">Monto reclamado ( S/. ): <div class="d_ob">*</div></div>
-                                            <input type="text" size="4" maxlength="4" name="campo1" id="campo1" value="">
+                                            <input type="text" size="4" maxlength="4" name="campo1" value="">
                                         </div>
                                     </div>
 
@@ -245,7 +249,7 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:99%;" colspan="2">
                                             <div class="etiquetaFormulario">DESCRIPCIÓN: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" id="campo1" value="">
+                                            <input type="text" size="20" maxlength="30" name="campo1" value="">
                                         </div>
                                         <div class="divTableRow">
                                             <div class="divTableCell" style="width:100%;">
@@ -346,7 +350,7 @@
 
 </main>
 
-<script src="assets/js/registro.js"></script>
+<!-- <script src="assets/js/registro.js"></script> -->
 
 
 <?php include 'src/includes/footer.php' ?>
