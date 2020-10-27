@@ -31,6 +31,9 @@ ObjMain = {
             ObjMain.load_ubigeo();
             ObjMain.defaultUbigeo();
         }
+        if(window.location.href == ( `${DOMAIN}send-payment` ) ){
+            ObjMain.showDataSales();
+        }
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
         }
@@ -53,7 +56,10 @@ ObjMain = {
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
-        if(document.querySelector('#checkout_crumb') != null){
+        // if(document.querySelector('#checkout_crumb') != null){
+        //     ObjMain.listar_items(); 
+        // }
+        if(window.location.href == ( `${DOMAIN}carrito` )){
             ObjMain.listar_items(); 
         }
     },
@@ -87,8 +93,11 @@ ObjMain = {
         });
         document.querySelector('.sub_cost').innerHTML = (sub).toFixed(2);
         const {...resp }  = ObjMain.calcEnvio(vol,weight)
+        
         localStorage.setItem('subtotal' , sub );
-        localStorage.setItem('costo_envio' ,+resp.total_coste );
+        localStorage.setItem('volumen_total' , vol );
+        localStorage.setItem('peso_total' , weight );
+        localStorage.setItem('costo_envio' , + resp.total_coste );
         document.querySelector('.cost_shipped').textContent = parseFloat(resp.total_coste).toFixed(2)
         localStorage.removeItem('descuento')
         ObjMain.costo_total();
@@ -934,11 +943,11 @@ ObjMain = {
         }
     },
     calcEnvio :( vol, peso ) => {
-        const peso_small = 20 ;
-        const peso_big   = 50 ;
-        const vol_small  = 60 ;
-        const vol_big    = 100 ;
-        const paq_small = 20;
+        const peso_small = 30 ;
+        const peso_big   = 60 ;
+        const vol_small  = 240 ;
+        const vol_big    = 480;
+        const paq_small = 10;
         const paq_big = 20;
         
         if(peso < peso_small && vol < vol_small ) {
@@ -966,6 +975,89 @@ ObjMain = {
                 total_coste : caja_small * paq_small + caja * paq_big,
             }
         }
+    },
+    getDataSales :(sesion) => { 
+        const comprador    =  localStorage.getItem('Comprador')? JSON.parse(localStorage.getItem('Comprador')) : null
+        const destinatario = localStorage.getItem('Destinatario')? JSON.parse(localStorage.getItem('Destinatario')) : null 
+        const factura      =  localStorage.getItem('facturacion')? JSON.parse(localStorage.getItem('facturacion')) : null
+        const productos   =  localStorage.getItem('productos')? JSON.parse(localStorage.getItem('productos')) : null
+        return !sesion 
+        ? {
+            destinatario,
+            factura,
+            productos,
+        } 
+        : {
+            comprador,
+            destinatario,
+            factura,
+            productos
+        }
+    },
+    showDataSales  : () => {
+
+        const session       = parseInt(document.querySelector('.dataUser').dataset.id);
+        const objSales      =  ObjMain.getDataSales(session);
+        const peso_total    = localStorage.getItem('peso_total') ? localStorage.getItem('peso_total') : 0
+        const volumen_total = localStorage.getItem('volumen_total') ? localStorage.getItem('volumen_total') : 0 
+        const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
+        const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
+        const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
+        let containerProd   = document.querySelector('.table-products');
+        let envio_pago      = document.querySelector('#envio_pago');
+        let subtotal_pago   = document.querySelector('#subtotal_pago');
+        let total_pago      = document.querySelector('#total_pago');
+        
+        let productos = []
+
+        if(localStorage.getItem('productos')) {
+             productos = JSON.parse(localStorage.getItem('productos'))
+             productos.forEach( (prod ,index ) => {
+                 let $tr = document.createElement('tr');
+                 let childOne = document.createElement('td')
+                 childOne.setAttribute('scope','row')
+                 
+                 let childTwo = document.createElement('td')
+                 childTwo.style.textAlign = 'left';
+                 
+                 let childThree = document.createElement('td')
+                 childThree.classList.add('subtotalr')
+                 childThree.style.textAlign = 'right'
+
+                 $tr.appendChild(childOne).innerHTML = `${index + 1 }`
+                 $tr.appendChild(childTwo).textContent = `${prod.title}`;
+                 $tr.appendChild(childThree).textContent = `${parseFloat(prod.precio_online * prod.cantidad).toFixed(2)}`
+                 containerProd.appendChild($tr)
+             })
+        }
+        let dataUser = null;
+        if(session) {
+            dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
+        }else {
+            dataUser = objSales.destinatario
+        }
+        
+        document.querySelector('.dataComprador').innerHTML = `
+                        <div>LIMA LIMA </div>
+                        <div>${dataUser.distrito} </div>
+                        <div> ${dataUser.d_envio} - Lima </div>
+                        <div>Volumen total de la carga: ${volumen_total} m3 </div>
+                        <div>Peso total de la carga: ${peso_total} kg </div>
+                        <br><br>
+
+                        <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">COMPRA A NOMBRE DE </li>
+                        <div>${dataUser.tipo_doc}: ${dataUser.number_doc }</div>
+                        <div>${dataUser.nombres} ${dataUser.apellido_paterno } ${dataUser.apellido_materno} </div>
+                        <br> <br>
+
+                        <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">RESUMEN DEL PEDIDO</li>
+                        <div>Cantidad de productos: ${cantidad} </div>
+                        <div>Importe Sub Total: S/ ${parseFloat(subtotal).toFixed(2)} 
+                        </div>`;
+
+        subtotal_pago.textContent = `${parseFloat(subtotal).toFixed(2)}` ;
+        envio_pago.textContent    = `${parseFloat(envio).toFixed(2)}`
+        total_pago.textContent    = `${(parseFloat(envio) + parseFloat(subtotal)).toFixed(2)} `
     }
 }
 
@@ -1297,9 +1389,7 @@ const perfil = () => {
                
         });
         
-    }
-
-    
+    } 
 }
 
 window.addEventListener('load', () => {

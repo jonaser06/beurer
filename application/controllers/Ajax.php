@@ -322,4 +322,46 @@ class Ajax extends MY_Controller
             ->set_status_header(404)
             ->set_output(json_encode($resp));
     }
+    // CREAR TOKEN CULQI
+    public function createCharge () 
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+            
+            if (!empty($result)) {
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = '';
+                $this->resp['data'] = [
+                    
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                return;
+                
+            } else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 404,
+                    'message' => ''
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
 }
