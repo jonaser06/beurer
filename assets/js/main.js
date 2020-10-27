@@ -31,6 +31,10 @@ ObjMain = {
             ObjMain.load_ubigeo();
             ObjMain.defaultUbigeo();
         }
+        if(window.location.href == ( `${DOMAIN}reclamos` ) ){
+            ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
+        }   
         if(window.location.href == ( `${DOMAIN}send-payment` ) ){
             ObjMain.showDataSales();
         }
