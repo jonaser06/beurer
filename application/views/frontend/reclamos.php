@@ -344,8 +344,6 @@
 
     <br>
 
-    </div>
-
 </main>
 
 <script src="assets/js/registro.js"></script>
