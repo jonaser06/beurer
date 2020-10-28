@@ -639,6 +639,8 @@ ObjMain = {
                             if(redirect){
                                 localStorage.removeItem('reg-redir');
                                 window.location = redirect;
+                            }else{
+                                window.location = DOMAIN;
                             }
                         })
                         .catch((err)=>{
