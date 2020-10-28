@@ -1,6 +1,7 @@
 :root {
   --color: brown;
   --colorResponse: #C51152;
+  --colorFilter: #C51152;
   --colorSave: #C51152;
 }
 
@@ -239,6 +240,11 @@ select {
 .input-group:nth-child(1)::after {
   content: attr(data-content);
   color: var(--colorResponse);
+  margin-left: 5px;
+}
+.input-group:nth-child(2)::after {
+  content: attr(data-content);
+  color: var(--colorFilter);
   margin-left: 5px;
 }
 

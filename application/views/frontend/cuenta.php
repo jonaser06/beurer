@@ -79,29 +79,15 @@ input {
                         </button></li>
                     <li><button id="p_misord" class="btn btnprimary1 p_user">
                             <div class="col-md-10 col-sm-10 col-xs-10">
-                                <h3>Mis Pedidos</h3>
+                                <h3>Mis Compras</h3>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-2">
                                 <h3>></h3>
                             </div>
                         </button></li>
                    
-                    <li style="display: none;"><button id="p_misdir" class="btn btnprimary1 p_user">
-                            <div class="col-md-10 col-sm-10 col-xs-10">
-                                <h3>Mis Direcciones</h3>
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <h3>></h3>
-                            </div>
-                        </button></li>
-                    <li><button class="btn btnprimary1 p_user"><a href=<?= base_url('ajax/logout')?>>
-                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                    <h3>Cerrar Sesión</h3>
-                                </div>
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <h3>></h3>
-                                </div>
-                            </a></button></li>
+                   
+                   
 
                 </ul>
             </div>
@@ -130,8 +116,8 @@ input {
                     <p>
                     <ul style="font-size:1.2em;line-height:50px; display:none">
                         <li>1. Datos Personales</li>
-                        <li>2. Mis órdenes</li>
-                        <li>3. Mis Direcciones</li>
+                        <li>2. Cambio de Contraseña</li>
+                        <li>3. Mis Compras</li>
                     </ul>
                     </p>
 
@@ -213,6 +199,8 @@ input {
     data-ofertas      =<?= (int)$userData['ofertas']?>
     data-politicas    =<?= (int)$userData['politicas']?>
     data-direccion    ="<?= $userData['direccion']?>"
+    data-distrito    ="<?= $userData['distrito']?>"
+    data-referencia    ="<?= $userData['referencia']?>"
     >
 </main>
 

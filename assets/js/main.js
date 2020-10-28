@@ -63,7 +63,7 @@ ObjMain = {
         // if(document.querySelector('#checkout_crumb') != null){
         //     ObjMain.listar_items(); 
         // }
-        if(window.location.href == ( `${DOMAIN}carrito` )){
+         if (window.location.href == ( `${DOMAIN}carrito` )){
             ObjMain.listar_items(); 
         }
     },
@@ -379,12 +379,15 @@ ObjMain = {
     updateAccount : (id) => {
         const $btnSave = document.querySelector('.saveUser')
         let formData = new FormData();
-        const apellidos = document.querySelector('#c_apep1').value.trim().split(' ');
-        const politicas = (document.querySelector('#politicas').checked )? 1 : 0 ;
-        const correo    = document.querySelector('#c_correo1').value ;
-        let tipo = document.querySelector('#s_tipodoc').value;
-        let direccion= document.querySelector('#locationUser').value;
-
+        const apellido_paterno = document.querySelector('#c_apep1').value.trim();
+        const apellido_materno = document.querySelector('#c_apem1').value.trim();
+        const politicas        = (document.querySelector('#politicas').checked )? 1 : 0 ;
+        const correo           = document.querySelector('#c_correo1').value ;
+        let tipo               = document.querySelector('#s_tipodoc').value;
+        let direccion          = document.querySelector('#locationUser').value; 
+        let dist               = document.getElementById('sdist');
+        dist = dist.options[dist.selectedIndex].getAttribute('data-name');
+        ref = document.getElementById('referencia').value;
         
         if (!politicas ) {
             $btnSave.dataset.content = 'x Acepte las Politicas';
@@ -392,14 +395,16 @@ ObjMain = {
             return;
         }
         formData.append("nombre", document.querySelector('#c_nombres1').value);
-        formData.append("apellido_paterno", apellidos[0]);
-        formData.append("apellido_materno", apellidos[1]);
+        formData.append("apellido_paterno", apellido_paterno);
+        formData.append("apellido_materno", apellido_materno);
         formData.append("correo", correo);
         formData.append("telefono", document.querySelector('#c_telcel').value);
         formData.append("tipo_documento",tipo  );
         formData.append("documento",  document.querySelector('#campo1').value);
         formData.append("politicas",politicas) ;
+        formData.append("distrito",dist) ;
         formData.append("direccion",direccion) ;
+        formData.append("referencia",ref) ;
         formData.append("ofertas",(document.querySelector('#publicidad').checked )? 1 : 0  );
 
         ObjMain.ajax_post('POST',`${DOMAIN}myaccount/update/${id}`, formData)
@@ -790,6 +795,7 @@ ObjMain = {
     },
     updatePass: () =>  {
         const $pass= document.querySelector('.updatePass');
+        const $new_pass= document.querySelector('#newPass');
         const $containerPass = document.querySelector('.passContainer');
         const $repeat = document.querySelector('.repeat');
         if($pass) {
@@ -810,6 +816,7 @@ ObjMain = {
                         document.documentElement.style.setProperty('--colorResponse',`${resp.code == 404 ? '#C51152': 'green'} `);
                         $form.reset()
                         $repeat.dataset.content = ''
+                        $new_pass.parentElement.dataset.content = ''
                     })
                     .catch((err)=>{
                         err = JSON.parse(err);
@@ -837,11 +844,11 @@ ObjMain = {
 
                 if($currentPass.value.length > limit ) {
                     $parent.dataset.content = '√ constraseña segura';
-                    document.documentElement.style.setProperty('--colorResponse','green');
+                    document.documentElement.style.setProperty('--colorFilter','green');
                     return
                 }else {
                     $parent.dataset.content = 'constraseña muy corta';
-                    document.documentElement.style.setProperty('--colorResponse','blue');
+                    document.documentElement.style.setProperty('--colorFilter','blue');
                     return
                 }
             })
@@ -907,7 +914,17 @@ ObjMain = {
             childNode.textContent= 'SELECCIONE DISTRITO';
             childNode.setAttribute('selected','selected')
                     nodeParent.insertBefore(childNode ,document.querySelectorAll('#sdist > option')[0]);
+                    if(window.location.href == ( `${DOMAIN}myaccount` ) ){
+                        ObjMain.selectedDistrict(userData.distrito)
+                       }
            } ,200)
+          
+    },
+    selectedDistrict : district => {
+        $selectDist = document.querySelector("#sdist");
+        $distritos  = document.querySelectorAll('#sdist > option');
+        $distritos.forEach( dist => dist.textContent == district ? dist.setAttribute('selected','selected') : '')
+        
     },
     cupon: (event) => {
         
@@ -1144,7 +1161,7 @@ const perfil = () => {
         let inicio = document.getElementById("p_inicio");
         let datos = document.getElementById("p_datosp");
         let orden = document.getElementById("p_misord");
-        let direccion = document.getElementById("p_misdir");
+        // let direccion = document.getElementById("p_misdir");
         let info = document.getElementById("info_puser");
         let seccionPass = document.getElementById("panel_pass");
         for (var i = 0; i < btns3.length; i++) {
@@ -1163,7 +1180,7 @@ const perfil = () => {
         inicio.addEventListener("click", function (e) {
             titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
     
-            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Cambio de Contraseña</li> <li>3. Mis Compras </li> </ul> </p>';
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
@@ -1172,22 +1189,22 @@ const perfil = () => {
     
         datos.addEventListener("click", function () { 
             titulouser.innerHTML = '<p>Datos Personales</p>';
-            contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
+            contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;margin-top:10px">
             <div class="divTableBody" style="display:block;">
-                <div class="divTableRow" id="pn_datos1">
+                <div class="divTableRow" id="pn_datos1"  style="display:flex;flex-wrap:wrap;width:100%">
                     <div class="divTableCell">
                         <div class="etiquetaFormulario">Nombres </div>
                         <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
                     </div>
                     <div class="divTableCell">
-                        <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
-                            name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
+                        <div class="etiquetaFormulario">Apellido paterno</div> <input type="text" size="20" maxlength="20"
+                            name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno}">
                     </div>
                     <div class="divTableCell">
-                        <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
-                            maxlength="30" name="campo1" id="correo" value="${userData.correo}"
-                            style="">
+                        <div class="etiquetaFormulario">Apellido materno</div> <input type="text" size="20" maxlength="20"
+                            name="campo1" id="c_apem1" onkeypress="return soloLetras(event)" value="${userData.apellido_materno}">
                     </div>
+                   
                 </div>
                 <div class="divTableRow">
                     <div class="divTableCell">
@@ -1203,20 +1220,58 @@ const perfil = () => {
                         <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
                             maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
                     </div>
-                    <div class="divTableCell">
+                    
+                </div>
+                <div class="divTableRow" style = "display:flex;flex-wrap:wrap">
+                <div class="divTableCell">
                         <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
                             name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
                     </div>
+                    <div class="divTableCell">
+                    <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
+                        maxlength="30" name="campo1" id="correo" value="${userData.correo}"
+                        style="">
+                     </div>
                 </div>
-                
                 <div class="divTableRow" style="display:flex;flex-wrap:wrap">
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
                 <p>Mis direcciones</p>
                  </div> <br> <br>
-                    <div class="divTableCell" style="display:block">
-                        <div class="etiquetaFormulario">Domicilio</div>
-                        <input type="text" name="campo1"id="locationUser" onkeypress="return soloLetras(event)" value="${userData.direccion}">
+                 <div class="divTableRow" style ="width:100%">
+                    <div class="divTableCell">
+                            <div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div>
+                            </div>
+                            <select id="s_depa" onchange="ObjMain.showProvincesList(this)">
+                                <option disabled selected>  </option>
+                            </select>
                     </div>
+                    
+                    <div class="divTableCell">
+                        <div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div>
+                        </div>
+                        <select id="sprov" onchange="ObjMain.showDistrictsList(this)">
+                            <option disabled selected> </option>
+                        </select>
+                    </div>
+                    <div class="divTableCell">
+                        <div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div>
+                        </div>
+                        <select id="sdist">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="divTableRow" style ="width:100%">
+                <div class="divTableCell" style="display:block">
+                        <div class="etiquetaFormulario">Dirección</div>
+                        <input size="20" type="text" name="campo1"id="locationUser" onkeypress="return soloLetras(event)" value="${userData.direccion}">
+                    </div>
+                    <div class="divTableCell">
+                    <div class="etiquetaFormulario">Referencia</div>
+                    <input type="text" id="referencia" size="20" maxlength="45" value="${userData.referencia}">
+                    </div>
+                </div>
                    
                  </div>
                 </div> <br> <br>
@@ -1243,6 +1298,8 @@ const perfil = () => {
                 </div>
                 <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
                 `;
+
+
           let index   = userData.tipo_documento == 'DNI' ? '1' 
                                     :userData.tipo_documento == 'PASAPORTE' ? '2'
                                     : userData.tipo_documento == 'CE' ? '3'
@@ -1255,12 +1312,14 @@ const perfil = () => {
              userData.tipo_documento = event.target.value
           })
         
-    
-    
         if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
             }
+
+            
+            ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
         });
     
         orden.addEventListener("click", function () {
@@ -1359,14 +1418,7 @@ const perfil = () => {
             ObjMain.taps();
         });
     
-        direccion.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
-            contenidouser.innerHTML = ``;
-            if (screen && screen.width < 700) {
-                secciones.style.display = 'none';
-                infouser.style.display = 'block';
-            }
-        });
+     
  
         seccionPass.addEventListener("click", function () {
             titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
@@ -1403,7 +1455,7 @@ const perfil = () => {
     
             ObjMain.comparePass()
             ObjMain.updatePass()
-            ObjMain.limitPass('#currentPass',5)
+            ObjMain.limitPass('#newPass',5)
             ObjMain.showPass('.eyes')
                
         });
