@@ -15,6 +15,7 @@
     data-provincia    ="<?= $session? $userData['provincia'] :'' ?>"
     data-distrito    ="<?= $session? $userData['distrito'] :'' ?>"
     data-referencia    ="<?= $session? $userData['referencia'] :'' ?>"
+    data-telefono    ="<?= $session? $userData['telefono'] :'' ?>"
     >
 
 
@@ -570,7 +571,7 @@
                         d_envio :  document.getElementById('c_dir').value ,
                         referencia :  document.getElementById('c_ref').value ,
                         fijo :  document.getElementById('c_telfij').value ,
-                        cell :  document.getElementById('c_telcel').value ,
+                        telefono :  document.getElementById('c_telcel').value ,
                     }
                 }             
                 getFactura () {

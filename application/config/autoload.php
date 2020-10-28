@@ -145,3 +145,5 @@ define('URL_BASE', getenv('DOMAIN') );
 define('DIR_U', getenv('DIR_U') );
 define('MAIL_USER', getenv('MAIL_USER') );
 define('MAIL_PASS', getenv('MAIL_PASS') );
+define('PUBLIC_KEY', getenv('PUBLIC_KEY') );
+define('PRIVATE_KEY', getenv('PRIVATE_KEY') );
