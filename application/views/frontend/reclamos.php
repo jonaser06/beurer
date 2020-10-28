@@ -37,7 +37,7 @@
 
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Número Documento Identidad: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" value="" required>
+                                            <input id="r_n_doc" type="text" size="20" maxlength="20" name="campo1" value="" required>
                                         </div>
                                     </div>
 
@@ -45,7 +45,7 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Nombres : <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" value="">
+                                            <input id="r_nombr" type="text" size="20" maxlength="20" name="campo1" value="">
                                         </div>
                                     </div>
 
@@ -54,14 +54,14 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Apellido Paterno: <div class="d_ob">*</div></div>
 
-                                            <input type="text" size="20" maxlength="20" name="campo1" value="">
+                                            <input id="r_apat" type="text" size="20" maxlength="20" name="campo1" value="">
 
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Apellido Materno: <div class="d_ob">*</div>
                                             </div>
 
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="c_apem" value="">
+                                            <input id="r_amat" type="text" size="20" maxlength="20" name="campo1" id="c_apem" value="">
 
                                         </div>
 
@@ -70,11 +70,11 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono/Celular</div>
-                                            <input type="text" size="9" maxlength="9" name="campo1" value="">
+                                            <input id="r_telef" type="text" size="9" maxlength="9" name="campo1" value="">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" value="">
+                                            <input id="r_correo" type="text" size="20" maxlength="30" name="campo1" value="">
                                         </div>
                                     </div>
 
@@ -110,7 +110,7 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:99%;">
                                             <div class="etiquetaFormulario">Dirección: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" value="">
+                                            <input id="r_direc" type="text" size="20" maxlength="30" name="campo1" value="">
                                         </div>
                                     </div>
                                     <br>
@@ -127,7 +127,7 @@
                                         <div class="divTableRow" id="pn_datos1">
                                             <div class="divTableCell" style="width:99%;">
                                                 <div class="etiquetaFormulario">Coloca el nombre de tu padre, madre o apoderado : <div class="d_ob">*</div></div>
-                                                <input type="text" size="20" maxlength="20" name="campo1" value="">
+                                                <input id="r_apd_nombr" type="text" size="20" maxlength="20" name="campo1" value="">
                                             </div>
                                         </div>
 
@@ -135,7 +135,7 @@
                                             <div class="divTableCell">
                                                 <div class="etiquetaFormulario">Tipo Documento Identidad: <div class="d_ob">*</div></div>
 
-                                                <select id="s_tipodoc">
+                                                <select id="r_apd_tip">
                                                     <option id="di_pn1" value="1" selected>DNI</option>
                                                     <option id="di_pn2" value="2">Pasaporte</option>
                                                     <option id="di_pn3" value="3"> CE</option>
@@ -147,7 +147,7 @@
                                                 <div class="etiquetaFormulario">Número Documento Identidad: <div
                                                         class="d_ob">*</div>
                                                 </div>
-                                                <input type="text" size="20" maxlength="20" name="campo1" value="" required>
+                                                <input id="r_apd_doc" type="text" size="20" maxlength="20" name="campo1" value="" required>
                                             </div>
                                         </div>
 
@@ -155,11 +155,11 @@
                                         <div class="divTableRow">
                                             <div class="divTableCell">
                                                 <div class="etiquetaFormulario">Teléfono/Celular</div>
-                                                <input type="text" size="9" maxlength="9" name="campo1" value="">
+                                                <input id="r_apd_telf" type="text" size="9" maxlength="9" name="campo1" value="">
                                             </div>
                                             <div class="divTableCell">
                                                 <div class="etiquetaFormulario">Correo electrónico: <div class="d_ob">*</div></div>
-                                                <input type="text" size="20" maxlength="30" name="campo1" value="">
+                                                <input id="r_apd_corr" type="text" size="20" maxlength="30" name="campo1" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -187,12 +187,12 @@
                                 <div class="divTableBody" style="display:block;">
                                     <div class="divTableRow" id="radios_1">
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="r_tipo_bn" value="producto" checked>
                                             <span>PRODUCTO</span>
                                         </label>
 
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="r_tipo_bn" value="servicio">
                                             <span>SERVICIO</span>
                                         </label>
                                     </div>
@@ -200,7 +200,7 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:99%;" colspan="2">
                                             <div class="etiquetaFormulario">Monto reclamado ( S/. ): <div class="d_ob">*</div></div>
-                                            <input type="text" size="4" maxlength="4" name="campo1" value="">
+                                            <input id="r_mont" type="text" size="4" maxlength="4" name="campo1" value="">
                                         </div>
                                     </div>
 
@@ -209,7 +209,7 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:100%;">
                                             <div class="etiquetaFormulario">Descripción del producto o servicio adquirido: <div class="d_ob">*</div></div>
-                                            <textarea class="form-control" style="width:100%;height:8vh;background-color:white;" aria-label="With textarea"></textarea>
+                                            <textarea id="r_descr" class="form-control" style="width:100%;height:8vh;background-color:white;" aria-label="With textarea"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -236,12 +236,12 @@
                                 <div class="divTableBody" style="display:block;">
                                     <div class="divTableRow" id="radios_1">
                                         <label>
-                                            <input type="radio" name="radio2">
+                                            <input type="radio" name="r_tip_rec" value="queja" checked>
                                             <span>QUEJA</span>
                                         </label>
 
                                         <label>
-                                            <input type="radio" name="radio2">
+                                            <input type="radio" name="r_tip_rec" value="reclamo">
                                             <span>RECLAMO</span>
                                         </label>
                                     </div>
@@ -249,12 +249,12 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:99%;" colspan="2">
                                             <div class="etiquetaFormulario">DESCRIPCIÓN: <div class="d_ob">*</div></div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" value="">
+                                            <input id="r_rec_desc" type="text" size="20" maxlength="30" name="campo1" value="">
                                         </div>
                                         <div class="divTableRow">
                                             <div class="divTableCell" style="width:100%;">
                                                 <div class="etiquetaFormulario">PEDIDO: <div class="d_ob">*</div></div>
-                                                <textarea class="form-control" style="width:100%;height:21vh;background-color:white;" aria-label="With textarea"></textarea>
+                                                <textarea id="r_rec_pedi" class="form-control" style="width:100%;height:21vh;background-color:white;" aria-label="With textarea"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -266,7 +266,17 @@
             </div>
         </div>
 
+        <div style="text-align:center !important;">
+            <div class="checkbox"
+                style="display:inline-block;  border:3px solid #c51152; background-color:whitesmoke; display:none;"
+                id="dp_error">
+                <div style="display:inline-block; font-size:1.3em; font-weight:bold; margin: 12px 32px;" id="d_error"> -
+                </div>
+            </div>
+        </div>
+
     </div>
+    
 
     <br><br>
 
@@ -291,7 +301,7 @@
             </div>
         </div>
 
-        <span><a class="btn btn-primary1 disabled" id="env_reclamo" href="">ENVIAR</a></span>
+        <span><a class="btn btn-primary1" id="env_reclamo" href="#" onclick="ObjMain.reclamos(event);">ENVIAR</a></span>
 
         <br>
 
@@ -353,4 +363,10 @@
 <!-- <script src="assets/js/registro.js"></script> -->
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 <?php include 'src/includes/footer.php' ?>
+
+</body>
+
+</html>
