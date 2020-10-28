@@ -256,15 +256,15 @@
             formData.append('apellidos' , charge.apellidos );
             formData.append('correo' , charge.correo );
             formData.append('tipo_documento' , charge.tipo_documento);
-            formData.append('numero_documento' , charge.number_documento);
+            formData.append('numero_documento' , charge.numero_documento);
             formData.append('provincia' , 'Lima');
             formData.append('distrito' , charge.distrito);
             formData.append('telefono' , charge.telefono);
-            formData.append('dir_envio' , charge.d_envio);
+            formData.append('d_envio' , charge.d_envio);
             formData.append('referencia' , charge.referencia);
             formData.append('entrega_precio' ,charge.envio );
-            formData.append('productos_precio' ,charge.subtotal );
-            formData.append('id_cliente' ,charge.session);
+            formData.append('id_cliente' ,charge.id_session);
+            formData.append('subtotal' ,charge.subtotal);
 
             formData.append('id_productos' , charge.id_productos);
             formData.append('cantidades' , charge.cantidades);
@@ -289,9 +289,9 @@
             formData.append('tipo_documento' , user.tipo_doc);
             formData.append('numero_documento' ,user.number_doc );
 
-            formData.append('id_productos' , JSON.stringify( converter().id_products ));
-            formData.append('cantidades' , JSON.stringify( converter().cant_products));
-            formData.append('subtotales' , JSON.stringify( converter().subtotal_products));
+            formData.append('id_productos' , converter().id_products );
+            formData.append('cantidades' , converter().cant_products);
+            formData.append('subtotales' ,  converter().subtotal_products);
 
             formData.append('cantidad_total' , cantidad );
             formData.append('subtotal_coste' , subtotal );
@@ -325,9 +325,9 @@
                             
                             const {...charge } = resp;  
                             if(charge.outcome.type == "venta_exitosa" ) { 
-                                // tomamos los metadatos de el cargo y se hace un Request a controller Finalizar Sales
+                                // tomamos los metadatos de el cargo y se hace un Request a controller Finalizar el pago
                                 const { metadata } = charge ;
-                                
+                                console.log(metadata)
                                 const formCharge = dataFormPurchase(metadata);
                                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchase`, formCharge)
                                 .then( resp => {})

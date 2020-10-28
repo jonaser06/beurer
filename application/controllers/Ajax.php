@@ -411,7 +411,7 @@ class Ajax extends MY_Controller
             $id_productos = explode('-',$this->input->post('id_productos'));
             $cantidades   = explode('-',$this->input->post('cantidades'));
             $subtotales   = explode('-',$this->input->post('subtotales'));
-
+            date_default_timezone_set('UTC');
             $data =[ 
                          'id_cliente' => $this->input->post('id_cliente'),
                          'nombres'   => $this->input->post('nombres'),
@@ -424,9 +424,9 @@ class Ajax extends MY_Controller
                          'distrito'=> $this->input->post('distrito'),
                          'dir_envio'=> $this->input->post('d_envio'),
                          'referencia'=> $this->input->post('referencia'),
-                         'entrega_precio'=> $this->input->post('entrega_precio'),
-                         'productos_precio'=> $this->input->post('subtotal'),
-                         'pedido_fecha'=> date('d-m-Y'),
+                         'entrega_precio'=> floatval($this->input->post('entrega_precio')),
+                         'productos_precio'=> floatval($this->input->post('subtotal')),
+                         'pedido_fecha'=> date("m.d.y"),
                          'pedido_estado'=> 1 ,
                     
             ];
