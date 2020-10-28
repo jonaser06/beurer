@@ -203,8 +203,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
+
 <script>
-        Culqi.publicKey ='pk_test_9rNJzJYDhq1KxhH4';
+        Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
 
 </script>
 

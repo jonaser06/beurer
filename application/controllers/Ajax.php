@@ -337,8 +337,8 @@ class Ajax extends MY_Controller
                 Requests::register_autoloader();
                 include_once APPPATH.'third_party/culqi/lib/culqi.php';
     
-              $SECRET_KEY = "sk_test_zwggqXQXiQk0eaip";
-              $culqi = new Culqi\Culqi(array('api_key' => $SECRET_KEY));
+             
+              $culqi = new Culqi\Culqi(['api_key' => PRIVATE_KEY]);
         
               $charge = $culqi->Charges->create(
                         [
