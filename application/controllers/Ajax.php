@@ -32,6 +32,53 @@ class Ajax extends MY_Controller
              ->set_output($file);
     }
 
+    public function setreclamo(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $data = [
+                'r_tipo_doc' => $this->input->post('r_tipo_doc'),
+                'r_n_doc' => $this->input->post('r_n_doc'),
+                'r_nombr' => $this->input->post('r_nombr'),
+                'r_apat' => $this->input->post('r_apat'),
+                'r_amat' => $this->input->post('r_amat'),
+                'r_telef' => $this->input->post('r_telef'),
+                'r_correo' => $this->input->post('r_correo'),
+                'r_depa' => $this->input->post('r_depa'),
+                'r_prov' => $this->input->post('r_prov'),
+                'r_dist' => $this->input->post('r_dist'),
+                'r_direc' => $this->input->post('r_direc'),
+                'r_menor' => $this->input->post('r_menor'),
+                'r_apd_nombr' => $this->input->post('r_apd_nombr'),
+                'r_apd_tip' => $this->input->post('r_apd_tip'),
+                'r_apd_doc' => $this->input->post('r_apd_doc'),
+                'r_apd_telf' => $this->input->post('r_apd_telf'),
+                'r_apd_corr' => $this->input->post('r_apd_corr'),
+                'r_tipo_bn' => $this->input->post('r_tipo_bn'),
+                'r_mont' => $this->input->post('r_mont'),
+                'r_descr' => $this->input->post('r_descr'),
+                'r_tip_rec' => $this->input->post('r_tip_rec'),
+                'r_rec_desc' => $this->input->post('r_rec_desc'),
+                'r_rec_pedi' => $this->input->post('r_rec_pedi'),
+                'r_fecha' => date('Y-m-d H:i:s')
+            ];
+                $this->dbInsert('reclamos',$data);
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->resp['data'] = $data;
+                $this->output
+                 ->set_content_type('application/json')
+                 ->set_status_header(200)
+                 ->set_output(json_encode($this->resp));
+                 return;
+        }
+        $this->resp['message'] = 'Ocurrio un error en la petición';
+        $this->output
+             ->set_content_type('application/json')
+             ->set_status_header(404)
+             ->set_output(json_encode($this->resp));
+
+    }
+
     public function setregister(){
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $data = [

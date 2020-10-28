@@ -67,6 +67,98 @@ ObjMain = {
             ObjMain.listar_items(); 
         }
     },
+    reclamos: (e) =>{
+        e.preventDefault();
+        let r_tipo_doc = document.querySelector('#s_tipodoc').value;
+        let r_n_doc    = document.querySelector('#r_n_doc').value;
+        let r_nombr    = document.querySelector('#r_nombr').value;
+        let r_apat     = document.querySelector('#r_apat').value;
+        let r_amat     = document.querySelector('#r_amat').value;
+        let r_telef    = document.querySelector('#r_telef').value;
+        let r_correo   = document.querySelector('#r_correo').value;
+        let r_depa     = document.querySelector('#s_depa').value;
+        let r_prov     = document.querySelector('#sprov').value;
+        let r_dist     = document.querySelector('#sdist').value;
+        let r_direc    = document.querySelector('#r_direc').value;
+        let r_menor    = (document.querySelector('#menor_edad').checked)? 1 : 0 ;
+        let r_apd_nombr = document.querySelector('#r_apd_nombr').value;
+        let r_apd_tip  = document.querySelector('#r_apd_tip').value;
+        let r_apd_doc  = document.querySelector('#r_apd_doc').value;
+        let r_apd_telf = document.querySelector('#r_apd_telf').value;
+        let r_apd_corr = document.querySelector('#r_apd_corr').value;
+
+        let r_tipo_bn
+        let radios = document.getElementsByName('r_tipo_bn');
+        for (var i = 0, length = radios.length; i < length; i++) {
+            r_tipo_bn = (radios[i].checked)?radios[i].value:'servicio';
+            break;
+        }
+
+        let r_mont     = document.querySelector('#r_mont').value;
+        let r_descr    = document.querySelector('#r_descr').value;
+
+        let r_tip_rec
+        let radios2 = document.getElementsByName('r_tip_rec');
+        for (var i = 0, length = radios2.length; i < length; i++) {
+            r_tip_rec = (radios2[i].checked)?radios2[i].value:'reclamo';
+            break;
+        }
+
+        let r_rec_desc = document.querySelector('#r_rec_desc').value;
+        let r_rec_pedi = document.querySelector('#r_rec_pedi').value;
+
+        if(r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_menor != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != ''){
+
+            let formData = new FormData();
+                formData.append('r_tipo_doc', r_tipo_doc);
+                formData.append('r_n_doc', r_n_doc);
+                formData.append('r_nombr', r_nombr);
+                formData.append('r_apat', r_apat);
+                formData.append('r_amat', r_amat);
+                formData.append('r_telef', r_telef);
+                formData.append('r_correo', r_correo);
+                formData.append('r_depa', r_depa);
+                formData.append('r_prov', r_prov);
+                formData.append('r_dist', r_dist);
+                formData.append('r_direc', r_direc);
+                formData.append('r_menor', r_menor);
+                formData.append('r_apd_nombr', r_apd_nombr);
+                formData.append('r_apd_tip', r_apd_tip);
+                formData.append('r_apd_doc', r_apd_doc);
+                formData.append('r_apd_telf', r_apd_telf);
+                formData.append('r_apd_corr', r_apd_corr);
+                formData.append('r_tipo_bn', r_tipo_bn);
+                formData.append('r_mont', r_mont);
+                formData.append('r_descr', r_descr);
+                formData.append('r_tip_rec', r_tip_rec);
+                formData.append('r_rec_desc', r_rec_desc);
+                formData.append('r_rec_pedi', r_rec_pedi);
+
+                ObjMain.ajax_post('POST',DOMAIN+'ajax/setreclamo', formData)
+                .then((resp)=>{
+                    resp = JSON.parse(resp);
+                    if(resp.status){
+                        Swal.fire({
+                            icon: 'success' ,
+                            title: 'Enviado correctamente',
+                            text: 'Su reclamo se envio correctamente',
+                        })
+                        setTimeout(() => {
+                            window.location = DOMAIN;
+                        }, 1000);
+                    }
+                })
+                .catch((err)=>{
+                    err = JSON.parse(err);
+                    ObjMain.alert_form(false,err.message);
+                });
+
+        }else{
+            return ObjMain.alert_form(false,'Rellene todo los campos!');
+        }
+
+        
+    },
     register_cart: (e)=>{
         e.preventDefault();
         let url = window.location.href;

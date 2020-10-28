@@ -17,6 +17,7 @@
                     <ul>
                         <li><a href="<?= base_url('preguntas-frecuentes'); ?>" class="link-footer">FAQ</a></li>
                         <!-- <li><a href="<?= base_url('instrucciones-de-uso'); ?>" class="link-footer">Instrucciones de uso</a></li> -->
+                        <li><a href="<?= base_url('reclamos'); ?>" class="link-footer">Libro de Reclamaciones</a></li>
                         <li><a href="<?= base_url('centro-de-descargas'); ?>" class="link-footer">Centro de descargas</a></li>
                         <li><a href="<?= base_url('terminos-y-condiciones'); ?>" class="link-footer">Términos y condiciones</a></li>
                         <li><a href="<?= base_url('politicas-de-privacidad'); ?>" class="link-footer">Políticas y privacidad</a></li>
