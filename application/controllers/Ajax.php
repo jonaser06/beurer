@@ -344,6 +344,7 @@ class Ajax extends MY_Controller
                 $this->resp['data'] = [
                     "tipon_cupon" => $result['tipo_cupon'],
                     "descuento" => $result['cupon_precio'],
+                    "codigo" => $result['cupon_codigo'],
                 ];
                 $this->output
                     ->set_content_type('application/json')
@@ -392,7 +393,7 @@ class Ajax extends MY_Controller
                             "amount"        =>$this->input->post('total_coste'),
                             "capture"       =>true,
                             "currency_code" =>"PEN",
-                            "description"   => $this->input->post('id_productos') ,
+                            "description"   => 'Compra desde web BEURER' ,
                             "installments"  => 0,
                             "source_id"     => $this->input->post('token'),
                             "email"         =>$this->input->post('correo'),
@@ -412,6 +413,9 @@ class Ajax extends MY_Controller
                                 "subtotales" =>$this->input->post('subtotales'),
                                 "cantidad_total" =>$this->input->post('cantidad_total'),
                                 "envio" =>$this->input->post('envio_coste'),
+                                "cupon_descuento" =>$this->input->post('cupon_descuento'),
+                                "tipo_cupon" =>$this->input->post('tipo_cupon'),
+                                "cupon_codigo" =>$this->input->post('cupon_codigo'),
                                 "subtotal" =>$this->input->post('subtotal_coste')
                                 
                             ],
@@ -461,6 +465,7 @@ class Ajax extends MY_Controller
             date_default_timezone_set('UTC');
             $data =[ 
                          'id_cliente' => $this->input->post('id_cliente'),
+                         'codigo'   => $this->input->post('codigo_venta'),
                          'nombres'   => $this->input->post('nombres'),
                          'apellidos' => $this->input->post('apellidos'),
                          'correo'    => $this->input->post('correo'),
@@ -471,6 +476,8 @@ class Ajax extends MY_Controller
                          'distrito'=> $this->input->post('distrito'),
                          'dir_envio'=> $this->input->post('d_envio'),
                          'referencia'=> $this->input->post('referencia'),
+                         'cupon_codigo'=> $this->input->post('cupon_codigo'),
+                         'cupon_descuento'=> $this->input->post('cupon_descuento'),
                          'entrega_precio'=> floatval($this->input->post('entrega_precio')),
                          'productos_precio'=> floatval($this->input->post('subtotal')),
                          'pedido_fecha'=> date("m.d.y"),

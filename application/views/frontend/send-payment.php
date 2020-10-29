@@ -116,6 +116,13 @@
                                     <td class="subtotalr" id="subtotal_pago" style="text-align:right;"></td>
                                     </tr>
                                 
+                                    <tr class="tr_cupon" style="display:none">
+                                    <td ></td>  
+                                    <td scope="row"  style=" text-align:left;vertical-align:middle;">CUPÓN</td>
+                                    
+                                    <td  id="cupon_descuento" style="color:#c51152;text-align:right;"></td>
+                                    </tr>
+
                                     <tr>
                                     <td ></td>  
                                     <td scope="row"  style=" text-align:left;vertical-align:middle;">COSTO DEL ENVÍO</td>
@@ -217,9 +224,27 @@
         const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
         const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
         const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
-        
-        const user          = localStorage.getItem('domicilio')  ? JSON.parse(localStorage.getItem('Comprador')): JSON.parse(localStorage.getItem('Destinatario'))
-        const total         = (parseFloat(subtotal) + parseFloat(envio)).toFixed(2)*100
+        let tipo_cupon    = localStorage.getItem('tipo') ? parseInt(localStorage.getItem('tipo')) : null
+        let descuento     = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
+        let cupon         = localStorage.getItem('descuento') ? true : false
+        const user          = localStorage.getItem('domicilio')  ? JSON.parse(localStorage.getItem('Comprador')): JSON.parse(localStorage.getItem('Comprador'))
+        const cupon_codigo = localStorage.getItem('cupon_codigo')? localStorage.getItem('cupon_codigo'):0;
+        let total = 0
+        let cupon_descuento = 0;
+        if(cupon) {
+            if(tipo_cupon == 1 ) {
+                document.querySelector('#cupon_descuento').textContent  = `${parseFloat(descuento).toFixed(2)} %`
+                cupon_descuento = parseFloat(subtotal)* (descuento/100)
+                total = `${(((parseFloat(subtotal)* descuento/100) + parseFloat(envio))).toFixed(2)*100}`
+            }
+            if(tipo_cupon == 2) {
+                document.querySelector('#cupon_descuento').textContent  = `- ${parseFloat(descuento).toFixed(2)}`
+                cupon_descuento = parseFloat(descuento).toFixed(2);
+                total = `${(parseFloat(envio) + parseFloat(subtotal) - descuento ).toFixed(2) *100 }`
+            }
+        }else{
+            total = `${((parseFloat(envio) + parseFloat(subtotal))).toFixed(2) *100}`;
+        }
         
 
         // FORMULARIO SETTINGS CULQI DEFAULT 
@@ -229,7 +254,20 @@
             description: 'Completamos tu pago con toda la seguridad que tú necesitas',
             amount: total
         });
+
+
+        Culqi.options({
+            lang: 'auto',
+            style: {
+            logo: "<?php echo base_url('assets/images/logos/logo.png') ?>",
+            maincolor: '#C51152',
+            buttontext: '#ffffff',
+            maintext: '#4A4A4A',
+            desctext: '#4A4A4A'
+            }
+        });
         document.getElementById('buy').addEventListener('click', event => {
+            
             Culqi.open();
             $('html, body').animate({scrollTop:0}, 'slow');
             event.preventDefault();
@@ -243,7 +281,7 @@
             productos.forEach(prod => {
                 id_products.push(prod.id);
                 cant_products.push(prod.cantidad);
-                subtotal_products.push(prod.subtotal);
+                subtotal_products.push(prod.cantidad * prod.precio_online);
             })
             return {
                 id_products   : id_products.join('-'),
@@ -266,6 +304,9 @@
             formData.append('entrega_precio' ,charge.envio );
             formData.append('id_cliente' ,charge.id_session);
             formData.append('subtotal' ,charge.subtotal);
+            formData.append('tipo_cupon' ,charge.tipo_cupon);
+            formData.append('cupon_codigo' ,charge.cupon_codigo);
+            formData.append('cupon_descuento' ,charge.cupon_descuento);
 
             formData.append('id_productos' , charge.id_productos);
             formData.append('cantidades' , charge.cantidades);
@@ -297,6 +338,9 @@
             formData.append('cantidad_total' , cantidad );
             formData.append('subtotal_coste' , subtotal );
             formData.append('envio_coste' , envio );
+            formData.append('tipo_cupon' , `${tipo_cupon == null ? 0 : tipo_cupon }` );
+            formData.append('cupon_descuento' , cupon_descuento );
+            formData.append('cupon_codigo' , cupon_codigo );
             formData.append('total_coste' , total );
             
             return formData;
@@ -323,17 +367,15 @@
                         resp = JSON.parse(resp);
                         resp = JSON.parse(resp)
                         if(resp.object == 'charge') {
-                            
                             const {...charge } = resp;  
                             if(charge.outcome.type == "venta_exitosa" ) { 
                                 // tomamos los metadatos de el cargo y se hace un Request a controller Finalizar el pago
                                 const { metadata } = charge ;
-                                console.log(metadata)
                                 const formCharge = dataFormPurchase(metadata);
+                                formCharge.append('codigo_venta',charge.reference_code);
                                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchase`, formCharge)
                                 .then( resp => {})
                                 .catch();
-
                                 modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
                             }
                         }else{

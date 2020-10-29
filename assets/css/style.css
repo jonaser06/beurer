@@ -3,8 +3,16 @@
   --colorResponse: #C51152;
   --colorFilter: #C51152;
   --colorSave: #C51152;
-}
+  --stateActive: #C51152;
+  --stateDefault: #CCC
 
+}
+.state_active{
+  background-color: var(--mainColor);
+}
+.no_active {
+  background-color: var(--stateDefault);
+}
 input,
 select {
   outline: none;

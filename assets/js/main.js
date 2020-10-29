@@ -8,7 +8,10 @@
 ****    vol : volumen total del carrito 
 ****    peso : peso total del carrito
 ****    return : RETORNA UN OBJETO con el coste_envio como attr
+* ObjMain.stateProgress( param )   @param : int (1 || 2 || 3 ||4)  dependiendo del estado / pinta la barra de porcentaje
+*
 */
+
 var ubigeoPeru = {
 	ubigeos: new Array()
 };
@@ -197,6 +200,7 @@ ObjMain = {
         document.querySelector('.cost_shipped').textContent = parseFloat(resp.total_coste).toFixed(2)
         localStorage.removeItem('descuento')
         localStorage.removeItem('tipo')
+        localStorage.removeItem('cupon_codigo')
         ObjMain.costo_total();
 
     },
@@ -328,7 +332,8 @@ ObjMain = {
 
     },
     mas:(id)=>{
-        if(parseInt(document.querySelector('.cant-'+id).value) < 10){ 
+       
+        if(parseInt(document.querySelector('.cant-'+id).value) < 6){ 
             let cantidad = parseInt(document.querySelector('.cant-'+id).value);
             let ncantidad = cantidad + 1; 
             let precio   = parseFloat(document.querySelector('.precio-'+id).value).toFixed(2);
@@ -801,8 +806,11 @@ ObjMain = {
             if(event.target.matches(btnAdd)){
                 const $addCarrito = document.querySelector(btnCarrito);
                 const $cantidad = document.querySelector(nodeQuanty)
-                $cantidad.value = parseInt($cantidad.value) + 1
-                $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+                if(parseInt($cantidad.value) < 6 ) {
+                    $cantidad.value = parseInt($cantidad.value) + 1
+                    $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+                }
+              
 
                 
             }
@@ -1007,10 +1015,12 @@ ObjMain = {
             const childNode  =  document.createElement('option')
             childNode.textContent= 'SELECCIONE DISTRITO';
             childNode.setAttribute('selected','selected')
-                    nodeParent.insertBefore(childNode ,document.querySelectorAll('#sdist > option')[0]);
-                    if(window.location.href == ( `${DOMAIN}myaccount` ) ){
-                        ObjMain.selectedDistrict(userData.distrito)
-                       }
+            nodeParent.insertBefore(childNode ,document.querySelectorAll('#sdist > option')[0]);
+            if(window.location.href == ( `${DOMAIN}myaccount` ) ||window.location.href == ( `${DOMAIN}facturacion` )){
+                    if(userData.distrito) {
+                        ObjMain.selectedDistrict(userData.distrito);
+                    }
+            }
            } ,200)
           
     },
@@ -1046,7 +1056,8 @@ ObjMain = {
                     $descuento.textContent = tipo == 1 ? `${res.data.descuento} %`:`${res.data.descuento}`
                     $resCupon.style.color = 'green';
                     $resCupon.textContent = res.message;
-
+                    localStorage.setItem('cupon_codigo',res.data.codigo)
+                    
                 }else {
                     $resCupon.textContent = res.message;
                     $resCupon.style.color = '#C51152';
@@ -1112,7 +1123,7 @@ ObjMain = {
         const factura      =  localStorage.getItem('facturacion')? JSON.parse(localStorage.getItem('facturacion')) : null
         const productos   =  localStorage.getItem('productos')? JSON.parse(localStorage.getItem('productos')) : null
         return !sesion 
-        ? {
+        ? { comprador,
             destinatario,
             factura,
             productos,
@@ -1129,15 +1140,19 @@ ObjMain = {
         const session       = parseInt(document.querySelector('.dataUser').dataset.id);
         const objSales      =  ObjMain.getDataSales(session);
         const peso_total    = localStorage.getItem('peso_total') ? localStorage.getItem('peso_total') : 0
+        const tipo_cupon    = localStorage.getItem('tipo') ? parseInt(localStorage.getItem('tipo')) : null
+        const descuento     = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
+        const cupon         = localStorage.getItem('descuento') ? true : false
         const volumen_total = localStorage.getItem('volumen_total') ? localStorage.getItem('volumen_total') : 0 
         const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
         const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
         const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
         let containerProd   = document.querySelector('.table-products');
         let envio_pago      = document.querySelector('#envio_pago');
+        let $cupon          = document.querySelector('#cupon_descuento');
         let subtotal_pago   = document.querySelector('#subtotal_pago');
         let total_pago      = document.querySelector('#total_pago');
-        
+        let total_payment = 0;
         let productos = []
 
         if(localStorage.getItem('productos')) {
@@ -1160,12 +1175,13 @@ ObjMain = {
                  containerProd.appendChild($tr)
              })
         }
-        let dataUser = null;
-        if(session) {
-            dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
-        }else {
-            dataUser = objSales.destinatario
-        }
+        let dataUser = objSales.comprador;
+        // if(session) {
+        //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
+        //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
+        // }else {
+        //     dataUser = objSales.destinatario
+        // }
         
         document.querySelector('.dataComprador').innerHTML = `
                         <div>LIMA LIMA </div>
@@ -1183,11 +1199,35 @@ ObjMain = {
                         <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">RESUMEN DEL PEDIDO</li>
                         <div>Cantidad de productos: ${cantidad} </div>
                         <div>Importe Sub Total: S/ ${parseFloat(subtotal).toFixed(2)} 
-                        </div>`;
+                        </div>
+                        <p style="font-weight:600;font-size:1.2em;margin-top:15px">Su pedido llegará en 4 dias días. </p>
+
+                        `;
+        if(cupon) {
+            document.querySelector('.tr_cupon').style.display = 'table-row';
+            if(tipo_cupon == 1 ) {
+                $cupon.textContent  = `${parseFloat(descuento).toFixed(2)} %`
+                total_payment = `${( (parseFloat(subtotal)* descuento/100) + parseFloat(envio)).toFixed(2)} `
+            }
+            if(tipo_cupon == 2) {
+                $cupon.textContent  = `- ${parseFloat(descuento).toFixed(2)}`
+                total_payment = `${(parseFloat(envio) + parseFloat(subtotal)- descuento).toFixed(2)  }`
+            }
+        }else{
+            total_payment = `${(parseFloat(envio) + parseFloat(subtotal)).toFixed(2)} `;
+        }
 
         subtotal_pago.textContent = `${parseFloat(subtotal).toFixed(2)}` ;
         envio_pago.textContent    = `${parseFloat(envio).toFixed(2)}`
-        total_pago.textContent    = `${(parseFloat(envio) + parseFloat(subtotal)).toFixed(2)} `
+        total_pago.textContent    = total_payment;
+        
+    },
+    stateProgress : (estate) => {
+        const $statesNode = document.querySelectorAll('.progress-bar');
+        $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')
+        for (let index = 0; index < estate ; index++ ) {
+            $statesNode[index].style.backgroundColor = '#C51152';
+        }
     }
 }
 
@@ -1206,7 +1246,7 @@ class Carrito {
         const DomTokenProd = {...this.$btnAddCarrito.dataset};
         delete DomTokenProd.target ;
         delete DomTokenProd.toggle ;
-        DomTokenProd.subtotal = parseFloat(DomTokenProd.precio )* parseInt(DomTokenProd.cantidad );
+        DomTokenProd.subtotal = parseFloat(DomTokenProd.precio_online )* parseInt(DomTokenProd.cantidad );
         return DomTokenProd;
     }
     add() {
@@ -1422,13 +1462,51 @@ const perfil = () => {
             <ul class="taps" id="taps">
                 <li class="tap  active" style="font-weight:bold;">
                     Ultimas Compras
-
                 </li>
                 <li class="tap">Detalles</li>
             </ul>
             <br>
             <div class="panels">
-                <section class="panel active">
+            <section class="panel active">
+                <article class="item-shop">
+                    <figure class="item-imagen">
+                        <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                        <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        <span class="item-title">Color : rojo</span>
+                    </figure>
+                    <div class="item-data">
+                        <span class="detalle">Envio: Calle Electra AV. Andormeda andromeda</span>
+                        <span class="detalle">Distrito : Chorrillos</span>
+                        <br>
+                        <span class="detalle">Precio: S/ 23.40</span>
+                        <span class="detalle">Cantidad: 3 unidades.</span>
+                        <span class="detalle">Total : 70.20</span>
+
+                    </div>
+                    <div class="item-fecha">
+                        <span>01 de Octubre de 2020</span>
+                        <span>Estado : entregado</span>
+                        <span>Receptor : Renzo Lopez Galarza</span>
+                    </div>
+                </article>
+
+                <div class="progress" style="width:70%;margin:14px auto">
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Solicitado
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Despachado
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Enviado
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Entregado
+					</div>
+				</div>
+            </section>
+
+                <section class="panel">
                     <article class="item-shop">
                         <figure class="item-imagen">
                             <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
@@ -1479,31 +1557,7 @@ const perfil = () => {
                     </article>
                 
                 </section>
-                <section class="panel">
-                    <article class="item-shop">
-                        <figure class="item-imagen">
-                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
-                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
-                            <span class="item-title">Color : rojo</span>
-
-                        </figure>
-                        <div class="item-data">
-                            <span class="detalle">Envio: Calle Electra AV. Andormeda andromeda</span>
-                            <span class="detalle">Distrito : Chorrillos</span>
-                            <br>
-                            <span class="detalle">Precio: S/ 23.40</span>
-                            <span class="detalle">Cantidad: 3 unidades.</span>
-                            <span class="detalle">Total : 70.20</span>
-
-                        </div>
-                        <div class="item-fecha">
-                            <span>01 de Octubre de 2020</span>
-                            <span>Estado : entregado</span>
-                            <span>Receptor : Renzo Lopez Galarza</span>
-                        </div>
-                    </article>
-                </section>
-        
+               
         </div>`;
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';

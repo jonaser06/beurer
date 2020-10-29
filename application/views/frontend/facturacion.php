@@ -10,6 +10,7 @@
     data-nombres =<?= $userData ? $userData['nombre'] : '' ?>
     data-apellido_paterno ="<?= $userData ? $userData['apellido_paterno'] : '' ?>"
     data-apellido_materno ="<?= $userData ? $userData['apellido_materno'] : '' ?>"
+    data-correo ="<?= $userData ? $userData['correo'] : '' ?>"
     data-d_envio    ="<?= $session? $userData['direccion'] :'' ?>"
     data-departamento    ="<?= $session? $userData['departamento'] :'' ?>"
     data-provincia    ="<?= $session? $userData['provincia'] :'' ?>"
@@ -101,7 +102,7 @@
             <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
                 <div class="tab-button-outer">
                     <ul id="tab-button2">
-                        <li id="icon-description2" class="is-active"><a>DATOS DEL DESTINATARIO</a></li>
+                        <li id="icon-description2" class="is-active"><a>DATOS DEL COMPRADOR</a></li>
                     </ul>
                 </div>
                 <div class="content">
@@ -129,7 +130,7 @@
                                                     class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" name="campo1" id="campo1" 
-                                                value=""
+                                                value="<?= $userData ? $userData['documento'] : '' ?>"
                                                 required
                                             >
 
@@ -141,7 +142,7 @@
                                             <div class="etiquetaFormulario">Nombres: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres1"
-                                                onkeypress="return soloLetras(event)" value="">
+                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['nombre'] : '' ?>">
 
                                         </div>
 
@@ -149,14 +150,14 @@
                                             <div class="etiquetaFormulario">Apellidos Paterno <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" name="campo1" id="c_apellido_paterno"
-                                                onkeypress="return soloLetras(event)" value="">
+                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['apellido_paterno'] : '' ?>">
 
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Apellidos Materno <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" name="campo1" id="c_apellido_materno"
-                                                onkeypress="return soloLetras(event)" value="">
+                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['apellido_materno'] : '' ?>">
 
                                         </div>
                                     </div>
@@ -168,7 +169,7 @@
                                                 </div>
                                             </div>
                                             <input type="email" id="c_correo1" size="20" maxlength="30" name="campo1"
-                                                id="correo" value="" required>
+                                                id="correo" value="<?= $userData ? $userData['correo'] : '' ?>" required>
                                         </div>
 
                                         <div class="divTableCell">
@@ -203,12 +204,12 @@
                                                 </div>
                                             </div>
                                             <input type="text" size="20" maxlength="45" name="campo1" id="c_dir"
-                                                value="">
+                                                value="<?= $session? $userData['direccion'] :'' ?>">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Referencia</div>
                                             <input type="text" size="20" maxlength="45" name="campo1" id="c_ref"
-                                                value="">
+                                                value="<?= $session? $userData['referencia'] :'' ?>">
                                         </div>
                                     </div>
 
@@ -216,7 +217,7 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono fijo</div>
                                             <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij"
-                                                 value="">
+                                                 value="<?= $session? $userData['telefono'] :'' ?>">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono celular: <div class="d_ob">*</div>
@@ -245,7 +246,7 @@
         <br>
         <br>
 
-        <!-- <div>
+        <div>
             <div class="checkbox" style="display:inline-block;">
                 <label class="font-light label-pol" style="display:inline;">
                     <input type="checkbox" id="otra-persona" /><i class="helper"></i>
@@ -255,12 +256,12 @@
                     Marque esta casilla, si el destinatario del pedido será una tercera persona</div>
             </div>
 
-        </div> -->
+        </div>
 
 
 
 
-        <!-- <div class="row cont_datos" id="d_formularios2" align="center" style="display:none;width:46em;">
+        <div class="row cont_datos" id="d_formularios2" align="center" style="display:none;width:46em;">
             <div class="tabs col-xs-12" style="display:block !important;" id="tab-registro">
                 <div class="tab-button-outer">
                     <ul id="tab-button2">
@@ -280,9 +281,9 @@
                                             </div>
 
                                             <select id="tipo_doc_destinatario">
-                                                <option id="di_pn1" value="1" selected>DNI</option>
-                                                <option id="di_pn2" value="2">Pasaporte</option>
-                                                <option id="di_pn3" value="3"> CE</option>
+                                                <option id="di_pn1" value="DNI" selected>DNI</option>
+                                                <option id="di_pn2" value="PASAPORTE">Pasaporte</option>
+                                                <option id="di_pn3" value="CE"> CE</option>
                                             </select>
 
                                         </div>
@@ -300,7 +301,7 @@
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Nombres : <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres_des"
+                                            <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres_dest"
                                                 onkeypress="return soloLetras(event)" value="">
 
                                         </div>
@@ -339,7 +340,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div> 
 
 
 
@@ -500,26 +501,26 @@
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', () => {
+    // window.addEventListener('load', () => {
 
         const $destinatarioForm  = document.querySelector('#d_formularios1');
         let factura = localStorage.getItem('factura');
+
         let domicilio = localStorage.getItem('domicilio');
         let session = document.querySelector('.dataUser').dataset.id;
 
         
-        if(session && domicilio && !factura ) {
-            $destinatarioForm.style.display = 'none'
+        // if(session && domicilio && !factura ) {
+        //     $destinatarioForm.style.display = 'none'
 
-        }
-        if(session && domicilio && factura) {
-            $destinatarioForm.style.display = 'none'
-            document.querySelector('#d_fact').style.display = 'none'
-            document.querySelector('#factura').style.display = 'inline-block'
-        }
+        // }
+        // if(session && domicilio && factura) {
+        //     $destinatarioForm.style.display = 'none'
+        //     document.querySelector('#d_fact').style.display = 'none'
+        //     document.querySelector('#factura').style.display = 'inline-block'
+        // }
         
-
-        const {...userData} = document.querySelector('.dataUser').dataset;
+        let {...userData } = document.querySelector('.dataUser').dataset;
           let index   = userData.tipo_doc == 'DNI' ? '1' 
                                     :userData.tipo_doc == 'PASAPORTE' ? '2'
                                     : userData.tipo_doc == 'CE' ? '3'
@@ -528,14 +529,12 @@
             if(nodeSelect){
                nodeSelect.setAttribute('selected','selected')
             }
-      
-      
          
 
     
            class Facturacion {
                constructor() {
-                //    this.$destinatario = document.querySelector('#otra-persona');
+                   this.$destinatario = document.querySelector('#otra-persona');
                    this.$factura      = document.querySelector('#dfactura');
                    this.$politicas      = document.querySelector('#politicas');
                    this.$btn_sgt      = document.querySelector('#btn_sgt');
@@ -548,17 +547,10 @@
                    this.TRIGGUER()
                }
                 getComprador() {
-                    const { ...data } = document.querySelector('.dataUser').dataset
-                    return data;
-                }
-                addComprador () {
-                    localStorage.setItem('Comprador' , JSON.stringify(this.getComprador()) )
-                }
-                getDestinatario () {
                     let valueDist = document.getElementById('sdist').value ; 
                     let distrito = '';
                     document.querySelectorAll('#sdist > option').forEach( dist =>  dist.value == valueDist ? distrito = dist.textContent : '' );
-                    this.dataDestinatario = {
+                    this.dataComprador = {
                         tipo_doc :  document.getElementById('s_tipodoc').value ,
                         number_doc :  document.getElementById('campo1').value ,
                         nombres :  document.getElementById('c_nombres1').value ,
@@ -572,6 +564,19 @@
                         referencia :  document.getElementById('c_ref').value ,
                         fijo :  document.getElementById('c_telfij').value ,
                         telefono :  document.getElementById('c_telcel').value ,
+                    }
+                }
+                addComprador () {
+                    localStorage.setItem('Comprador' , JSON.stringify(this.dataComprador) )
+                }
+                getDestinatario () {
+
+                    this.dataDestinatario = {
+                        tipo_doc :  document.getElementById('tipo_doc_destinatario').value ,
+                        number_doc :  document.getElementById('number_doc_dest').value ,
+                        nombres :  document.getElementById('c_nombres_dest').value ,
+                        apellidos :  document.getElementById('c_ape_dest').value ,
+                        telefono :  document.getElementById('c_telcel_dest').value ,
                     }
                 }             
                 getFactura () {
@@ -587,9 +592,19 @@
                 addFactura() {
                     localStorage.setItem('facturacion' , JSON.stringify(this.dataFactura) )
                 }
+                
                 filter (obj){
+                    console.log(obj)
                     for (const property in obj) {
-                        this.estado = obj[property] !== '' ? true : false ; 
+                        if((property== "fijo") ||(property =="referencia") ){
+                        }else {
+                            if(obj[property] == ''){
+                            this.estado = false;
+                            break;
+                            }else{
+                                this.estado = true;
+                            }
+                        }
                     }
                     return this.estado
                 }
@@ -610,52 +625,33 @@
                    this.$btn_sgt.addEventListener('click' , event => {
                     event.preventDefault();
                     const uri = event.target.href ;
-                    if(this.session && this.estadoFactura){
+                    // solo comprador 
+                    if(!this.$factura.checked && !this.$destinatario.checked){
                         this.$btn_sgt.disabled = true ;
-                        this.getFactura();
-                        if(this.filter(this.dataFactura)) {
+                        this.getComprador()
+                        if(this.filter(this.dataComprador)) {
                             if(this.$politicas.checked) {
                                 this.$btn_sgt.disabled = false ;
-
+                                this.addComprador()
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas poder continuar.');
+                                return
+                            }
+                           
+                        }else {
+                            this.alert_form(false,'los datos obligatorios (*) del Comprador  deben estar completos para poder continuar');
+                            return
+                        }
+                    }
+                    // comprador y factura
+                    if(this.$factura.checked && !this.$destinatario.checked){
+                        this.$btn_sgt.disabled = true ;
+                        this.getComprador();
+                        this.getFactura();
+                        if(this.filter(this.dataComprador) && this.filter(this.dataFactura)) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
                                 this.addComprador();
-                                this.addFactura();
-                                
-                            }else{
-                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
-                                return
-                            }
-                            
-                        }else {
-                            this.alert_form(false,'Debe llenar los datos de la factura para poder continuar.');
-                            return
-                        }
-                    }
-                    if( !this.session && !this.$factura.checked ) {
-                        this.getDestinatario();
-                        this.$btn_sgt.disabled = true ;
-
-                        if(this.filter(this.dataDestinatario)) {
-                            if(this.$politicas.checked) {
-                                this.$btn_sgt.disabled = false ;
-                                this.addDestinatario();
-                            }else{
-                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
-                                return
-                            }
-                            
-                        }else {
-                            this.alert_form(false,'Debe llenar los datos del comprador para poder continuar.');
-                            return
-                        }
-                    }
-                    if(!this.session && this.$factura.checked){
-                        this.$btn_sgt.disabled = true ;
-                        this.getDestinatario();
-                        this.getFactura();
-                        if(this.filter(this.dataDestinatario) && this.filter(this.dataFactura)) {
-                            if(this.$politicas.checked) {
-                                this.$btn_sgt.disabled = false ;
-                                this.addDestinatario();
                                 this.addFactura();
                             }else{
                                 this.alert_form(false,'Debe aceptar las políticas poder continuar.');
@@ -667,86 +663,57 @@
                             return
                         }
                     }
-                    // sesion , entrega a domicilio con la segunda factura desmarcada  y en el paso 2 da check;
-                  
-                    // sesion , entrega a domicilio con la segunda factura desmarcada da continuar sin marcar;
-                    if(this.session && this.estadoDomicilio && !this.estadoFactura &&!this.$factura.checked ){
+                    // comprador y 
+                    if(!this.$factura.checked && this.$destinatario.checked){
                         this.$btn_sgt.disabled = true ;
-                        
-                        if(this.$politicas.checked) {
-                            this.$btn_sgt.disabled = false ;
-                            this.addComprador();   
-                        }else {
-
-                            this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
-                            return
-                        }
-                    }
-                    if(this.session && this.estadoDomicilio && this.$factura.checked ){
-                        this.$btn_sgt.disabled = true ;
-                        this.getFactura();
-                        if(this.filter(this.dataFactura)) {
-                            if(this.$politicas.checked) {
-                                this.$btn_sgt.disabled = false ;
-                                this.addComprador();
-                                this.addFactura();
-                                
-                            }else{
-                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
-                                return
-                            }
-                            
-                        }else {
-                            this.alert_form(false,'Debe llenar los datos de factura poder continuar.');
-                            return
-                        }
-                    }
-                   
-                    if(this.session && !this.estadoDomicilio && !this.$factura.checked && !this.estadoFactura ){
-                        this.$btn_sgt.disabled = true ;
+                        this.getComprador();
                         this.getDestinatario();
-
-                        if(this.filter(this.dataDestinatario)) {
+                        if(this.filter(this.dataComprador) && this.filter(this.dataDestinatario)) {
                             if(this.$politicas.checked) {
                                 this.$btn_sgt.disabled = false ;
                                 this.addComprador();
                                 this.addDestinatario();
                             }else{
-                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
+                                this.alert_form(false,'Debe aceptar las políticas poder continuar.');
                                 return
                             }
-                        }else {
-                            this.alert_form(false,'Debe llenar los datos del destinatario poder continuar.');
-                            return
-                        }
-                    }
-                    if(this.session && !this.estadoDomicilio  && this.$factura.checked ){
-                        this.$btn_sgt.disabled = true ;
-                        this.getFactura();
-                        this.getDestinatario()
-                        if(this.filter(this.dataFactura)&& this.filter(this.dataDestinatario)) {
-                            if(this.$politicas.checked) {
-                                this.$btn_sgt.disabled = false ;
-                                this.addComprador();
-                                this.addDestinatario();
-                                this.addFactura();
-                                
-                            }else{
-                                this.alert_form(false,'Debe aceptar las políticas de privacidad para poder continuar.');
-                                return
-                            }
-                            
+                           
                         }else {
                             this.alert_form(false,'Todos los datos obligatorios (*) deben estar completos para poder continuar');
                             return
                         }
                     }
+                    // comprador , destinatario y factura
+                    if(this.$factura.checked && this.$destinatario.checked){
+                        this.$btn_sgt.disabled = true ;
+                        this.getComprador();
+                        this.getFactura();
+                        this.getDestinatario();
+                        if(this.filter(this.dataComprador) && this.filter(this.dataFactura)&& this.dataDestinatario) {
+                            if(this.$politicas.checked) {
+                                this.$btn_sgt.disabled = false ;
+                                this.addComprador();
+                                this.addFactura();
+                                this.addDestinatario();
+                            }else{
+                                this.alert_form(false,'Debe aceptar las políticas poder continuar.');
+                                return
+                            }
+                           
+                        }else {
+                            this.alert_form(false,'Todos los datos obligatorios (*) deben estar completos para poder continuar');
+                            return
+                        }
+                    }
+
+
+
                     window.location = uri
                   
                 })}
             }
            new Facturacion();
-} );
+// } );
 
          
 
