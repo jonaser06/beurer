@@ -58,7 +58,7 @@ class Paginas extends CI_Controller {
         $data = array();
 
         foreach ($paginas as $pagina) {
-//            $pagina['fechajm']=(new DateTime($pagina['fecha']))->format('d/m/Y H:i:s');
+            // $pagina['fechajm']=(new DateTime($pagina['fecha']))->format('d/m/Y H:i:s');
             $pagina['botones'] = '<center>';
             if($permiso['editar']==1){
                 $pagina['botones'] .= '<a href="manager/paginas/0/0/' . $pagina['idpagina'] . '" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-pencil"></i></a>';
@@ -134,7 +134,7 @@ class Paginas extends CI_Controller {
             //'tabs' => array(),
             'categorias'=>$this->sistema->getContenedores($id),
             'pags'=>$this->sistema->getPaginas(),
-//          'pagsf'=>$this->sistema->getPaginasf($user),
+            // 'pagsf'=>$this->sistema->getPaginasf($user),
             'mods'=>$this->sistema->getModulos(),
             'variables' => $this->mcontenido->getVariables($id),
             'cat' => $this->sistema->getcat($id),
@@ -165,7 +165,7 @@ class Paginas extends CI_Controller {
         $data['permiso']=$this->sistema->getPermisos($user,$idmodulo);
         $data['modulos']=$this->sistema->getModulos($user);
         
-//        print_r($data['permiso']); exit;
+        // print_r($data['permiso']); exit;
         
         /*switch (TRUE) {
             case ($id == 21):
@@ -247,13 +247,13 @@ class Paginas extends CI_Controller {
     
     public function saveeditface(){
         $post= $this->input->post();
-//        print_r($post); exit;
+        // print_r($post); exit;
         $this->sistema->editsitemap($post); 
 
         $pagina=$this->sistema->getpaginasit($post['sitemap']['idsitemap']);
         
         $mensaje=array("mensaje"=>"Datos registrados correctamente","idpagina"=>$pagina['idpagina']);
-//        echo 1;
+        // echo 1;
         echo json_encode($mensaje);
         
     }
@@ -292,13 +292,13 @@ class Paginas extends CI_Controller {
                 "errores"=>json_encode($errores),
                 "jm"=>json_encode($jm));
         }else{
-    //        $categoria=$this->sistema->getCategoria($post['sitemap']['idsitemap']);
-    //        if(isset($categoria) && !empty($categoria)){
-    //            $jm=array("idcategoria"=>$categoria['idcategoria'],"categoria"=>$post['paginas']['pagina']);
-    //    //        print_r($jm); exit;
-    //            $this->sistema->updatecategoria($jm);
-    //        }
-    //         $this->sistema->editpagina($post);
+        // $categoria=$this->sistema->getCategoria($post['sitemap']['idsitemap']);
+        // if(isset($categoria) && !empty($categoria)){
+        //     $jm=array("idcategoria"=>$categoria['idcategoria'],"categoria"=>$post['paginas']['pagina']);
+        //     print_r($jm); exit;
+        //     $this->sistema->updatecategoria($jm);
+        // }
+        //     $this->sistema->editpagina($post);
             $this->sistema->editsitemap($post);
 
             $mensaje = array(
