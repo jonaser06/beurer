@@ -15,7 +15,7 @@
 <!-- Select2 -->
 <script type="text/javascript" src="mgr/js/plugins/select2/select2.min.js"></script>
 <!-- Datetimepicker -->
-<script type="text/javascript" src="mgr/js/plugins/datetimepicker/moment.min.js"></script>
+<!-- <script type="text/javascript" src="mgr/js/plugins/datetimepicker/moment.min.js"></script> -->
 <script type="text/javascript" src="mgr/js/plugins/datetimepicker/moment-locale-es.js"></script>
 <script type="text/javascript" src="mgr/js/plugins/datetimepicker/datetimepicker.min.js"></script>
 <!-- colorpicker -->

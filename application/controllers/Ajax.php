@@ -7,6 +7,16 @@ class Ajax extends MY_Controller
     public function __construct()
 	{
         parent::__construct();
+
+        $this->load->model('backend/sistema');
+        $this->load->model('backend/msuscriptores');
+        $this->load->helper('general');
+
+        if ($this->session->has_userdata('manager')) {
+            $this->manager = $this->session->userdata('manager');
+        } else {
+            redirect('manager');
+        }
     }
 
     public function index(){
@@ -22,6 +32,171 @@ class Ajax extends MY_Controller
              ->set_content_type('application/json')
              ->set_status_header(200)
              ->set_output(json_encode($resp));
+    }
+
+    public function get_reclamos(){
+
+        $start = $this->input->post('fecha');
+        if( $start != null ) {
+            $exp = explode(' - ', $start);
+            $start = $exp[0];
+            $end   = $exp[1];
+            $w = [
+                    'r_fecha >='=> $start,
+                    'r_fecha <='=> $end
+                ];
+
+            $query = $this->dbSelect('*','reclamos', $w);
+
+            $this->resp['status'] = true;
+            $this->resp['code'] = 200;
+            $this->resp['message'] = 'find One!';
+            $this->resp['data'] = $query;
+            /* var_dump($query);
+            exit; */
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode($this->resp));
+                return;
+        }
+        
+        $query = $this->dbSelect('*','reclamos', []);
+        $this->resp['status'] = true;
+        $this->resp['code'] = 200;
+        $this->resp['message'] = 'find One!';
+        $this->resp['data'] = $query;
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($this->resp));
+            return;
+    }
+
+    public function reclamosxsl(){
+        
+        setlocale(LC_ALL, 'es_PE');
+        
+
+        $salida = '<table border="1">';
+        $salida .= '<tr>';
+        $salida .= '<td>reclamo</td>';
+        $salida .= '<td>Tipo de documento</td>';
+        $salida .= '<td>Numero de documento</td>';
+        $salida .= '<td>Nombres</td>';
+        $salida .= '<td>Apellido Paterno</td>';
+        $salida .= '<td>Apellido Materno</td>';
+        $salida .= '<td>Telefono</td>';
+        $salida .= '<td>Correo</td>';
+        $salida .= '<td>Departamento</td>';
+        $salida .= '<td>Provincia</td>';
+        $salida .= '<td>Distrito</td>';
+        $salida .= '<td>Direccion</td>';
+        $salida .= '<td>Menor de edad</td>';
+        $salida .= '<td>Nombres (Apoderado)</td>';
+        $salida .= '<td>Tipo de documento (Apoderado)</td>';
+        $salida .= '<td>Numero de documento (Apoderado)</td>';
+        $salida .= '<td>Telefono (Apoderado)</td>';
+        $salida .= '<td>Correo (Apoderado)</td>';
+        $salida .= '<td>Tipo de bien</td>';
+        $salida .= '<td>Monto</td>';
+        $salida .= '<td>Descripcion</td>';
+        $salida .= '<td>Tipo de reclamo</td>';
+        $salida .= '<td>Descripcion del reclamo</td>';
+        $salida .= '<td>Pedido</td>';
+        $salida .= '<td>Fecha</td>';
+        $salida .= '</tr>';    
+
+        $start = $this->input->post('fecha');
+        if( $start != null ) {
+            $exp = explode(' - ', $start);
+            $start = $exp[0];
+            $end   = $exp[1];
+            $w = [
+                    'r_fecha >='=> $start,
+                    'r_fecha <='=> $end
+                ];
+
+            $reclamos = $this->dbSelect('*','reclamos', $w);
+
+            foreach ($reclamos as $key => $value) {
+                $menor = ($value['r_menor'] == 1 )?'Si':'No';
+                $salida .= '<tr>';
+                $salida .= '<td>'.$value['id_reclamo'].'</td>';
+                $salida .= '<td>'.$value['r_tipo_doc'].'</td>';
+                $salida .= '<td>'.$value['r_n_doc'].'</td>';
+                $salida .= '<td>'.$value['r_nombr'].'</td>';
+                $salida .= '<td>'.$value['r_apat'].'</td>';
+                $salida .= '<td>'.$value['r_amat'].'</td>';
+                $salida .= '<td>'.$value['r_telef'].'</td>';
+                $salida .= '<td>'.$value['r_correo'].'</td>';
+                $salida .= '<td>'.$value['r_depa'].'</td>';
+                $salida .= '<td>'.$value['r_prov'].'</td>';
+                $salida .= '<td>'.$value['r_dist'].'</td>';
+                $salida .= '<td>'.$value['r_direc'].'</td>';
+                $salida .= '<td>'.$menor.'</td>';
+                $salida .= '<td>'.$value['r_apd_nombr'].'</td>';
+                $salida .= '<td>'.$value['r_apd_tip'].'</td>';
+                $salida .= '<td>'.$value['r_apd_doc'].'</td>';
+                $salida .= '<td>'.$value['r_apd_telf'].'</td>';
+                $salida .= '<td>'.$value['r_apd_corr'].'</td>';
+                $salida .= '<td>'.$value['r_tipo_bn'].'</td>';
+                $salida .= '<td>'.$value['r_mont'].'</td>';
+                $salida .= '<td>'.$value['r_descr'].'</td>';
+                $salida .= '<td>'.$value['r_tip_rec'].'</td>';
+                $salida .= '<td>'.$value['r_rec_desc'].'</td>';
+                $salida .= '<td>'.$value['r_rec_pedi'].'</td>';
+                $salida .= '<td>'.$value['r_fecha'].'</td>';
+                $salida .= '</tr>';    
+            }
+    
+            $salida .= '</table>';
+    
+            $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+            $this->output->set_content_type('application/vnd.ms-excel');
+            $this->output->set_output($salida);
+
+            return;
+
+        }
+
+        $reclamos = $this->dbSelect('*','reclamos', []);
+        foreach ($reclamos as $key => $value) {
+            $menor = ($value['r_menor'] == 1 )?'Si':'No';
+            $salida .= '<tr>';
+            $salida .= '<td>'.$value['id_reclamo'].'</td>';
+            $salida .= '<td>'.$value['r_tipo_doc'].'</td>';
+            $salida .= '<td>'.$value['r_n_doc'].'</td>';
+            $salida .= '<td>'.$value['r_nombr'].'</td>';
+            $salida .= '<td>'.$value['r_apat'].'</td>';
+            $salida .= '<td>'.$value['r_amat'].'</td>';
+            $salida .= '<td>'.$value['r_telef'].'</td>';
+            $salida .= '<td>'.$value['r_correo'].'</td>';
+            $salida .= '<td>'.$value['r_depa'].'</td>';
+            $salida .= '<td>'.$value['r_prov'].'</td>';
+            $salida .= '<td>'.$value['r_dist'].'</td>';
+            $salida .= '<td>'.$value['r_direc'].'</td>';
+            $salida .= '<td>'.$menor.'</td>';
+            $salida .= '<td>'.$value['r_apd_nombr'].'</td>';
+            $salida .= '<td>'.$value['r_apd_tip'].'</td>';
+            $salida .= '<td>'.$value['r_apd_doc'].'</td>';
+            $salida .= '<td>'.$value['r_apd_telf'].'</td>';
+            $salida .= '<td>'.$value['r_apd_corr'].'</td>';
+            $salida .= '<td>'.$value['r_tipo_bn'].'</td>';
+            $salida .= '<td>'.$value['r_mont'].'</td>';
+            $salida .= '<td>'.$value['r_descr'].'</td>';
+            $salida .= '<td>'.$value['r_tip_rec'].'</td>';
+            $salida .= '<td>'.$value['r_rec_desc'].'</td>';
+            $salida .= '<td>'.$value['r_rec_pedi'].'</td>';
+            $salida .= '<td>'.$value['r_fecha'].'</td>';
+            $salida .= '</tr>';    
+        }
+
+        $salida .= '</table>';
+
+        $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+        $this->output->set_content_type('application/vnd.ms-excel');
+        $this->output->set_output($salida);
     }
 
     public function getprovincia(){
