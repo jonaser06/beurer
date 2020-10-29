@@ -12,11 +12,11 @@ class Ajax extends MY_Controller
         $this->load->model('backend/msuscriptores');
         $this->load->helper('general');
 
-        if ($this->session->has_userdata('manager')) {
-            $this->manager = $this->session->userdata('manager');
-        } else {
-            redirect('manager');
-        }
+        // if ($this->session->has_userdata('manager')) {
+        //     $this->manager = $this->session->userdata('manager');
+        // } else {
+        //     redirect('manager');
+        // }
     }
 
     public function index(){
@@ -660,41 +660,64 @@ class Ajax extends MY_Controller
                     
             ];
             $id_pedido = $this->savePedido($data);
-            
-            for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
-                $datos = [
-                    'id_pedido'   => (int)$id_pedido,
-                    'id_producto' => (int)$id_productos[$i],
-                    'cantidad'    => (int)$cantidades[$i],
-                    'subtotal_precio' => $subtotales[$i],
-                ];
-                $response = $this->dbInsert('pedido_detalle',$datos);
-                
-                if($response){
-                    $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
-                    $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
-                    $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
-                    
-                }else{
-
-                    $this->resp = [
-                        'message' => 'error'
+            if($id_pedido) {
+                for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
+                    $datos = [
+                        'id_pedido'   => (int)$id_pedido,
+                        'id_producto' => (int)$id_productos[$i],
+                        'cantidad'    => (int)$cantidades[$i],
+                        'subtotal_precio' => $subtotales[$i],
                     ];
-                    $this->output
-                     ->set_content_type('application/json')
-                     ->set_status_header(404)
-                     ->set_output(json_encode($this->resp));
-                     return;
-                }
+                    $response = $this->dbInsert('pedido_detalle',$datos);
+                    
+                    if($response){
+                        $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
+                        $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
+                        $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
+                        
+                    }else{
+                        $this->resp = [
+                            'message' => 'error al guardar dato de pedido detalle'
+                        ];
+                        $this->output
+                         ->set_content_type('application/json')
+                         ->set_status_header(404)
+                         ->set_output(json_encode($this->resp));
+                         return;
+                    }
+                };
+                $this->resp = [
+                    'status'  => true,
+                    'code'    => 201 ,
+                    'message' => 'venta registrada',
+                    'data'    => [
+                        'pedido'       => 'created payment register !!',
+                        'codigo_pedido' => $id_pedido,
+                        'state_pedido' => 1
+                    ]
+                ];
+                $this->output
+                         ->set_content_type('application/json')
+                         ->set_status_header(200)
+                         ->set_output(json_encode($this->resp));
+                         return;
+            }else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 500 ,
+                    'message' => 'Hubo problemas al almacenar los datos.',
+                    'data'    => [
+                        'pedido'       => false,
+                        'state_pedido' => 0
+                    ]
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(500)
+                    ->set_output(json_encode($resp));
+                return;
             }
-            $this->resp = [
-                'message' => 'exito'
-            ];
-            $this->output
-                     ->set_content_type('application/json')
-                     ->set_status_header(200)
-                     ->set_output(json_encode($this->resp));
-                     return;
+            
             
           }else {
             $this->output
@@ -703,5 +726,67 @@ class Ajax extends MY_Controller
             ->set_output(json_encode($resp));
           }
     }
+
+      public function getPedido()
+      {
+          $resp = [
+              'status'  => false,
+              'code'    => 404,
+              'message' => 'Metodo POST requerido',
+          ];
+          if ($this->input->server('REQUEST_METHOD') == 'POST') {
+  
+              $id_pedido = $this->input->post('id_pedido');
+              $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
+              
+              if ($pedido) {
+                  $data = [];
+                  $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
+
+                  for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
+                      $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
+                      $productoDB = [
+                          'nombre' => $prod['titulo'],
+                          'precio' => $prod['precio'],
+                          'precio_online' => $prod['precio_anterior'],
+                          'producto_sku' => $prod['producto_sku'],
+                          'cantidad' => $pedido_detalle[$i]['cantidad'],
+                          'subtotal' => $pedido_detalle[$i]['subtotal_precio']
+                      ];
+                      array_push($data ,$productoDB);
+                  };
+
+                  $resp = [
+                      'status'  => true,
+                      'code'    => 200,
+                      'data'    => [
+                          'pedido'   => $pedido,
+                          'detalle'  => $data
+                      ]
+                  ];
+                  
+                  $this->output
+                      ->set_content_type('application/json')
+                      ->set_status_header(200)
+                      ->set_output(json_encode($resp));
+                  return;
+              } else {
+                  $resp = [
+                      'status'  => true,
+                      'code'    => 404,
+                      'message' => 'Ocurrio un error en el Core',
+                  ];
+                  $this->output
+                      ->set_content_type('application/json')
+                      ->set_status_header(404)
+                      ->set_output(json_encode($resp));
+                  return;
+              }
+          }
+          $this->output
+              ->set_content_type('application/json')
+              ->set_status_header(404)
+              ->set_output(json_encode($resp));
+      }
  
 }

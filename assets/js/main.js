@@ -1222,6 +1222,20 @@ ObjMain = {
         total_pago.textContent    = total_payment;
         
     },
+    resumePedido : (id) => {
+        const formData = new FormData();
+        formData.append('id_pedido',id);
+        // formData.append('id_pedido',parseInt(localStorage.getItem('id_pedido')));
+        ObjMain.ajax_post('POST',`${DOMAIN}ajax/getPedido`,formData)
+        .then( pedido => {
+            pedido = JSON.parse(pedido)
+            console.log(pedido)
+        })
+        .catch( err =>{
+            err = JSON.parse(err);
+            
+        });
+    },
     stateProgress : (estate) => {
         const $statesNode = document.querySelectorAll('.progress-bar');
         $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')

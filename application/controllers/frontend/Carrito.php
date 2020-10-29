@@ -65,4 +65,23 @@ class Carrito extends MY_Controller
 
         echo $output;
     }
+    function resume () {
+         
+        $uri_segment = $this->uri->segment_array();
+        $uri = implode('/',$uri_segment);
+
+        $this->data['varify_product'] = false;
+        $this->data['pagina'] = $this->taxonomia->getPaginaurl($uri);
+        $this->data['uri'] = $uri;
+        $this->data['confif'] = $this->contenido->getContenido(1);
+        $this->data['menu'] = $this->contenido->getMenu();
+        $this->data['userData'] =  isset($_SESSION['id_cliente']) 
+                    ? $this->get('clientes', ['id_cliente' => (int)$_SESSION['id_cliente']])
+                    : false ;
+        
+        
+        $output = $this->load->view("frontend/order-summary.php", $this->data, TRUE);
+
+        echo $output;
+    }
 }

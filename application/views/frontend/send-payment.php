@@ -212,21 +212,15 @@
 
 
 <script>
-        Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
-
-</script>
-
-<script>
-
-
+Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         const session       = parseInt(document.querySelector('.dataUser').dataset.id);
         const productos     = localStorage.getItem('productos') ? JSON.parse(localStorage.getItem('productos')) :[]
         const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
         const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
         const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
-        let tipo_cupon    = localStorage.getItem('tipo') ? parseInt(localStorage.getItem('tipo')) : null
-        let descuento     = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
-        let cupon         = localStorage.getItem('descuento') ? true : false
+        let tipo_cupon      = localStorage.getItem('tipo') ? parseInt(localStorage.getItem('tipo')) : null
+        let descuento       = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
+        let cupon           = localStorage.getItem('descuento') ? true : false
         const user          = localStorage.getItem('domicilio')  ? JSON.parse(localStorage.getItem('Comprador')): JSON.parse(localStorage.getItem('Comprador'))
         const cupon_codigo = localStorage.getItem('cupon_codigo')? localStorage.getItem('cupon_codigo'):0;
         let total = 0
@@ -246,16 +240,12 @@
             total = `${((parseFloat(envio) + parseFloat(subtotal))).toFixed(2) *100}`;
         }
         
-
-        // FORMULARIO SETTINGS CULQI DEFAULT 
         Culqi.settings({
             title: 'BEURER',
             currency: 'PEN',
             description: 'Completamos tu pago con toda la seguridad que tú necesitas',
             amount: total
         });
-
-
         Culqi.options({
             lang: 'auto',
             style: {
@@ -267,15 +257,11 @@
             }
         });
         document.getElementById('buy').addEventListener('click', event => {
-            
             Culqi.open();
             $('html, body').animate({scrollTop:0}, 'slow');
             event.preventDefault();
-            
 
         })
-        $('html, body').animate({scrollTop:0}, 'slow');
-
         function converter () {
             let id_products = [] , cant_products = [] , subtotal_products=[]
             productos.forEach(prod => {
@@ -325,7 +311,7 @@
             formData.append('nombres' , `${user.nombres}`);
             formData.append('apellidos' , `${user.apellido_paterno} ${user.apellido_materno}`);
             formData.append('telefono' , user.telefono );
-            formData.append('distrito' , `${user.distrito} ${user.provincia}`);
+            formData.append('distrito' , `${user.distrito}`);
             formData.append('d_envio' , user.d_envio);
             formData.append('referencia' , user.referencia);
             formData.append('tipo_documento' , user.tipo_doc);
@@ -349,54 +335,50 @@
             Swal.fire({
             icon: icon ,
             title: title,
-            text: message ,
-           
-})
-            
+            text: message ,     
+            })
         }
         function culqi() {
-
-        
-        if (Culqi.token) { 
-             const token  = Culqi.token.id;
-             const email = Culqi.token.email;
-             const formSend   = dataFormSend(token,email)
-
-            ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/createCharge`, formSend)
+            if (Culqi.token) { 
+                const token      = Culqi.token.id;
+                const email      = Culqi.token.email;
+                const formSend   = dataFormSend(token,email)
+                ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/createCharge`, formSend)
                     .then( resp => {
                         resp = JSON.parse(resp);
                         resp = JSON.parse(resp)
                         if(resp.object == 'charge') {
                             const {...charge } = resp;  
                             if(charge.outcome.type == "venta_exitosa" ) { 
-                                // tomamos los metadatos de el cargo y se hace un Request a controller Finalizar el pago
                                 const { metadata } = charge ;
                                 const formCharge = dataFormPurchase(metadata);
                                 formCharge.append('codigo_venta',charge.reference_code);
+
                                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchase`, formCharge)
-                                .then( resp => {})
-                                .catch();
-                                modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
-                            }
-                        }else{
+                                .then( resp => {
+                                resp = JSON.parse( resp );
+                                    if(resp.status) {
+                                        localStorage.setItem('id_pedido',resp.data.codigo_pedido);
+                                        modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
+                                        setTimeout( () => window.location = `${DOMAIN}order-summary` , 1000);
+                                    }
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                });
+                            } 
+                        }else {
                             modalCheckout( 'Error' ,'error',`${resp.user_message}`,'#C5115')
-                        }
+                        }   
                     })
                     .catch( err =>{
-                       console.log(err)
-                        
+                        console.log(err)
+                            
                     });
-        } else { 
-            console.log(Culqi.error);
-            alert(Culqi.error.user_message);
+            } else { 
+                console.log(Culqi.error);
+                alert(Culqi.error.user_message);
+            }
         }
-        };
-
-        
-        
-         
-  
-
-    
 
 </script>
