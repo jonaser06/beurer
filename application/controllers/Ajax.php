@@ -562,7 +562,37 @@ class Ajax extends MY_Controller
     
              
               $culqi = new Culqi\Culqi(['api_key' => PRIVATE_KEY]);
-        
+              $metadata = [
+                "id_session" =>$this->input->post('id_session'),
+                "tipo_documento" =>$this->input->post('tipo_documento'),
+                "numero_documento" =>$this->input->post('numero_documento'),
+                "correo" =>$this->input->post('correo'),
+                "distrito"    => $this->input->post('distrito'),
+                "nombres" => $this->input->post('nombres'),
+                "apellidos" => $this->input->post('apellidos'),
+                "telefono" => $this->input->post('telefono'),
+                "d_envio" => $this->input->post('d_envio'),
+                "referencia" => $this->input->post('referencia'),
+                "id_productos" =>$this->input->post('id_productos'),
+                "cantidades" =>$this->input->post('cantidades'),
+                "subtotales" =>$this->input->post('subtotales'),
+                "cantidad_total" =>$this->input->post('cantidad_total'),
+                "envio" =>$this->input->post('envio_coste'),
+                "cupon_descuento" =>$this->input->post('cupon_descuento'),
+                "tipo_cupon" =>$this->input->post('tipo_cupon'),
+                "cupon_codigo" =>$this->input->post('cupon_codigo'),
+                "subtotal" =>$this->input->post('subtotal_coste'),
+                
+              ];
+              $dest = [];
+              if($this->input->post('flag_dest')) {
+                $dest["dest_nombres"]    = $this->input->post('dest_nombres');
+                $dest["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                $dest["dest_telefono"]   = $this->input->post('dest_telefono');
+                $dest["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
+                $dest["dest_number_doc"] = $this->input->post('dest_number_doc');
+                $metadata["destinatario"] = json_encode($dest);
+              };
               $charge = $culqi->Charges->create(
                         [
                             "amount"        =>$this->input->post('total_coste'),
@@ -572,28 +602,7 @@ class Ajax extends MY_Controller
                             "installments"  => 0,
                             "source_id"     => $this->input->post('token'),
                             "email"         =>$this->input->post('correo'),
-                            "metadata"=>[
-                                "id_session" =>$this->input->post('id_session'),
-                                "tipo_documento" =>$this->input->post('tipo_documento'),
-                                "numero_documento" =>$this->input->post('numero_documento'),
-                                "correo" =>$this->input->post('correo'),
-                                "distrito"    => $this->input->post('distrito'),
-                                "nombres" => $this->input->post('nombres'),
-                                "apellidos" => $this->input->post('apellidos'),
-                                "telefono" => $this->input->post('telefono'),
-                                "d_envio" => $this->input->post('d_envio'),
-                                "referencia" => $this->input->post('referencia'),
-                                "id_productos" =>$this->input->post('id_productos'),
-                                "cantidades" =>$this->input->post('cantidades'),
-                                "subtotales" =>$this->input->post('subtotales'),
-                                "cantidad_total" =>$this->input->post('cantidad_total'),
-                                "envio" =>$this->input->post('envio_coste'),
-                                "cupon_descuento" =>$this->input->post('cupon_descuento'),
-                                "tipo_cupon" =>$this->input->post('tipo_cupon'),
-                                "cupon_codigo" =>$this->input->post('cupon_codigo'),
-                                "subtotal" =>$this->input->post('subtotal_coste')
-                                
-                            ],
+                            "metadata" =>$metadata,
                             "antifraud_details"=>[
                                 "address"    => $this->input->post('distrito'),
                                 "first_name" => $this->input->post('nombres'),
@@ -659,6 +668,13 @@ class Ajax extends MY_Controller
                          'pedido_estado'=> 1 ,
                     
             ];
+            if($this->input->post('dest_nombres')) {
+                $data["dest_nombres"]    = $this->input->post('dest_nombres');
+                $data["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                $data["dest_telefono"]   = $this->input->post('dest_telefono');
+                $data["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
+                $data["dest_number_doc"] = $this->input->post('dest_number_doc');
+              };
             $id_pedido = $this->savePedido($data);
             if($id_pedido) {
                 for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
@@ -738,16 +754,19 @@ class Ajax extends MY_Controller
   
               $id_pedido = $this->input->post('id_pedido');
               $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
-              
+
               if ($pedido) {
                   $data = [];
                   $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
 
                   for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
                       $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
+                      $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
+                      
                       $productoDB = [
                           'nombre' => $prod['titulo'],
                           'precio' => $prod['precio'],
+                          'imagen' => $imagenes[0]['imagen'],
                           'precio_online' => $prod['precio_anterior'],
                           'producto_sku' => $prod['producto_sku'],
                           'cantidad' => $pedido_detalle[$i]['cantidad'],

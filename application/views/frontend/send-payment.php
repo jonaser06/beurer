@@ -222,6 +222,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         let descuento       = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
         let cupon           = localStorage.getItem('descuento') ? true : false
         const user          = localStorage.getItem('domicilio')  ? JSON.parse(localStorage.getItem('Comprador')): JSON.parse(localStorage.getItem('Comprador'))
+        const dest          = localStorage.getItem('Destinatario')  ? JSON.parse(localStorage.getItem('Destinatario')): false
         const cupon_codigo = localStorage.getItem('cupon_codigo')? localStorage.getItem('cupon_codigo'):0;
         let total = 0
         let cupon_descuento = 0;
@@ -297,8 +298,14 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             formData.append('id_productos' , charge.id_productos);
             formData.append('cantidades' , charge.cantidades);
             formData.append('subtotales' , charge.subtotales);
-            
-            
+            if(charge['destinatario']){
+                charge.destinatario = JSON.parse(charge.destinatario)
+                formData.append('dest_nombres',charge.destinatario.dest_nombres)
+                formData.append('dest_apellidos',charge.destinatario.dest_apellidos)
+                formData.append('dest_telefono',charge.destinatario.dest_telefono)
+                formData.append('dest_tipo_doc',charge.destinatario.dest_tipo_doc)
+                formData.append('dest_number_doc',charge.destinatario.dest_number_doc)
+            }
             return formData;
         }
         function dataFormSend (token,email) {
@@ -328,7 +335,14 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             formData.append('cupon_descuento' , cupon_descuento );
             formData.append('cupon_codigo' , cupon_codigo );
             formData.append('total_coste' , total );
-            
+            if(dest){
+                formData.append('flag_dest',true)
+                formData.append('dest_nombres',dest.nombres)
+                formData.append('dest_apellidos',dest.apellidos)
+                formData.append('dest_telefono',dest.telefono)
+                formData.append('dest_tipo_doc',dest.tipo_doc)
+                formData.append('dest_number_doc',dest.number_doc)
+            }
             return formData;
         }
         function modalCheckout (title , icon ,message , color) {
@@ -351,6 +365,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                             const {...charge } = resp;  
                             if(charge.outcome.type == "venta_exitosa" ) { 
                                 const { metadata } = charge ;
+                                console.log(metadata)
                                 const formCharge = dataFormPurchase(metadata);
                                 formCharge.append('codigo_venta',charge.reference_code);
 

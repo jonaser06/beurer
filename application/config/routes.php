@@ -108,10 +108,10 @@ $route['linea-bebe/(:any)/(:any)'] = 'frontend/productos/show/$2';
 $route['carrito'] = 'frontend/carrito/index/';
 $route['enviopago'] = 'frontend/enviopago/index/';
 $route['reclamos'] = 'frontend/reclamos/index/';
-$route['resumenpedido'] = 'frontend/resumenpedido/index/';
 $route['registro'] = 'frontend/auth/index';
 $route['facturacion'] = 'frontend/carrito/register';
 $route['send-payment'] = 'frontend/carrito/envio';
+$route['order-summary'] = 'frontend/resumenpedido/index/';
 
 $route['rastreapedido'] = 'frontend/rastreapedido/index';
 $route['updatePass/(:num)'] = 'ajax/updatePass/$1';

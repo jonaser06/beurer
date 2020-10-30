@@ -31,6 +31,8 @@ ObjMain = {
             ObjMain.defaultUbigeo();
         }
         if(window.location.href == ( `${DOMAIN}facturacion` ) ){
+            localStorage.removeItem('Destinatario')
+            localStorage.removeItem('facturacion')
             ObjMain.load_ubigeo();
             ObjMain.defaultUbigeo();
         }
@@ -63,11 +65,12 @@ ObjMain = {
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
-        // if(document.querySelector('#checkout_crumb') != null){
-        //     ObjMain.listar_items(); 
-        // }
          if (window.location.href == ( `${DOMAIN}carrito` )){
             ObjMain.listar_items(); 
+        }
+         if (window.location.href == ( `${DOMAIN}order-summary` )){
+             ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
+             console.log('****resumen pedido *******')
         }
     },
     reclamos: (e) =>{
@@ -1225,16 +1228,69 @@ ObjMain = {
     resumePedido : (id) => {
         const formData = new FormData();
         formData.append('id_pedido',id);
-        // formData.append('id_pedido',parseInt(localStorage.getItem('id_pedido')));
         ObjMain.ajax_post('POST',`${DOMAIN}ajax/getPedido`,formData)
         .then( pedido => {
             pedido = JSON.parse(pedido)
-            console.log(pedido)
+            const productosResume  = pedido.data.detalle
+            const {...infoResume }  = pedido.data.pedido
+            console.log(infoResume)
+            ObjMain.resumeInfoView(infoResume)
+            ObjMain.resumeProductsView(productosResume)
         })
         .catch( err =>{
             err = JSON.parse(err);
             
         });
+    },
+    resumeInfoView : data => {
+
+        document.querySelector('.titular').textContent  = `${data.nombres} ${data.apellidos}`
+        document.querySelector('.dir_envio').textContent= `${data.dir_envio}`
+        document.querySelector('.provincia').textContent= `${data.provincia.toUpperCase()} LIMA`
+        document.querySelector('.distrito').textContent  = `${data.distrito.toUpperCase()}`
+        document.querySelector('.numero_documento').textContent  = `${data.numero_documento}`
+        document.querySelector('.correo').textContent  = data.correo
+        document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
+        document.querySelector('.referencia').textContent  = data.referencia
+        document.querySelector('.codigo-venta').textContent  = data.codigo
+    },
+    resumeProductsView : productos => {
+        
+        const $containerResume = document.querySelector('.pedido-products');
+        productos.forEach( prod => {
+            $containerResume.innerHTML +=     
+            `<div class="basket-product" style="text-align:center;">
+                <div class="item">
+                    <a class="product-image"
+                    >
+                        <img src="${DOMAIN}${prod.imagen}" alt=""
+                            class="product-frame">
+                    </a>
+                    <div class="product-details">
+                        <span>${prod.nombre}</span>
+                        <p>SKU: ${prod.producto_sku}</p>
+                        <p>Envío a domicilio</p>
+                    </div>
+                </div>
+
+                <div class="price" id="preuni">
+                    <div class="info-prod" style="display:block;">
+                        <img src="assets/images/precio-online.png">
+                        <div class="font-nexaheav text-left price rprice"> ${parseFloat(prod.precio_online).toFixed(2)}</div>
+                    </div>
+                    <div class="font-nexaheav"
+                        style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
+                        Normal: S/ ${parseFloat(prod.precio).toFixed(2)}</div>
+                </div>
+
+                <div class="quantity">
+
+                    <input class="form-control-field cantidad" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                        min="1" readonly>
+                </div>
+                <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
+            </div>`
+        }) 
     },
     stateProgress : (estate) => {
         const $statesNode = document.querySelectorAll('.progress-bar');
