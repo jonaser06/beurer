@@ -51,10 +51,7 @@ input {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 74ad318537d99eb1aedb702f7afbc06199e9ffe3
 
         <div class="row cont_datos" id="d_formularios1"  style="border-radius:20px;display:inline-block;width:90%;">
             <div  id="panel-user1" style="width:27%;float:left;background-color:transparent;color:#161616;margin-right:1.5%;">
@@ -68,10 +65,7 @@ input {
                     
                 </ul>                
             </div>            
-<<<<<<< HEAD
 
-=======
->>>>>>> 74ad318537d99eb1aedb702f7afbc06199e9ffe3
 
             <!-- <div id="info_puser" style="text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
                 <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;"> 
@@ -85,10 +79,7 @@ input {
                 <h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p></div>
                             
             </div>             -->
-<<<<<<< HEAD
-=======
 
->>>>>>> 74ad318537d99eb1aedb702f7afbc06199e9ffe3
             <div id="info_puser" style="border-radius:20px;text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
                 <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;"> 
                 <div id="back-section-user" style="font-size:1.6em;margin-right:4%;display:none;width:10%;float:left;border-right:2px solid whitesmoke;">
@@ -96,10 +87,7 @@ input {
                 </div>
                 
                 <div id="title-info-user" style="width:90%;float:left;margin:auto 0px;" ><p>Bienvenido al Panel de Administración del Cliente BEURER</p> </div> 
-<<<<<<< HEAD
 
-=======
->>>>>>> 74ad318537d99eb1aedb702f7afbc06199e9ffe3
                 </div>
                 <div id="cont-info-user">
 
