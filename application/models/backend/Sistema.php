@@ -34,7 +34,7 @@ class Sistema extends CI_Model {
     }*/
 	
 	 
-    public function getPaginas($user=0){
+    public function getPaginas($user  =0){
         $this->db->select('paginas.*');
         if($user!=0){
             $this->db->join('sitemap','paginas.idpagina=sitemap.idpagina','LEFT');
@@ -78,9 +78,9 @@ class Sistema extends CI_Model {
         return $this->salida($result->result_array());
     }
     
-    public function getCategoria($ids=0){
+    public function getCategoria( $ids=0 ){
         $this->db->where('idsitemap',$ids);
-        $query=$this->db->get('categorias');
+        $query=$this->db->get('paginas');
         return $query->row_array();
     }
     
@@ -156,7 +156,7 @@ class Sistema extends CI_Model {
         return $query->result_array();
     }
     
-    public function getModulos($user=0){
+    public function getModulos($user = 0){
         if($user>0){
             $this->db->join('perfil_modulos','modulos.idmodulo=perfil_modulos.idmodulo');
         }
@@ -194,7 +194,7 @@ class Sistema extends CI_Model {
         return $this->db->update('paginas',$datos['paginas']);
     }
     
-    public function getpaginasit($ids=0){
+    public function getpaginasit($ids = 0 ){
         $this->db->where('idsitemap',$ids);
         $query=$this->db->get('paginas');
         return $query->row_array();

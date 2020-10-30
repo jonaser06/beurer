@@ -7,6 +7,16 @@ class Ajax extends MY_Controller
     public function __construct()
 	{
         parent::__construct();
+
+        $this->load->model('backend/sistema');
+        $this->load->model('backend/msuscriptores');
+        $this->load->helper('general');
+
+        // if ($this->session->has_userdata('manager')) {
+        //     $this->manager = $this->session->userdata('manager');
+        // } else {
+        //     redirect('manager');
+        // }
     }
 
     public function index(){
@@ -24,12 +34,224 @@ class Ajax extends MY_Controller
              ->set_output(json_encode($resp));
     }
 
+    public function get_reclamos(){
+
+        $start = $this->input->post('fecha');
+        if( $start != null ) {
+            $exp = explode(' - ', $start);
+            $start = $exp[0];
+            $end   = $exp[1];
+            $w = [
+                    'r_fecha >='=> $start,
+                    'r_fecha <='=> $end
+                ];
+
+            $query = $this->dbSelect('*','reclamos', $w);
+
+            $this->resp['status'] = true;
+            $this->resp['code'] = 200;
+            $this->resp['message'] = 'find One!';
+            $this->resp['data'] = $query;
+            /* var_dump($query);
+            exit; */
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode($this->resp));
+                return;
+        }
+        
+        $query = $this->dbSelect('*','reclamos', []);
+        $this->resp['status'] = true;
+        $this->resp['code'] = 200;
+        $this->resp['message'] = 'find One!';
+        $this->resp['data'] = $query;
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($this->resp));
+            return;
+    }
+
+    public function reclamosxsl(){
+        
+        setlocale(LC_ALL, 'es_PE');
+        
+
+        $salida = '<table border="1">';
+        $salida .= '<tr>';
+        $salida .= '<td>reclamo</td>';
+        $salida .= '<td>Tipo de documento</td>';
+        $salida .= '<td>Numero de documento</td>';
+        $salida .= '<td>Nombres</td>';
+        $salida .= '<td>Apellido Paterno</td>';
+        $salida .= '<td>Apellido Materno</td>';
+        $salida .= '<td>Telefono</td>';
+        $salida .= '<td>Correo</td>';
+        $salida .= '<td>Departamento</td>';
+        $salida .= '<td>Provincia</td>';
+        $salida .= '<td>Distrito</td>';
+        $salida .= '<td>Direccion</td>';
+        $salida .= '<td>Menor de edad</td>';
+        $salida .= '<td>Nombres (Apoderado)</td>';
+        $salida .= '<td>Tipo de documento (Apoderado)</td>';
+        $salida .= '<td>Numero de documento (Apoderado)</td>';
+        $salida .= '<td>Telefono (Apoderado)</td>';
+        $salida .= '<td>Correo (Apoderado)</td>';
+        $salida .= '<td>Tipo de bien</td>';
+        $salida .= '<td>Monto</td>';
+        $salida .= '<td>Descripcion</td>';
+        $salida .= '<td>Tipo de reclamo</td>';
+        $salida .= '<td>Descripcion del reclamo</td>';
+        $salida .= '<td>Pedido</td>';
+        $salida .= '<td>Fecha</td>';
+        $salida .= '</tr>';    
+
+        $start = $this->input->post('fecha');
+        if( $start != null ) {
+            $exp = explode(' - ', $start);
+            $start = $exp[0];
+            $end   = $exp[1];
+            $w = [
+                    'r_fecha >='=> $start,
+                    'r_fecha <='=> $end
+                ];
+
+            $reclamos = $this->dbSelect('*','reclamos', $w);
+
+            foreach ($reclamos as $key => $value) {
+                $menor = ($value['r_menor'] == 1 )?'Si':'No';
+                $salida .= '<tr>';
+                $salida .= '<td>'.$value['id_reclamo'].'</td>';
+                $salida .= '<td>'.$value['r_tipo_doc'].'</td>';
+                $salida .= '<td>'.$value['r_n_doc'].'</td>';
+                $salida .= '<td>'.$value['r_nombr'].'</td>';
+                $salida .= '<td>'.$value['r_apat'].'</td>';
+                $salida .= '<td>'.$value['r_amat'].'</td>';
+                $salida .= '<td>'.$value['r_telef'].'</td>';
+                $salida .= '<td>'.$value['r_correo'].'</td>';
+                $salida .= '<td>'.$value['r_depa'].'</td>';
+                $salida .= '<td>'.$value['r_prov'].'</td>';
+                $salida .= '<td>'.$value['r_dist'].'</td>';
+                $salida .= '<td>'.$value['r_direc'].'</td>';
+                $salida .= '<td>'.$menor.'</td>';
+                $salida .= '<td>'.$value['r_apd_nombr'].'</td>';
+                $salida .= '<td>'.$value['r_apd_tip'].'</td>';
+                $salida .= '<td>'.$value['r_apd_doc'].'</td>';
+                $salida .= '<td>'.$value['r_apd_telf'].'</td>';
+                $salida .= '<td>'.$value['r_apd_corr'].'</td>';
+                $salida .= '<td>'.$value['r_tipo_bn'].'</td>';
+                $salida .= '<td>'.$value['r_mont'].'</td>';
+                $salida .= '<td>'.$value['r_descr'].'</td>';
+                $salida .= '<td>'.$value['r_tip_rec'].'</td>';
+                $salida .= '<td>'.$value['r_rec_desc'].'</td>';
+                $salida .= '<td>'.$value['r_rec_pedi'].'</td>';
+                $salida .= '<td>'.$value['r_fecha'].'</td>';
+                $salida .= '</tr>';    
+            }
+    
+            $salida .= '</table>';
+    
+            $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+            $this->output->set_content_type('application/vnd.ms-excel');
+            $this->output->set_output($salida);
+
+            return;
+
+        }
+
+        $reclamos = $this->dbSelect('*','reclamos', []);
+        foreach ($reclamos as $key => $value) {
+            $menor = ($value['r_menor'] == 1 )?'Si':'No';
+            $salida .= '<tr>';
+            $salida .= '<td>'.$value['id_reclamo'].'</td>';
+            $salida .= '<td>'.$value['r_tipo_doc'].'</td>';
+            $salida .= '<td>'.$value['r_n_doc'].'</td>';
+            $salida .= '<td>'.$value['r_nombr'].'</td>';
+            $salida .= '<td>'.$value['r_apat'].'</td>';
+            $salida .= '<td>'.$value['r_amat'].'</td>';
+            $salida .= '<td>'.$value['r_telef'].'</td>';
+            $salida .= '<td>'.$value['r_correo'].'</td>';
+            $salida .= '<td>'.$value['r_depa'].'</td>';
+            $salida .= '<td>'.$value['r_prov'].'</td>';
+            $salida .= '<td>'.$value['r_dist'].'</td>';
+            $salida .= '<td>'.$value['r_direc'].'</td>';
+            $salida .= '<td>'.$menor.'</td>';
+            $salida .= '<td>'.$value['r_apd_nombr'].'</td>';
+            $salida .= '<td>'.$value['r_apd_tip'].'</td>';
+            $salida .= '<td>'.$value['r_apd_doc'].'</td>';
+            $salida .= '<td>'.$value['r_apd_telf'].'</td>';
+            $salida .= '<td>'.$value['r_apd_corr'].'</td>';
+            $salida .= '<td>'.$value['r_tipo_bn'].'</td>';
+            $salida .= '<td>'.$value['r_mont'].'</td>';
+            $salida .= '<td>'.$value['r_descr'].'</td>';
+            $salida .= '<td>'.$value['r_tip_rec'].'</td>';
+            $salida .= '<td>'.$value['r_rec_desc'].'</td>';
+            $salida .= '<td>'.$value['r_rec_pedi'].'</td>';
+            $salida .= '<td>'.$value['r_fecha'].'</td>';
+            $salida .= '</tr>';    
+        }
+
+        $salida .= '</table>';
+
+        $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+        $this->output->set_content_type('application/vnd.ms-excel');
+        $this->output->set_output($salida);
+    }
+
     public function getprovincia(){
         $file = file_get_contents('assets/js/ubigeo.min.js');
         $this->output
              ->set_content_type('application/json')
              ->set_status_header(200)
              ->set_output($file);
+    }
+
+    public function setreclamo(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $data = [
+                'r_tipo_doc' => $this->input->post('r_tipo_doc'),
+                'r_n_doc' => $this->input->post('r_n_doc'),
+                'r_nombr' => $this->input->post('r_nombr'),
+                'r_apat' => $this->input->post('r_apat'),
+                'r_amat' => $this->input->post('r_amat'),
+                'r_telef' => $this->input->post('r_telef'),
+                'r_correo' => $this->input->post('r_correo'),
+                'r_depa' => $this->input->post('r_depa'),
+                'r_prov' => $this->input->post('r_prov'),
+                'r_dist' => $this->input->post('r_dist'),
+                'r_direc' => $this->input->post('r_direc'),
+                'r_menor' => $this->input->post('r_menor'),
+                'r_apd_nombr' => $this->input->post('r_apd_nombr'),
+                'r_apd_tip' => $this->input->post('r_apd_tip'),
+                'r_apd_doc' => $this->input->post('r_apd_doc'),
+                'r_apd_telf' => $this->input->post('r_apd_telf'),
+                'r_apd_corr' => $this->input->post('r_apd_corr'),
+                'r_tipo_bn' => $this->input->post('r_tipo_bn'),
+                'r_mont' => $this->input->post('r_mont'),
+                'r_descr' => $this->input->post('r_descr'),
+                'r_tip_rec' => $this->input->post('r_tip_rec'),
+                'r_rec_desc' => $this->input->post('r_rec_desc'),
+                'r_rec_pedi' => $this->input->post('r_rec_pedi'),
+                'r_fecha' => date('Y-m-d H:i:s')
+            ];
+                $this->dbInsert('reclamos',$data);
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->resp['data'] = $data;
+                $this->output
+                 ->set_content_type('application/json')
+                 ->set_status_header(200)
+                 ->set_output(json_encode($this->resp));
+                 return;
+        }
+        $this->resp['message'] = 'Ocurrio un error en la petición';
+        $this->output
+             ->set_content_type('application/json')
+             ->set_status_header(404)
+             ->set_output(json_encode($this->resp));
+
     }
 
     public function setregister(){
@@ -278,4 +500,312 @@ class Ajax extends MY_Controller
             ->set_status_header(404)
             ->set_output(json_encode($resp));
     }
+    public function cupon ()
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+            $codigo = $this->input->post('codigo');
+            $result = $this->get('cupon',['cupon_codigo' =>$codigo ]);
+            
+            if (!empty($result)) {
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'cupon encontrado !';
+                $this->resp['data'] = [
+                    "tipon_cupon" => $result['tipo_cupon'],
+                    "descuento" => $result['cupon_precio'],
+                    "codigo" => $result['cupon_codigo'],
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                return;
+                
+            } else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 404,
+                    'message' => 'x El cupon no es valido.'
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
+    // CREAR TOKEN CULQI
+    public function createCharge () 
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            try
+            { 
+                include_once APPPATH.'third_party/request/library/Requests.php';
+                Requests::register_autoloader();
+                include_once APPPATH.'third_party/culqi/lib/culqi.php';
+    
+             
+              $culqi = new Culqi\Culqi(['api_key' => PRIVATE_KEY]);
+              $metadata = [
+                "id_session" =>$this->input->post('id_session'),
+                "tipo_documento" =>$this->input->post('tipo_documento'),
+                "numero_documento" =>$this->input->post('numero_documento'),
+                "correo" =>$this->input->post('correo'),
+                "distrito"    => $this->input->post('distrito'),
+                "nombres" => $this->input->post('nombres'),
+                "apellidos" => $this->input->post('apellidos'),
+                "telefono" => $this->input->post('telefono'),
+                "d_envio" => $this->input->post('d_envio'),
+                "referencia" => $this->input->post('referencia'),
+                "id_productos" =>$this->input->post('id_productos'),
+                "cantidades" =>$this->input->post('cantidades'),
+                "subtotales" =>$this->input->post('subtotales'),
+                "cantidad_total" =>$this->input->post('cantidad_total'),
+                "envio" =>$this->input->post('envio_coste'),
+                "cupon_descuento" =>$this->input->post('cupon_descuento'),
+                "tipo_cupon" =>$this->input->post('tipo_cupon'),
+                "cupon_codigo" =>$this->input->post('cupon_codigo'),
+                "subtotal" =>$this->input->post('subtotal_coste'),
+                
+              ];
+              $dest = [];
+              if($this->input->post('flag_dest')) {
+                $dest["dest_nombres"]    = $this->input->post('dest_nombres');
+                $dest["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                $dest["dest_telefono"]   = $this->input->post('dest_telefono');
+                $dest["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
+                $dest["dest_number_doc"] = $this->input->post('dest_number_doc');
+                $metadata["destinatario"] = json_encode($dest);
+              };
+              $charge = $culqi->Charges->create(
+                        [
+                            "amount"        =>$this->input->post('total_coste'),
+                            "capture"       =>true,
+                            "currency_code" =>"PEN",
+                            "description"   => 'Compra desde web BEURER' ,
+                            "installments"  => 0,
+                            "source_id"     => $this->input->post('token'),
+                            "email"         =>$this->input->post('correo'),
+                            "metadata" =>$metadata,
+                            "antifraud_details"=>[
+                                "address"    => $this->input->post('distrito'),
+                                "first_name" => $this->input->post('nombres'),
+                                "last_name" => $this->input->post('apellidos'),
+                                "phone" => $this->input->post('telefono'),
+                            ]
+                        ]
+                );    
+                $response = $charge ? json_encode($charge) :null;
+                $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(200)
+                        ->set_output(json_encode($response));
+                    return;
+            } catch (Exception $e) {
+                $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(200)
+                        ->set_output(json_encode($e->getMessage()));
+                    return;
+                
+                
+               
+            }
+            
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
+    public function purchase () 
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+           #evaluamos si la compra está aprobada //en culqui si existe un token actual-registro de comtra current
+            $id_productos = explode('-',$this->input->post('id_productos'));
+            $cantidades   = explode('-',$this->input->post('cantidades'));
+            $subtotales   = explode('-',$this->input->post('subtotales'));
+            date_default_timezone_set('UTC');
+            $data =[ 
+                         'id_cliente' => $this->input->post('id_cliente'),
+                         'codigo'   => $this->input->post('codigo_venta'),
+                         'nombres'   => $this->input->post('nombres'),
+                         'apellidos' => $this->input->post('apellidos'),
+                         'correo'    => $this->input->post('correo'),
+                         'telefono'    => $this->input->post('telefono'),
+                         'tipo_documento'=> $this->input->post('tipo_documento'),
+                         'numero_documento'=> $this->input->post('numero_documento'),
+                         'provincia'=> $this->input->post('provincia'),
+                         'distrito'=> $this->input->post('distrito'),
+                         'dir_envio'=> $this->input->post('d_envio'),
+                         'referencia'=> $this->input->post('referencia'),
+                         'cupon_codigo'=> $this->input->post('cupon_codigo'),
+                         'cupon_descuento'=> $this->input->post('cupon_descuento'),
+                         'entrega_precio'=> floatval($this->input->post('entrega_precio')),
+                         'productos_precio'=> floatval($this->input->post('subtotal')),
+                         'pedido_fecha'=> date("m.d.y"),
+                         'pedido_estado'=> 1 ,
+                    
+            ];
+            if($this->input->post('dest_nombres')) {
+                $data["dest_nombres"]    = $this->input->post('dest_nombres');
+                $data["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                $data["dest_telefono"]   = $this->input->post('dest_telefono');
+                $data["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
+                $data["dest_number_doc"] = $this->input->post('dest_number_doc');
+              };
+            $id_pedido = $this->savePedido($data);
+            if($id_pedido) {
+                for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
+                    $datos = [
+                        'id_pedido'   => (int)$id_pedido,
+                        'id_producto' => (int)$id_productos[$i],
+                        'cantidad'    => (int)$cantidades[$i],
+                        'subtotal_precio' => $subtotales[$i],
+                    ];
+                    $response = $this->dbInsert('pedido_detalle',$datos);
+                    
+                    if($response){
+                        $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
+                        $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
+                        $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
+                        
+                    }else{
+                        $this->resp = [
+                            'message' => 'error al guardar dato de pedido detalle'
+                        ];
+                        $this->output
+                         ->set_content_type('application/json')
+                         ->set_status_header(404)
+                         ->set_output(json_encode($this->resp));
+                         return;
+                    }
+                };
+                $this->resp = [
+                    'status'  => true,
+                    'code'    => 201 ,
+                    'message' => 'venta registrada',
+                    'data'    => [
+                        'pedido'       => 'created payment register !!',
+                        'codigo_pedido' => $id_pedido,
+                        'state_pedido' => 1
+                    ]
+                ];
+                $this->output
+                         ->set_content_type('application/json')
+                         ->set_status_header(200)
+                         ->set_output(json_encode($this->resp));
+                         return;
+            }else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 500 ,
+                    'message' => 'Hubo problemas al almacenar los datos.',
+                    'data'    => [
+                        'pedido'       => false,
+                        'state_pedido' => 0
+                    ]
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(500)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+            
+            
+          }else {
+            $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+          }
+    }
+
+      public function getPedido()
+      {
+          $resp = [
+              'status'  => false,
+              'code'    => 404,
+              'message' => 'Metodo POST requerido',
+          ];
+          if ($this->input->server('REQUEST_METHOD') == 'POST') {
+  
+              $id_pedido = $this->input->post('id_pedido');
+              $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
+
+              if ($pedido) {
+                  $data = [];
+                  $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
+
+                  for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
+                      $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
+                      $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
+                      
+                      $productoDB = [
+                          'nombre' => $prod['titulo'],
+                          'precio' => $prod['precio'],
+                          'imagen' => $imagenes[0]['imagen'],
+                          'precio_online' => $prod['precio_anterior'],
+                          'producto_sku' => $prod['producto_sku'],
+                          'cantidad' => $pedido_detalle[$i]['cantidad'],
+                          'subtotal' => $pedido_detalle[$i]['subtotal_precio']
+                      ];
+                      array_push($data ,$productoDB);
+                  };
+
+                  $resp = [
+                      'status'  => true,
+                      'code'    => 200,
+                      'data'    => [
+                          'pedido'   => $pedido,
+                          'detalle'  => $data
+                      ]
+                  ];
+                  
+                  $this->output
+                      ->set_content_type('application/json')
+                      ->set_status_header(200)
+                      ->set_output(json_encode($resp));
+                  return;
+              } else {
+                  $resp = [
+                      'status'  => true,
+                      'code'    => 404,
+                      'message' => 'Ocurrio un error en el Core',
+                  ];
+                  $this->output
+                      ->set_content_type('application/json')
+                      ->set_status_header(404)
+                      ->set_output(json_encode($resp));
+                  return;
+              }
+          }
+          $this->output
+              ->set_content_type('application/json')
+              ->set_status_header(404)
+              ->set_output(json_encode($resp));
+      }
+ 
 }

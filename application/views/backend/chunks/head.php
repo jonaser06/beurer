@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="mgr/bower_components/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="mgr/bower_components/Ionicons/css/ionicons.min.css">
+<!-- daterange picker -->
+<link rel="stylesheet" href="mgr/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="mgr/dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="mgr/dist/css/skins/skin-blue.min.css">

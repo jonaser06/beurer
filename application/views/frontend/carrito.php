@@ -56,7 +56,8 @@
                     <div class="carrito-container"></div>
 
                 </div>  
-
+                
+                <?php if ( !$sesion ): ?>
                 <div style="float:left;width:100%; text-align:left;color:black;background-color:white; padding:.5rem 2rem;border-radius:25px;">
                     <div class="row">
                         <div class="titulo font-nexaheavy" style="margin-top:2%;margin-left:2%;padding-left:1% !important;border-left:2px solid #c51152;">
@@ -68,7 +69,7 @@
                             <span class="font-light">¿Eres nuevo? Regístrate aquí y compra ahora. </span>
                             <br><br>
                             <span>
-                                <a class="btn btn-cmn" href="producto.php" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
+                                <a class="btn btn-cmn" onclick="ObjMain.register_cart(event);" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
                             </span>
 
                         </div>
@@ -81,7 +82,7 @@
                             </span>
                             <br><br><br>
                             <span>
-                                <a class="btn btn-cmn" href="producto.php" style="width:80%;padding:7px 0px;font-size:1em;">
+                                <a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" style="width:80%;padding:7px 0px;font-size:1em;">
                                     CONTINUAR SIN REGISTRARSE
                                 </a>
                             </span>
@@ -90,26 +91,26 @@
                             <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Inicia sesión
                             </div>
                             <span class="font-light">Inicia sesión para caja rápida. </span>
-                            <form class="login-container" style="padding:12px 0px;" action="panel-usuario.php">
+                            <form class="login-container lcc" style="padding:12px 0px;font-size: 1.2em !important;">
                                 <p class="font-light" style="line-height:0px;">Correo Electrónico</p>
-                                <p><input type="email" style="width:85% !important"></p>
+                                <p><input type="email" id="username__" style="width:85% !important"></p>
                                 <p class="font-light" style="line-height:0px;">Contraseña</p>
-                                <p><input type="password" style="width:85% !important"></p>
-
-
+                                <p><input type="password" id="pasword__" style="width:85% !important"></p>
                                 <p class="font-light"><a href="#">¿Has olvidado la contraseña?</a></p>
                                 <br>
-                                <span><a class="btn btn-cmn" href="producto.php" style="width:80%;padding:7px 0px;font-size:1em;">
-                                    INICIAR SESIÓN Y COMPRAR</a></span>
+                                <input class="btn btn-cmn" type="submit" value="INICIAR SESIÓN Y COMPRAR" style="width:80% !important;;padding:7px 0px;font-size:1em !important; height: 35px; line-height: 23px;">                                
                             </form>
 
                         </div>
                     </div>
                 </div>
+                <?php endif; ?>
+                
             </div>
         </main2>
 
-        <div class="aside" style="border-radius:3%;">
+        <div class="aside" style="display: inline-block;text-align: left;padding-left: 4%;">
+            <?php if ( $sesion ): ?>
             <div style="text-align:center;">
                 <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
                     <label class="font-light label-pol" style="display:inline;">
@@ -120,13 +121,21 @@
             </div>
 
             <div id="d_envio" style="display:none;text-align:center; ">
-                <div class="tituloTabla1" style="text-align:center;">Departamento</div>
+                <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
+                    <label class="font-light label-pol" style="display:inline;">
+                        <input type="checkbox" id="check_factura" onclick="ObjMain.factura()" /><i class="helper"></i>
+                    </label>
+                    <div style="display:inline-block; font-size:1.55em;font-family:'nexaheavyuploaded_file';">Deseo una factura</div>
+                </div>
+                <!-- <div class="tituloTabla1" style="text-align:center;">Departamento</div>
                 <select id="s_depa" style="width:55%;font-size:16px !important;" onchange="ObjMain.showProvincesList(this);"></select>
                 <div class="tituloTabla1" style="text-align:center;">Provincia</div>
                 <select id="sprov" style="width:55%;font-size:16px !important;" onchange="ObjMain.showDistrictsList(this);"></select>
                 <div class="tituloTabla1" style="text-align:center;">Distrito</div>
-                <select id="sdist" style="width:55%;font-size:16px !important;"></select>
+                <select id="sdist" style="width:55%;font-size:16px !important;"></select> -->
             </div>
+            <?php endif; ?>
+
             <hr>
 
             <div>
@@ -142,9 +151,10 @@
                     </div>
                     <div class="head-cupon">Ingrese aquí su cupón de descuento</div>
                     <div class="input-cupon" style="display:flex;">
-                        <input type="text" placeholder="Ej. 6W79H6" style="border: 1px solid black;font-size:1.4em !important;" maxlength="12">
-                        <a href="#" class="cup-btn">CANJEAR</a>
+                        <input class="cod-cupon" utype="text" placeholder="Ej. 6W79H6" style="width: 58%; border: 1px solid black;" maxlength="12">
+                        <a href="#" onclick="ObjMain.cupon(event);" class="cup-btn">CANJEAR</a>
                     </div>
+                    <div class="res-cup"></div>
                     <div class="footer-resumen">
                         <div class="item-resumen">
                             <div class="n-ind"></div>
@@ -169,7 +179,10 @@
                     </div>
                 </div>
             </div>
-            <span><a class="btn btn-cmn" href="producto.php" tabindex="2">Seguir comprando</a></span>
+            <span><a class="btn btn-cmn" href="<?php echo base_url(); ?>" tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
+            <?php if ( $sesion ): ?>
+            <span><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;">Comprar</a></span>
+            <?php endif; ?>
             <br>
 
         </div>

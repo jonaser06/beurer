@@ -177,7 +177,7 @@ class Subcategorias extends CI_Controller {
 
 	public function save(){
 		$subcatid = $this->input->post('subcatid');
-
+		
 		if(empty($subcatid)){
 			$data = array(
 			        'idpagina' => $this->input->post('categoria'),

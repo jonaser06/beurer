@@ -305,6 +305,7 @@
 
 </style> -->
 <script>
+    
     // Configura tu llave pública
     Culqi.publicKey = 'Aquí inserta tu llave pública';
     // Configura tu Culqi Checkout

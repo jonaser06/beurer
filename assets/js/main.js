@@ -3,13 +3,21 @@
 *  ObjMain.ajax_post : objeto para peticiones ajax
 *
 *  ObjMain.getDataCarrito()    : retorna un obj con  los datos del carrito
+
+*      ObjMain.caclEnvio( float :vol ,float : peso ) 
+****    vol : volumen total del carrito 
+****    peso : peso total del carrito
+****    return : RETORNA UN OBJETO con el coste_envio como attr
+* ObjMain.stateProgress( param )   @param : int (1 || 2 || 3 ||4)  dependiendo del estado / pinta la barra de porcentaje
+*
 */
+
 var ubigeoPeru = {
 	ubigeos: new Array()
 };
 let DOMAIN;
 let filterResult = false;
-
+let intento = 1;
 
 ObjMain = {
     init: ()=>{
@@ -20,9 +28,26 @@ ObjMain = {
         if(window.location.href== ( DOMAIN+'registro' ) ){
             console.log('Pagina de registro');
             ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
+        }
+        if(window.location.href == ( `${DOMAIN}facturacion` ) ){
+            localStorage.removeItem('Destinatario')
+            localStorage.removeItem('facturacion')
+            ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
+        }
+        if(window.location.href == ( `${DOMAIN}reclamos` ) ){
+            ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
+        }   
+        if(window.location.href == ( `${DOMAIN}send-payment` ) ){
+            ObjMain.showDataSales();
         }
         if(document.querySelector('.login') != null){
             ObjMain.sign_in();
+        }
+        if(document.querySelector('.lcc') != null){
+            ObjMain.sign_in_cart();
         }
         if(document.querySelector('.email-recovery') != null){
             ObjMain.recovery();
@@ -40,18 +65,171 @@ ObjMain = {
         if(document.querySelector('#container10') != null){
             ObjMain.overload();
         }
-        if(document.querySelector('#checkout_crumb') != null){
+         if (window.location.href == ( `${DOMAIN}carrito` )){
             ObjMain.listar_items(); 
         }
+         if (window.location.href == ( `${DOMAIN}order-summary` )){
+             ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
+             console.log('****resumen pedido *******')
+        }
+    },
+    reclamos: (e) =>{
+        e.preventDefault();
+        let r_tipo_doc = document.querySelector('#s_tipodoc').value;
+        let r_n_doc    = document.querySelector('#r_n_doc').value;
+        let r_nombr    = document.querySelector('#r_nombr').value;
+        let r_apat     = document.querySelector('#r_apat').value;
+        let r_amat     = document.querySelector('#r_amat').value;
+        let r_telef    = document.querySelector('#r_telef').value;
+        let r_correo   = document.querySelector('#r_correo').value;
+        let r_depa     = document.querySelector('#s_depa').value;
+        let r_prov     = document.querySelector('#sprov').value;
+        let r_dist     = document.querySelector('#sdist').value;
+        let r_direc    = document.querySelector('#r_direc').value;
+        let r_menor    = (document.querySelector('#menor_edad').checked)? 1 : 0 ;
+        let r_apd_nombr = document.querySelector('#r_apd_nombr').value;
+        let r_apd_tip  = document.querySelector('#r_apd_tip').value;
+        let r_apd_doc  = document.querySelector('#r_apd_doc').value;
+        let r_apd_telf = document.querySelector('#r_apd_telf').value;
+        let r_apd_corr = document.querySelector('#r_apd_corr').value;
+
+        let r_tipo_bn
+        let radios = document.getElementsByName('r_tipo_bn');
+        for (var i = 0, length = radios.length; i < length; i++) {
+            r_tipo_bn = (radios[i].checked)?radios[i].value:'servicio';
+            break;
+        }
+
+        let r_mont     = document.querySelector('#r_mont').value;
+        let r_descr    = document.querySelector('#r_descr').value;
+
+        let r_tip_rec
+        let radios2 = document.getElementsByName('r_tip_rec');
+        for (var i = 0, length = radios2.length; i < length; i++) {
+            r_tip_rec = (radios2[i].checked)?radios2[i].value:'reclamo';
+            break;
+        }
+
+        let r_rec_desc = document.querySelector('#r_rec_desc').value;
+        let r_rec_pedi = document.querySelector('#r_rec_pedi').value;
+
+        if(r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_menor != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != ''){
+
+            let formData = new FormData();
+                formData.append('r_tipo_doc', r_tipo_doc);
+                formData.append('r_n_doc', r_n_doc);
+                formData.append('r_nombr', r_nombr);
+                formData.append('r_apat', r_apat);
+                formData.append('r_amat', r_amat);
+                formData.append('r_telef', r_telef);
+                formData.append('r_correo', r_correo);
+                formData.append('r_depa', r_depa);
+                formData.append('r_prov', r_prov);
+                formData.append('r_dist', r_dist);
+                formData.append('r_direc', r_direc);
+                formData.append('r_menor', r_menor);
+                formData.append('r_apd_nombr', r_apd_nombr);
+                formData.append('r_apd_tip', r_apd_tip);
+                formData.append('r_apd_doc', r_apd_doc);
+                formData.append('r_apd_telf', r_apd_telf);
+                formData.append('r_apd_corr', r_apd_corr);
+                formData.append('r_tipo_bn', r_tipo_bn);
+                formData.append('r_mont', r_mont);
+                formData.append('r_descr', r_descr);
+                formData.append('r_tip_rec', r_tip_rec);
+                formData.append('r_rec_desc', r_rec_desc);
+                formData.append('r_rec_pedi', r_rec_pedi);
+
+                ObjMain.ajax_post('POST',DOMAIN+'ajax/setreclamo', formData)
+                .then((resp)=>{
+                    resp = JSON.parse(resp);
+                    if(resp.status){
+                        Swal.fire({
+                            icon: 'success' ,
+                            title: 'Enviado correctamente',
+                            text: 'Su reclamo se envio correctamente',
+                        })
+                        setTimeout(() => {
+                            window.location = DOMAIN;
+                        }, 1000);
+                    }
+                })
+                .catch((err)=>{
+                    err = JSON.parse(err);
+                    ObjMain.alert_form(false,err.message);
+                });
+
+        }else{
+            return ObjMain.alert_form(false,'Rellene todo los campos!');
+        }
+
+        
+    },
+    register_cart: (e)=>{
+        e.preventDefault();
+        let url = window.location.href;
+        localStorage.setItem('reg-redir', url);
+        window.location = DOMAIN+'registro';
     },
     recalculo: (item) =>{
-        let cost = 0 ;
+        let sub = 0 ;
+        let vol = 0;
+        let weight = 0;
+        /* table vol */
+        let vol_big = parseFloat(120.20);
+        let vol_small = parseFloat(90.50);
+        /* table weight */
+        let weight_big = parseFloat(50.00);
+        let weight_small = parseFloat(30.00);
+
         item.forEach((p,index)=>{
-            let subt = parseFloat(p.precio_online) * parseInt(p.cantidad);
-            cost = cost + subt;
+            /* precioproducto x cantidad */
+            let ppxc = parseFloat(p.precio_online) * parseInt(p.cantidad);
+            sub = sub + ppxc;
+            /* volumen x cantidad */
+            let vxc = parseFloat(p.volumen) * parseInt(p.cantidad);
+            vol = vol + vxc;
+            /* peso x cantidad */
+            let pxc = parseFloat(p.peso) * parseInt(p.cantidad);
+            weight = weight + pxc;
         });
-        document.querySelector('.sub_cost').innerHTML = (cost).toFixed(2);
-        console.log('Total: '+cost);
+        document.querySelector('.sub_cost').innerHTML = (sub).toFixed(2);
+        const {...resp }  = ObjMain.calcEnvio(vol,weight)
+        
+        localStorage.setItem('subtotal' , sub );
+        localStorage.setItem('volumen_total' , vol );
+        localStorage.setItem('peso_total' , weight );
+        localStorage.setItem('costo_envio' , resp.total_coste );
+        document.querySelector('.cost_shipped').textContent = parseFloat(resp.total_coste).toFixed(2)
+        localStorage.removeItem('descuento')
+        localStorage.removeItem('tipo')
+        localStorage.removeItem('cupon_codigo')
+        ObjMain.costo_total();
+
+    },
+    costo_total: () => {
+        let total = 0; 
+        const sub   = localStorage.getItem('subtotal')? parseFloat(localStorage.getItem('subtotal')): 0;
+        const envio = localStorage.getItem('costo_envio') ?  parseFloat(localStorage.getItem('costo_envio')) : 0;
+        let desc    = localStorage.getItem('descuento') ? parseFloat( localStorage.getItem('descuento')) : 0;
+        const tipo  = localStorage.getItem('tipo')?parseInt(localStorage.getItem('tipo')):null;
+
+        // const cupon = localStorage.getItem('cupon') ? localStorage.getItem('cupon') : 0 ;
+        if(tipo == 1){
+            total = sub * (desc/100 )
+            
+        }
+        if(tipo == 2) {
+            total = sub;
+            total = total - desc;
+        } 
+        if( tipo == null){
+            total = sub
+        }
+        console.log(total , envio)
+        let costo_total = total + envio 
+        document.querySelector('.total_cost').textContent = costo_total.toFixed(2);
+        
     },
     listar_items: () => {
         let item = localStorage.getItem('productos');
@@ -100,7 +278,7 @@ ObjMain = {
             item += '</div>';
             item += '<div class="quantity">';
             item += '<button class="count-cant" onclick="ObjMain.menos('+id+');">-</button>';
-            item += '<input class="form-control-field cantidad cant-'+id+'" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
+            item += '<input class="form-control-field cantidad cant-'+id+' cantidad_prod" name="pwd" value="'+parseInt(cant)+'" type="text" min="1" readonly>';
             item += '<button class="count-cant" onclick="ObjMain.mas('+id+');">+</button>';
             item += '</div>';
             item += '<div class="subtotal rsubtotal sub-'+id+'" id="subtotal">'+subtotal+'</div>';
@@ -114,15 +292,20 @@ ObjMain = {
         d_envio = document.getElementById("d_envio");
         var checkBo = document.getElementById("check_envio");
         if (checkBo.checked == true) {
-
             d_envio.style.display = "block";
-            ObjMain.load_ubigeo();
-
-
+            // ObjMain.load_ubigeo();
+            localStorage.setItem('domicilio', true);
         } else {
-
             d_envio.style.display = "none";
-
+            localStorage.removeItem('domicilio');
+        }
+    },
+    factura: () =>{
+        var fact = document.getElementById("check_factura");
+        if (fact.checked == true) {
+            localStorage.setItem('factura', true);
+        } else {
+            localStorage.removeItem('factura');
         }
     },
     delete: (event)=>{
@@ -152,7 +335,8 @@ ObjMain = {
 
     },
     mas:(id)=>{
-        if(parseInt(document.querySelector('.cant-'+id).value) < 10){ 
+       
+        if(parseInt(document.querySelector('.cant-'+id).value) < 6){ 
             let cantidad = parseInt(document.querySelector('.cant-'+id).value);
             let ncantidad = cantidad + 1; 
             let precio   = parseFloat(document.querySelector('.precio-'+id).value).toFixed(2);
@@ -295,12 +479,15 @@ ObjMain = {
     updateAccount : (id) => {
         const $btnSave = document.querySelector('.saveUser')
         let formData = new FormData();
-        const apellidos = document.querySelector('#c_apep1').value.trim().split(' ');
-        const politicas = (document.querySelector('#politicas').checked )? 1 : 0 ;
-        const correo    = document.querySelector('#c_correo1').value ;
-        let tipo = document.querySelector('#s_tipodoc').value;
-        let direccion= document.querySelector('#locationUser').value;
-
+        const apellido_paterno = document.querySelector('#c_apep1').value.trim();
+        const apellido_materno = document.querySelector('#c_apem1').value.trim();
+        const politicas        = (document.querySelector('#politicas').checked )? 1 : 0 ;
+        const correo           = document.querySelector('#c_correo1').value ;
+        let tipo               = document.querySelector('#s_tipodoc').value;
+        let direccion          = document.querySelector('#locationUser').value; 
+        let dist               = document.getElementById('sdist');
+        dist = dist.options[dist.selectedIndex].getAttribute('data-name');
+        ref = document.getElementById('referencia').value;
         
         if (!politicas ) {
             $btnSave.dataset.content = 'x Acepte las Politicas';
@@ -308,14 +495,16 @@ ObjMain = {
             return;
         }
         formData.append("nombre", document.querySelector('#c_nombres1').value);
-        formData.append("apellido_paterno", apellidos[0]);
-        formData.append("apellido_materno", apellidos[1]);
+        formData.append("apellido_paterno", apellido_paterno);
+        formData.append("apellido_materno", apellido_materno);
         formData.append("correo", correo);
         formData.append("telefono", document.querySelector('#c_telcel').value);
         formData.append("tipo_documento",tipo  );
         formData.append("documento",  document.querySelector('#campo1').value);
         formData.append("politicas",politicas) ;
+        formData.append("distrito",dist) ;
         formData.append("direccion",direccion) ;
+        formData.append("referencia",ref) ;
         formData.append("ofertas",(document.querySelector('#publicidad').checked )? 1 : 0  );
 
         ObjMain.ajax_post('POST',`${DOMAIN}myaccount/update/${id}`, formData)
@@ -379,6 +568,30 @@ ObjMain = {
                 });
             });
         }
+    },
+    sign_in_cart: () =>{
+        document.querySelector('.lcc').addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let user = document.querySelector("#username__").value;
+            let pass = document.querySelector("#pasword__").value;
+            
+            let formData = new FormData();
+            formData.append("username", user);
+            formData.append("contrasena", pass);
+            ObjMain.ajax_post('POST',DOMAIN+'ajax/login', formData )
+            .then((resp)=>{
+                resp = JSON.parse(resp);
+                if(resp.status){
+                    window.location = DOMAIN+'carrito';
+                }
+            })
+            .catch((err)=>{
+                err = JSON.parse(err);
+                let message = document.querySelector(".response_sesion");
+                message.innerHTML = err.message;
+
+            });
+        });
     },
     login: ()=>{
         let ventanalogin = document.getElementsByClassName("login")[0];
@@ -524,7 +737,20 @@ ObjMain = {
                         ObjMain.ajax_post('POST',DOMAIN+'ajax/setregister', formData)
                         .then((resp)=>{
                             resp = JSON.parse(resp);
-                            window.location = DOMAIN;
+
+                            /* login */
+                            let formData2 = new FormData();
+                            formData2.append("username", correo);
+                            formData2.append("contrasena", pass1);
+                            ObjMain.ajax_post('POST',DOMAIN+'ajax/login', formData2 ).then((resp)=>{});
+
+                            let redirect = localStorage.getItem('reg-redir');
+                            if(redirect){
+                                localStorage.removeItem('reg-redir');
+                                window.location = redirect;
+                            }else{
+                                window.location = DOMAIN;
+                            }
                         })
                         .catch((err)=>{
                             err = JSON.parse(err);
@@ -583,8 +809,11 @@ ObjMain = {
             if(event.target.matches(btnAdd)){
                 const $addCarrito = document.querySelector(btnCarrito);
                 const $cantidad = document.querySelector(nodeQuanty)
-                $cantidad.value = parseInt($cantidad.value) + 1
-                $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+                if(parseInt($cantidad.value) < 6 ) {
+                    $cantidad.value = parseInt($cantidad.value) + 1
+                    $addCarrito.setAttribute('data-cantidad',$cantidad.value);
+                }
+              
 
                 
             }
@@ -671,6 +900,7 @@ ObjMain = {
     },
     updatePass: () =>  {
         const $pass= document.querySelector('.updatePass');
+        const $new_pass= document.querySelector('#newPass');
         const $containerPass = document.querySelector('.passContainer');
         const $repeat = document.querySelector('.repeat');
         if($pass) {
@@ -691,6 +921,7 @@ ObjMain = {
                         document.documentElement.style.setProperty('--colorResponse',`${resp.code == 404 ? '#C51152': 'green'} `);
                         $form.reset()
                         $repeat.dataset.content = ''
+                        $new_pass.parentElement.dataset.content = ''
                     })
                     .catch((err)=>{
                         err = JSON.parse(err);
@@ -718,11 +949,11 @@ ObjMain = {
 
                 if($currentPass.value.length > limit ) {
                     $parent.dataset.content = '√ constraseña segura';
-                    document.documentElement.style.setProperty('--colorResponse','green');
+                    document.documentElement.style.setProperty('--colorFilter','green');
                     return
                 }else {
                     $parent.dataset.content = 'constraseña muy corta';
-                    document.documentElement.style.setProperty('--colorResponse','blue');
+                    document.documentElement.style.setProperty('--colorFilter','blue');
                     return
                 }
             })
@@ -741,8 +972,333 @@ ObjMain = {
                })
            })
         }
-    }
+    },
+    taps: () => {
+        let tabs = Array.prototype.slice.apply(document.querySelectorAll('.tap'));
+        let panels = Array.prototype.slice.apply(document.querySelectorAll('.panel'));
+        document.getElementById('taps').addEventListener('click', (e) => {
+            if (e.target.tagName == 'LI') {
+                let i = tabs.indexOf(e.target);
+                tabs.map(tab => tab.classList.remove('active'));
+                tabs[i].classList.add('active');
 
+                panels.map(panel => panel.classList.remove('active'));
+                panels[i].classList.add('active');
+            }
+        });
+    },
+    dataFacturacion : () => {
+        return {
+            comprador : JSON.parse(localStorage.getItem('comprador')),
+            factura : localStorage.getItem('factura')? JSON.parse(localStorage.getItem('factura')):'no solicito factura',
+            destinatario : localStorage.getItem('destinatario')?JSON.parse(localStorage.getItem('destinatario')):'el destinatario es unico',
+        }
+    },
+    defaultUbigeo : () => {
+        setTimeout(function () {
+            
+            document.querySelectorAll('#s_depa > option').forEach(depa => {
+              if( depa.textContent == 'Lima' ){
+                depa.setAttribute('selected','selected');
+                document.querySelector('#s_depa').disabled = true;
+            } 
+             });
+             $('#s_depa').trigger('change')
+
+            document.querySelectorAll('#sprov > option').forEach(prov => {
+                if( prov.textContent == 'Lima' ){
+                    prov.setAttribute('selected','selected');
+                    document.querySelector('#sprov').disabled = true;
+                }
+            });
+            
+            $('#sprov').trigger('change')
+            
+            const nodeParent =  document.querySelectorAll('#sdist > option')[0].parentNode;
+            const childNode  =  document.createElement('option')
+            childNode.textContent= 'SELECCIONE DISTRITO';
+            childNode.setAttribute('selected','selected')
+            nodeParent.insertBefore(childNode ,document.querySelectorAll('#sdist > option')[0]);
+            if(window.location.href == ( `${DOMAIN}myaccount` ) ||window.location.href == ( `${DOMAIN}facturacion` )){
+                    if(userData.distrito) {
+                        ObjMain.selectedDistrict(userData.distrito);
+                    }
+            }
+           } ,200)
+          
+    },
+    selectedDistrict : district => {
+        $selectDist = document.querySelector("#sdist");
+        $distritos  = document.querySelectorAll('#sdist > option');
+        $distritos.forEach( dist => dist.textContent == district ? dist.setAttribute('selected','selected') : '')
+        
+    },
+    cupon: (event) => {
+        
+        event.preventDefault();
+        const $inputCupon = document.querySelector('.cup-btn');
+        const $resCupon = document.querySelector('.res-cup');
+        if(true){
+            const $cupon = document.querySelector('.cod-cupon');
+            const $descuento = document.querySelector('.descont_cost');
+            const $sub = parseFloat(document.querySelector('.sub_cost').textContent); // tomando en duro
+            const $total = document.querySelector('.total_cost');
+            const formData = new FormData();
+            
+            formData.append('codigo' ,$cupon.value);
+            ObjMain.ajax_post('POST', 'ajax/cupon' , formData)
+            .then( res => {
+                res = JSON.parse(res);
+                if(res.status){
+                    intento++;
+                    let tipo = parseInt(res.data.tipon_cupon);
+                    let desc;
+                    let total; 
+                    localStorage.setItem('tipo' , tipo );
+                    localStorage.setItem('descuento' ,res.data.descuento );
+                    $descuento.textContent = tipo == 1 ? `${res.data.descuento} %`:`${res.data.descuento}`
+                    $resCupon.style.color = 'green';
+                    $resCupon.textContent = res.message;
+                    localStorage.setItem('cupon_codigo',res.data.codigo)
+                    
+                }else {
+                    $resCupon.textContent = res.message;
+                    $resCupon.style.color = '#C51152';
+                    $cupon.value ="";
+                }
+                ObjMain.costo_total();
+            
+            })
+            .catch((err)=>{
+                console.log(err)
+            
+            });
+        }
+    },
+    calcEnvio :( vol, peso ) => {
+        const peso_small = 30 ;
+        const peso_big   = 60 ;
+        const vol_small  = 240 ;
+        const vol_big    = 480;
+        const paq_small = 10;
+        const paq_big = 20;
+        if( vol == 0 || peso == 0) {
+            return {
+                total_coste : 0
+            }
+        }
+        // if(peso < peso_small && vol < vol_small ) {
+        //     return {
+        //         paquete_small : 1,
+        //         total_coste : paq_small
+        //     }
+        // }
+        // if((peso > peso_small && peso < peso_big) && (vol > vol_small && vol < vol_big ) ) {
+        //     return {
+        //         paquete_big : 1,
+        //         total_coste : paq_big
+        //     }
+        // }
+        // if( peso > peso_big && vol > vol_big ) {
+        //     const resPeso = peso % peso_big ;
+        //     let caja_small = 0;
+        //     let caja = parseInt(peso / peso_big); 
+        //     resPeso < peso_small ? caja_small++ : caja++ 
+        //     return  {
+        //         paquete_big : caja,
+        //         paquete_small : caja_small,
+        //         coste_small : caja_small * paq_small,
+        //         coste_big : caja * paq_big,
+        //         total_coste : caja_small * paq_small + caja * paq_big,
+        //     }
+        // }
+        return  {
+                    paquete_big : 1,
+                    paquete_small : 1,
+                    coste_small : 0,
+                    coste_big : 20,
+                    total_coste : 10
+                }
+    },
+    getDataSales :(sesion) => { 
+        const comprador    =  localStorage.getItem('Comprador')? JSON.parse(localStorage.getItem('Comprador')) : null
+        const destinatario = localStorage.getItem('Destinatario')? JSON.parse(localStorage.getItem('Destinatario')) : null 
+        const factura      =  localStorage.getItem('facturacion')? JSON.parse(localStorage.getItem('facturacion')) : null
+        const productos   =  localStorage.getItem('productos')? JSON.parse(localStorage.getItem('productos')) : null
+        return !sesion 
+        ? { comprador,
+            destinatario,
+            factura,
+            productos,
+        } 
+        : {
+            comprador,
+            destinatario,
+            factura,
+            productos
+        }
+    },
+    showDataSales  : () => {
+
+        const session       = parseInt(document.querySelector('.dataUser').dataset.id);
+        const objSales      =  ObjMain.getDataSales(session);
+        const peso_total    = localStorage.getItem('peso_total') ? localStorage.getItem('peso_total') : 0
+        const tipo_cupon    = localStorage.getItem('tipo') ? parseInt(localStorage.getItem('tipo')) : null
+        const descuento     = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
+        const cupon         = localStorage.getItem('descuento') ? true : false
+        const volumen_total = localStorage.getItem('volumen_total') ? localStorage.getItem('volumen_total') : 0 
+        const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
+        const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
+        const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
+        let containerProd   = document.querySelector('.table-products');
+        let envio_pago      = document.querySelector('#envio_pago');
+        let $cupon          = document.querySelector('#cupon_descuento');
+        let subtotal_pago   = document.querySelector('#subtotal_pago');
+        let total_pago      = document.querySelector('#total_pago');
+        let total_payment = 0;
+        let productos = []
+
+        if(localStorage.getItem('productos')) {
+             productos = JSON.parse(localStorage.getItem('productos'))
+             productos.forEach( (prod ,index ) => {
+                 let $tr = document.createElement('tr');
+                 let childOne = document.createElement('td')
+                 childOne.setAttribute('scope','row')
+                 
+                 let childTwo = document.createElement('td')
+                 childTwo.style.textAlign = 'left';
+                 
+                 let childThree = document.createElement('td')
+                 childThree.classList.add('subtotalr')
+                 childThree.style.textAlign = 'right'
+
+                 $tr.appendChild(childOne).innerHTML = `${index + 1 }`
+                 $tr.appendChild(childTwo).textContent = `${prod.title}`;
+                 $tr.appendChild(childThree).textContent = `${parseFloat(prod.precio_online * prod.cantidad).toFixed(2)}`
+                 containerProd.appendChild($tr)
+             })
+        }
+        let dataUser = objSales.comprador;
+        // if(session) {
+        //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
+        //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
+        // }else {
+        //     dataUser = objSales.destinatario
+        // }
+        
+        document.querySelector('.dataComprador').innerHTML = `
+                        <div>LIMA LIMA </div>
+                        <div>${dataUser.distrito} </div>
+                        <div> ${dataUser.d_envio} - Lima </div>
+                        <div>Volumen total de la carga: ${volumen_total} m3 </div>
+                        <div>Peso total de la carga: ${peso_total} kg </div>
+                        <br><br>
+
+                        <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">COMPRA A NOMBRE DE </li>
+                        <div>${dataUser.tipo_doc}: ${dataUser.number_doc }</div>
+                        <div>${dataUser.nombres} ${dataUser.apellido_paterno } ${dataUser.apellido_materno} </div>
+                        <br> <br>
+
+                        <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">RESUMEN DEL PEDIDO</li>
+                        <div>Cantidad de productos: ${cantidad} </div>
+                        <div>Importe Sub Total: S/ ${parseFloat(subtotal).toFixed(2)} 
+                        </div>
+                        <p style="font-weight:600;font-size:1.2em;margin-top:15px">Su pedido llegará en 4 dias días. </p>
+
+                        `;
+        if(cupon) {
+            document.querySelector('.tr_cupon').style.display = 'table-row';
+            if(tipo_cupon == 1 ) {
+                $cupon.textContent  = `${parseFloat(descuento).toFixed(2)} %`
+                total_payment = `${( (parseFloat(subtotal)* descuento/100) + parseFloat(envio)).toFixed(2)} `
+            }
+            if(tipo_cupon == 2) {
+                $cupon.textContent  = `- ${parseFloat(descuento).toFixed(2)}`
+                total_payment = `${(parseFloat(envio) + parseFloat(subtotal)- descuento).toFixed(2)  }`
+            }
+        }else{
+            total_payment = `${(parseFloat(envio) + parseFloat(subtotal)).toFixed(2)} `;
+        }
+
+        subtotal_pago.textContent = `${parseFloat(subtotal).toFixed(2)}` ;
+        envio_pago.textContent    = `${parseFloat(envio).toFixed(2)}`
+        total_pago.textContent    = total_payment;
+        
+    },
+    resumePedido : (id) => {
+        const formData = new FormData();
+        formData.append('id_pedido',id);
+        ObjMain.ajax_post('POST',`${DOMAIN}ajax/getPedido`,formData)
+        .then( pedido => {
+            pedido = JSON.parse(pedido)
+            const productosResume  = pedido.data.detalle
+            const {...infoResume }  = pedido.data.pedido
+            console.log(infoResume)
+            ObjMain.resumeInfoView(infoResume)
+            ObjMain.resumeProductsView(productosResume)
+        })
+        .catch( err =>{
+            err = JSON.parse(err);
+            
+        });
+    },
+    resumeInfoView : data => {
+
+        document.querySelector('.titular').textContent  = `${data.nombres} ${data.apellidos}`
+        document.querySelector('.dir_envio').textContent= `${data.dir_envio}`
+        document.querySelector('.provincia').textContent= `${data.provincia.toUpperCase()} LIMA`
+        document.querySelector('.distrito').textContent  = `${data.distrito.toUpperCase()}`
+        document.querySelector('.numero_documento').textContent  = `${data.numero_documento}`
+        document.querySelector('.correo').textContent  = data.correo
+        document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
+        document.querySelector('.referencia').textContent  = data.referencia
+        document.querySelector('.codigo-venta').textContent  = data.codigo
+    },
+    resumeProductsView : productos => {
+        
+        const $containerResume = document.querySelector('.pedido-products');
+        productos.forEach( prod => {
+            $containerResume.innerHTML +=     
+            `<div class="basket-product" style="text-align:center;">
+                <div class="item">
+                    <a class="product-image"
+                    >
+                        <img src="${DOMAIN}${prod.imagen}" alt=""
+                            class="product-frame">
+                    </a>
+                    <div class="product-details">
+                        <span>${prod.nombre}</span>
+                        <p>SKU: ${prod.producto_sku}</p>
+                        <p>Envío a domicilio</p>
+                    </div>
+                </div>
+
+                <div class="price" id="preuni">
+                    <div class="info-prod" style="display:block;">
+                        <img src="assets/images/precio-online.png">
+                        <div class="font-nexaheav text-left price rprice"> ${parseFloat(prod.precio_online).toFixed(2)}</div>
+                    </div>
+                    <div class="font-nexaheav"
+                        style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
+                        Normal: S/ ${parseFloat(prod.precio).toFixed(2)}</div>
+                </div>
+
+                <div class="quantity">
+
+                    <input class="form-control-field cantidad" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                        min="1" readonly>
+                </div>
+                <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
+            </div>`
+        }) 
+    },
+    stateProgress : (estate) => {
+        const $statesNode = document.querySelectorAll('.progress-bar');
+        $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')
+        for (let index = 0; index < estate ; index++ ) {
+            $statesNode[index].style.backgroundColor = '#C51152';
+        }
+    }
 }
 
 
@@ -760,7 +1316,7 @@ class Carrito {
         const DomTokenProd = {...this.$btnAddCarrito.dataset};
         delete DomTokenProd.target ;
         delete DomTokenProd.toggle ;
-        DomTokenProd.subtotal = parseFloat(DomTokenProd.precio )* parseInt(DomTokenProd.cantidad );
+        DomTokenProd.subtotal = parseFloat(DomTokenProd.precio_online )* parseInt(DomTokenProd.cantidad );
         return DomTokenProd;
     }
     add() {
@@ -809,7 +1365,7 @@ const perfil = () => {
         let inicio = document.getElementById("p_inicio");
         let datos = document.getElementById("p_datosp");
         let orden = document.getElementById("p_misord");
-        let direccion = document.getElementById("p_misdir");
+        // let direccion = document.getElementById("p_misdir");
         let info = document.getElementById("info_puser");
         let seccionPass = document.getElementById("panel_pass");
         for (var i = 0; i < btns3.length; i++) {
@@ -828,7 +1384,7 @@ const perfil = () => {
         inicio.addEventListener("click", function (e) {
             titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
     
-            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Cambio de Contraseña</li> <li>3. Mis Compras </li> </ul> </p>';
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
@@ -837,22 +1393,22 @@ const perfil = () => {
     
         datos.addEventListener("click", function () { 
             titulouser.innerHTML = '<p>Datos Personales</p>';
-            contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;">
+            contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;margin-top:10px">
             <div class="divTableBody" style="display:block;">
-                <div class="divTableRow" id="pn_datos1">
+                <div class="divTableRow" id="pn_datos1"  style="display:flex;flex-wrap:wrap;width:100%">
                     <div class="divTableCell">
                         <div class="etiquetaFormulario">Nombres </div>
                         <input type="text" size="20" maxlength="30" name="campo1"id="c_nombres1" onkeypress="return soloLetras(event)" value="${userData.nombre}">
                     </div>
                     <div class="divTableCell">
-                        <div class="etiquetaFormulario">Apellidos</div> <input type="text" size="20" maxlength="20"
-                            name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno} ${userData.apellido_materno}">
+                        <div class="etiquetaFormulario">Apellido paterno</div> <input type="text" size="20" maxlength="20"
+                            name="campo1" id="c_apep1" onkeypress="return soloLetras(event)" value="${userData.apellido_paterno}">
                     </div>
                     <div class="divTableCell">
-                        <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
-                            maxlength="30" name="campo1" id="correo" value="${userData.correo}"
-                            style="">
+                        <div class="etiquetaFormulario">Apellido materno</div> <input type="text" size="20" maxlength="20"
+                            name="campo1" id="c_apem1" onkeypress="return soloLetras(event)" value="${userData.apellido_materno}">
                     </div>
+                   
                 </div>
                 <div class="divTableRow">
                     <div class="divTableCell">
@@ -868,25 +1424,59 @@ const perfil = () => {
                         <div class="etiquetaFormulario">Número Documento Identidad</div> <input type="text" size="20"
                             maxlength="20" name="campo1" id="campo1" value="${userData.documento}" required>
                     </div>
-                    <div class="divTableCell">
+                    
+                </div>
+                <div class="divTableRow" style = "display:flex;flex-wrap:wrap">
+                <div class="divTableCell">
                         <div class="etiquetaFormulario">Teléfono celular</div> <input type="text" size="9" maxlength="9"
                             name="campo1" id="c_telcel" onkeypress="return soloNumeros(event)" value="${userData.telefono}">
                     </div>
+                    <div class="divTableCell">
+                    <div class="etiquetaFormulario">Correo electrónico</div> <input type="email" id="c_correo1" size="20"
+                        maxlength="30" name="campo1" id="correo" value="${userData.correo}"
+                        style="">
+                     </div>
                 </div>
-                
                 <div class="divTableRow" style="display:flex;flex-wrap:wrap">
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-                <p>Conoce lo último de Beurer.pe</p>
+                <p>Mis direcciones</p>
                  </div> <br> <br>
-                    <div class="divTableCell" style="display:block">
-                        <div class="etiquetaFormulario">Domicilio</div>
-                        <input type="text" name="campo1"id="locationUser" onkeypress="return soloLetras(event)" value="${userData.direccion}">
-                    </div>
-                    <div class="divTableCell" style="display:block">
-                        <div class="etiquetaFormulario">Dirección de Envio</div> 
-                        <input type="text" size="20" maxlength="20"name="campo1" id="envio"  value="direccion de entrega">
+                 <div class="divTableRow" style ="width:100%">
+                    <div class="divTableCell">
+                            <div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div>
+                            </div>
+                            <select id="s_depa" onchange="ObjMain.showProvincesList(this)">
+                                <option disabled selected>  </option>
+                            </select>
                     </div>
                     
+                    <div class="divTableCell">
+                        <div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div>
+                        </div>
+                        <select id="sprov" onchange="ObjMain.showDistrictsList(this)">
+                            <option disabled selected> </option>
+                        </select>
+                    </div>
+                    <div class="divTableCell">
+                        <div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div>
+                        </div>
+                        <select id="sdist">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="divTableRow" style ="width:100%">
+                <div class="divTableCell" style="display:block">
+                        <div class="etiquetaFormulario">Dirección</div>
+                        <input size="20" type="text" name="campo1"id="locationUser" onkeypress="return soloLetras(event)" value="${userData.direccion}">
+                    </div>
+                    <div class="divTableCell">
+                    <div class="etiquetaFormulario">Referencia</div>
+                    <input type="text" id="referencia" size="20" maxlength="45" value="${userData.referencia}">
+                    </div>
+                </div>
+                   
                  </div>
                 </div> <br> <br>
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
@@ -912,6 +1502,8 @@ const perfil = () => {
                 </div>
                 <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
                 `;
+
+
           let index   = userData.tipo_documento == 'DNI' ? '1' 
                                     :userData.tipo_documento == 'PASAPORTE' ? '2'
                                     : userData.tipo_documento == 'CE' ? '3'
@@ -924,33 +1516,128 @@ const perfil = () => {
              userData.tipo_documento = event.target.value
           })
         
-    
-    
         if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
             }
+
+            
+            ObjMain.load_ubigeo();
+            ObjMain.defaultUbigeo();
         });
     
         orden.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Mis órdenes</p>';
-            contenidouser.innerHTML = '<h4>En este Panel2 te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Mis órdenes</li> <li>3. Mis Direcciones</li> </ul> </p>';
+            titulouser.innerHTML = '<p style="margin: auto;">Mis Ultimas Compras</p>';
+            contenidouser.innerHTML = `
+            <ul class="taps" id="taps">
+                <li class="tap  active" style="font-weight:bold;">
+                    Ultimas Compras
+                </li>
+                <li class="tap">Detalles</li>
+            </ul>
+            <br>
+            <div class="panels">
+            <section class="panel active">
+                <article class="item-shop">
+                    <figure class="item-imagen">
+                        <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                        <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        <span class="item-title">Color : rojo</span>
+                    </figure>
+                    <div class="item-data">
+                        <span class="detalle">Envio: Calle Electra AV. Andormeda andromeda</span>
+                        <span class="detalle">Distrito : Chorrillos</span>
+                        <br>
+                        <span class="detalle">Precio: S/ 23.40</span>
+                        <span class="detalle">Cantidad: 3 unidades.</span>
+                        <span class="detalle">Total : 70.20</span>
+
+                    </div>
+                    <div class="item-fecha">
+                        <span>01 de Octubre de 2020</span>
+                        <span>Estado : entregado</span>
+                        <span>Receptor : Renzo Lopez Galarza</span>
+                    </div>
+                </article>
+
+                <div class="progress" style="width:70%;margin:14px auto">
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Solicitado
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Despachado
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Enviado
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
+						<i class="fa fa-check"></i> Entregado
+					</div>
+				</div>
+            </section>
+
+                <section class="panel">
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        </figure>
+                        <div class="item-data">
+                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
+                            <span class="item-price"> S/.24.50</span>
+                            <br>
+                            <span class="item-price"> Total : S/.72.50</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            01 de Octubre de 2020
+                        </div>
+                    </article>
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        </figure>
+                        <div class="item-data">
+                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
+                            <span class="item-price"> S/.24.50</span>
+                            <br>
+                            <span class="item-price"> Total : S/.72.50</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            01 de Octubre de 2020
+                        </div>
+                    </article>
+                    <article class="item-shop">
+                        <figure class="item-imagen">
+                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
+                        </figure>
+                        <div class="item-data">
+                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
+                            <span class="item-price"> S/.24.50</span>
+                            <br>
+                            <span class="item-price"> Total : S/.72.50</span>
+
+                        </div>
+                        <div class="item-fecha">
+                            01 de Octubre de 2020
+                        </div>
+                    </article>
+                
+                </section>
+               
+        </div>`;
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
             }
-        });
-    
-        direccion.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Mis direcciones</p>';
-            contenidouser.innerHTML = ``;
-            if (screen && screen.width < 700) {
-                secciones.style.display = 'none';
-                infouser.style.display = 'block';
-            }
+            ObjMain.taps();
         });
     
      
+ 
         seccionPass.addEventListener("click", function () {
             titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
             contenidouser.innerHTML = `<form id ="formPass" method="POST">
@@ -986,14 +1673,12 @@ const perfil = () => {
     
             ObjMain.comparePass()
             ObjMain.updatePass()
-            ObjMain.limitPass('#currentPass',5)
+            ObjMain.limitPass('#newPass',5)
             ObjMain.showPass('.eyes')
                
         });
         
-    }
-
-    
+    } 
 }
 
 window.addEventListener('load', () => {

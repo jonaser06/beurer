@@ -183,6 +183,8 @@
                                 data-producto_sku   = "<?php echo $product['producto_sku']?>"
                                 data-precio_online   = "<?php echo $product['precio_anterior']?>"
                                 data-img   = "<?= $product['imagen'][0] ?>"
+                                data-peso   = <?= $product['precio'] ?>
+                                data-volumen   = <?= $product['volumen'] ?>
                                 data-cantidad ="1">
                                 <a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1"
                                 >AÑADIR AL CARRO
@@ -464,7 +466,7 @@ $(function() {
                         AL CARRO</button></a>
                 <br>
                 <br>
-                <a href="producto.php"
+                <a href="<?php echo base_url('belleza/cuidado-del-rostro'); ?>"
                     style="font-size: 0.95rem;font-weight:bold;text-decoration-line:underline;">Seguir comprando</a>
             </div>
             <?php 
