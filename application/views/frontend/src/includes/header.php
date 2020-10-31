@@ -90,7 +90,7 @@
                                 <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:26px;"></a>
                             </div>
                             <div class="utl3">    
-                                <a href="rastrea-pedido.php"><img src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt="" style="max-width:48px;"></a>
+                                <a href="<?= base_url('state-pedido')?>"><img src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt="" style="max-width:48px;"></a>
                             </div>
                         </div>
                         <div class="menu-hamb" style=" justify-content:right; display:grid; right:70%; padding-right:2%;">                            

@@ -113,7 +113,7 @@ $route['facturacion'] = 'frontend/carrito/register';
 $route['send-payment'] = 'frontend/carrito/envio';
 $route['order-summary'] = 'frontend/resumenpedido/index/';
 
-$route['rastreapedido'] = 'frontend/rastreapedido/index';
+$route['state-pedido'] = 'frontend/rastreapedido/index';
 $route['updatePass/(:num)'] = 'ajax/updatePass/$1';
 
 $route['myaccount'] = 'frontend/perfil';

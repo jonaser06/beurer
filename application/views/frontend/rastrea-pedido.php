@@ -18,22 +18,26 @@ include 'src\includes\header.php'
 }
 </style><main class="main-detail-products">
         <div class="container2 dv-segui" style="width:80%;" >
-        <div  id="div_buscarp1" style="height:100%;background-image:url('assets/images/fondo1.png');background-color:white;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;margin-bottom:2%;" >
+        <div  id="div_buscarp1" style="height:100%;background-image:url(<?= base_url('beurer_plantilla/assets/images/fondo1.png')?>);background-color:white;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;margin-bottom:2%;" >
     <span class="font-nexaheavy" style="font-size:2rem;color:#c51152;"> Seguimiento de Compra </span>
     <hr style="border-color:#c51152;">
-    <ul style="list-style-image: url('assets/images/check-solid.svg'); font-size:1.3em;margin-left:5%;">
+    <ul style="list-style-image: url(<?= base_url('beurer_plantilla/assets/images/check-solid.svg')?>); font-size:1.3em;margin-left:5%;">
     <li class="font-nexaheavy" style="font-size:1rem;color:black;"> Conoce el estado de tu pedido en tiempo real </li>
     <li class="font-nexaheavy" style="font-size:1rem;color:black;"> Ingresa tu número de DNI o Número de pedido </li>
     </ul>    
     <br>
     <div style="text-align:center;">
-                    <input type="text" id="cod_seg" maxlength="12"  placeholder="Ingresa el Número del Pedido" style="text-align:center;width:50%;"> 
-                </div>
+                    <input type="text" id="cod_seg" maxlength="12"  placeholder="Ingresa el Número del Pedido" style="text-align:center;width:50%;">
+                    <span class="res-pedido" style="display:block;margin-top:13px"></span>
+    </div>
     </div>
     <div class="row">
             <div class="col-md-12 " id="div_buscarp" style="align-self:center;">
                 <div style="text-align:center;">
-                     <button class="btn btn-cmn" id="btn_seg">Buscar</button>
+                     <button onclick="ObjMain.statePedido(this)"
+                     class="btn btn-cmn" id="btnSearch">
+                     Buscar
+                    </button>
                 </div>
                 <hr>
             </div>
@@ -44,8 +48,8 @@ include 'src\includes\header.php'
             <div  id="result_seg1" style="height:100%;background-image:url('assets/images/fondo1.png');background-color:white;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;margin-bottom:2%;" >
                 <span class="font-nexaheavy" style="font-weight:bold;font-size:2rem;color:#c51152;"> Información de Pedido </span>
                 <hr style="border-color:#c51152;">
-                <div style="font-weight:bold;text-align:center;" ><p style="font-size:1.5em;font-family:'nexa-bolduploaded_file';"> Numero de Pedido:</p><p style="font-family:'nexa-lightuploaded_file';font-weight:normal;font-size:1.4em;">101429929</p> </div>
-                <div style="font-weight:bold;text-align:center;" ><p style="font-size:1.5em;font-family:'nexa-bolduploaded_file';"> Numero de Pedido:</p><p style="font-family:'nexa-lightuploaded_file';font-weight:normal;font-size:1.4em;"> 01 de Setiembre de 2020</p></div>
+                <div style="font-weight:bold;text-align:center;" ><p style="font-size:1.5em;font-family:'nexa-bolduploaded_file';"> Numero de Pedido:</p><p class="codigo-pedido" style="font-family:'nexa-lightuploaded_file';font-weight:normal;font-size:1.4em;"></p> </div>
+                <div style="font-weight:bold;text-align:center;" ><p style="font-size:1.5em;font-family:'nexa-bolduploaded_file';"> Fecha de Pedido:</p><p class="fecha_pedido"style="font-family:'nexa-lightuploaded_file';font-weight:normal;font-size:1.4em;">  </p></div>
             </div>
             
             
@@ -104,15 +108,17 @@ include 'src\includes\header.php'
 </div>
 
 <div id="progress-content-section" style="margin-top:8.5em;color:black; background-color:white;width:85%;padding:1.5%;">
-	<div class="section-content discovery active">
+    
+    <div class="section-content discovery active">
 		
 		<div align="center">
                 <h1 style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">Orden Generada</h1>
                 
                 <br>
-                <div style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p style="font-weight:normal;">Completado</p> </div>
+                <div  style="font-size:1.3em;font-weight:bold;color:black;" >
+                Estado:<p class="estado"style="font-weight:normal;">Incompleto</p> </div>
                 <div style="font-size:1.3em;font-weight:bold;" >Descripción:<p style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido culminando con el pago. </p> </div>
-                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p style="font-weight:normal;"> 01 de Setiembre de 2020</p></div>
+                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p class="fechaEstado" style="font-weight:normal;"> En proceso</p></div>
 
                 </div>
 	</div>
@@ -122,9 +128,9 @@ include 'src\includes\header.php'
                 <h1 style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">Preparando Pedido</h1>
                 
                 <br>
-                <div style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p style="font-weight:normal;">Completado</p> </div>
+                <div  style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p class="estado" style="font-weight:normal;">Incompleto </p></div>
                 <div style="font-size:1.3em;font-weight:bold;" >Descripción:<p style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido culminando con el pago. </p> </div>
-                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p style="font-weight:normal;"> 01 de Setiembre de 2020</p></div>
+                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p class="fechaEstado"style="font-weight:normal;">En proceso </p></div>
 
                 </div>
 	</div>
@@ -134,9 +140,9 @@ include 'src\includes\header.php'
                 <h1 style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">Listo para recojo</h1>
                 
                 <br>
-                <div style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p style="font-weight:normal;">Completado</p> </div>
+                <div  style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p  class="estado" style="font-weight:normal;"> Incompleto</p></div>
                 <div style="font-size:1.3em;font-weight:bold;" >Descripción:<p style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido culminando con el pago. </p> </div>
-                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p style="font-weight:normal;"> 01 de Setiembre de 2020</p></div>
+                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p class="fechaEstado" style="font-weight:normal;"> En proceso</p></div>
 
                 </div>
 	</div>
@@ -146,9 +152,9 @@ include 'src\includes\header.php'
                 <h1 style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">Pedido entregado</h1>
                 
                 <br>
-                <div style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p style="font-weight:normal;">Completado</p> </div>
+                <div  style="font-size:1.3em;font-weight:bold;color:black;" >Estado:<p class="estado" style="font-weight:normal;">Incompleto </p></div>
                 <div style="font-size:1.3em;font-weight:bold;" >Descripción:<p style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido culminando con el pago. </p> </div>
-                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p style="font-weight:normal;"> 01 de Setiembre de 2020</p></div>
+                <div style="font-size:1.3em;font-weight:bold;" >Fecha: <p class="fechaEstado" style="font-weight:normal;">En proceso </p></div>
 
                 </div>
 	</div>
@@ -158,7 +164,11 @@ include 'src\includes\header.php'
 
 <br>
 <div style="text-align:center;">
-                <span ><a class="btn btn-cmn" style="font-size:1.2em;padding:1% 8%;" href="#" id="btn_nb" >REALIZAR NUEVA BÚSQUEDA</a></span>		
+                <span >
+                    <a class="btn btn-cmn" style="font-size:1.2em;padding:1% 8%;"
+                     href="#"
+                     onclick="ObjMain.showSearchPedido(this)"
+                     >REALIZAR NUEVA BÚSQUEDA</a></span>		
             </div>
 
 

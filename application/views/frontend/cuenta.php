@@ -59,7 +59,7 @@ input {
                                 <h3>Inicio</h3>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-2">
-                                <h3>></h3< /div>
+                                <h3>></h3</div>
                         </button></li>
                     <li><button id="p_datosp" class="btn btnprimary1 p_user">
                             <div class="col-md-10 col-sm-10 col-xs-10">
@@ -114,7 +114,7 @@ input {
                         gestiones con nosotros.</h4>
                     <h4>Contamos con este panel a tu disposición:</h4>
                     <p>
-                    <ul style="font-size:1.2em;line-height:50px; display:none">
+                    <ul style="font-size:1.2em;line-height:50px; ">
                         <li>1. Datos Personales</li>
                         <li>2. Cambio de Contraseña</li>
                         <li>3. Mis Compras</li>

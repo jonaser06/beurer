@@ -356,9 +356,13 @@ select {
   /* border: 0 none;
 outline: 0 none; */
 }
+input {
+  font-size: 14px!important;
+  height: 26px!important;
+}
 
 button {
-
+    font-size: 16px!important;
   /* color: #fff; */
 }
 
@@ -1182,9 +1186,9 @@ section2 {
     }
     .item-price {
         width: 100%;
-        text-align: center;
+        text-align: left;
          font-size: 13px;
-         font-weight: bold;
+         /* font-weight: bold; */
     }
      .detalle {
          text-align: left;

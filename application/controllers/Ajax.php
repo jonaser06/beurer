@@ -646,8 +646,8 @@ class Ajax extends MY_Controller
             $id_productos = explode('-',$this->input->post('id_productos'));
             $cantidades   = explode('-',$this->input->post('cantidades'));
             $subtotales   = explode('-',$this->input->post('subtotales'));
-            date_default_timezone_set('UTC');
-            $data =[ 
+            date_default_timezone_set("America/Lima");          
+              $data =[ 
                          'id_cliente' => $this->input->post('id_cliente'),
                          'codigo'   => $this->input->post('codigo_venta'),
                          'nombres'   => $this->input->post('nombres'),
@@ -664,7 +664,7 @@ class Ajax extends MY_Controller
                          'cupon_descuento'=> $this->input->post('cupon_descuento'),
                          'entrega_precio'=> floatval($this->input->post('entrega_precio')),
                          'productos_precio'=> floatval($this->input->post('subtotal')),
-                         'pedido_fecha'=> date("m.d.y"),
+                         'pedido_fecha'=> date('y-m-d'),
                          'pedido_estado'=> 1 ,
                     
             ];
@@ -676,6 +676,14 @@ class Ajax extends MY_Controller
                 $data["dest_number_doc"] = $this->input->post('dest_number_doc');
               };
             $id_pedido = $this->savePedido($data);
+            $pedido_estado = [
+                'id_pedido'        => $id_pedido,
+                'id_estado_pedido' => 1,
+                'observacion'      => 'pedido solicitado',
+                'fecha_estado'     => date('y-m-d')
+            ];
+            $this->dbInsert('pedido_estado',$pedido_estado);
+
             if($id_pedido) {
                 for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
                     $datos = [
@@ -702,6 +710,10 @@ class Ajax extends MY_Controller
                          return;
                     }
                 };
+                // enviar correo 
+
+
+
                 $this->resp = [
                     'status'  => true,
                     'code'    => 201 ,
@@ -742,10 +754,9 @@ class Ajax extends MY_Controller
             ->set_output(json_encode($resp));
           }
     }
-
-      public function getPedido()
-      {
-          $resp = [
+    public function getPedido()
+    {
+        $resp = [
               'status'  => false,
               'code'    => 404,
               'message' => 'Metodo POST requerido',
@@ -775,6 +786,14 @@ class Ajax extends MY_Controller
                       array_push($data ,$productoDB);
                   };
 
+                  /**
+                   * 
+                   * AQUI ENVIAR EL CORREO
+                   * $data['detalle'] : array : productos 
+                    * $data[pedido]:array  detalles del usuario y pedido , cupon ,descuento
+                   * 
+                   * 
+                   */
                   $resp = [
                       'status'  => true,
                       'code'    => 200,
@@ -806,6 +825,94 @@ class Ajax extends MY_Controller
               ->set_content_type('application/json')
               ->set_status_header(404)
               ->set_output(json_encode($resp));
-      }
+    }
+
+    public function estadoPedido ()
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $codigo = $this->input->post('codigo');
+            $result = $this->get('pedido',['codigo' =>$codigo ]);
+            $states_pedido = $this->dbSelect('*','pedido_estado' , ['id_pedido' => $result['id_pedido']]);
+            if (!empty($result)) {
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'codigo correcto !';
+                $this->resp['data'] = [
+                    "estado" => $result['pedido_estado'],
+                    "codigo" => $result['codigo'],
+                    "fecha" => $result['pedido_fecha'],
+                    'estados_pedido' => $states_pedido
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                return;
+                
+            } else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 404,
+                    'message' => 'x El codigo de pedido no es correcto intente con otro. '
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
+    public function pedidosCliente ()
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $this->db->where(['id_cliente' => $this->input->post('id_cliente')] );
+            $this->db->order_by('id_pedido','desc');
+            $this->db->limit(5);
+            $pedidos = $this->db->get('pedido')->result_array();
+    
+            if (!empty($pedidos)) {
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'tiene pedidos!';
+                $this->resp['data'] = $pedidos;
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                return;
+                
+            } else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 404,
+                    'message' => 'Aun no tiene pedidos ...'
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    }
  
 }

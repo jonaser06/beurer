@@ -495,14 +495,14 @@ if (screen && screen.width > 992) {
 
 
 //rastrea pedido
-$("#btn_seg").click(function () {
-    seguimiento = document.getElementById("div_seg");
-    buscarpedido = document.getElementById("div_buscarp");
-    buscarpedido2 = document.getElementById("div_buscarp1");
-    seguimiento.style.display = "block";
-    buscarpedido.style.display = "none";
-    buscarpedido2.style.display = "none";
-});
+// $("#btn_seg").click(function () {
+//     seguimiento = document.getElementById("div_seg");
+//     buscarpedido = document.getElementById("div_buscarp");
+//     buscarpedido2 = document.getElementById("div_buscarp1");
+//     seguimiento.style.display = "block";
+//     buscarpedido.style.display = "none";
+//     buscarpedido2.style.display = "none";
+// });
 
 $("#btn_nb").click(function () {
     seguimiento = document.getElementById("div_seg");
@@ -514,6 +514,9 @@ $("#btn_nb").click(function () {
     codseg.value = "";
     codseg.focus();
 });
+
+
+
 $('#subscribe').submit(function (event) {
     event.preventDefault();
 

@@ -117,7 +117,7 @@ include 'src/includes/header.php'
                         <br>
 
                         <li style="font-weight:bold;">Fecha de entrega</li>
-                        <div style="text-align:left;">01 de Setiembre de 2020</div>
+                        <div class="fecha_entrega"style="text-align:left;"></div>
                         <br> 
 
                         <li style="font-weight:bold;">Código de Pedido</li>

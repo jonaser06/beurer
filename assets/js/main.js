@@ -1253,6 +1253,7 @@ ObjMain = {
         document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
         document.querySelector('.referencia').textContent  = data.referencia
         document.querySelector('.codigo-venta').textContent  = data.codigo
+        document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} + 4 días habiles`
     },
     resumeProductsView : productos => {
         
@@ -1292,14 +1293,158 @@ ObjMain = {
             </div>`
         }) 
     },
-    stateProgress : (estate) => {
-        const $statesNode = document.querySelectorAll('.progress-bar');
+    stateProgress : (estate , pos ) => {
+        const $statesNode = document.querySelectorAll(`.bar-${pos}`);
         $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')
         for (let index = 0; index < estate ; index++ ) {
             $statesNode[index].style.backgroundColor = '#C51152';
         }
-    }
+    },
+    statePedido: (event) => {
+        
+        const $panelState = document.querySelector('#div_seg');
+        const $searchMenu = document.querySelector('#div_buscarp');
+        const $searchInput = document.querySelector('#div_buscarp1');
+        const $inputCodigo = document.querySelector('#cod_seg');            
+        const $resCodigo = document.querySelector('.res-pedido');
+        const $estados   = document.querySelectorAll('.estado');          
+        const $fechasEstado   = document.querySelectorAll('.fechaEstado');          
+        const $panelCodigo   = document.querySelector('.codigo-pedido');          
+        const $panelFecha   = document.querySelector('.fecha_pedido');          
+        if($inputCodigo.value !== ''){
+
+            const formData = new FormData();
+            formData.append('codigo' ,$inputCodigo.value);
+
+            ObjMain.ajax_post('POST', 'ajax/estadoPedido' , formData)
+            .then( res => {
+                res = JSON.parse(res);
+                console.log(res)
+                if(res.status){
+                    $searchInput.style.display = 'none';
+                    $searchMenu.style.display = 'none';
+                    $panelState.style.display = 'block';
+                    $panelCodigo.textContent = `${res.data.codigo}`;
+                    $panelFecha.textContent = `${ObjMain.formatFecha(res.data.fecha)}`;
+
+                    let tipo_estado = parseInt(res.data.estado);
+                    let estadosPedido = res.data.estados_pedido
+                    for (let index = 0; index < tipo_estado ; index++) {
+                        $estados[index].textContent = 'Completado'
+                    };
+                    if(estadosPedido){
+                        estadosPedido.forEach((statePedido ,pos ) => {
+                            $fechasEstado[pos].textContent = statePedido.fecha_estado
+                        })
+                    }
+                    
+
+                    setTimeout( function() {
+                        $(`.step0${tipo_estado}`).trigger('click');
+                    },1000)
+                    
+                    
+                }else {
+                    $resCodigo.textContent = res.message;
+                    $resCodigo.style.color = '#C51152';
+                    $inputCodigo.value ="";
+                }
+                   
+            })
+            .catch((err)=>{
+              console.log(err)  
+            
+            });
+        }else {
+            $resCodigo.textContent = 'Escriba el codigo de su pedido'
+            $resCodigo.style.color = '#C51152';
+        }
+    },
+    showSearchPedido : () => {
+        const $panelState = document.querySelector('#div_seg');
+        const $searchMenu = document.querySelector('#div_buscarp');
+        const $searchInput = document.querySelector('#div_buscarp1');
+        const $inputCodigo = document.querySelector('#cod_seg'); 
+        const $resCodigo = document.querySelector('.res-pedido');
+
+        $panelState.style.display = 'none';
+        $searchMenu.style.display = 'block';
+        $searchInput.style.display = 'block';
+        $inputCodigo.value = '' ;
+        $resCodigo.textContent = ''
+        $inputCodigo.focus();           
+    },
+    formatFecha :(format , entrega = 0) => {
+        const formato = format.split('-');
+        const dia = formato[2]
+        const mes = formato[1]
+        const anio= formato[0]
+        let nombres_dias = new Array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
+        let nombres_meses = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')
+        let fecha_actual = new Date()
+        return `${dia} de ${nombres_meses[mes-1]} del ${anio}`
+    },
+    clientePedidos : (id) => {
+        const $pedidosContainer = document.querySelector('.pedido');
+        const formData = new FormData();
+        formData.append('id_cliente',id);
+        ObjMain.ajax_post('POST',`${DOMAIN}ajax/pedidosCliente`,formData)
+        .then( response => {
+            response = JSON.parse(response)
+            console.log(response.data)
+            response.data.forEach( (pedido , pos ) => {
+                let descuento = pedido.cupon_descuento ? pedido.cupon_descuento: 0 ;
+                let fecha = ObjMain.formatFecha(pedido.pedido_fecha);
+                let nodeDescuento = descuento ? `<span class="item-price" >Descuento: S/ ${descuento}</span>`:''
+                $pedidosContainer.innerHTML += 
+                `<article class="item-shop">
+                <figure class="item-imagen">
+                    <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
+                    <span class="item-title"> CODIGO DE PEDIDO <BR> ${pedido.codigo}</span>
+                    <span class="item-title"></span>
+                </figure>
+                <div class="item-data">
+                    <span class="detalle">Envio: ${pedido.dir_envio}</span>
+                    <span class="detalle">Distrito :${pedido.distrito}</span>
+                    <br>
+                    <span class="item-price">Precio: S/. ${pedido.productos_precio}</span>
+                    ${nodeDescuento}
+                    <span class="item-price">Envio : S/. ${pedido.entrega_precio}</span>
+                    <span class="detalle" style="margin-top:7px;">Total : S/. ${parseFloat(pedido.productos_precio) - parseFloat(descuento) + parseFloat(pedido.entrega_precio)}</span>
+
+                </div>
+                <div class="item-fecha">
+                    <span>${fecha}</span>
+                    <span>Comprador : ${pedido.nombres} ${pedido.apellidos}</span>
+                    
+                </div>
+            </article>
+            
+            <div class="progress" style="width:100%;margin-top:14px;margin-bottom:15px;margin-left:5px">
+                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                    <i class="fa fa-check"></i> Solicitado
+                </div>
+                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                    <i class="fa fa-check"></i> Despachado
+                </div>
+                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                    <i class="fa fa-check"></i> Enviado
+                </div>
+                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                    <i class="fa fa-check"></i> Entregado
+                </div>
+            </div>`;
+            ObjMain.stateProgress(pedido.pedido_estado , pos );
+
+            })
+        })
+        .catch( err =>{
+            err = JSON.parse(err);
+            
+        });
+    },
 }
+
 
 
 class Carrito {
@@ -1533,110 +1678,24 @@ const perfil = () => {
                 <li class="tap  active" style="font-weight:bold;">
                     Ultimas Compras
                 </li>
-                <li class="tap">Detalles</li>
             </ul>
             <br>
             <div class="panels">
             <section class="panel active">
-                <article class="item-shop">
-                    <figure class="item-imagen">
-                        <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
-                        <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
-                        <span class="item-title">Color : rojo</span>
-                    </figure>
-                    <div class="item-data">
-                        <span class="detalle">Envio: Calle Electra AV. Andormeda andromeda</span>
-                        <span class="detalle">Distrito : Chorrillos</span>
-                        <br>
-                        <span class="detalle">Precio: S/ 23.40</span>
-                        <span class="detalle">Cantidad: 3 unidades.</span>
-                        <span class="detalle">Total : 70.20</span>
-
-                    </div>
-                    <div class="item-fecha">
-                        <span>01 de Octubre de 2020</span>
-                        <span>Estado : entregado</span>
-                        <span>Receptor : Renzo Lopez Galarza</span>
-                    </div>
-                </article>
-
-                <div class="progress" style="width:70%;margin:14px auto">
-					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
-						<i class="fa fa-check"></i> Solicitado
-					</div>
-					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
-						<i class="fa fa-check"></i> Despachado
-					</div>
-					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
-						<i class="fa fa-check"></i> Enviado
-					</div>
-					<div class="progress-bar" role="progressbar" style="width:25%;background-color:#CCC">
-						<i class="fa fa-check"></i> Entregado
-					</div>
-				</div>
+            <div class="pedido" >
+                
+            </div>
             </section>
 
-                <section class="panel">
-                    <article class="item-shop">
-                        <figure class="item-imagen">
-                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
-                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
-                        </figure>
-                        <div class="item-data">
-                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
-                            <span class="item-price"> S/.24.50</span>
-                            <br>
-                            <span class="item-price"> Total : S/.72.50</span>
-
-                        </div>
-                        <div class="item-fecha">
-                            01 de Octubre de 2020
-                        </div>
-                    </article>
-                    <article class="item-shop">
-                        <figure class="item-imagen">
-                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
-                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
-                        </figure>
-                        <div class="item-data">
-                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
-                            <span class="item-price"> S/.24.50</span>
-                            <br>
-                            <span class="item-price"> Total : S/.72.50</span>
-
-                        </div>
-                        <div class="item-fecha">
-                            01 de Octubre de 2020
-                        </div>
-                    </article>
-                    <article class="item-shop">
-                        <figure class="item-imagen">
-                            <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
-                            <span class="item-title">MASAJEADOR ANTICELULÍTICO CM 50</span>
-                        </figure>
-                        <div class="item-data">
-                            <span style="text-align:center;width:100%">Cantidad: 3 unidades.</span>
-                            <span class="item-price"> S/.24.50</span>
-                            <br>
-                            <span class="item-price"> Total : S/.72.50</span>
-
-                        </div>
-                        <div class="item-fecha">
-                            01 de Octubre de 2020
-                        </div>
-                    </article>
-                
-                </section>
                
         </div>`;
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
             }
+            ObjMain.clientePedidos(userData.id_cliente)
             ObjMain.taps();
-        });
-    
-     
+        });  
  
         seccionPass.addEventListener("click", function () {
             titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
