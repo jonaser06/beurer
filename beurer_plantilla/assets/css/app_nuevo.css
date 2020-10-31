@@ -1903,6 +1903,7 @@ background-color:transparent !important;
 
 .p_user{
 	background-color:white;
+	border:none;
 }
 
 @media  (max-width:500px) {

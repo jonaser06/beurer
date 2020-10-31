@@ -52,6 +52,7 @@ input {
             </div>
         </div>
 
+
         <div class="row cont_datos" id="d_formularios1"  style="border-radius:20px;display:inline-block;width:90%;">
             <div  id="panel-user1" style="width:27%;float:left;background-color:transparent;color:#161616;margin-right:1.5%;">
                 <ul  id="p_users" style="text-align:left;background-color:transparent;">
@@ -64,6 +65,7 @@ input {
                     
                 </ul>                
             </div>            
+
 
             <!-- <div id="info_puser" style="text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
                 <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;"> 
@@ -85,6 +87,7 @@ input {
                 </div>
                 
                 <div id="title-info-user" style="width:90%;float:left;margin:auto 0px;" ><p>Bienvenido al Panel de Administración del Cliente BEURER</p> </div> 
+
                 </div>
                 <div id="cont-info-user">
 
