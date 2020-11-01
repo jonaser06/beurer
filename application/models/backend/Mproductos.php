@@ -907,7 +907,7 @@ class Mproductos extends CI_Model {
     }
 
     public function getOneProductos($name='') {
-
+        $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
         $this->db->select('imagenes.imagen, productos.*, categorias.titulo as subcategoria, categorias.url as subcat_url, sitemap.url as cat_url,  paginas.pagina, paginas.idpagina');
         $this->db->where('productos.titulo', $name);
         
