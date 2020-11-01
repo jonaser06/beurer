@@ -113,7 +113,7 @@ ObjMain = {
         let r_rec_desc = document.querySelector('#r_rec_desc').value;
         let r_rec_pedi = document.querySelector('#r_rec_pedi').value;
 
-        if(r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_menor != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != ''){
+        if(r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != ''){
 
             let formData = new FormData();
                 formData.append('r_tipo_doc', r_tipo_doc);
