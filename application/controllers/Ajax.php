@@ -711,7 +711,10 @@ class Ajax extends MY_Controller
                     }
                 };
                 // enviar correo 
-
+                $enviar = $this->sendmail($data['correo'], $data, 'PEDIDO CONFIRMADO', 'order_confirm.php');
+                $this->sendmail();
+                var_dump($data);
+                exit;
 
 
                 $this->resp = [
