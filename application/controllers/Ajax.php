@@ -710,7 +710,7 @@ class Ajax extends MY_Controller
                          return;
                     }
                 };
-                // enviar correo 
+                // enviar correo  
 
 
 
