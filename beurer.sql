@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2020 a las 01:42:42
+-- Tiempo de generación: 02-11-2020 a las 01:55:56
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -1011,6 +1011,7 @@ INSERT INTO `modulos` (`idmodulo`, `modulo`, `url`, `icono`, `orden`, `activo`) 
 (5, 'CATEGORIAS', 'categorias', 'fa-list-alt\r\n', '5.00', 0),
 (6, 'USUARIOS', 'usuarios', 'fa fa-user-o', '0.00', 1),
 (7, 'CAMBIO ESTADO', 'pedidos', 'fa fa-clone', '6.00', 1);
+(8, 'RECLAMOS', 'reclamos', 'fa fa-envelope-o\r\n', '7.00', 1);
 
 -- --------------------------------------------------------
 
@@ -1315,7 +1316,9 @@ INSERT INTO `perfil_modulos` (`idmodulo`, `idperfil`, `ver`, `editar`, `eliminar
 (6, 1, 1, 1, 1),
 (6, 3, 1, 1, 1),
 (7, 1, 1, 1, 1),
-(7, 3, 1, 1, 1);
+(7, 3, 1, 1, 1),
+(8, 1, 1, 1, 1),
+(8, 3, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2010,6 +2013,12 @@ ALTER TABLE `producto_marca`
   ADD KEY `marca_id` (`marca_id`) USING BTREE;
 
 --
+-- Indices de la tabla `reclamos`
+--
+ALTER TABLE `reclamos`
+  ADD PRIMARY KEY (`id_reclamo`);
+
+--
 -- Indices de la tabla `sitemap`
 --
 ALTER TABLE `sitemap`
@@ -2171,6 +2180,12 @@ ALTER TABLE `perfiles`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+
+--
+-- AUTO_INCREMENT de la tabla `reclamos`
+--
+ALTER TABLE `reclamos`
+  MODIFY `id_reclamo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `sitemap`
