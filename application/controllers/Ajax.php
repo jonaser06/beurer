@@ -34,6 +34,219 @@ class Ajax extends MY_Controller
              ->set_output(json_encode($resp));
     }
 
+    public function get_report(){
+        $currentpage = ($this->input->get('page'))?$this->input->get('page'):1;
+        $start = $this->input->post('fecha');
+        if( $start != null ) {
+            $exp = explode(' - ', $start);
+            $start = $exp[0];
+            $end   = $exp[1];
+            $w = [
+                'p.pedido_fecha >='=> $start,
+                'p.pedido_fecha <='=> $end
+            ];
+
+            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+            $this->db->from('pedido_detalle as pd');
+            $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
+            $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+            $this->db->where($w);
+            $query = $this->db->get()->result_array();
+
+            if($query){
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->resp['data'] = $query;
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }else{
+                $this->resp['status'] = false;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'Sin resultados';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }
+        }
+
+        $pagination = $this->pagination('pedido_detalle', $currentpage );
+
+        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+        $this->db->from('pedido_detalle as pd');
+        $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
+        $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+        $this->db->limit($pagination['forpage'],$pagination['offset']);
+        $query = $this->db->get()->result_array();
+
+        if($query){
+            $this->resp['status'] = true;
+            $this->resp['code'] = 200;
+            $this->resp['message'] = 'find One!';
+            $this->resp['data'] = $query;
+    
+            $this->resp['currentpage'] 	= $currentpage;
+            $this->resp['paginas'] 		= $pagination['pagination'];
+            $this->resp['previus_page'] = $pagination['previus_page'];
+            $this->resp['next_page'] 	= $pagination['next_page'];
+            
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode($this->resp));
+                return;
+        }else{
+            $this->resp['status'] = false;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'Sin resultados';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+        }
+        
+
+    }
+
+    public function reportexsl(){
+        setlocale(LC_ALL, 'es_PE');
+        
+
+        $salida = '<table border="1">';
+        $salida .= '<tr>';
+        $salida .= '<td>Reporte</td>';
+        $salida .= '<td>Pedido</td>';
+        $salida .= '<td>id Producto</td>';
+        $salida .= '<td>Nombres</td>';
+        $salida .= '<td>Apellidos</td>';
+        $salida .= '<td>Telefono</td>';
+        $salida .= '<td>Correo</td>';
+        $salida .= '<td>Tipo documento</td>';
+        $salida .= '<td>N° documento</td>';
+        $salida .= '<td>Provincia</td>';
+        $salida .= '<td>Distrito</td>';
+        $salida .= '<td>Direccion</td>';
+        $salida .= '<td>Precio de envio</td>';
+        $salida .= '<td>Precio de producto</td>';
+        $salida .= '<td>Cupon</td>';
+        $salida .= '<td>Fecha</td>';
+        $salida .= '<td>Estado</td>';
+        $salida .= '<td>Producto</td>';
+        $salida .= '</tr>';    
+
+        $start = $this->input->post('fecha');
+        if( $start != null ) {
+            $exp = explode(' - ', $start);
+            $start = $exp[0];
+            $end   = $exp[1];
+            $w = [
+                'p.pedido_fecha >='=> $start,
+                'p.pedido_fecha <='=> $end
+            ];
+
+            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+            $this->db->from('pedido_detalle as pd');
+            $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
+            $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+            $this->db->where($w);
+            $query = $this->db->get()->result_array();
+            /* var_dump($reclamos);
+            exit; */
+            foreach ($query as $key => $value) {
+                $estado;
+                if($value['pedido_estado'] =='1'){
+                    $estado = 'Orden Generada';
+                }elseif($value['pedido_estado'] =='2'){
+                    $estado = 'Preparando Pedido';
+                }elseif($value['pedido_estado'] =='3'){
+                    $estado = 'Listo para el recojo';
+                }else{
+                    $estado = 'Pedido entregado';
+                }
+                $salida .= '<tr>';
+                $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
+                $salida .= '<td>'.$value['id_pedido'].'</td>';
+                $salida .= '<td>'.$value['id_producto'].'</td>';
+                $salida .= '<td>'.$value['nombres'].'</td>';
+                $salida .= '<td>'.$value['apellidos'].'</td>';
+                $salida .= '<td>'.$value['telefono'].'</td>';
+                $salida .= '<td>'.$value['correo'].'</td>';
+                $salida .= '<td>'.$value['tipo_documento'].'</td>';
+                $salida .= '<td>'.$value['numero_documento'].'</td>';
+                $salida .= '<td>'.$value['provincia'].'</td>';
+                $salida .= '<td>'.$value['distrito'].'</td>';
+                $salida .= '<td>'.$value['dir_envio'].'</td>';
+                $salida .= '<td>'.$value['entrega_precio'].'</td>';
+                $salida .= '<td>'.$value['productos_precio'].'</td>';
+                $salida .= '<td>'.$value['cupon_descuento'].'</td>';
+                $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+                $salida .= '<td>'.$estado.'</td>';
+                $salida .= '<td>'.$value['titulo'].'</td>';
+                $salida .= '</tr>';    
+            }
+    
+            $salida .= '</table>';
+    
+            $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+            $this->output->set_content_type('application/vnd.ms-excel');
+            $this->output->set_output($salida);
+
+            return;
+
+        }
+
+        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+        $this->db->from('pedido_detalle as pd');
+        $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
+        $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+
+            $query = $this->db->get()->result_array();
+        foreach ($query as $key => $value) {
+            $estado;
+                if($value['pedido_estado'] =='1'){
+                    $estado = 'Orden Generada';
+                }elseif($value['pedido_estado'] =='2'){
+                    $estado = 'Preparando Pedido';
+                }elseif($value['pedido_estado'] =='3'){
+                    $estado = 'Listo para el recojo';
+                }else{
+                    $estado = 'Pedido entregado';
+                }
+                $salida .= '<tr>';
+                $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
+                $salida .= '<td>'.$value['id_pedido'].'</td>';
+                $salida .= '<td>'.$value['id_producto'].'</td>';
+                $salida .= '<td>'.$value['nombres'].'</td>';
+                $salida .= '<td>'.$value['apellidos'].'</td>';
+                $salida .= '<td>'.$value['telefono'].'</td>';
+                $salida .= '<td>'.$value['correo'].'</td>';
+                $salida .= '<td>'.$value['tipo_documento'].'</td>';
+                $salida .= '<td>'.$value['numero_documento'].'</td>';
+                $salida .= '<td>'.$value['provincia'].'</td>';
+                $salida .= '<td>'.$value['distrito'].'</td>';
+                $salida .= '<td>'.$value['dir_envio'].'</td>';
+                $salida .= '<td>'.$value['entrega_precio'].'</td>';
+                $salida .= '<td>'.$value['productos_precio'].'</td>';
+                $salida .= '<td>'.$value['cupon_descuento'].'</td>';
+                $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+                $salida .= '<td>'.$estado.'</td>';
+                $salida .= '<td>'.$value['titulo'].'</td>';
+                $salida .= '</tr>';   
+        }
+
+        $salida .= '</table>';
+
+        $this->output->set_header("Content-Disposition: attachment; filename=reportes_" . date('Y-m-d') . ".xls");
+        $this->output->set_content_type('application/vnd.ms-excel');
+        $this->output->set_output($salida);
+    }
+
     public function get_reclamos(){
 
         // if(!$this->input->get('page')) header('location:'.URL_BASE.'admin/listproduct?page=1');
@@ -74,22 +287,34 @@ class Ajax extends MY_Controller
         
         $pagination = $this->pagination('reclamos', $currentpage );
         $query = $this->dbSelect('*','reclamos', [], '', true, $pagination['forpage'], $pagination['offset'] );
-        
-        $this->resp['status'] = true;
-        $this->resp['code'] = 200;
-        $this->resp['message'] = 'find One!';
-        $this->resp['data'] = $query;
 
-        $this->resp['currentpage'] 	= $currentpage;
-		$this->resp['paginas'] 		= $pagination['pagination'];
-		$this->resp['previus_page'] = $pagination['previus_page'];
-        $this->resp['next_page'] 	= $pagination['next_page'];
+        if($query){
+            $this->resp['status'] = true;
+            $this->resp['code'] = 200;
+            $this->resp['message'] = 'find One!';
+            $this->resp['data'] = $query;
+    
+            $this->resp['currentpage'] 	= $currentpage;
+            $this->resp['paginas'] 		= $pagination['pagination'];
+            $this->resp['previus_page'] = $pagination['previus_page'];
+            $this->resp['next_page'] 	= $pagination['next_page'];
+            
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode($this->resp));
+                return;
+        }else{
+            $this->resp['status'] = false;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'Sin resultados';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+        }
         
-        $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($this->resp));
-            return;
     }
 
     public function reclamosxsl(){

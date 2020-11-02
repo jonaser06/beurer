@@ -33,6 +33,7 @@
                             </div>
                         </div>
                         <div class="box-body">
+                            <div class="section_reclamos"></div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
