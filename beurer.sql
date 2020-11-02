@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2020 a las 01:55:56
+-- Tiempo de generación: 02-11-2020 a las 08:18:05
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -1010,8 +1010,9 @@ INSERT INTO `modulos` (`idmodulo`, `modulo`, `url`, `icono`, `orden`, `activo`) 
 (4, 'SUSCRIPTORES', 'suscriptores', 'fa fa-envelope-o', '2.00', 1),
 (5, 'CATEGORIAS', 'categorias', 'fa-list-alt\r\n', '5.00', 0),
 (6, 'USUARIOS', 'usuarios', 'fa fa-user-o', '0.00', 1),
-(7, 'CAMBIO ESTADO', 'pedidos', 'fa fa-clone', '6.00', 1);
-(8, 'RECLAMOS', 'reclamos', 'fa fa-envelope-o\r\n', '7.00', 1);
+(7, 'RECLAMOS', 'reclamos', 'fa fa-envelope-o\r\n', '6.00', 1),
+(8, 'CAMBIO ESTADO', 'pedidos', 'fa fa-clone', '8.00', 1),
+(9, 'REPORTES', 'reportes', 'fa fa-clone', '1.00', 1);
 
 -- --------------------------------------------------------
 
@@ -1092,43 +1093,43 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `codigo`, `nombres`, `apellidos`, `telefono`, `apellido_paterno`, `apellido_materno`, `correo`, `tipo_documento`, `numero_documento`, `provincia`, `distrito`, `dir_envio`, `cupon_codigo`, `cupon_descuento`, `entrega_precio`, `productos_precio`, `pedido_fecha`, `pedido_estado`, `id_cliente`, `dest_number_doc`, `dest_tipo_doc`, `dest_nombres`, `dest_apellidos`, `dest_telefono`, `referencia`) VALUES
-(1, NULL, 'renzo', 'lopez galarza', 'undefined', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(2, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(3, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(4, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', '0.00', '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(5, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', '0.00', '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(6, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', '434534535', 'Lima', 'Ate Lima', 'calle perseo la molina', NULL, NULL, '10.00', '0.00', '0000-00-00', 1, 128, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(7, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, 'renzoedward23@hotmail.com', 'PASAPORTE', '434534535', 'Lima', 'Ate Lima', 'calle perseo la molina', NULL, NULL, '10.00', '48.00', '0000-00-00', 1, 128, NULL, NULL, NULL, NULL, NULL, 'calle'),
-(8, NULL, 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'La Victoria Lima', 'okoko', NULL, NULL, '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(9, NULL, 'kkk', 'undefined undefined', '9', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', 'i', 'Lima', 'undefined undefined', 'undefined', NULL, NULL, '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'undefined'),
-(10, NULL, 'kkk', 'undefined undefined', '9', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', 'i', 'Lima', 'undefined undefined', 'undefined', NULL, NULL, '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'undefined'),
-(11, NULL, 'kkk', 'undefined undefined', '9', NULL, NULL, 'renzo@gmail.com', 'DNI', 'i', 'Lima', 'undefined undefined', 'undefined', 'DA#UUL', '1.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'undefined'),
-(12, NULL, 'jaime', 'gomes lopez', '43434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar 01', 'okoko', 'DA#UUL', '1.00', '10.00', '36.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(13, NULL, 'jaime', 'gomes lopez', 'calle per', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar 01', 'okoko', '0', '0.00', '10.00', '36.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(14, '4GowGynJnC', 'jaime', 'gomes lopez', 'calle per', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar 01', 'okoko', '0', '0.00', '10.00', '36.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(15, 'h2nHUi9qbC', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo 01', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar'),
-(16, 'ZZcZ31MYTo', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo 01', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar'),
-(17, 'zbMxunnggx', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo 01', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar'),
-(18, 'OfuQ1SqjWu', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar'),
-(19, 'Jk6Z1fyS8p', 'jaime', 'gomes lopez', '9494944', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'mi direccion de entrega', '0', '0.00', '10.00', '18.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar'),
-(20, 'irqJYUamjm', 'jaime', 'gomes lopez', '222222', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '18.00', '0000-00-00', 1, 140, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'avenida'),
-(21, 'hHwgJ3BkCa', 'jaime', 'gomes lopez', '4343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'avenida'),
-(22, 'ltGcDyaU2B', 'jaime', 'gomes lopez', '4343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'avenida'),
-(23, 'Yxs5fsCxKl', 'jaime', 'gomes lopez', '4343434', NULL, NULL, 'renzoedward@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, 'undefined', 'DNI', 'lola', 'lolita morena', '23132132', 'avenida'),
-(24, '0odHn3b1Uj', 'jaime', 'gomes lopez', '324343434', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, '111111111111111111', 'DNI', 'lola', 'lolita morena', '23132132', 'avenida'),
-(25, 'VIZ9ScteH7', 'jaime', 'gomes lopez', '11111', NULL, NULL, 'renzoedward@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 4, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(26, '1zUnFdZDLT', 'jaime', 'gomes lopez', '898989899', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '12.00', '10.00', '24.00', '2020-10-08', 1, 140, '32332323', 'PASAPORTE', 'ramon edward', 'lopez julia', '545455454', 'avenida'),
-(27, 'ukc8XteONP', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '3.00', '10.00', '6.00', '2020-10-27', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(28, 'QJlDywV3JK', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '3.00', '10.00', '6.00', '2020-10-29', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(29, 'kDorPsCjib', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '3.00', '10.00', '6.00', '2020-10-30', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(30, 'dn4AZoBr7o', 'jaime', 'gomes lopez', '333333', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(31, 'ujtnZqZ5dy', 'jaime', 'gomes lopez', '333333', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(32, '8AmEYx3TtB', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(33, 'JJADrWru35', 'jaime', 'gomes lopez', 'mkmkm', NULL, NULL, 'renzoedward@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '96.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(34, 'M0SCVWwWke', 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'jonaser06@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(35, 'eqCOoUbeD3', 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'jonaser06@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida'),
-(36, 'A97OhmjQ9f', 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'jonaser06@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida');
+INSERT INTO `pedido` (`id_pedido`, `codigo`, `nombres`, `apellidos`, `telefono`, `apellido_paterno`, `apellido_materno`, `correo`, `tipo_documento`, `numero_documento`, `provincia`, `distrito`, `dir_envio`, `cupon_codigo`, `cupon_descuento`, `entrega_precio`, `productos_precio`, `pedido_fecha`, `pedido_estado`, `id_cliente`, `dest_number_doc`, `dest_tipo_doc`, `dest_nombres`, `dest_apellidos`, `dest_telefono`, `referencia`, `recojo`) VALUES
+(1, NULL, 'renzo', 'lopez galarza', 'undefined', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(2, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(3, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', NULL, '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(4, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', '0.00', '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(5, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', 'undefined', 'Lima', 'Ate Lima', NULL, NULL, NULL, '10.00', '0.00', '0000-00-00', 1, 0, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(6, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, '0', 'PASAPORTE', '434534535', 'Lima', 'Ate Lima', 'calle perseo la molina', NULL, NULL, '10.00', '0.00', '0000-00-00', 1, 128, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(7, NULL, 'renzo', 'lopez galarza', '989848484', NULL, NULL, 'renzoedward23@hotmail.com', 'PASAPORTE', '434534535', 'Lima', 'Ate Lima', 'calle perseo la molina', NULL, NULL, '10.00', '48.00', '0000-00-00', 1, 128, NULL, NULL, NULL, NULL, NULL, 'calle', 0),
+(8, NULL, 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'La Victoria Lima', 'okoko', NULL, NULL, '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(9, NULL, 'kkk', 'undefined undefined', '9', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', 'i', 'Lima', 'undefined undefined', 'undefined', NULL, NULL, '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'undefined', 0),
+(10, NULL, 'kkk', 'undefined undefined', '9', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', 'i', 'Lima', 'undefined undefined', 'undefined', NULL, NULL, '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'undefined', 0),
+(11, NULL, 'kkk', 'undefined undefined', '9', NULL, NULL, 'renzo@gmail.com', 'DNI', 'i', 'Lima', 'undefined undefined', 'undefined', 'DA#UUL', '1.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'undefined', 0),
+(12, NULL, 'jaime', 'gomes lopez', '43434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar 01', 'okoko', 'DA#UUL', '1.00', '10.00', '36.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(13, NULL, 'jaime', 'gomes lopez', 'calle per', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar 01', 'okoko', '0', '0.00', '10.00', '36.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(14, '4GowGynJnC', 'jaime', 'gomes lopez', 'calle per', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar 01', 'okoko', '0', '0.00', '10.00', '36.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(15, 'h2nHUi9qbC', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo 01', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar', 0),
+(16, 'ZZcZ31MYTo', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo 01', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar', 0),
+(17, 'zbMxunnggx', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo 01', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar', 0),
+(18, 'OfuQ1SqjWu', 'jaime', 'gomes lopez', '989893933', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Carabayllo', 'calle perseo la molina', 'DAUUM', '6.00', '10.00', '12.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar', 0),
+(19, 'Jk6Z1fyS8p', 'jaime', 'gomes lopez', '9494944', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'mi direccion de entrega', '0', '0.00', '10.00', '18.00', '0000-00-00', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida larco mar', 0),
+(20, 'irqJYUamjm', 'jaime', 'gomes lopez', '222222', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '18.00', '0000-00-00', 1, 140, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'avenida', 0),
+(21, 'hHwgJ3BkCa', 'jaime', 'gomes lopez', '4343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'avenida', 0),
+(22, 'ltGcDyaU2B', 'jaime', 'gomes lopez', '4343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'avenida', 0),
+(23, 'Yxs5fsCxKl', 'jaime', 'gomes lopez', '4343434', NULL, NULL, 'renzoedward@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, 'undefined', 'DNI', 'lola', 'lolita morena', '23132132', 'avenida', 0),
+(24, '0odHn3b1Uj', 'jaime', 'gomes lopez', '324343434', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 1, 140, '111111111111111111', 'DNI', 'lola', 'lolita morena', '23132132', 'avenida', 0),
+(25, 'VIZ9ScteH7', 'jaime', 'gomes lopez', '11111', NULL, NULL, 'renzoedward@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '24.00', '0000-00-00', 4, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(26, '1zUnFdZDLT', 'jaime', 'gomes lopez', '898989899', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '12.00', '10.00', '24.00', '2020-10-08', 1, 140, '32332323', 'PASAPORTE', 'ramon edward', 'lopez julia', '545455454', 'avenida', 0),
+(27, 'ukc8XteONP', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzo@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '3.00', '10.00', '6.00', '2020-10-27', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(28, 'QJlDywV3JK', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '3.00', '10.00', '6.00', '2020-10-29', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(29, 'kDorPsCjib', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', 'DAUUM', '3.00', '10.00', '6.00', '2020-10-30', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(30, 'dn4AZoBr7o', 'jaime', 'gomes lopez', '333333', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(31, 'ujtnZqZ5dy', 'jaime', 'gomes lopez', '333333', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(32, '8AmEYx3TtB', 'jaime', 'gomes lopez', '434343434', NULL, NULL, 'renzoedward23@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(33, 'JJADrWru35', 'jaime', 'gomes lopez', 'mkmkm', NULL, NULL, 'renzoedward@hotmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '96.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(34, 'M0SCVWwWke', 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'jonaser06@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(35, 'eqCOoUbeD3', 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'jonaser06@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0),
+(36, 'A97OhmjQ9f', 'jaime', 'gomes lopez', '94949494', NULL, NULL, 'jonaser06@gmail.com', 'DNI', '999999900', 'Lima', 'Magdalena del Mar', 'okoko', '0', '0.00', '10.00', '6.00', '2020-10-31', 1, 140, NULL, NULL, NULL, NULL, NULL, 'avenida', 0);
 
 -- --------------------------------------------------------
 
@@ -1194,23 +1195,6 @@ INSERT INTO `pedido_detalle` (`id_pedido_detalle`, `id_pedido`, `id_producto`, `
 (40, 33, 105, NULL, NULL, NULL, 1, '6.00'),
 (41, 33, 105, NULL, NULL, NULL, 1, '6.00'),
 (42, 33, 54, NULL, NULL, NULL, 6, '36.00'),
-(43, 34, 152, NULL, NULL, NULL, 6, '36.00'),
-(44, 34, 101, NULL, NULL, NULL, 1, '6.00'),
-(45, 34, 105, NULL, NULL, NULL, 1, '6.00'),
-(46, 34, 105, NULL, NULL, NULL, 1, '6.00'),
-(47, 34, 105, NULL, NULL, NULL, 1, '6.00'),
-(48, 35, 14, NULL, NULL, NULL, 1, '6.00'),
-(49, 36, 14, NULL, NULL, NULL, 1, '6.00'),
-(50, 37, 14, NULL, NULL, NULL, 4, '24.00'),
-(51, 37, 152, NULL, NULL, NULL, 2, '12.00'),
-(52, 38, 14, NULL, NULL, NULL, 4, '24.00'),
-(53, 38, 152, NULL, NULL, NULL, 2, '12.00'),
-(54, 39, 14, NULL, NULL, NULL, 4, '24.00'),
-(55, 39, 152, NULL, NULL, NULL, 2, '12.00'),
-(56, 40, 14, NULL, NULL, NULL, 4, '24.00'),
-(57, 40, 152, NULL, NULL, NULL, 2, '12.00'),
-(58, 41, 14, NULL, NULL, NULL, 4, '24.00'),
-(59, 41, 152, NULL, NULL, NULL, 2, '12.00');
 (43, 34, 23, NULL, NULL, NULL, 1, '6.00'),
 (44, 35, 23, NULL, NULL, NULL, 1, '6.00'),
 (45, 36, 23, NULL, NULL, NULL, 1, '6.00');
@@ -1239,28 +1223,7 @@ INSERT INTO `pedido_estado` (`id_pedido_estado`, `id_pedido`, `id_estado_pedido`
 (3, 33, 1, 'pedido solicitado', '2020-10-31'),
 (4, 34, 1, 'pedido solicitado', '2020-10-31'),
 (5, 35, 1, 'pedido solicitado', '2020-10-31'),
-(6, 36, 1, 'pedido solicitado', '2020-10-31'),
-(7, 37, 1, 'pedido solicitado', '2020-11-01'),
-(8, 38, 1, 'pedido solicitado', '2020-11-01'),
-(9, 39, 1, 'pedido solicitado', '2020-11-01'),
-(10, 40, 1, 'pedido solicitado', '2020-11-01'),
-(11, 41, 1, 'pedido solicitado', '2020-11-01'),
-(15, 39, 2, NULL, '2020-11-01'),
-(16, 39, 3, NULL, '2020-11-01'),
-(17, 39, 4, NULL, '2020-11-01'),
-(18, 40, 2, NULL, '2020-11-01'),
-(19, 40, 3, NULL, '2020-11-01'),
-(20, 32, 2, NULL, '2020-11-01'),
-(21, 32, 3, NULL, '2020-11-01'),
-(22, 33, 2, NULL, '2020-11-01'),
-(23, 33, 3, NULL, '2020-11-01'),
-(24, 34, 2, NULL, '2020-11-01');
-(1, 31, 1, 'pedido solicitado', '2020-10-31 00:00:00'),
-(2, 32, 1, 'pedido solicitado', '2020-10-31 00:00:00'),
-(3, 33, 1, 'pedido solicitado', '2020-10-31 00:00:00'),
-(4, 34, 1, 'pedido solicitado', '2020-10-31 00:00:00'),
-(5, 35, 1, 'pedido solicitado', '2020-10-31 00:00:00'),
-(6, 36, 1, 'pedido solicitado', '2020-10-31 00:00:00');
+(6, 36, 1, 'pedido solicitado', '2020-10-31');
 
 -- --------------------------------------------------------
 
@@ -1318,7 +1281,9 @@ INSERT INTO `perfil_modulos` (`idmodulo`, `idperfil`, `ver`, `editar`, `eliminar
 (7, 1, 1, 1, 1),
 (7, 3, 1, 1, 1),
 (8, 1, 1, 1, 1),
-(8, 3, 1, 1, 1);
+(8, 3, 1, 1, 1),
+(9, 1, 1, 1, 1),
+(9, 3, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2143,7 +2108,7 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `modulos`
 --
 ALTER TABLE `modulos`
-  MODIFY `idmodulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idmodulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `paginas`
@@ -2155,19 +2120,19 @@ ALTER TABLE `paginas`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_detalle`
 --
 ALTER TABLE `pedido_detalle`
-  MODIFY `id_pedido_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_pedido_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_estado`
 --
 ALTER TABLE `pedido_estado`
-  MODIFY `id_pedido_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_pedido_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
