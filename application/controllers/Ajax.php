@@ -666,6 +666,7 @@ class Ajax extends MY_Controller
                          'productos_precio'=> floatval($this->input->post('subtotal')),
                          'pedido_fecha'=> date('y-m-d'),
                          'pedido_estado'=> 1 ,
+                         'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
                     
             ];
             if($this->input->post('dest_nombres')) {
@@ -845,6 +846,7 @@ class Ajax extends MY_Controller
                 $this->resp['data'] = [
                     "estado" => $result['pedido_estado'],
                     "codigo" => $result['codigo'],
+                    "recojo" => $result['recojo'],
                     "fecha" => $result['pedido_fecha'],
                     'estados_pedido' => $states_pedido
                 ];

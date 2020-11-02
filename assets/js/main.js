@@ -171,7 +171,7 @@ ObjMain = {
         localStorage.setItem('reg-redir', url);
         window.location = DOMAIN+'registro';
     },
-    recalculo: (item) =>{
+    recalculo: (item = []) =>{
         let sub = 0 ;
         let vol = 0;
         let weight = 0;
@@ -199,6 +199,10 @@ ObjMain = {
         localStorage.setItem('subtotal' , sub );
         localStorage.setItem('volumen_total' , vol );
         localStorage.setItem('peso_total' , weight );
+        if(localStorage.getItem('recojo')) {
+            document.querySelector('#check_recojo').checked = true
+            resp.total_coste = 0;
+        }
         localStorage.setItem('costo_envio' , resp.total_coste );
         document.querySelector('.cost_shipped').textContent = parseFloat(resp.total_coste).toFixed(2)
         localStorage.removeItem('descuento')
@@ -299,6 +303,19 @@ ObjMain = {
             d_envio.style.display = "none";
             localStorage.removeItem('domicilio');
         }
+    },
+    recojo: () =>{ 
+        const $checkRecojo = document.getElementById("check_recojo");
+        let item = localStorage.getItem('productos') ? JSON.parse(localStorage.getItem('productos')): [] ;
+            if ($checkRecojo.checked == true) {
+                localStorage.setItem('recojo', true);
+                ObjMain.recalculo(item)
+            } else {
+                localStorage.removeItem('recojo');
+                ObjMain.recalculo(item)
+            }
+        
+       
     },
     factura: () =>{
         var fact = document.getElementById("check_factura");
@@ -1146,6 +1163,7 @@ ObjMain = {
         const tipo_cupon    = localStorage.getItem('tipo') ? parseInt(localStorage.getItem('tipo')) : null
         const descuento     = localStorage.getItem('descuento') ? parseFloat(localStorage.getItem('descuento') ): 0
         const cupon         = localStorage.getItem('descuento') ? true : false
+        const recojo         = localStorage.getItem('recojo') ? true : false
         const volumen_total = localStorage.getItem('volumen_total') ? localStorage.getItem('volumen_total') : 0 
         const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
         const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
@@ -1178,7 +1196,17 @@ ObjMain = {
                  containerProd.appendChild($tr)
              })
         }
+
         let dataUser = objSales.comprador;
+        
+        const innerEnvio = !recojo ? `<div>LIMA LIMA </div>
+                                        <div>${dataUser.distrito} </div>
+                                        <div> ${dataUser.d_envio} ${dataUser.referencia} - Lima </div>
+                                        <div>Volumen total de la carga: ${volumen_total} m3 </div>
+                                        <div>Peso total de la carga: ${peso_total} kg </div>
+                                        <br><br>`
+                                    : `<br>`;
+        document.querySelector('.title-envio').textContent = !recojo  ?'INFORMACIÓN DE ENVÍO':'RECOJO EN TIENDA';
         // if(session) {
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
@@ -1187,13 +1215,7 @@ ObjMain = {
         // }
         
         document.querySelector('.dataComprador').innerHTML = `
-                        <div>LIMA LIMA </div>
-                        <div>${dataUser.distrito} </div>
-                        <div> ${dataUser.d_envio} - Lima </div>
-                        <div>Volumen total de la carga: ${volumen_total} m3 </div>
-                        <div>Peso total de la carga: ${peso_total} kg </div>
-                        <br><br>
-
+                        ${innerEnvio}
                         <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">COMPRA A NOMBRE DE </li>
                         <div>${dataUser.tipo_doc}: ${dataUser.number_doc }</div>
                         <div>${dataUser.nombres} ${dataUser.apellido_paterno } ${dataUser.apellido_materno} </div>
@@ -1243,17 +1265,25 @@ ObjMain = {
         });
     },
     resumeInfoView : data => {
-
+        const recojo = parseInt(data.recojo);
+        if(recojo) {
+            document.querySelector('.dir_envio').textContent= `Dirección de la Tienda.`
+            document.querySelector('.distrito').textContent  = `Distrito de la Tienda `
+            document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recoger: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
+            document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} en los proximos días.`
+        }else {
+            document.querySelector('.dir_envio').textContent= `${data.dir_envio}`
+            document.querySelector('.distrito').textContent  = `${data.distrito.toUpperCase()}`
+            document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
+            document.querySelector('.referencia').textContent  = data.referencia
+            document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} + 4 días habiles`
+        }
         document.querySelector('.titular').textContent  = `${data.nombres} ${data.apellidos}`
-        document.querySelector('.dir_envio').textContent= `${data.dir_envio}`
         document.querySelector('.provincia').textContent= `${data.provincia.toUpperCase()} LIMA`
-        document.querySelector('.distrito').textContent  = `${data.distrito.toUpperCase()}`
         document.querySelector('.numero_documento').textContent  = `${data.numero_documento}`
         document.querySelector('.correo').textContent  = data.correo
-        document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
-        document.querySelector('.referencia').textContent  = data.referencia
         document.querySelector('.codigo-venta').textContent  = data.codigo
-        document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} + 4 días habiles`
+
     },
     resumeProductsView : productos => {
         
@@ -1293,12 +1323,227 @@ ObjMain = {
             </div>`
         }) 
     },
+    // 
     stateProgress : (estate , pos ) => {
         const $statesNode = document.querySelectorAll(`.bar-${pos}`);
         $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')
         for (let index = 0; index < estate ; index++ ) {
             $statesNode[index].style.backgroundColor = '#C51152';
         }
+    },
+    sendType : (type) => {
+        const $containerSteps = document.querySelector('.container_progress');
+        const $states_messages  = document.querySelector('.state_messages');          
+
+        if(type) {
+            document.querySelector('.unstep').style.display = 'none';
+            $containerSteps.innerHTML = `<div class="section-content discovery active">
+
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Orden Generada</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">
+                    Estado:<p class="estado" style="font-weight:normal;">Incompleto</p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;"> En proceso</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-content strategy">
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Preparando Pedido</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">Estado:<p class="estado"
+                        style="font-weight:normal;">Incompleto </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;">En proceso </p>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+        <div class="section-content production">
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Pedido entregado</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">Estado:<p class="estado"
+                        style="font-weight:normal;">Incompleto </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;">En proceso </p>
+                </div>
+
+            </div>
+        </div>`
+            $states_messages.innerHTML = `<span class="step step01 step_on active">
+                                            Orden Generada</span>
+
+                                        <span class="step_arrow"></span>
+                                        <span class="step step02 step_off ">Preparando Pedido</span>
+
+                                        <span class="step_arrow"></span>
+                                        <span class="step step03 step_off ">Pedido Entregado</span>`;
+
+            $(".step02").click(function() {
+                $("#line-progress").css("width", "50%");
+                $(".strategy").addClass("active").siblings().removeClass("active");
+            });
+    
+            $(".step03").click(function() {
+                $("#line-progress").css("width", "100%");
+                $(".production").addClass("active").siblings().removeClass("active");
+            });
+    
+        }else {
+            document.querySelector('.unstep').style.display = 'block';
+            $containerSteps.innerHTML = `<div class="section-content discovery active">
+
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Orden Generada</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">
+                    Estado:<p class="estado" style="font-weight:normal;">Incompleto</p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;"> En proceso</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-content strategy">
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Preparando Pedido</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">Estado:<p class="estado"
+                        style="font-weight:normal;">Incompleto </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;">En proceso </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-content creative">
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Listo para recojo</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">Estado:<p class="estado"
+                        style="font-weight:normal;"> Incompleto</p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;"> En proceso</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-content production">
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Pedido entregado</h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">Estado:<p class="estado"
+                        style="font-weight:normal;">Incompleto </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        culminando con el pago. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;">En proceso </p>
+                </div>
+
+            </div>
+        </div>`
+            $states_messages.innerHTML = `<span class="step step01 step_on active">
+                                            Orden Generada</span>
+
+                                        <span class="step_arrow"></span>
+                                        <span class="step step02 step_off ">Preparando Pedido</span>
+
+                                        <span class="step_arrow"></span>
+                                        <span class="step step03 step_off ">Listo para recojo</span>
+
+                                        <span class="step_arrow"></span>
+                                        <span class="step step04 step_off ">Pedido entregado</span>`
+            $(".step02").click(function() {
+                $("#line-progress").css("width", "33.33%");
+                $(".strategy").addClass("active").siblings().removeClass("active");
+            });
+    
+            $(".step03").click(function() {
+                $("#line-progress").css("width", "66.66%");
+                $(".creative").addClass("active").siblings().removeClass("active");
+            });
+    
+            $(".step04").click(function() {
+                $("#line-progress").css("width", "100%");
+                $(".production").addClass("active").siblings().removeClass("active");
+            });
+        }
+        $(".step").click(function() {
+            $(this).addClass("active").prevAll().addClass("active");
+            $(this).nextAll().removeClass("active");
+        });
+        $(".step01").click(function() {
+            $("#line-progress").css("width", "1%");
+            $(".discovery").addClass("active").siblings().removeClass("active");
+        });
+
+
+       
     },
     statePedido: (event) => {
         
@@ -1307,8 +1552,7 @@ ObjMain = {
         const $searchInput = document.querySelector('#div_buscarp1');
         const $inputCodigo = document.querySelector('#cod_seg');            
         const $resCodigo = document.querySelector('.res-pedido');
-        const $estados   = document.querySelectorAll('.estado');          
-        const $fechasEstado   = document.querySelectorAll('.fechaEstado');          
+            
         const $panelCodigo   = document.querySelector('.codigo-pedido');          
         const $panelFecha   = document.querySelector('.fecha_pedido');          
         if($inputCodigo.value !== ''){
@@ -1324,9 +1568,15 @@ ObjMain = {
                     $searchInput.style.display = 'none';
                     $searchMenu.style.display = 'none';
                     $panelState.style.display = 'block';
+
+                    ObjMain.sendType(parseInt(res.data.recojo))
+
+                    const $estados   = document.querySelectorAll('.estado');          
+                    const $fechasEstado   = document.querySelectorAll('.fechaEstado');      
                     $panelCodigo.textContent = `${res.data.codigo}`;
                     $panelFecha.textContent = `${ObjMain.formatFecha(res.data.fecha)}`;
-
+                    $estados.forEach( estado => estado.textContent = 'Incompleto');
+                    
                     let tipo_estado = parseInt(res.data.estado);
                     let estadosPedido = res.data.estados_pedido
                     for (let index = 0; index < tipo_estado ; index++) {
@@ -1334,15 +1584,13 @@ ObjMain = {
                     };
                     if(estadosPedido){
                         estadosPedido.forEach((statePedido ,pos ) => {
-                            $fechasEstado[pos].textContent = statePedido.fecha_estado
+                            $fechasEstado[pos].textContent =  `${ObjMain.formatFecha(statePedido.fecha_estado)}`; 
                         })
                     }
-                    
-
                     setTimeout( function() {
                         $(`.step0${tipo_estado}`).trigger('click');
                     },1000)
-                    
+            
                     
                 }else {
                     $resCodigo.textContent = res.message;
@@ -1360,6 +1608,7 @@ ObjMain = {
             $resCodigo.style.color = '#C51152';
         }
     },
+
     showSearchPedido : () => {
         const $panelState = document.querySelector('#div_seg');
         const $searchMenu = document.querySelector('#div_buscarp');
@@ -1396,16 +1645,17 @@ ObjMain = {
                 let descuento = pedido.cupon_descuento ? pedido.cupon_descuento: 0 ;
                 let fecha = ObjMain.formatFecha(pedido.pedido_fecha);
                 let nodeDescuento = descuento ? `<span class="item-price" >Descuento: S/ ${descuento}</span>`:''
+                let nodeEnvioDistrito =  !parseInt(pedido.recojo)? `<span class="detalle"> ${pedido.distrito}</span>`:''
                 $pedidosContainer.innerHTML += 
                 `<article class="item-shop">
                 <figure class="item-imagen">
                     <img src="https://beurer.pe/assets/sources/CM50_01.jpg" class="item-img">
-                    <span class="item-title"> CODIGO DE PEDIDO <BR> ${pedido.codigo}</span>
+                    <span class="item-title"> CÓDIGO DE PEDIDO <BR> ${pedido.codigo}</span>
                     <span class="item-title"></span>
                 </figure>
                 <div class="item-data">
-                    <span class="detalle">Envio: ${pedido.dir_envio}</span>
-                    <span class="detalle">Distrito :${pedido.distrito}</span>
+                    <span class="detalle">${parseInt(pedido.recojo) ? '': 'Dirección de Envío:'} ${pedido.dir_envio}</span>
+                    ${nodeEnvioDistrito}
                     <br>
                     <span class="item-price">Precio: S/. ${pedido.productos_precio}</span>
                     ${nodeDescuento}
@@ -1672,11 +1922,11 @@ const perfil = () => {
         });
     
         orden.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Mis Ultimas Compras</p>';
+            titulouser.innerHTML = '<p style="margin: auto;">Panel de mis Pedidos</p>';
             contenidouser.innerHTML = `
             <ul class="taps" id="taps">
                 <li class="tap  active" style="font-weight:bold;">
-                    Ultimas Compras
+                    Mis Últimas Compras
                 </li>
             </ul>
             <br>

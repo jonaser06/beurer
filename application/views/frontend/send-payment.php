@@ -68,7 +68,7 @@
                 <div class="col-md-6 col-sm-12">
                     <ul
                         style="list-style-image: url(<?= base_url('beurer_plantilla/assets/images/check-solid.svg')?>);background-color:white;border-radius:8%; font-size:1.2em;padding:6% 7%;">
-                        <li class="font-nexaheavy" style="list-style:none;font-size:1.4em;">INFORMACIÓN DE ENVÍO</li>
+                        <li class="font-nexaheavy title-envio" style="list-style:none;font-size:1.4em;"></li>
 
                         <div class="dataComprador">
 

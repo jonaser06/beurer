@@ -54,7 +54,8 @@ input {
         <div class="row cont_datos" id="d_formularios1" style="border-radius:20px;display:inline-block;width:90%;">
             <div id="panel-user1" style="width:27%;float:left;background-color:transparent;color:#161616;margin-right:1.5%;">
                 <ul id="p_users"  style="text-align:left;background-color:transparent;">
-                    <li><button id="p_inicio" class="btn btnprimary1 p_user active">
+                    <li><button id="p_inicio" class="btn btnprimary1 p_user active" 
+                         style="border-radius: 20px 20px 0px 0px;">
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <h3>Inicio</h3>
                             </div>
@@ -77,7 +78,8 @@ input {
                                 <h3>></h3>
                             </div>
                         </button></li>
-                    <li><button id="p_misord" class="btn btnprimary1 p_user">
+                    <li><button id="p_misord" class="btn btnprimary1 p_user"
+                        style="border-radius: 0px 0px 20px 20px;">
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <h3>Mis Compras</h3>
                             </div>

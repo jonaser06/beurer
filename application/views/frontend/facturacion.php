@@ -198,7 +198,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="divTableRow">
+                                    <div class="divTableRow cell-send" >
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Dirección de entrega: <div class="d_ob">*
                                                 </div>
@@ -541,8 +541,9 @@
                    this.session       = document.querySelector('.dataUser').dataset.id;
                    this.estadoDomicilio = localStorage.getItem('domicilio')
                    this.estadoFactura = localStorage.getItem('factura')
+                   this.estadoRecojo = localStorage.getItem('recojo')
                    this.estado = false ;
-
+                   
                    this.$btn_sgt.disabled = true;
                    this.TRIGGUER()
                }
@@ -550,6 +551,7 @@
                     let valueDist = document.getElementById('sdist').value ; 
                     let distrito = '';
                     document.querySelectorAll('#sdist > option').forEach( dist =>  dist.value == valueDist ? distrito = dist.textContent : '' );
+                    
                     this.dataComprador = {
                         tipo_doc :  document.getElementById('s_tipodoc').value ,
                         number_doc :  document.getElementById('campo1').value ,
@@ -560,8 +562,8 @@
                         departamento :  document.getElementById('s_depa').value ,
                         provincia :  document.getElementById('sprov').value ,
                         distrito :  distrito ,
-                        d_envio :  document.getElementById('c_dir').value ,
-                        referencia :  document.getElementById('c_ref').value ,
+                        d_envio :   this.estadoRecojo? 'recoger en tienda' :document.getElementById('c_dir').value,
+                        referencia : this.estadoRecojo? '....compra de recojo' :document.getElementById('c_ref').value ,
                         fijo :  document.getElementById('c_telfij').value ,
                         telefono :  document.getElementById('c_telcel').value ,
                     }
@@ -580,6 +582,7 @@
                     }
                 }             
                 getFactura () {
+                    
                     this.dataFactura = {
                         ruc :  document.getElementById('ruc').value ,
                         r_social :  document.getElementById('r_social').value ,
@@ -622,6 +625,9 @@
                 }
 
                TRIGGUER () {
+                   if(this.estadoRecojo) {
+                       document.querySelector('.cell-send').style.display = 'none'
+                   }
                    this.$btn_sgt.addEventListener('click' , event => {
                     event.preventDefault();
                     const uri = event.target.href ;

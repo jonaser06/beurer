@@ -34,6 +34,7 @@
                                             <th>Categoría</th>
                                             <th>Color</th>
                                             <th>Estado</th>
+                                            <th>recojo</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -81,7 +82,7 @@
                         }
                         return `<span class="label label-warning"> sin color </span>`;
                     }},
-                    { "data": "estado" , 'render' : function (data , type , row ) {
+                    { "data": "estado" , 'render' : function (data , type , row ,meta) {
                         let salida ;
                         salida = `<span class="label 
                         ${data == 1 ? 'label-success' : 'label-danger'}

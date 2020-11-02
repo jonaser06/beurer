@@ -110,6 +110,14 @@
         </main2>
 
         <div class="aside" style="display: inline-block;text-align: left;padding-left: 4%;">
+            <div style="text-align:center;">
+                <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
+                    <label class="font-light label-pol" style="display:inline;">
+                        <input type="checkbox" id="check_recojo" onclick="ObjMain.recojo()" /><i class="helper"></i>
+                    </label>
+                    <div style="display:inline-block; font-size:1.55em;font-family:'nexaheavyuploaded_file';">Recoger en Tienda</div>
+                </div>
+            </div>
             <?php if ( $sesion ): ?>
             <div style="text-align:center;">
                 <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">

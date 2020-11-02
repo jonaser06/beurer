@@ -1155,6 +1155,9 @@ section2 {
           align-items: flex-start;
           justify-content: center;
       }
+      .item-data {
+        padding-right: 14px;
+      }
       .item-imagen{
           text-align: center;
           flex: 1;
@@ -1194,3 +1197,9 @@ section2 {
          text-align: left;
          font-weight: bold;
     }
+
+
+    /* panel user  */
+#p_users > li button {
+  border: none !important
+}
