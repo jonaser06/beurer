@@ -1,0 +1,3 @@
+<html>
+    Pedido confirmado
+</html>

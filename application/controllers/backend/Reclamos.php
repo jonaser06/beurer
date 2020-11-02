@@ -20,7 +20,7 @@ class Reclamos extends CI_Controller {
     }
     
     public function index(){
-
+        if(!$this->input->get('page')) header('location:'.URL_BASE.'manager/reclamos?page=1');
         $user=$this->manager['user']['idperfil'];
         $idmodulo=4;
         

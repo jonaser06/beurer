@@ -53,7 +53,7 @@
                                 <div class="col-md-3">
                                     <form action="<?= base_url(); ?>ajax/reclamosxsl" method="POST">
                                         <input type="hidden" name="fecha" class="fecha_reclamo">
-                                        <button type="submit" class="btn btn-sm btn-success btn-block">Exportar</button>
+                                        <button type="submit" class="btn-sbmt-exp btn btn-sm btn-success btn-block">Exportar</button>
                                     </form>
                                 </div>
                             </div>
@@ -72,6 +72,9 @@
                                     </thead>
                                     <tbody class="table_reclamos"></tbody>
                                 </table>
+                            </div>
+                            <div class="dataTables_paginate paging_simple_numbers" id="table_subcategory_paginate">
+                                <ul class="pagination"></ul>
                             </div>
                         </div>
                     </div>

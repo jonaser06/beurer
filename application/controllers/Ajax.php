@@ -36,6 +36,9 @@ class Ajax extends MY_Controller
 
     public function get_reclamos(){
 
+        // if(!$this->input->get('page')) header('location:'.URL_BASE.'admin/listproduct?page=1');
+        $currentpage = ($this->input->get('page'))?$this->input->get('page'):1;
+        
         $start = $this->input->post('fecha');
         if( $start != null ) {
             $exp = explode(' - ', $start);
@@ -47,25 +50,41 @@ class Ajax extends MY_Controller
                 ];
 
             $query = $this->dbSelect('*','reclamos', $w);
-
-            $this->resp['status'] = true;
-            $this->resp['code'] = 200;
-            $this->resp['message'] = 'find One!';
-            $this->resp['data'] = $query;
-            /* var_dump($query);
-            exit; */
-            $this->output
-                ->set_content_type('application/json')
-                ->set_status_header(200)
-                ->set_output(json_encode($this->resp));
-                return;
+            if($query){
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'find One!';
+                $this->resp['data'] = $query;
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }else{
+                $this->resp['status'] = false;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'Sin resultados';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }
         }
         
-        $query = $this->dbSelect('*','reclamos', []);
+        $pagination = $this->pagination('reclamos', $currentpage );
+        $query = $this->dbSelect('*','reclamos', [], '', true, $pagination['forpage'], $pagination['offset'] );
+        
         $this->resp['status'] = true;
         $this->resp['code'] = 200;
         $this->resp['message'] = 'find One!';
         $this->resp['data'] = $query;
+
+        $this->resp['currentpage'] 	= $currentpage;
+		$this->resp['paginas'] 		= $pagination['pagination'];
+		$this->resp['previus_page'] = $pagination['previus_page'];
+        $this->resp['next_page'] 	= $pagination['next_page'];
+        
         $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
@@ -118,7 +137,8 @@ class Ajax extends MY_Controller
                 ];
 
             $reclamos = $this->dbSelect('*','reclamos', $w);
-
+            /* var_dump($reclamos);
+            exit; */
             foreach ($reclamos as $key => $value) {
                 $menor = ($value['r_menor'] == 1 )?'Si':'No';
                 $salida .= '<tr>';
@@ -712,8 +732,7 @@ class Ajax extends MY_Controller
                     }
                 };
                 // enviar correo 
-
-
+                $enviar = $this->sendmail($data['correo'], $data, 'PEDIDO CONFIRMADO', 'order_confirm.php');
 
                 $this->resp = [
                     'status'  => true,

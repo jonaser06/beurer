@@ -35,11 +35,12 @@ class MY_Controller extends CI_Controller
         if ($query) return true;
         return false;
     }
-    public function dbSelect($label, $table, $where = [], $o = '')
+    public function dbSelect($label, $table, $where = [], $o = '', $limit = false, $forpage = 0, $offset = 0)
     {
         $this->db->select($label);
         $this->db->from($table);
         $this->db->where($where);
+        if($limit) $this->db->limit($forpage,$offset);
         $this->db->order_by($o, 'DESC');
         $query = $this->db->get()->result_array();
         if ($query) return $query;
@@ -150,10 +151,32 @@ class MY_Controller extends CI_Controller
         $output = openssl_decrypt(base64_decode($pass), METHOD, $key, 0, $iv);
         return $output;
     }
+    public function pagination($db, $currentpage = 1 )
+    {
+        $this->db->select('*');
+        $this->db->from($db);
+        $paginas = $this->db->get()->result_array();
+        $forpage = 10;
+        $pagination = ceil(count($paginas) / $forpage);
+        $offset = (int)($currentpage - 1) * $forpage;
+
+        $next_page    = ((int)$currentpage + 1) <= ($pagination) ? ((int)$currentpage + 1) : false;
+        $previus_page = ((int)$currentpage - 1) <= 0 ? false : ((int)$currentpage - 1);
+
+        $pagination = [
+            'forpage'   => $forpage,
+            'pagination' => $pagination,
+            'offset'    => $offset,
+            'next_page' => $next_page,
+            'previus_page' => $previus_page
+        ];
+        return $pagination;
+    }
+    
     public function sendmail($to, $data, $subject,$template){
         $config = [
             'protocol'  => 'smtp', 
-            'smtp_host' => 'ssl://smtp.zoho.com', 
+            'smtp_host' => 'ssl://mail.beurer.pe', 
             'smtp_port' =>  465, 
             'smtp_user' => MAIL_USER,
             'smtp_pass' => MAIL_PASS, 
