@@ -159,7 +159,7 @@ class Ajax extends MY_Controller
             /* var_dump($reclamos);
             exit; */
             foreach ($query as $key => $value) {
-                $estado;
+                $estado = '';
                 if($value['pedido_estado'] =='1'){
                     $estado = 'Orden Generada';
                 }elseif($value['pedido_estado'] =='2'){
@@ -206,38 +206,38 @@ class Ajax extends MY_Controller
         $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
         $this->db->join('productos as pr', 'pr.id = pd.id_producto');
 
-            $query = $this->db->get()->result_array();
+        $query = $this->db->get()->result_array();
         foreach ($query as $key => $value) {
-            $estado;
-                if($value['pedido_estado'] =='1'){
-                    $estado = 'Orden Generada';
-                }elseif($value['pedido_estado'] =='2'){
-                    $estado = 'Preparando Pedido';
-                }elseif($value['pedido_estado'] =='3'){
-                    $estado = 'Listo para el recojo';
-                }else{
-                    $estado = 'Pedido entregado';
-                }
-                $salida .= '<tr>';
-                $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
-                $salida .= '<td>'.$value['id_pedido'].'</td>';
-                $salida .= '<td>'.$value['id_producto'].'</td>';
-                $salida .= '<td>'.$value['nombres'].'</td>';
-                $salida .= '<td>'.$value['apellidos'].'</td>';
-                $salida .= '<td>'.$value['telefono'].'</td>';
-                $salida .= '<td>'.$value['correo'].'</td>';
-                $salida .= '<td>'.$value['tipo_documento'].'</td>';
-                $salida .= '<td>'.$value['numero_documento'].'</td>';
-                $salida .= '<td>'.$value['provincia'].'</td>';
-                $salida .= '<td>'.$value['distrito'].'</td>';
-                $salida .= '<td>'.$value['dir_envio'].'</td>';
-                $salida .= '<td>'.$value['entrega_precio'].'</td>';
-                $salida .= '<td>'.$value['productos_precio'].'</td>';
-                $salida .= '<td>'.$value['cupon_descuento'].'</td>';
-                $salida .= '<td>'.$value['pedido_fecha'].'</td>';
-                $salida .= '<td>'.$estado.'</td>';
-                $salida .= '<td>'.$value['titulo'].'</td>';
-                $salida .= '</tr>';   
+            $estado = '';
+            if($value['pedido_estado'] =='1'){
+                $estado = 'Orden Generada';
+            }elseif($value['pedido_estado'] =='2'){
+                $estado = 'Preparando Pedido';
+            }elseif($value['pedido_estado'] =='3'){
+                $estado = 'Listo para el recojo';
+            }else{
+                $estado = 'Pedido entregado';
+            }
+            $salida .= '<tr>';
+            $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
+            $salida .= '<td>'.$value['id_pedido'].'</td>';
+            $salida .= '<td>'.$value['id_producto'].'</td>';
+            $salida .= '<td>'.$value['nombres'].'</td>';
+            $salida .= '<td>'.$value['apellidos'].'</td>';
+            $salida .= '<td>'.$value['telefono'].'</td>';
+            $salida .= '<td>'.$value['correo'].'</td>';
+            $salida .= '<td>'.$value['tipo_documento'].'</td>';
+            $salida .= '<td>'.$value['numero_documento'].'</td>';
+            $salida .= '<td>'.$value['provincia'].'</td>';
+            $salida .= '<td>'.$value['distrito'].'</td>';
+            $salida .= '<td>'.$value['dir_envio'].'</td>';
+            $salida .= '<td>'.$value['entrega_precio'].'</td>';
+            $salida .= '<td>'.$value['productos_precio'].'</td>';
+            $salida .= '<td>'.$value['cupon_descuento'].'</td>';
+            $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+            $salida .= '<td>'.$estado.'</td>';
+            $salida .= '<td>'.$value['titulo'].'</td>';
+            $salida .= '</tr>';   
         }
 
         $salida .= '</table>';
