@@ -10,15 +10,22 @@
             <?= $this->load->view('backend/chunks/sidebar', array(), TRUE) ?>
 
             <div class="content-wrapper">
+              <?php 
+                $uri = $this->uri->segment_array();
+                $modulo = $this->sistema->getModulo($uri[2]);
 
+                if(in_array( $modulo['idmodulo'] , $modulosjm)){
+              ?>
                 <section class="content-header">
                     <h1>
-                        Administrador de Estado Pedidos
+                        Administrador de estados de los Pedidos
                     </h1>
                 </section>
-
+                <?php }?>
                 <!-- Main content -->
                 <section class="content container-fluid">
+                <?php if(in_array($modulo['idmodulo'],$modulosjm)){
+                ?>
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <!--<h3 class="box-title">Filtrar</h3>-->
@@ -42,6 +49,7 @@
                             </div>
                         </div>
                     </div>
+                <?php }else {?>
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"><strong>NO TIENES ACCESO A ESTE MÓDULO</strong></h3>
@@ -52,6 +60,7 @@
                             </div>
                         </div>
                     </div>
+                <?php }?>
                 </section>
 
             </div>

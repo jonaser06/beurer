@@ -1645,7 +1645,32 @@ ObjMain = {
                 let descuento = pedido.cupon_descuento ? pedido.cupon_descuento: 0 ;
                 let fecha = ObjMain.formatFecha(pedido.pedido_fecha);
                 let nodeDescuento = descuento ? `<span class="item-price" >Descuento: S/ ${descuento}</span>`:''
-                let nodeEnvioDistrito =  !parseInt(pedido.recojo)? `<span class="detalle"> ${pedido.distrito}</span>`:''
+                let nodeEnvioDistrito =  !parseInt(pedido.recojo) ? `<span class="detalle"> ${pedido.distrito}</span>`:''
+
+                let progressBarrState =  !parseInt(pedido.recojo) ? 
+                        `<div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Orden Generada
+                        </div>
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Preparando Pedido
+                        </div>
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Listo para recojo
+                        </div>
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Pedido Entregado
+                        </div>`
+                        : `<div class="progress-bar bar-${pos}" role="progressbar" style="width:33.3%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Orden Generada
+                        </div>
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:33.3%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Preparando Pedido
+                        </div>
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:33.3%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Listo en Tienda
+                        </div>
+                        `;
+
                 $pedidosContainer.innerHTML += 
                 `<article class="item-shop">
                 <figure class="item-imagen">
@@ -1671,18 +1696,7 @@ ObjMain = {
             </article>
             
             <div class="progress" style="width:100%;margin-top:14px;margin-bottom:15px;margin-left:5px">
-                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
-                    <i class="fa fa-check"></i> Solicitado
-                </div>
-                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
-                    <i class="fa fa-check"></i> Despachado
-                </div>
-                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
-                    <i class="fa fa-check"></i> Enviado
-                </div>
-                <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
-                    <i class="fa fa-check"></i> Entregado
-                </div>
+                ${progressBarrState}
             </div>`;
             ObjMain.stateProgress(pedido.pedido_estado , pos );
 
