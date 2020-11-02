@@ -1791,9 +1791,9 @@ const perfil = () => {
         });
     
         inicio.addEventListener("click", function (e) {
-            titulouser.innerHTML = '<p style="margin: auto;">Bienvenido al Panel de Administración del Cliente BEURER</p>';
+            titulouser.innerHTML = '<h4 style="margin: auto;font-weight:600">Bienvenido al Panel de Administración del Cliente BEURER</h4>';
     
-            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1.2em;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Cambio de Contraseña</li> <li>3. Mis Compras </li> </ul> </p>';
+            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:.8rem;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Cambio de Contraseña</li> <li>3. Mis Compras </li> </ul> </p>';
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
@@ -1801,7 +1801,7 @@ const perfil = () => {
         });
     
         datos.addEventListener("click", function () { 
-            titulouser.innerHTML = '<p>Datos Personales</p>';
+            titulouser.innerHTML = '<h5 style="margin: auto;font-weight:600">Datos Personales</h5>';
             contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;margin-top:10px">
             <div class="divTableBody" style="display:block;">
                 <div class="divTableRow" id="pn_datos1"  style="display:flex;flex-wrap:wrap;width:100%">
@@ -1936,10 +1936,10 @@ const perfil = () => {
         });
     
         orden.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Panel de mis Pedidos</p>';
+            titulouser.innerHTML = '<h4 style="margin: auto;font-weight:600">Panel de mis Pedidos</h4>';
             contenidouser.innerHTML = `
             <ul class="taps" id="taps">
-                <li class="tap  active" style="font-weight:bold;">
+                <li class="tap  active" style="font-size:.8rem;font-weight:bold;">
                     Mis Últimas Compras
                 </li>
             </ul>
@@ -1962,8 +1962,8 @@ const perfil = () => {
         });  
  
         seccionPass.addEventListener("click", function () {
-            titulouser.innerHTML = '<p style="margin: auto;">Cambio de Contraseña</p><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
-            contenidouser.innerHTML = `<form id ="formPass" method="POST">
+            titulouser.innerHTML = '<h4 style="margin: auto;font-weight:600">Cambio de Contraseña</h4><h4>Se recomientda usar una contraseña que no uses en otro sitio</h4>';
+            contenidouser.innerHTML = `<form id ="formPass"  style="font-size:.85rem"method="POST">
                     <div class="input-group passContainer">
                         <label for="currentPass">Actual</label>
                         <input
