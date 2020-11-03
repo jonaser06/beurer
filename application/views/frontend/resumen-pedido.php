@@ -103,7 +103,7 @@ include 'src/includes/header.php'
                     </br>
                     <ul
                         style="list-style-image: url(<?= base_url('beurer_plantilla/assets/images/check-solid.svg')?>); font-size:1.3em;margin-left:3%;">
-                        <li style="font-weight:bold;">Dirección de envio</li>
+                        <li class="title-envio" style="font-weight:bold;"></li>
                         <div class="titular" style="text-align:left;"> </div>
                         <div class="dir_envio" style="text-align:left;"></div>
                         <div class="provincia" style="text-align:left;"></div>

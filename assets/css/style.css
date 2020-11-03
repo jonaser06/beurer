@@ -1119,7 +1119,7 @@ section2 {
   transition: .5s all ease-in-out;
   }
   .taps .active {
-  list-style-image: url('assets/images/check-solid.svg'); 
+  list-style-image: url('../images/check-solid.svg'); 
   font-size:1.1em;
   color: #C51152;
   border-bottom: 1px solid #C51152;

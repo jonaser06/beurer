@@ -70,6 +70,7 @@ ObjMain = {
         }
          if (window.location.href == ( `${DOMAIN}order-summary` )){
              ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
+             setTimeout(localStorage.clear(),2000)
              console.log('****resumen pedido *******')
         }
     },
@@ -495,6 +496,7 @@ ObjMain = {
     },
     updateAccount : (id) => {
         const $btnSave = document.querySelector('.saveUser')
+        const $respSave = document.querySelector('.response-update')
         let formData = new FormData();
         const apellido_paterno = document.querySelector('#c_apep1').value.trim();
         const apellido_materno = document.querySelector('#c_apem1').value.trim();
@@ -507,8 +509,10 @@ ObjMain = {
         ref = document.getElementById('referencia').value;
         
         if (!politicas ) {
-            $btnSave.dataset.content = 'x Acepte las Politicas';
-            // document.documentElement.style.setProperty('--colorSave','#C51152');            
+            $respSave.textContent = 'x Debe aceptar las políticas de privacidad para continuar';
+            setTimeout( () => $respSave.textContent = '',3000 );
+            // $btnSave.dataset.content = 'x Acepte las Politicas';
+            // document.documentElement.style.setProperty('--colorSave','#fff');            
             return;
         }
         formData.append("nombre", document.querySelector('#c_nombres1').value);
@@ -527,7 +531,6 @@ ObjMain = {
         ObjMain.ajax_post('POST',`${DOMAIN}myaccount/update/${id}`, formData)
         .then((resp)=>{
             resp = JSON.parse(resp);
-            $btnSave.dataset.content = '√ Datos Actualizados';
             document.documentElement.style.setProperty('--colorSave','green');  
 
             const spinner = document.getElementById("spinner");
@@ -537,9 +540,13 @@ ObjMain = {
             ObjMain.render(
                 $nodeSaludo,
                 `${userData.nombre} ${userData.apellido_paterno} ${userData.apellido_materno}`);
-
-            document.getElementById("p_datosp").click();
-
+                $respSave.textContent = ' √ Se actualizaron sus datos de Usuario.';
+                $respSave.style.color = 'green';
+                setTimeout( function () { 
+                    $respSave.textContent = ''
+                    document.getElementById("p_datosp").click();
+                },3000 );
+               
             
         })
         .catch((err)=>{
@@ -1167,7 +1174,7 @@ ObjMain = {
         const volumen_total = localStorage.getItem('volumen_total') ? localStorage.getItem('volumen_total') : 0 
         const subtotal      = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0 
         const envio         = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0 
-        const cantidad      = localStorage.getItem('cantidad') ? localStorage.getItem('cantidad') : 0 
+        let cantidad      = 0;
         let containerProd   = document.querySelector('.table-products');
         let envio_pago      = document.querySelector('#envio_pago');
         let $cupon          = document.querySelector('#cupon_descuento');
@@ -1179,6 +1186,7 @@ ObjMain = {
         if(localStorage.getItem('productos')) {
              productos = JSON.parse(localStorage.getItem('productos'))
              productos.forEach( (prod ,index ) => {
+                 cantidad += parseInt(prod.cantidad); 
                  let $tr = document.createElement('tr');
                  let childOne = document.createElement('td')
                  childOne.setAttribute('scope','row')
@@ -1267,11 +1275,15 @@ ObjMain = {
     resumeInfoView : data => {
         const recojo = parseInt(data.recojo);
         if(recojo) {
+
+            document.querySelector('.title-envio').textContent= `Dirección de Recojo`
             document.querySelector('.dir_envio').textContent= `Dirección de la Tienda.`
             document.querySelector('.distrito').textContent  = `Distrito de la Tienda `
             document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recoger: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
             document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} en los proximos días.`
         }else {
+            document.querySelector('.title-envio').textContent= `Dirección de envío`
+
             document.querySelector('.dir_envio').textContent= `${data.dir_envio}`
             document.querySelector('.distrito').textContent  = `${data.distrito.toUpperCase()}`
             document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
@@ -1323,7 +1335,6 @@ ObjMain = {
             </div>`
         }) 
     },
-    // 
     stateProgress : (estate , pos ) => {
         const $statesNode = document.querySelectorAll(`.bar-${pos}`);
         $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')
@@ -1909,6 +1920,8 @@ const perfil = () => {
                                 Beurer en mi e-mail.</span></div>
                     </div>
                 </div>
+                <span class="response-update"style="margin-left:10px;font-size:.8rem;color: #C51152"></span>
+
                 <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
                 `;
 

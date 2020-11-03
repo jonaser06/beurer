@@ -815,7 +815,6 @@ class Ajax extends MY_Controller
                 "distrito"    => $this->input->post('distrito'),
                 "nombres" => $this->input->post('nombres'),
                 "apellidos" => $this->input->post('apellidos'),
-                "telefono" => $this->input->post('telefono'),
                 "d_envio" => $this->input->post('d_envio'),
                 "referencia" => $this->input->post('referencia'),
                 "id_productos" =>$this->input->post('id_productos'),
@@ -838,6 +837,13 @@ class Ajax extends MY_Controller
                 $dest["dest_number_doc"] = $this->input->post('dest_number_doc');
                 $metadata["destinatario"] = json_encode($dest);
               };
+              $facturacion = [];
+              if($this->input->post('flag_facturacion')) {
+                $dest["ruc"]    = $this->input->post('ruc');
+                $dest["r_social"]  = $this->input->post('r_social');
+                $dest["r_fiscal"]   = $this->input->post('r_fiscal');
+                $metadata["facturacion"] = json_encode($dest);
+              };
               $charge = $culqi->Charges->create(
                         [
                             "amount"        =>$this->input->post('total_coste'),
@@ -850,9 +856,10 @@ class Ajax extends MY_Controller
                             "metadata" =>$metadata,
                             "antifraud_details"=>[
                                 "address"    => $this->input->post('distrito'),
+                                "address_city"    => 'LIMA - PERU ',
                                 "first_name" => $this->input->post('nombres'),
                                 "last_name" => $this->input->post('apellidos'),
-                                "phone" => $this->input->post('telefono'),
+                                "phone_number" => $this->input->post('telefono'),
                             ]
                         ]
                 );    
@@ -920,6 +927,11 @@ class Ajax extends MY_Controller
                 $data["dest_telefono"]   = $this->input->post('dest_telefono');
                 $data["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
                 $data["dest_number_doc"] = $this->input->post('dest_number_doc');
+              };
+            if($this->input->post('ruc')) {
+                $data["ruc"]    = $this->input->post('ruc');
+                $data["r_social"]  = $this->input->post('r_social');
+                $data["r_fiscal"]   = $this->input->post('r_fiscal');
               };
             $id_pedido = $this->savePedido($data);
             $pedido_estado = [

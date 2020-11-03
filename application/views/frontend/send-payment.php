@@ -223,6 +223,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         let cupon           = localStorage.getItem('descuento') ? true : false
         const user          = localStorage.getItem('domicilio')  ? JSON.parse(localStorage.getItem('Comprador')): JSON.parse(localStorage.getItem('Comprador'))
         const dest          = localStorage.getItem('Destinatario')  ? JSON.parse(localStorage.getItem('Destinatario')): false
+        const facturacion   = localStorage.getItem('facturacion')  ? JSON.parse(localStorage.getItem('facturacion')): false
         const cupon_codigo = localStorage.getItem('cupon_codigo')? localStorage.getItem('cupon_codigo'):0;
         let total = 0
         let cupon_descuento = 0;
@@ -306,6 +307,12 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                 formData.append('dest_tipo_doc',charge.destinatario.dest_tipo_doc)
                 formData.append('dest_number_doc',charge.destinatario.dest_number_doc)
             }
+            if(charge['facturacion']){
+                charge.facturacion = JSON.parse(charge.facturacion)
+                formData.append('ruc',charge.facturacion.ruc)
+                formData.append('r_social',charge.facturacion.r_social)
+                formData.append('r_fiscal',charge.facturacion.r_fiscal)
+            }
             return formData;
         }
         function dataFormSend (token,email) {
@@ -343,6 +350,12 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                 formData.append('dest_tipo_doc',dest.tipo_doc)
                 formData.append('dest_number_doc',dest.number_doc)
             }
+            if(facturacion){
+                formData.append('flag_facturacion',true)
+                formData.append('ruc',facturacion.ruc)
+                formData.append('r_social',facturacion.r_social)
+                formData.append('r_fiscal',facturacion.r_fiscal)
+            }
             return formData;
         }
         function modalCheckout (title , icon ,message , color) {
@@ -365,9 +378,10 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                             const {...charge } = resp;  
                             if(charge.outcome.type == "venta_exitosa" ) { 
                                 const { metadata } = charge ;
-                                console.log(metadata)
+                                const { antifraud_details } = charge ; 
                                 const formCharge = dataFormPurchase(metadata);
                                 formCharge.append('codigo_venta',charge.reference_code);
+                                formCharge.append('telefono',antifraud_details.phone)
 
                                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchase`, formCharge)
                                 .then( resp => {
