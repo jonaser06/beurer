@@ -15,7 +15,7 @@ class Mproductos extends CI_Model {
 
 
     public function getProductos() {
-
+        $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
         $this->db->select('imagenes.imagen, productos.*, categorias.titulo as subcategoria, paginas.pagina, paginas.idpagina');
         $this->db->join('imagenes', 'imagenes.producto_id = productos.id', 'right');
         $this->db->join('categorias', 'categorias.id = productos.categoria_id', 'right');
