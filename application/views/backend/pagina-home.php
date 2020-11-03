@@ -101,7 +101,7 @@
                             ?>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane" id="tab_categoria">
+                            <!-- <div class="tab-pane" id="tab_categoria">
                                 <form id="inputs_categoria" action="manager/paginas/savecategoria" method="post">
                                     <div class="row">
                                         <div class="col-xs-6">
@@ -137,11 +137,11 @@
                                         </div>
                                     </div>
 
-<!--                                    <input type="hidden" class="form-control" name="sitemap-idsitemap" value="<!?= isset($recurso['sitemap-idsitemap']) ? $recurso['sitemap-idsitemap'] : ''; ?>">
+                              <input type="hidden" class="form-control" name="sitemap-idsitemap" value="<!?= isset($recurso['sitemap-idsitemap']) ? $recurso['sitemap-idsitemap'] : ''; ?>">
                                     <input type="hidden" class="form-control" name="sitemap-idrecurso" value="<!?= isset($recurso['sitemap-idrecurso']) ? $recurso['sitemap-idrecurso'] : ''; ?>">
-                                    <input type="hidden" class="form-control" name="recursos-idrecurso" value="<!?= isset($recurso['recursos-idrecurso']) ? $recurso['recursos-idrecurso'] : ''; ?>">-->
+                                    <input type="hidden" class="form-control" name="recursos-idrecurso" value="<!?= isset($recurso['recursos-idrecurso']) ? $recurso['recursos-idrecurso'] : ''; ?>">
                                 </form>
-                            </div>
+                            </div> -->
                             <div class="tab-pane <?= (empty($variables))?'active':'' ?>" id="tab_pagina">
                                 <form id="inputs_pagina" action="manager/paginas/saveedit/" method="post">
                                     <div class="row">
