@@ -1234,7 +1234,7 @@ ObjMain = {
                         <div>Cantidad de productos: ${cantidad} </div>
                         <div>Importe Sub Total: S/ ${parseFloat(subtotal).toFixed(2)} 
                         </div>
-                        <p style="font-weight:600;font-size:1.2em;margin-top:15px">Su pedido llegará en 4 dias días. </p>
+                        <p style="font-weight:600;font-size:1.2em;margin-top:15px">Su pedido llegará en 4 días. </p>
 
                         `;
         if(cupon) {
