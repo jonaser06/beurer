@@ -34,11 +34,11 @@ ObjMain = {
             localStorage.removeItem('Destinatario')
             localStorage.removeItem('facturacion')
             ObjMain.load_ubigeo();
-            ObjMain.defaultUbigeo();
+            // ObjMain.defaultUbigeo();
         }
         if(window.location.href == ( `${DOMAIN}reclamos` ) ){
             ObjMain.load_ubigeo();
-            ObjMain.defaultUbigeo();
+            // ObjMain.defaultUbigeo();
         }   
         if(window.location.href == ( `${DOMAIN}send-payment` ) ){
             ObjMain.showDataSales();
@@ -1947,7 +1947,7 @@ const perfil = () => {
 
             
             ObjMain.load_ubigeo();
-            ObjMain.defaultUbigeo();
+            // ObjMain.defaultUbigeo();
         });
     
         orden.addEventListener("click", function () {
