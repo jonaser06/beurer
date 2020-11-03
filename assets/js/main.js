@@ -21,7 +21,7 @@ let intento = 1;
 
 ObjMain = {
     init: ()=>{
-        DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
+        DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'https://www.blogingenieria.site/';
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
         ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal');
