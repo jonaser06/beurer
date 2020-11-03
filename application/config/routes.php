@@ -111,9 +111,9 @@ $route['reclamos'] = 'frontend/reclamos/index/';
 $route['registro'] = 'frontend/auth/index';
 $route['facturacion'] = 'frontend/carrito/register';
 $route['send-payment'] = 'frontend/carrito/envio';
-$route['order-summary'] = 'frontend/resumenpedido/index/';
+$route['order-summary'] = 'frontend/ResumenPedido/index/';
 
-$route['estado-pedido'] = 'frontend/rastreapedido/index';
+$route['estado-pedido'] = 'frontend/RastreaPedido/index';
 $route['updatePass/(:num)'] = 'ajax/updatePass/$1';
 
 $route['myaccount'] = 'frontend/perfil';

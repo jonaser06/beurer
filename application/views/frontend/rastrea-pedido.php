@@ -1,5 +1,5 @@
 <?php
-include 'src\includes\header.php'
+include 'src/includes/header.php'
 ?>
 
 <style>
@@ -180,6 +180,6 @@ include 'src\includes\header.php'
 </script>
 <?php
 
-include 'src\includes\footer.php'
+include 'src/includes/footer.php'
 
 ?>
