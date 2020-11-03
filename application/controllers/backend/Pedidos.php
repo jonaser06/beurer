@@ -71,13 +71,14 @@ class Pedidos extends MY_Controller {
                 "mensaje"=>  "Se envío el correo de cambio de estado al cliente",
                 "tipo" => 1 
             ];
+            $query = $this->get('pedido', ['id_pedido'=>$id_pedido]);
+            $enviar = $this->sendmail($query['correo'], $query, 'PEDIDO ACTUALIZADO', 'order_confirm.php');
         }else {
             $mensaje = [
                 "mensaje"=>  "Hubo un problema",
                 "tipo" => 2 
             ]; 
         }
-        
         echo json_encode($mensaje);      
     }
    
