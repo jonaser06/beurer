@@ -83,7 +83,7 @@
                         <ul class="nav nav-tabs">
                             
                             
-                                <li><a href="#tab_categoria" data-toggle="tab">Categoría</a></li>
+                                <!-- <li><a href="#tab_categoria" data-toggle="tab">Categoría</a></li> -->
                             
                             <?php if (!empty($variables)) { ?>
                                 <li class="active"><a href="#tab_variables" data-toggle="tab">Variables</a></li>

@@ -72,7 +72,7 @@
                 <!-- /.login-logo -->
                 <div class="login-box-body">
                     <p class="subtitulo">Inicia Sesión</p>
-                    <form id="loginjm" action="manager/login" method="post">
+                    <form id="loginjm" action="<?=base_url('manager/login')?>" method="post">
                         <div class="form-group has-feedback">
                             <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario">
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>

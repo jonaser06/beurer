@@ -1117,7 +1117,7 @@ class Ajax extends MY_Controller
                 $resp = [
                     'status'  => false,
                     'code'    => 404,
-                    'message' => 'x El codigo de pedido no es correcto intente con otro. '
+                    'message' => 'x El código de pedido no es correcto , intente con uno distinto '
                 ];
                 $this->output
                     ->set_content_type('application/json')
