@@ -810,7 +810,7 @@ ObjMain = {
     changueColor : ( visor , btnColorChangue ,btnCarrito)  => {
         document.addEventListener('click', event => {
             if(event.target.matches(btnColorChangue)){
-                DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
+                DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'https://www.blogingenieria.site/';
 
              const $visor = document.querySelector(visor),
              $addCarrito = document.querySelector(btnCarrito)
