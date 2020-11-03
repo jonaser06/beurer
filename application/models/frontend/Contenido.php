@@ -432,6 +432,7 @@ class Contenido extends CI_Model {
 
     public function getOneProduct($name='')
     {
+        $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
         $this->db->select('productos.*, imagenes.imagen, categorias.url as subcat_url, sitemap.url as cat_url' );
         $this->db->where('productos.titulo', $name);
         $this->db->join('imagenes', 'imagenes.producto_id = productos.id', 'right');
