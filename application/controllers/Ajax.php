@@ -855,7 +855,7 @@ class Ajax extends MY_Controller
                             "email"         =>$this->input->post('correo'),
                             "metadata" =>$metadata,
                             "antifraud_details"=>[
-                                "address"    => $this->input->post('distrito'),
+                                "address"    => 'Distrito:'.$this->input->post('distrito'),
                                 "address_city"    => 'LIMA - PERU ',
                                 "first_name" => $this->input->post('nombres'),
                                 "last_name" => $this->input->post('apellidos'),
@@ -1051,7 +1051,7 @@ class Ajax extends MY_Controller
                    * 
                    */
                   $enviar = $this->sendmail($pedido['correo'], $pedido, 'PEDIDO CONFIRMADO', 'order_confirm.php');
-                  
+
                   $resp = [
                       'status'  => true,
                       'code'    => 200,
