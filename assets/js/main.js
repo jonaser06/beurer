@@ -1746,6 +1746,7 @@ class Carrito {
             this.addState(producto);
             this.addStorage();
         }else {
+            console.log("carrito:"+producto);
             this.addState(producto);
             this.addStorage();
 
