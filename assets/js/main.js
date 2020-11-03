@@ -21,7 +21,7 @@ let intento = 1;
 
 ObjMain = {
     init: ()=>{
-        DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
+        DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'https://www.blogingenieria.site/';
         ObjMain.changueColor('#principal-img','.selectColor','.btnAddCarrito');
         ObjMain.changueQuanty('#aum','#dism','#cantidad_prod','.btnAddCarrito');
         ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal');
@@ -810,7 +810,7 @@ ObjMain = {
     changueColor : ( visor , btnColorChangue ,btnCarrito)  => {
         document.addEventListener('click', event => {
             if(event.target.matches(btnColorChangue)){
-                DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'http://www.blogingenieria.site/';
+                DOMAIN = (window.location.hostname=='localhost')?'http://localhost/beurer/':'https://www.blogingenieria.site/';
 
              const $visor = document.querySelector(visor),
              $addCarrito = document.querySelector(btnCarrito)
@@ -1746,6 +1746,7 @@ class Carrito {
             this.addState(producto);
             this.addStorage();
         }else {
+            console.log("carrito:"+producto);
             this.addState(producto);
             this.addStorage();
 
