@@ -1616,7 +1616,7 @@ ObjMain = {
             
             });
         }else {
-            $resCodigo.textContent = 'Escriba el codigo de su pedido'
+            $resCodigo.textContent = 'Escriba el código de su pedido'
             $resCodigo.style.color = '#C51152';
         }
     },
@@ -1652,7 +1652,7 @@ ObjMain = {
         ObjMain.ajax_post('POST',`${DOMAIN}ajax/pedidosCliente`,formData)
         .then( response => {
             response = JSON.parse(response)
-            console.log(response.data)
+            if(response.status) {
             response.data.forEach( (pedido , pos ) => {
                 let descuento = pedido.cupon_descuento ? pedido.cupon_descuento: 0 ;
                 let fecha = ObjMain.formatFecha(pedido.pedido_fecha);
@@ -1713,8 +1713,14 @@ ObjMain = {
             ObjMain.stateProgress(pedido.pedido_estado , pos );
 
             })
+            }else {
+                document.getElementById('taps').style.display = 'none'
+                $pedidosContainer.innerHTML += `<h4 style="color:#C51152;width:100%;text-align:center;margin-top:18px" >  No tienes pedidos en proceso.</h4`
+            }
+       
         })
         .catch( err =>{
+            console.log(err)
             err = JSON.parse(err);
             
         });
