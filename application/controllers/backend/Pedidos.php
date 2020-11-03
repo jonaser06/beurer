@@ -17,10 +17,12 @@ class Pedidos extends MY_Controller {
             redirect('manager');
         }
     } 
+    
     public function index() {
         $user = $this->manager['user']['idperfil']; 
         $data['pags'] = $this->sistema->getPaginas();
         $data['mods'] = $this->sistema->getModulos($user);
+        
         $key = null;
         foreach ($data['pags'] as $key => $pag0) {            
             $hijos = $this->sistema->getHijos($pag0['idpagina']);

@@ -966,11 +966,10 @@ class Ajax extends MY_Controller
                          ->set_status_header(404)
                          ->set_output(json_encode($this->resp));
                          return;
-                    }
-                };
-                // enviar correo 
-                $enviar = $this->sendmail($data['correo'], $data, 'PEDIDO CONFIRMADO', 'order_confirm.php');
-
+                        }
+                    };
+                    // enviar correo 
+                    
                 $this->resp = [
                     'status'  => true,
                     'code'    => 201 ,
@@ -979,14 +978,14 @@ class Ajax extends MY_Controller
                         'pedido'       => 'created payment register !!',
                         'codigo_pedido' => $id_pedido,
                         'state_pedido' => 1
-                    ]
-                ];
-                $this->output
-                         ->set_content_type('application/json')
-                         ->set_status_header(200)
-                         ->set_output(json_encode($this->resp));
-                         return;
-            }else {
+                        ]
+                    ];
+                    $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+                }else {
                 $resp = [
                     'status'  => false,
                     'code'    => 500 ,
@@ -1051,6 +1050,8 @@ class Ajax extends MY_Controller
                    * 
                    * 
                    */
+                  $enviar = $this->sendmail($pedido['correo'], $pedido, 'PEDIDO CONFIRMADO', 'order_confirm.php');
+                  
                   $resp = [
                       'status'  => true,
                       'code'    => 200,
