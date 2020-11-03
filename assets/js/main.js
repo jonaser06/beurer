@@ -1048,7 +1048,7 @@ ObjMain = {
                         ObjMain.selectedDistrict(userData.distrito);
                     }
             }
-           } ,200)
+           } ,1000)
           
     },
     selectedDistrict : district => {
