@@ -27,8 +27,8 @@ ObjMain = {
         ObjMain.modalCarrito('.btnAddCarrito','.cantidadModal');
         if(window.location.href== ( DOMAIN+'registro' ) ){
             console.log('Pagina de registro');
-            ObjMain.load_ubigeo();
-            ObjMain.defaultUbigeo();
+            ObjMain.load_ubigeo()
+            // ObjMain.defaultUbigeo();
         }
         if(window.location.href == ( `${DOMAIN}facturacion` ) ){
             localStorage.removeItem('Destinatario')
@@ -629,13 +629,14 @@ ObjMain = {
         ObjMain.ajax_post('GET', DOMAIN+'ajax/getprovincia','')
         .then((resp)=>{
             ubigeoPeru.ubigeos = JSON.parse(resp);
-            ObjMain.showRegionsList();
+            return ObjMain.showRegionsList()
         })
+        .then( () => ObjMain.defaultUbigeo())
         .catch((err)=>{
             console.log(err);
         });
     },
-    showRegionsList: () =>{
+    showRegionsList: async () =>{
         ubigeoPeru.ubigeos.forEach((ubigeo)=>{
             if (ubigeo.provincia === '00' && ubigeo.distrito === '00') {
                 let option = document.createElement('option');
@@ -1048,7 +1049,7 @@ ObjMain = {
                         ObjMain.selectedDistrict(userData.distrito);
                     }
             }
-           } ,1000)
+           } ,0)
           
     },
     selectedDistrict : district => {
