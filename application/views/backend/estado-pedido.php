@@ -39,6 +39,7 @@
                                     <thead>
                                         <tr>
                                             <th>Código Pedido</th>
+                                            <th>Comprador</th>
                                             <th>Tipo de Entrega</th>
                                             <th>Estado</th>
                                             <th></th>
@@ -84,6 +85,9 @@
             "ajax": "manager/pedidos/getPedidos",
                 "columns": [
                     { "data": "codigo" },
+                    { "data": "nombres" , 'render' : function (data ,type , row) {
+                        return `${row.nombres} ${row.apellidos}`
+                    } },
                     { "data": "recojo" ,'render' : function (data , type , row ) {
                         
                         if(parseInt(data)){

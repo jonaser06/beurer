@@ -1,7 +1,6 @@
 <?php
 include 'src/includes/header.php'
-?>
-
+?>;
 <style>
 #checkout_crumb:after,
 #checkout_crumb_four:after {
@@ -25,6 +24,11 @@ include 'src/includes/header.php'
 	font-family:'nexa-lightuploaded_file'!important;
     }
 </style>
+<input 
+    type="hidden" 
+    class="dataUser"
+    data-session = "<?php echo isset($_SESSION['id_cliente']) ? $_SESSION['id_cliente']: false ;?>"
+>
 <main class="main-detail-products">
     <div class="container2 dv-segui" style="width:80%;">
         <div id="div_buscarp1"

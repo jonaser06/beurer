@@ -1215,9 +1215,10 @@ ObjMain = {
                                         <div>Volumen total de la carga: ${volumen_total} m3 </div>
                                         <div>Peso total de la carga: ${peso_total} kg </div>
                                         <br><br>`
-                                    : `<br>`;
+                                    : `<div>Av.Caminos del Inca N.257 Tienda N° 149 Santiago de Surco - Lima</div>
+                                    <br>`;
         document.querySelector('.title-envio').textContent = !recojo  ?'INFORMACIÓN DE ENVÍO':'RECOJO EN TIENDA';
-        const messageEnvio = !recojo?  'Su pedido llegará en un plazo de 4 días.' : 'Puede recoger su pedido en un plazo máximo de 30 días.'
+        const messageEnvio = !recojo?  'Su pedido llegará en un plazo de 4 días.' : 'Recordar que tiene un plazo de 30 días para recoger su pedido, de no recogerlo, se procederá con la devolución de la compra.'
         // if(session) {
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
@@ -1278,20 +1279,21 @@ ObjMain = {
     resumeInfoView : data => {
         const recojo = parseInt(data.recojo);
         if(recojo) {
-
             document.querySelector('.title-envio').textContent= `Dirección de Recojo`
-            document.querySelector('.dir_envio').textContent= `Dirección de la Tienda.`
-            document.querySelector('.distrito').textContent  = `Distrito de la Tienda `
-            document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recoger: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
-            document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} en los proximos días.`
+            document.querySelector('.dir_envio').textContent= `Av.Caminos del Inca N.257 Tienda N° 149`
+            document.querySelector('.distrito').textContent  = `Santiago de Surco.`
+            document.querySelector('.title_referencia').style.display  = `none`
+            document.querySelector('.espaciado').style.display  = `none`
+            document.querySelector('.title_recojo').textContent = 'Fecha de Recojo'
+            document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recoger: ${data.dest_nombres} `: 'La entrega es personal'
+            document.querySelector('.fecha_entrega').textContent  = `Recordar que tiene un plazo de 30 días para recoger su pedido , de no recogerlo, se procederá con la devolución de la compra.`
         }else {
             document.querySelector('.title-envio').textContent= `Dirección de envío`
-
             document.querySelector('.dir_envio').textContent= `${data.dir_envio}`
             document.querySelector('.distrito').textContent  = `${data.distrito.toUpperCase()}`
-            document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres} ${data.dest_apellidos} `: 'La entrega es personal'
+            document.querySelector('.destinatario').textContent  = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres}.`: 'La entrega es personal'
             document.querySelector('.referencia').textContent  = data.referencia
-            document.querySelector('.fecha_entrega').textContent  = ` desde el ${ObjMain.formatFecha(data.pedido_fecha)} + 4 días habiles`
+            document.querySelector('.fecha_entrega').textContent  = ` Desde el ${ObjMain.formatFecha(data.pedido_fecha)} , su pedido llegara en un plazo de 4 días habiles`
         }
         document.querySelector('.titular').textContent  = `${data.nombres} ${data.apellidos}`
         document.querySelector('.provincia').textContent= `${data.provincia.toUpperCase()} LIMA`
@@ -1338,7 +1340,7 @@ ObjMain = {
             </div>`
         }) 
     },
-    stateProgress : (estate , pos ) => {
+    stateProgress : ( estate , pos ) => {
         const $statesNode = document.querySelectorAll(`.bar-${pos}`);
         $statesNode.forEach( barr => barr.style.backgroundColor = '#CCC')
         for (let index = 0; index < estate ; index++ ) {
@@ -1559,70 +1561,101 @@ ObjMain = {
 
        
     },
-    statePedido: (event) => {
-        
+    showStatePedido : (res)=> {
         const $panelState = document.querySelector('#div_seg');
         const $searchMenu = document.querySelector('#div_buscarp');
         const $searchInput = document.querySelector('#div_buscarp1');
         const $inputCodigo = document.querySelector('#cod_seg');            
         const $resCodigo = document.querySelector('.res-pedido');
-            
         const $panelCodigo   = document.querySelector('.codigo-pedido');          
-        const $panelFecha   = document.querySelector('.fecha_pedido');          
+        const $panelFecha   = document.querySelector('.fecha_pedido');  
+        if(res.status){
+            $searchInput.style.display = 'none';
+            $searchMenu.style.display = 'none';
+            $panelState.style.display = 'block';
+
+            ObjMain.sendType(parseInt(res.data.recojo))
+
+            const $estados   = document.querySelectorAll('.estado');          
+            const $fechasEstado   = document.querySelectorAll('.fechaEstado');      
+            $panelCodigo.textContent = `${res.data.codigo}`;
+            $panelFecha.textContent = `${ObjMain.formatFecha(res.data.fecha)}`;
+            $estados.forEach( estado => estado.textContent = 'Incompleto');
+            
+            let tipo_estado = parseInt(res.data.estado);
+            let estadosPedido = res.data.estados_pedido
+            for (let index = 0; index < tipo_estado ; index++) {
+                $estados[index].textContent = 'Completado'
+            };
+
+            if(estadosPedido){
+                estadosPedido.forEach((statePedido ,pos ) => {
+                    $fechasEstado[pos].textContent =  `${ObjMain.formatFecha(statePedido.fecha_estado)}`; 
+                })
+            }
+            setTimeout( function() {
+                $(`.step0${tipo_estado}`).trigger('click');
+            },1000)
+            
+        }else {
+            $resCodigo.textContent = res.message;
+            $resCodigo.style.color = '#C51152';
+            $inputCodigo.value ="";
+        }
+    },
+    statePedido: (event) => {
+        
+        
+        const $inputCodigo = document.querySelector('#cod_seg');            
+        const $resCodigo = document.querySelector('.res-pedido');
+            
+                
         if($inputCodigo.value !== ''){
-
-            const formData = new FormData();
-            formData.append('codigo' ,$inputCodigo.value);
-
-            ObjMain.ajax_post('POST', 'ajax/estadoPedido' , formData)
-            .then( res => {
-                res = JSON.parse(res);
-                console.log(res)
-                if(res.status){
-                    $searchInput.style.display = 'none';
-                    $searchMenu.style.display = 'none';
-                    $panelState.style.display = 'block';
-
-                    ObjMain.sendType(parseInt(res.data.recojo))
-
-                    const $estados   = document.querySelectorAll('.estado');          
-                    const $fechasEstado   = document.querySelectorAll('.fechaEstado');      
-                    $panelCodigo.textContent = `${res.data.codigo}`;
-                    $panelFecha.textContent = `${ObjMain.formatFecha(res.data.fecha)}`;
-                    $estados.forEach( estado => estado.textContent = 'Incompleto');
-                    
-                    let tipo_estado = parseInt(res.data.estado);
-                    let estadosPedido = res.data.estados_pedido
-                    for (let index = 0; index < tipo_estado ; index++) {
-                        $estados[index].textContent = 'Completado'
-                    };
-                    if(estadosPedido){
-                        estadosPedido.forEach((statePedido ,pos ) => {
-                            $fechasEstado[pos].textContent =  `${ObjMain.formatFecha(statePedido.fecha_estado)}`; 
-                        })
+            const resultExpr = /^[0-9]{8}$/.test($inputCodigo.value);
+            if(resultExpr){
+                const formData = new FormData();
+                formData.append('dni' ,$inputCodigo.value);
+                ObjMain.ajax_post('POST', 'ajax/estadoPedido' , formData)
+                .then( res => {
+                    const { session } = document.querySelector('.dataUser').dataset;
+                    if(session) {
+                        res = JSON.parse(res)
+                        if(!res.status){
+                            $resCodigo.textContent = res.message;
+                            $resCodigo.style.color = '#C51152';
+                            $inputCodigo.value ="";
+                            return
+                        }
+                        localStorage.setItem('state_pedido' , true)
+                        window.location = `${DOMAIN}myaccount`;
+                        localStorage.setItem('state_pedido' , true)
+                    }else {
+                        res = JSON.parse(res);
+                        ObjMain.showStatePedido(res);
                     }
-                    setTimeout( function() {
-                        $(`.step0${tipo_estado}`).trigger('click');
-                    },1000)
-            
-                    
-                }else {
-                    $resCodigo.textContent = res.message;
-                    $resCodigo.style.color = '#C51152';
-                    $inputCodigo.value ="";
-                }
-                   
-            })
-            .catch((err)=>{
-              console.log(err)  
-            
-            });
+                })
+                .catch( err => {
+                     
+                })
+
+            }else {
+                const formData = new FormData();
+                formData.append('codigo' ,$inputCodigo.value);
+                ObjMain.ajax_post('POST', 'ajax/estadoPedido' , formData)
+                .then( res => {
+                    res = JSON.parse(res);
+                    ObjMain.showStatePedido(res);
+                })
+                .catch((err)=>{
+                  console.log(err)  
+                });
+            }
+           
         }else {
             $resCodigo.textContent = 'Escriba el código de su pedido'
             $resCodigo.style.color = '#C51152';
         }
     },
-
     showSearchPedido : () => {
         const $panelState = document.querySelector('#div_seg');
         const $searchMenu = document.querySelector('#div_buscarp');
@@ -2049,6 +2082,10 @@ window.addEventListener('load', () => {
     ObjMain.init();
     if( window.location.href== ( `${DOMAIN}myaccount` ) ){
         perfil();
+        if(localStorage.getItem('state_pedido')) {
+            $('#p_misord').trigger('click');
+            localStorage.removeItem('state_pedido')
+        }
     }
    $btncarrito = document.querySelector('.btnAddCarrito')
     if($btncarrito) {

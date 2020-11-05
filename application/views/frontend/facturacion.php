@@ -299,19 +299,19 @@
 
                                     <div class="divTableRow" id="pn_datos1">
                                         <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Nombres : <div class="d_ob">*</div>
+                                            <div class="etiquetaFormulario">Nombres y Apellidos: <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="30" name="campo1" id="c_nombres_dest"
+                                            <input type="text" size="100" maxlength="100" name="campo1" id="c_nombres_dest"
                                                 onkeypress="return soloLetras(event)" value="">
 
                                         </div>
-                                        <div class="divTableCell">
+                                        <!-- <div class="divTableCell">
                                             <div class="etiquetaFormulario">Apellidos: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="20" maxlength="20" name="campo1" id="c_ape_dest"
                                                 onkeypress="return soloLetras(event)" value="">
 
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="divTableRow">
@@ -500,7 +500,6 @@
         </div>
     </div>
     </div>
-    <!--Fin de cuerpo-->
     
 </main>
 <style>
@@ -592,9 +591,9 @@
                         tipo_doc :  document.getElementById('tipo_doc_destinatario').value ,
                         number_doc :  document.getElementById('number_doc_dest').value ,
                         nombres :  document.getElementById('c_nombres_dest').value ,
-                        apellidos :  document.getElementById('c_ape_dest').value ,
                         telefono :  document.getElementById('c_telcel_dest').value ,
                     }
+                    // apellidos :  document.getElementById('c_ape_dest').value ,
                 }             
                 getFactura () {
                     

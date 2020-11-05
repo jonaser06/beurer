@@ -25,13 +25,24 @@
 					<div class="row">
 						<div class="container-fluid">
 							<div class="row">
-								<div class="col-xs-10">
+								<div class="col-xs-6">
 									<div class="form-group">
 										<label class="control-label">Código de Pedido</label>
 										<input readonly type="text" class="form-control" id="codigo" name="pedido[codigo]"  value="<?= isset($pedido['codigo']) ? $pedido['codigo'] : 'No tiene codigo'; ?>" >
 									</div>
 								</div>
-								
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label class="control-label">Comprador</label>
+										<input readonly type="text" class="form-control" id="comprador"  value="<?= isset($pedido['nombres']) ? $pedido['nombres'].' '.$pedido['apellidos'] : ''; ?>" >
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label class="control-label">correo</label>
+										<input readonly type="text" class="form-control" id="correo"  value="<?= isset($pedido['correo']) ? $pedido['correo']: ''; ?>" >
+									</div>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-10">
@@ -50,17 +61,17 @@
 									<div class="form-group">
                                         <label for="campo_3-1" class="control-label">Estado</label>
                                         <?php if($pedido['recojo']== '1'){?>
-										<select name="pedido[pedido_estado]" class="form-control">
-											<option value="1" <?= ($pedido['pedido_estado'] == 1 ? 'selected' : '') ?>>Orden generada</option>
-											<option value="2" <?= ($pedido['pedido_estado'] == 2? 'selected' : '') ?>>Prepando Pedido</option>
-											<option value="3" <?= ($pedido['pedido_estado'] == 3 ? 'selected' : '') ?>>Listo en Tienda</option>
+										<select id="selected_pedido"name="pedido[pedido_estado]" class="form-control">
+											<option value="1" <?= ($pedido['pedido_estado'] == 1 ? 'selected disabled' : '') ?>>Orden generada</option>
+											<option value="2" <?= ($pedido['pedido_estado'] == 2? 'selected disabled ' : '') ?>>Prepando Pedido</option>
+											<option value="3" <?= ($pedido['pedido_estado'] == 3 ? 'selected disabled' : '') ?>>Listo en Tienda</option>
                                         </select>
                                         <?php } else {?>
                                             <select name="pedido[pedido_estado]" class="form-control">
-											<option value="1" <?= ($pedido['pedido_estado'] == 1 ? 'selected' : '') ?>>Orden generada</option>
-											<option value="2" <?= ($pedido['pedido_estado'] == 2 ? 'selected' : '') ?>>Prepando Pedido</option>
-											<option value="3" <?= ($pedido['pedido_estado'] == 3 ? 'selected' : '') ?>>Listo en Para recojo</option>
-											<option value="4" <?= ($pedido['pedido_estado'] == 4 ? 'selected' : '') ?>>Pedido entregado</option>
+											<option value="1" <?= ($pedido['pedido_estado'] == 1 ? 'selected disabled' : '') ?>>Orden generada</option>
+											<option value="2" <?= ($pedido['pedido_estado'] == 2 ? 'selected disabled' : '') ?>>Prepando Pedido</option>
+											<option value="3" <?= ($pedido['pedido_estado'] == 3 ? 'selected disabled' : '') ?>>Listo en Para recojo</option>
+											<option value="4" <?= ($pedido['pedido_estado'] == 4 ? 'selected disabled' : '') ?>>Pedido entregado</option>
                                         </select>
                                        <?php } ?>
 									</div>
@@ -83,7 +94,7 @@
 
 		$(document).ready(function () {
 			$("#formEditarEstado").submit(function(e){
-                e.preventDefault();
+				e.preventDefault();
 				$.ajax({
 					url:  $(this).attr('action'),
 					type: $(this).attr('method'),

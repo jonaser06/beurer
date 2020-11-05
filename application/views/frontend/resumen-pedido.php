@@ -115,11 +115,11 @@ include 'src/includes/header.php'
                         <div class="distrito" style="text-align:left;"></div>
                         <div class="provincia" style="text-align:left;"></div>
                         <br>
-                        <li style="font-weight:bold;">Referencia</li>
+                        <li class="title_referencia"style="font-weight:bold;">Referencia</li>
                         <div class="referencia" style="text-align:left;"> </div>
-                        <br>
+                        <br class="espaciado">
 
-                        <li style="font-weight:bold;">Fecha de entrega</li>
+                        <li class="title_recojo" style="font-weight:bold;">Fecha de entrega</li>
                         <div class="fecha_entrega"style="text-align:left;"></div>
                         <br> 
 

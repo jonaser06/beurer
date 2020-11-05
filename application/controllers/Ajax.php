@@ -831,7 +831,7 @@ class Ajax extends MY_Controller
               $dest = [];
               if($this->input->post('flag_dest')) {
                 $dest["dest_nombres"]    = $this->input->post('dest_nombres');
-                $dest["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                // $dest["dest_apellidos"]  = $this->input->post('dest_apellidos');
                 $dest["dest_telefono"]   = $this->input->post('dest_telefono');
                 $dest["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
                 $dest["dest_number_doc"] = $this->input->post('dest_number_doc');
@@ -923,7 +923,7 @@ class Ajax extends MY_Controller
             ];
             if($this->input->post('dest_nombres')) {
                 $data["dest_nombres"]    = $this->input->post('dest_nombres');
-                $data["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                // $data["dest_apellidos"]  = $this->input->post('dest_apellidos');
                 $data["dest_telefono"]   = $this->input->post('dest_telefono');
                 $data["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
                 $data["dest_number_doc"] = $this->input->post('dest_number_doc');
@@ -1042,14 +1042,7 @@ class Ajax extends MY_Controller
                       array_push($data ,$productoDB);
                   };
 
-                  /**
-                   * 
-                   * AQUI ENVIAR EL CORREO
-                   * $data['detalle'] : array : productos 
-                    * $data[pedido]:array  detalles del usuario y pedido , cupon ,descuento
-                   * 
-                   * 
-                   */
+            
                   $enviar = $this->sendmail($pedido['correo'], $pedido, 'PEDIDO CONFIRMADO', 'order_confirm.php');
 
                   $resp = [
@@ -1093,8 +1086,11 @@ class Ajax extends MY_Controller
             'message' => 'Metodo POST requerido',
         ];
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
-            $codigo = $this->input->post('codigo');
-            $result = $this->get('pedido',['codigo' =>$codigo ]);
+           $type_search_dni = $this->input->post('dni') ? true : false ;
+           $result =  $this->input->post('dni') 
+                    ? $this->dbSelect('*','pedido' , ['numero_documento' => $this->input->post('dni') ],'id_pedido')[0] 
+                    : $this->get('pedido', ['codigo' => $this->input->post('codigo') ]);
+             
             $states_pedido = $this->dbSelect('*','pedido_estado' , ['id_pedido' => $result['id_pedido']]);
             if (!empty($result)) {
                 $this->resp['status'] = true;
@@ -1117,7 +1113,7 @@ class Ajax extends MY_Controller
                 $resp = [
                     'status'  => false,
                     'code'    => 404,
-                    'message' => 'x El código de pedido no es correcto , intente con uno distinto '
+                    'message' => !$type_search_dni ?'x El código de pedido no es correcto , intente con uno distinto ' : 'x el Usuario con el DNI ingresado no realizo compras , intente con otro'
                 ];
                 $this->output
                     ->set_content_type('application/json')
