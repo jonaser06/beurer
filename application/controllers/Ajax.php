@@ -362,8 +362,10 @@ class Ajax extends MY_Controller
                 ];
 
             $reclamos = $this->dbSelect('*','reclamos', $w);
-            /* var_dump($reclamos);
-            exit; */
+            echo '<!--';
+            echo json_encode($reclamos);
+            echo '-->';
+            exit;
             foreach ($reclamos as $key => $value) {
                 $menor = ($value['r_menor'] == 1 )?'Si':'No';
                 $salida .= '<tr>';
@@ -397,9 +399,9 @@ class Ajax extends MY_Controller
     
             $salida .= '</table>';
     
-            $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
-            $this->output->set_content_type('application/vnd.ms-excel');
-            $this->output->set_output($salida);
+            // $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+            // $this->output->set_content_type('application/vnd.ms-excel');
+            // $this->output->set_output($salida);
 
             return;
 
