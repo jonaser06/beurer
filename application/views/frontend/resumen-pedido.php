@@ -103,17 +103,20 @@ include 'src/includes/header.php'
                     </br>
                     <ul
                         style="list-style-image: url(<?= base_url('beurer_plantilla/assets/images/check-solid.svg')?>); font-size:1.3em;margin-left:3%;">
-                        <li class="title-envio" style="font-weight:bold;"></li>
-                        <div class="titular" style="text-align:left;"> </div>
-                        <div class="dir_envio" style="text-align:left;"></div>
-                        <div class="provincia" style="text-align:left;"></div>
-                        <div class="distrito" style="text-align:left;"></div>
+                        <li style="font-weight:bold;">Comprador</li>
                         <div class="numero_documento" style="text-align:left;"></div>
+                        <div class="titular" style="text-align:left;"> </div>
                         <div class="correo" style="text-align:left;"></div>
+                        <div class="destinatario">Lo puede recibir:</div>
+                        <br>
+
+                        <li class="title-envio" style="font-weight:bold;"></li>
+                        <div class="dir_envio" style="text-align:left;"></div>
+                        <div class="distrito" style="text-align:left;"></div>
+                        <div class="provincia" style="text-align:left;"></div>
                         <br>
                         <li style="font-weight:bold;">Referencia</li>
                         <div class="referencia" style="text-align:left;"> </div>
-                        <span class="destinatario">Lo puede recibir:</span>
                         <br>
 
                         <li style="font-weight:bold;">Fecha de entrega</li>

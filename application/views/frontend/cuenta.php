@@ -1,3 +1,4 @@
+<!--  -->
 <?php include 'src/includes/header.php' ?>
 
 
@@ -24,25 +25,36 @@ input {
         display: block !important;
     }
 }
+    input ,select{
+    height: 30px !important;
+	border: 1px solid #999;
+	font-size: 16px !important;
+	color: #161616;
+	font-family:'nexa-lightuploaded_file'!important;
+    }
+    .divTableRow {
+        display: flex;
+        flex-wrap: wrap;
+    }
 </style>
 
-<main class="main-detail-products" style="overflow: hidden;">
+<main class="main-detail-products" style="overflow: hidden;" >
     <!--Inicio de cuerpo-->
 
     <div class="formulario" style="background-color:transparent;text-align:center;">
 
         <div class="row cont_datos" id="d_formularios1" align="center"
-            style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;">
+            style="background-color:white;display:inline-block;width:90%;text-align:left;margin-bottom:1%;border-radius:20px">
             <div class="col-md-12" style="color:#161616;display:flex;">
 
                 <img src="<?= base_url('beurer_plantilla/assets/images/user-plomo.png')?>"
-                    style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:5px solid #c51152;">
+                    style="width:80px;height:80x;margin:auto 0;padding:0.5%;border-radius:50%;border:3px solid gray;">
 
                 <div style="margin:20px 10px;">
                     <span style="font-size:1.3em;font-family:'nexaregularuploaded_file';">HOLA</span>
                     <p   
                         class="user-name-db"
-                        style="margin-top:5px;font-size:1.4em;margin-bottom:10px;font-weight:bold;
+                        style="margin-top:5px;font-size:1.4em !important;margin-bottom:10px;font-weight:bold;
                         font-family:'nexaregularuploaded_file';">
                         <?php echo $userData['nombre']." ".$userData['apellido_paterno']." ".$userData['apellido_materno']?>
                         </p>
@@ -98,7 +110,7 @@ input {
               
             </script>
              <div id="info_puser"
-                style="text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
+                style="border-radius:20px;text-align:left;width:71%;min-height:25em;float:left;background-color:white;padding:3% 5%;;color:#161616;transition: all 0.3s ease-out;">
                 <div class="row" style="margin:0;display:flex;font-size:1.3em;font-weight:bold;">
                     <div id="back-section-user"
                         style="font-size:1.6em;margin-right:4%;display:none;width:10%;float:left;border-right:2px solid whitesmoke;">
@@ -116,7 +128,7 @@ input {
                         gestiones con nosotros.</h4>
                     <h4>Contamos con este panel a tu disposición:</h4>
                     <p>
-                    <ul style="font-size:1.2em;line-height:50px; ">
+                    <ul style="font-size:1.2em !important;line-height:50px; ">
                         <li>1. Datos Personales</li>
                         <li>2. Cambio de Contraseña</li>
                         <li>3. Mis Compras</li>

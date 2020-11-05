@@ -41,7 +41,7 @@
 
     <div class="formulario" style="text-align:center;width:100%;transform: scale(0.9);background:transparent;" align="center">
         <br>
-        <main2>
+        <main2 style="font-size: 0.75rem !important;">
             <div class="basket" style="padding:0px;">
                 <div style="background-color:white;border-radius:25px;float:left;width:100%;padding:.5rem 2rem;margin-bottom:3%;">
                     <div class="titulo font-nexaheavy" style="margin-top:2%;float:left;margin-left:2%;padding-left:1% !important;border-left:2px solid #c51152;">Productos seleccionados en carrito de compras</div>
@@ -81,7 +81,7 @@
                                 Solo te pediremos algunos datos para el despacho. No serán guardados para tu próxima compra.
                             </span>
                             <br><br><br>
-                            <span>
+                            <span class="btn-nextCarrito">
                                 <a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" style="width:80%;padding:7px 0px;font-size:1em;">
                                     CONTINUAR SIN REGISTRARSE
                                 </a>
@@ -98,7 +98,7 @@
                                 <p><input type="password" id="pasword__" style="width:85% !important"></p>
                                 <p class="font-light"><a href="#">¿Has olvidado la contraseña?</a></p>
                                 <br>
-                                <input class="btn btn-cmn" type="submit" value="INICIAR SESIÓN Y COMPRAR" style="width:80% !important;;padding:7px 0px;font-size:1em !important; height: 35px; line-height: 23px;">                                
+                                <input class="btn btn-cmn" type="submit" value="INICIAR SESIÓN Y COMPRAR" style="width:fit-content!important;padding:7px 10px !important;font-size:.95em !important; height: 35px!important; line-height: 23px;">                                
                             </form>
 
                         </div>
@@ -189,11 +189,12 @@
             </div>
             <span><a class="btn btn-cmn" href="<?php echo base_url(); ?>" tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
             <?php if ( $sesion ): ?>
-            <span><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;">Comprar</a></span>
+            <span class="btn-nextCarrito"><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;outline: none;">Comprar</a></span>
             <?php endif; ?>
             <br>
 
         </div>
+        
 
     </div>
     <!--Fin de cuerpo-->
@@ -221,7 +222,7 @@
 </main>
 
 
-<div id="container10" style="margin-top:17em;">
+<div id="container10" style="margin-top:17em;font-size:90%!important">
     <div class="loader default default-01">
         <div class='loader-container'>
             <div class='ball'></div>
@@ -277,4 +278,11 @@
 
 </body>
 
+<style>
+
+   body {
+       font-size: 62.5%!important;
+   }
+    
+</style>
 </html>

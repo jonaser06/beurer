@@ -113,7 +113,7 @@
                                 <div class="divTableBody" style="display:block;">
                                     <div class="divTableRow">
                                         <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Tipo Documento Identidad: : <div
+                                            <div class="etiquetaFormulario">Tipo Documento Identidad:<div
                                                     class="d_ob">*</div>
                                             </div>
 
@@ -129,8 +129,8 @@
                                             <div class="etiquetaFormulario">Número Documento Identidad: <div
                                                     class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="campo1" 
-                                                value="<?= $userData ? $userData['documento'] : '' ?>"
+                                            <input type="text" size="20" maxlength="20"  onkeypress="return soloNumeros(event)" name="campo1" id="campo1" 
+                                                value="<?= $userData ? $userData['documento'] : '' ?> "
                                                 required
                                             >
 
@@ -216,13 +216,13 @@
                                     <div class="divTableRow">
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono fijo</div>
-                                            <input type="text" size="9" maxlength="9" name="campo1" id="c_telfij"
+                                            <input type="text" size="9" maxlength="9" name="campo1"  onkeypress="return soloNumeros(event)"  id="c_telfij"
                                                  value="<?= $session? $userData['telefono'] :'' ?>">
                                         </div>
                                         <div class="divTableCell">
                                             <div class="etiquetaFormulario">Teléfono celular: <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="9" maxlength="9" name="campo1" id="c_telcel"
+                                            <input type="text" size="9" maxlength="9" onkeypress="return soloNumeros(event)" name="campo1" id="c_telcel"
                                                 value="">
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@
                                             <div class="etiquetaFormulario">Número Documento Identidad: <div
                                                     class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="number_doc_dest"
+                                            <input type="text" size="20" maxlength="20" name="campo1"  onkeypress="return soloNumeros(event)"  id="number_doc_dest"
                                                 value="" required>
 
                                         </div>
@@ -396,7 +396,7 @@
                                         <div class="divTableCell" style="width:100%;">
                                             <div class="etiquetaFormulario">Razón Social: <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="9" maxlength="9" name="campo1" id="r_social"
+                                            <input type="text"  name="campo1" id="r_social"
                                                 value="" required>
                                         </div>
                                     </div>
@@ -405,7 +405,7 @@
                                         <div class="divTableCell" style="width:100%;">
                                             <div class="etiquetaFormulario">Dirección Fiscal: <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="9" maxlength="9" name="campo1" id="d_fiscal"
+                                            <input type="text"  name="campo1" id="d_fiscal"
                                                 value="" required>
                                         </div>
                                     </div>
@@ -446,7 +446,14 @@
                             Privacidad</a>.</span></div>
             </div>
         </div>
-
+        <div style="text-align:center !important;" >
+        <div class="checkbox" style="display:inline-block; " id="d_publicidad">
+            <label class="font-light label-pol" style="display:inline;">
+                <input type="checkbox" id="publicidad"   /><i class="helper"></i>
+            </label>
+            <div style="display:inline-block; font-size:1.3em; color:black;"> <span>Deseo recibir ofertas y novedades de Beurer en mi e-mail.</span></div>
+        </div>
+        </div>
 
         <br>
 
@@ -496,7 +503,15 @@
     <!--Fin de cuerpo-->
     
 </main>
-
+<style>
+    input ,select{
+    height: 30px !important;
+	border: 1px solid #999;
+	font-size: 16px !important;
+	color: #161616;
+	font-family:'nexa-lightuploaded_file'!important;
+    }
+</style>
 <script src=<?= base_url('beurer_plantilla/assets/js/registro.js')?>></script>    
 
 <script>
@@ -597,11 +612,10 @@
                 }
                 
                 filter (obj){
-                    console.log(obj)
                     for (const property in obj) {
                         if((property== "fijo") ||(property =="referencia") ){
                         }else {
-                            if(obj[property] == ''){
+                            if(obj[property] == ''||obj[property] == 'SELECCIONE DISTRITO'){
                             this.estado = false;
                             break;
                             }else{

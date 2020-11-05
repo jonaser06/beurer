@@ -7,11 +7,16 @@ class Perfil extends MY_Controller
 	{
         parent::__construct();
         $this->load->model('frontend/taxonomia');
-        $this->load->model('frontend/contenido');
+		$this->load->model('frontend/contenido');
+		
+        if (!isset($_SESSION['id_cliente'])) {
+			redirect('');
+        } 
 	}
 
 	public function index()
 	{
+
        $uri_segment = $this->uri->segment_array();
         $uri = implode('/',$uri_segment);
 

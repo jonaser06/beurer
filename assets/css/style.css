@@ -184,8 +184,7 @@ select {
   color: #fff;
   font-family: "nexaheavyuploaded_file";
   border: none;
-  padding: 10px;
-  height: auto;
+  height: 35px!important;
   text-align: center;
 }
 
@@ -214,7 +213,7 @@ select {
   background-color: #C51152;
   padding: 8px;
   margin-top: 15px;
-  border-radius: 9px;
+  border-radius: 15px;
 }
 
 .input-group {
@@ -272,6 +271,8 @@ select {
   margin-left: 5px;
 }
 
+
+
 /* ojito show  */
 .eyes {
   height: 20px;
@@ -279,6 +280,17 @@ select {
 
 }
 
+@media (max-width: 768px) {
+  #formPass .input-group {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+  #formPass .input-group  label {
+   width: 100%;text-align: left;
+   margin-left: 30px
+  }
+}
 
 .font-nexaheav {
   font-size: 1.1em;
@@ -324,7 +336,8 @@ body {
   background-color: #fff;
 
   font-family: 'Open Sans', sans-serif;
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
+  /* font-size: 82.5%; */
   margin: 0 auto;
 }
 
@@ -349,9 +362,11 @@ h1 {
   padding: 0;
 }
 
+
 input,
 button,
 select {
+  
   font-size: .85em !important;
   /* border: 0 none;
 outline: 0 none; */

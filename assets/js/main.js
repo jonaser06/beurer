@@ -67,6 +67,7 @@ ObjMain = {
         }
          if (window.location.href == ( `${DOMAIN}carrito` )){
             ObjMain.listar_items(); 
+            ObjMain.nextStepCarrito();
         }
          if (window.location.href == ( `${DOMAIN}order-summary` )){
              ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
@@ -1329,7 +1330,7 @@ ObjMain = {
 
                 <div class="quantity">
 
-                    <input class="form-control-field cantidad" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
                 <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
@@ -1697,7 +1698,7 @@ ObjMain = {
                     <span class="item-price">Precio: S/. ${pedido.productos_precio}</span>
                     ${nodeDescuento}
                     <span class="item-price">Envio : S/. ${pedido.entrega_precio}</span>
-                    <span class="detalle" style="margin-top:7px;">Total : S/. ${parseFloat(pedido.productos_precio) - parseFloat(descuento) + parseFloat(pedido.entrega_precio)}</span>
+                    <span class="detalle" style="margin-top:7px;">Total : S/.  ${(parseFloat(pedido.productos_precio) - parseFloat(descuento) + parseFloat(pedido.entrega_precio)).toFixed(2)}</span>
 
                 </div>
                 <div class="item-fecha">
@@ -1707,7 +1708,7 @@ ObjMain = {
                 </div>
             </article>
             
-            <div class="progress" style="width:100%;margin-top:14px;margin-bottom:15px;margin-left:5px">
+            <div class="progress" style="width:100%;margin-top:14px;margin-bottom:2rem;margin-left:5px">
                 ${progressBarrState}
             </div>`;
             ObjMain.stateProgress(pedido.pedido_estado , pos );
@@ -1725,6 +1726,24 @@ ObjMain = {
             
         });
     },
+    nextStepCarrito : () => {
+        const subtotal = parseFloat(document.querySelector('.sub_cost').textContent);
+        if(subtotal == 0) {
+            document.querySelector('.carrito-container').innerHTML = '<h4 style="display:block;margin:7.5em 0" >No tiene productos en su Carrito de Compras</h4>'
+        }
+        document.querySelector('.btn-nextCarrito').addEventListener('click' , event => {
+            event.preventDefault();
+            const ruta = event.target.href; 
+            const subtotal = parseFloat(document.querySelector('.sub_cost').textContent);
+            console.log(subtotal)
+            if(subtotal > 0 ) {
+                window.location = ruta
+            } else {
+                document.querySelector('.carrito-container').innerHTML = '<h4 style="display:block;margin:7.5em 0" >No tiene productos en su Carrito de Compras</h4>'
+            }
+        })
+        
+    }
 }
 
 
@@ -1812,7 +1831,7 @@ const perfil = () => {
         inicio.addEventListener("click", function (e) {
             titulouser.innerHTML = '<h4 style="margin: auto;font-weight:600">Bienvenido al Panel de Administración del Cliente BEURER</h4>';
     
-            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:.8rem;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Cambio de Contraseña</li> <li>3. Mis Compras </li> </ul> </p>';
+            contenidouser.innerHTML = '<h4>En este Panel te ofrecemos la comodidad que mereces, para que puedas administrar todas tus gestiones con nosotros.</h4> <h4>Contamos con 3 secciones a tu disposición:</h4> <p> <ul style="font-size:1rem;line-height:50px;"> <li>1. Datos Personales</li> <li>2. Cambio de Contraseña</li> <li>3. Mis Compras </li> </ul> </p>';
             if (screen && screen.width < 700) {
                 secciones.style.display = 'none';
                 infouser.style.display = 'block';
@@ -1820,7 +1839,7 @@ const perfil = () => {
         });
     
         datos.addEventListener("click", function () { 
-            titulouser.innerHTML = '<h5 style="margin: auto;font-weight:600">Datos Personales</h5>';
+            titulouser.innerHTML = '<h4 style="margin: auto;font-weight:600">Datos Personales</h4>';
             contenidouser.innerHTML = `<div class="divTable" style=" width:100%;display:inline-block;margin-top:10px">
             <div class="divTableBody" style="display:block;">
                 <div class="divTableRow" id="pn_datos1"  style="display:flex;flex-wrap:wrap;width:100%">
@@ -1867,7 +1886,7 @@ const perfil = () => {
                 </div>
                 <div class="divTableRow" style="display:flex;flex-wrap:wrap">
                 <div style="width:90%;float:left;margin:auto 0px;font-weight:bold;font-size:1.3em">
-                <p>Mis direcciones</p>
+                <h4 style="margin: auto;font-weight:600">Mis direcciones</h4>
                  </div> <br> <br>
                  <div class="divTableRow" style ="width:100%">
                     <div class="divTableCell">
@@ -1930,7 +1949,7 @@ const perfil = () => {
                 </div>
                 <span class="response-update"style="margin-left:10px;font-size:.8rem;color: #C51152"></span>
 
-                <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="background-color:#C51152;color:#fff;margin-top:10px;float:left"> guardar datos</button>
+                <button onclick ="ObjMain.updateAccount(${userData.id_cliente})" class="btn saveUser" style="border-radius:15px;background-color:#C51152;color:#fff;margin-top:10px;float:left"> Guardar datos</button>
                 `;
 
 

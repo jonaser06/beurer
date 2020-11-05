@@ -17,6 +17,13 @@ include 'src/includes/header.php'
     font-size: .8rem !important;
     font-weight: bold;
 }
+    input {
+    height: 30px !important;
+	border: 1px solid #999;
+	font-size: 16px !important;
+	color: #161616;
+	font-family:'nexa-lightuploaded_file'!important;
+    }
 </style>
 <main class="main-detail-products">
     <div class="container2 dv-segui" style="width:80%;">

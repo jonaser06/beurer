@@ -242,7 +242,15 @@
     </div>
     <!--Fin de cuerpo-->
 </main>
-
+<style>
+    input ,select{
+    height: 30px !important;
+	border: 1px solid #999;
+	font-size: 16px !important;
+	color: #161616;
+	font-family:'nexa-lightuploaded_file'!important;
+    }
+</style>
 
 <!-- <script src="assets/js/registro.js"></script>    -->
 

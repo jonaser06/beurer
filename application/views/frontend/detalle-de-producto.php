@@ -131,8 +131,8 @@
                                 S/ <?= $product['precio']; ?></div>
                         </div>
 
-                        <div class="font-nexaheav text-left "
-                            style="font-size:1.1em;font-weight:bold;font-family:'nexa-lightuploaded_file';margin-top:-0.5rem;">
+                        <div class="font-nexaheav"
+                            style="text-align:left;font-size:1.1em;font-weight:bold;font-family:'nexa-lightuploaded_file';margin-top:-0.5rem;">
                             Normal: S/ <?= $product['precio_anterior']; ?></div>
                         <br>
                         <span class="px-0 col-xs-12  font-nexaregular"
@@ -169,19 +169,20 @@
                             </label>
 
                             <div class="cantidad_btn" style="display:inline-block;">
-                                <button id="dism" style="margin:0 2%;">-</button>
+                                <button id="dism" style="margin:0 2%;width:42px;height:42px">-</button>
                                 <input class="form-control-field" name="pwd" value="1" type="text" id="cantidad_prod"
-                                    min="1" style="padding:0px;width:10%; text-align:center;" readonly>
-                                <button id="aum" style="margin:0 2%;">+</button>
+                                    min="1" style="padding:0px;width:10%; border:none!important;text-align:center; 
+                                    vertical-align: middle!important;font-size:2em!important;font-family:nexaheavyuploaded_file!important;background-color:transparent!important" readonly>
+                                <button id="aum" style="margin:0 2%;width:42px;height:42px">+</button>
                             </div>
                             <br> <br>
                             <button class="btnAddCarrito btn btn-cmn" type="button" data-toggle="modal"
                                 data-target="#DetalleProducto" 
                                 data-title="<?php echo $product['titulo']?>"
                                 data-id       = "<?php echo $product['id']?>"
-                                data-precio   = "<?php echo $product['precio']?>"
+                                data-precio   = "<?php echo $product['precio_anterior']?>"
                                 data-producto_sku   = "<?php echo $product['producto_sku']?>"
-                                data-precio_online   = "<?php echo $product['precio_anterior']?>"
+                                data-precio_online   = "<?php echo $product['precio']?>"
                                 data-img   = "<?= $product['imagen'][0] ?>"
                                 data-peso   = <?= $product['precio'] ?>
                                 data-volumen   = <?= $product['volumen'] ?>
@@ -335,9 +336,7 @@
     <?php endif ?>
 
 </main>
-<?php
-        include 'src/includes/footer.php'
-    ?>
+
 <script src="<?= base_url('assets/js/libraries/fancybox.min.js'); ?>"></script>
 <script>
 $(document).ready(function() {
@@ -439,21 +438,21 @@ $(function() {
                         <h2 class="modal-title" id="title-principal" style="font-size:1.3rem;font-weight:bold;">
                         <?= $product['titulo']?>
                         </h2>
-                        <div class="font-nexaheav text-left cantidadModal"
-                            style="font-size:1.3em;font-family:'nexaregularuploaded_file';">
+                        <div class="font-nexaheav cantidadModal"
+                            style="text-align:left;font-size:1.3em;font-family:'nexaregularuploaded_file';font-weight:100">
                             Cantidad: 1
                         </div>
 
 
                         <div style="display:block;"> <img
-                                style="display:inline-block;width:7vh;height:5vh;margin-right:3%;padding-bottom:4%;"
+                                style="text-align:left;display:inline-block;width:7vh;height:5vh;margin-right:3%;padding-bottom:4%;"
                                 src="<?= base_url(); ?>assets/images/precio-online.png">
-                            <div class="font-nexaheav text-left"
-                                style="display:inline-block;color:#c51152;font-weight:bold; font-size: 1.2rem;font-family:'nexaregularuploaded_file';">
-                                S/ <?=$product['precio_anterior'] ?></div>
+                            <div class="font-nexaheav"
+                                style="text-align:left;display:inline-block;color:#c51152;font-weight:bold; font-size: 1.2rem;font-family:'nexaregularuploaded_file';">
+                                S/ <?=$product['precio'] ?></div>
                         </div>
-                        <div class="font-nexaheav text-left "
-                            style="font-size:1.1em;font-family:'nexaregularuploaded_file';">Normal: S/ <?=$product['precio'] ?></div>
+                        <div class="font-nexaheav"
+                            style="font-weight:100;text-align:left;font-size:1.1em;font-family:'nexaregularuploaded_file';">Normal: S/ <?=$product['precio_anterior'] ?></div>
                     </div>
 
                 </div>
@@ -462,7 +461,7 @@ $(function() {
                 style="text-align:center;border-top:0 none;padding-top:7px;border-bottom:1px solid #c3c3c3;padding-bottom:35px;">
 
                 <a href="<?php echo base_url('carrito'); ?>"><button type="button" class="btn  btn-cmn"
-                        style="width:75%;text-align:center;font-size:1.2rem;padding-top:7px;padding-bottom:7px; padding-left:0px;padding-right:0px; ">IR
+                style="width:75%!important;text-align:center;font-size:1.2rem!important;padding-top:7px;padding-bottom:7px; padding-left:0px;padding-right:0px; ">IR
                         AL CARRO</button></a>
                 <br>
                 <br>
@@ -544,6 +543,14 @@ $(function() {
     </div>
 </div>
 
+<style>
+    body {
+        background-color: #fff!important;
+    }
+</style>
+<?php
+        include 'src/includes/footer.php'
+    ?>
 </body>
 
 </html>

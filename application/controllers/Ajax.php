@@ -1032,9 +1032,9 @@ class Ajax extends MY_Controller
                       
                       $productoDB = [
                           'nombre' => $prod['titulo'],
-                          'precio' => $prod['precio'],
+                          'precio' => $prod['precio_anterior'],
                           'imagen' => $imagenes[0]['imagen'],
-                          'precio_online' => $prod['precio_anterior'],
+                          'precio_online' => $prod['precio'],
                           'producto_sku' => $prod['producto_sku'],
                           'cantidad' => $pedido_detalle[$i]['cantidad'],
                           'subtotal' => $pedido_detalle[$i]['subtotal_precio']
