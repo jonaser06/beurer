@@ -363,7 +363,7 @@ class Ajax extends MY_Controller
 
             $reclamos = $this->dbSelect('*','reclamos', $w);
             echo '<!--';
-            echo json_encode($reclamos);
+            var_dump($reclamos);
             echo '-->';
             exit;
             foreach ($reclamos as $key => $value) {
