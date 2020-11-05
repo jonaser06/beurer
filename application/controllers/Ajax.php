@@ -19,6 +19,32 @@ class Ajax extends MY_Controller
         // }
     }
 
+    public function setoferta(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $data = [
+                'nombres' => $this->input->post('nombres'),
+                'apellidos' => $this->input->post('apellidos'),
+                'correo' => $this->input->post('correo'),
+                'ofertas' => 1
+            ];
+            $this->dbInsert('clientes_ofertas', $data);
+            $this->resp['status'] = true;
+            $this->resp['code'] = 200;
+            $this->resp['message'] = 'Insertado correctamente';
+            $this->resp['data'] = $data;
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode($this->resp));
+                return;
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($this->resp));
+            return;
+    }
+
     public function index(){
         $resp = [
             'status'  => false,

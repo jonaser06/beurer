@@ -34,6 +34,7 @@ ObjMain = {
             localStorage.removeItem('Destinatario')
             localStorage.removeItem('facturacion')
             ObjMain.load_ubigeo();
+            ObjMain.recibir_ofertas();
             // ObjMain.defaultUbigeo();
         }
         if(window.location.href == ( `${DOMAIN}reclamos` ) ){
@@ -74,6 +75,31 @@ ObjMain = {
              setTimeout(localStorage.clear(),2000)
              console.log('****resumen pedido *******')
         }
+    },
+    recibir_ofertas: () =>{
+        document.querySelector('#publicidad').addEventListener('change',(event)=>{
+            if (event.target.checked) {
+                let nombres = document.getElementById('c_nombres1').value;
+                let apellidos = document.getElementById('c_apellido_paterno').value + ' ' + document.getElementById('c_apellido_materno').value;
+                let correo = document.getElementById('c_correo1').value;
+                if( nombres != null , apellidos != null, correo != null ){
+                    let formData = new FormData();
+                    formData.append('nombres', nombres);
+                    formData.append('apellidos', apellidos);
+                    formData.append('correo', correo);
+                    ObjMain.ajax_post('POST',DOMAIN+'ajax/setoferta', formData)
+                    .then((resp)=>{
+                        resp = JSON.parse(resp);
+                        if(resp.status){
+                            
+                        }
+                    })
+                    .catch((err)=>{
+                        err = JSON.parse(err);
+                    });
+                }
+            }
+        });
     },
     reclamos: (e) =>{
         e.preventDefault();
