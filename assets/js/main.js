@@ -1217,6 +1217,7 @@ ObjMain = {
                                         <br><br>`
                                     : `<br>`;
         document.querySelector('.title-envio').textContent = !recojo  ?'INFORMACIÓN DE ENVÍO':'RECOJO EN TIENDA';
+        const messageEnvio = !recojo?  'Su pedido llegará en un plazo de 4 días.' : 'Puede recoger su pedido en un plazo maximo de 30 días.'
         // if(session) {
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
@@ -1235,7 +1236,7 @@ ObjMain = {
                         <div>Cantidad de productos: ${cantidad} </div>
                         <div>Importe Sub Total: S/ ${parseFloat(subtotal).toFixed(2)} 
                         </div>
-                        <p style="font-weight:600;font-size:1.2em;margin-top:15px">Su pedido llegará en 4 días. </p>
+                        <p style="font-weight:600;font-size:1.2em;margin-top:15px">${messageEnvio} </p>
 
                         `;
         if(cupon) {
