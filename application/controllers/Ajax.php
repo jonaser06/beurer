@@ -118,7 +118,7 @@ class Ajax extends MY_Controller
         setlocale(LC_ALL, 'es_PE');
         
 
-        $salida = '<table border="1">';
+        $salida = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><table border="1">';
         $salida .= '<tr>';
         $salida .= '<td>Reporte</td>';
         $salida .= '<td>Pedido</td>';
@@ -191,10 +191,10 @@ class Ajax extends MY_Controller
                 $salida .= '</tr>';    
             }
     
-            $salida .= '</table>';
+            $salida .= '</table></body></html>';
     
             $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
-            $this->output->set_content_type('application/vnd.ms-excel');
+            $this->output->set_content_type('application/vnd.ms-excel charset=iso-8859-1');
             $this->output->set_output($salida);
 
             return;
@@ -240,10 +240,10 @@ class Ajax extends MY_Controller
             $salida .= '</tr>';   
         }
 
-        $salida .= '</table>';
+        $salida .= '</table></body></html>';
 
         $this->output->set_header("Content-Disposition: attachment; filename=reportes_" . date('Y-m-d') . ".xls");
-        $this->output->set_content_type('application/vnd.ms-excel');
+        $this->output->set_content_type('application/vnd.ms-excel charset=iso-8859-1');
         $this->output->set_output($salida);
     }
 
