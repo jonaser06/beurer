@@ -75,18 +75,9 @@
                                             <th>Pedido</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <!-- <th>Telefono</th>
-                                            <th>Correo</th>
-                                            <th>Documento</th>
-                                            <th>Numero</th>
-                                            <th>Provincia</th>
-                                            <th>Distrito</th>
-                                            <th>Dirección de envio</th>
-                                            <th>Costo de entrega</th>
-                                            <th>Subtotal</th>
-                                            <th>Cupon</th> -->
                                             <th>Fecha</th>
                                             <th>Producto</th>
+                                            <th>Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table_reclamos"></tbody>

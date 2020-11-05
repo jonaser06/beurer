@@ -24,12 +24,23 @@ let ObjReclamos = {
                 // console.log(resp);
                 document.querySelector('.btn-sbmt-exp').disabled = false;
                 resp.data.forEach((d)=>{
+                    let estado;
+                    if( d.pedido_estado == '1' ){
+                        estado = 'Orden Generada';
+                    }else if( d.pedido_estado == '2' ){
+                        estado = 'Preparando Pedido';
+                    }else if( d.pedido_estado == '3' ){
+                        estado = 'Listo para el recojo';
+                    }else{
+                        estado = 'Pedido entregado';
+                    }
                     reclamo += '<tr>';
                     reclamo += '<th>'+ d.id_pedido +'</th>';
                     reclamo += '<th>'+ d.nombres +'</th>';
                     reclamo += '<th>'+ d.apellidos +'</th>';
                     reclamo += '<th>'+ d.pedido_fecha +'</th>';
                     reclamo += '<th>'+ d.titulo +'</th>';
+                    reclamo += '<th>'+ estado +'</th>';
                     reclamo += '</tr>';
                 });
                 table.innerHTML = reclamo;
@@ -58,12 +69,23 @@ let ObjReclamos = {
             // console.log(resp);
             if(resp.status){
                 resp.data.forEach((d)=>{
+                    let estado;
+                    if( d.pedido_estado == '1' ){
+                        estado = 'Orden Generada';
+                    }else if( d.pedido_estado == '2' ){
+                        estado = 'Preparando Pedido';
+                    }else if( d.pedido_estado == '3' ){
+                        estado = 'Listo para el recojo';
+                    }else{
+                        estado = 'Pedido entregado';
+                    }
                     reclamo += '<tr>';
                     reclamo += '<th>'+ d.id_pedido +'</th>';
                     reclamo += '<th>'+ d.nombres +'</th>';
                     reclamo += '<th>'+ d.apellidos +'</th>';
                     reclamo += '<th>'+ d.pedido_fecha +'</th>';
                     reclamo += '<th>'+ d.titulo +'</th>';
+                    reclamo += '<th>'+ estado +'</th>';
                     reclamo += '</tr>';
                 });
                 let btn_page = '';
