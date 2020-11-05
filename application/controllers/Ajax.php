@@ -394,10 +394,9 @@ class Ajax extends MY_Controller
             }
     
             $salida .= '</table>';
-            echo $salida;
-            // $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
-            // $this->output->set_content_type('application/vnd.ms-excel');
-            // $this->output->set_output($salida);
+            $this->output->set_header("Content-Disposition: attachment; filename=reclamos_" . date('Y-m-d') . ".xls");
+            $this->output->set_content_type('application/vnd.ms-excel charset=iso-8859-1');
+            $this->output->set_output($salida);
 
             return;
 
