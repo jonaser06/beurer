@@ -1217,7 +1217,7 @@ ObjMain = {
                                         <br><br>`
                                     : `<br>`;
         document.querySelector('.title-envio').textContent = !recojo  ?'INFORMACIÓN DE ENVÍO':'RECOJO EN TIENDA';
-        const messageEnvio = !recojo?  'Su pedido llegará en un plazo de 4 días.' : 'Puede recoger su pedido en un plazo maximo de 30 días.'
+        const messageEnvio = !recojo?  'Su pedido llegará en un plazo de 4 días.' : 'Puede recoger su pedido en un plazo máximo de 30 días.'
         // if(session) {
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
         //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
