@@ -403,7 +403,7 @@
 
                                     <div class="divTableRow">
                                         <div class="divTableCell" style="width:100%;">
-                                            <div class="etiquetaFormulario">Dirección Fiscal: <div class="d_ob">*</div>
+                                            <div class="etiquetaFormulario">Domicilio Fiscal: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text"  name="campo1" id="d_fiscal"
                                                 value="" required>
