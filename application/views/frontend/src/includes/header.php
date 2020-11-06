@@ -44,6 +44,7 @@
 </head>
 <style>
 .navigation-menu{
+    display: none;
     position: fixed;
     height: 60px;
     width: 100%;
@@ -65,6 +66,11 @@
     text-align: center;
 }
 
+@media only screen and (max-width: 767px) {
+    .navigation-menu{
+        display: block;
+    }
+}
 
 </style>
 <body style='background-color:rgba(255,255,255,0);'>
