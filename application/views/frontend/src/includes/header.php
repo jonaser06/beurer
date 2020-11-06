@@ -42,8 +42,48 @@
         gtag('config', 'UA-147139498-4');
     </script>
 </head>
+<style>
+.navigation-menu{
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background: #FFF;
+    z-index: 999;
+    bottom: 0px;
+    padding-top: 5px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+}
+.navigation-menu ul{
+    display: flex;
+    margin: auto;
+    width: 60%;
+    padding-left: 15px;
+}
 
+.navigation-menu ul li{
+    padding: 5px;
+    text-align: center;
+}
+
+
+</style>
 <body style='background-color:rgba(255,255,255,0);'>
+    <div class="navigation-menu">
+        <ul>
+            <li>
+                <a href="<?= base_url('carrito'); ?>"><img class="img_nav" style="width: 29px;" src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt=""></a>
+                <div class="icon_nav">Carrito</div>
+            </li>
+            <li>
+                <a href="#"><img class="img_nav" style="width: 19px;" src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt=""></a>
+                <div class="icon_nav">Mi Cuenta</div>
+            </li>
+            <li>
+                <a href="<?= base_url('estado-pedido'); ?>"><img class="img_nav" style="width: 40px;" src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt=""></a>
+                <div class="icon_nav">Tracking</div>
+            </li>
+        </ul>
+    </div>
     <?php  $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));     ?>
     <div class="wrapper-header" id="cabecera" <?php echo (isset($carrito) && $carrito )?'style="display:none;"':''; ?> >
         <header class="header">
