@@ -229,6 +229,8 @@ ObjMain = {
         localStorage.setItem('peso_total' , weight );
         if(localStorage.getItem('recojo')) {
             document.querySelector('#check_recojo').checked = true
+            // document.getElementById("check_envio").disabled = true
+
             resp.total_coste = 0;
         }
         localStorage.setItem('costo_envio' , resp.total_coste );
@@ -324,21 +326,35 @@ ObjMain = {
         d_envio = document.getElementById("d_envio");
         var checkBo = document.getElementById("check_envio");
         if (checkBo.checked == true) {
-            d_envio.style.display = "block";
+            // document.getElementById("check_recojo").disabled = true
+            document.getElementById("check_recojo").checked = false
+            ObjMain.recojo()
+
+            // d_envio.style.display = "block";
             // ObjMain.load_ubigeo();
             localStorage.setItem('domicilio', true);
         } else {
             d_envio.style.display = "none";
             localStorage.removeItem('domicilio');
+            document.getElementById("check_recojo").disabled = false
+
         }
     },
-    recojo: () =>{ 
+    recojo: () => { 
         const $checkRecojo = document.getElementById("check_recojo");
+
         let item = localStorage.getItem('productos') ? JSON.parse(localStorage.getItem('productos')): [] ;
             if ($checkRecojo.checked == true) {
+                if(document.getElementById("check_envio")){
+                    document.getElementById("check_envio").checked = false
+                    ObjMain.delivery()
+                }
                 localStorage.setItem('recojo', true);
                 ObjMain.recalculo(item)
             } else {
+                if(document.getElementById("check_envio")){
+                    document.getElementById("check_envio").disabled = false
+                }
                 localStorage.removeItem('recojo');
                 ObjMain.recalculo(item)
             }

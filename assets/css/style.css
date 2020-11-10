@@ -1218,3 +1218,21 @@ section2 {
 #p_users > li button {
   border: none !important
 }
+
+
+
+@media (min-width : 1200px) and (max-width: 1241px) {
+  .direction-footer {
+    padding-right:10px !important;
+  }
+}
+@media (min-width : 1242px) and (max-width: 1290px) {
+  .direction-footer {
+    padding-right:15px !important;
+  }
+}
+@media (min-width : 1290px) and (max-width: 1370px) {
+  .direction-footer {
+    padding-right: 25px !important;
+  }
+}

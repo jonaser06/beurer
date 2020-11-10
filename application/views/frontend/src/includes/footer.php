@@ -29,6 +29,7 @@
                     
                 </div>
                 <div class="col-sm-5 col-md-6 col-1-5 phons-f">
+
                     <!-- <h2 class="phones-footer"><a href="#"><i class="icon-f icon-phone"></i> <?php echo $confif['numero_t']; ?></a></h2 class="phones-footer"> -->
 
                     <?php if (!empty($confif['numero_t2'])): ?>
@@ -47,7 +48,7 @@
                     <!-- DIRECCIÓN -->
                     <?php if (!empty($confif['direccion'])): ?>
                         <?php foreach ($confif['direccion'] as $row): ?>
-                            <a href="#" class="link-footer d-block"><i class="icon-f icon-ubc"></i>  <?= $row['ubicacion']; ?></a>
+                            <a href="#" class="link-footer d-block direction-footer"><i class="icon-f icon-ubc"></i>  <?= $row['ubicacion']; ?></a>
                         <?php endforeach ?>
                     <?php endif ?>
 
@@ -148,22 +149,4 @@
     });
 </script>
 
-<!-- <script>
 
-Culqi.publicKey = 'Aquí inserta tu llave pública';
-// Configura tu Culqi Checkout
-Culqi.settings({
-    title: 'BEURER',
-    currency: 'PEN',
-    description: 'Completamos tu pago con toda la seguridad que tú necesitas',
-    amount: 216070
-});
-// Usa la funcion Culqi.open() en el evento que desees
-$('#buy').on('click', function(e) {
-    // Abre el formulario con las opciones de Culqi.settings
-    
-    Culqi.open();
-    e.preventDefault();
-});
-
-</script> -->

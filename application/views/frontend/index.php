@@ -224,6 +224,68 @@
          });
         
 
+         
+if (screen && screen.width > 992) {
+    $(".div-search").mouseover(function (event) {
+        $(".input-search").css({
+            'width': '18.5vw',
+            'border-color': '#c51152',
+            'border-radius': '15px',
+            'box-shadow': '4px 4px #ccc',
+
+        })
+        $(".input-search::placeholder").css({
+            'opacity': '1',
+            'color': '#fff',
+
+        })
+    });
+    $(".div-search").mouseout(function (event) {
+        $(".input-search").css({
+            'width': '0',
+            'border-color': 'transparent',
+            'border-radius': '0',
+            'box-shadow': '0px 0px #ccc',
+            //'padding': '0'
+        })
+    });
+} else {
+    $(".div-search").mouseover(function (event) {
+        $(".input-search").css({
+            'width': '18.5vw',
+            'border-color': '#c51152',
+            'border-radius': '15px',
+            'box-shadow': '4px 4px #ccc',
+        })
+
+        $(".input-search::placeholder").css({
+            'opacity': '1',
+            'color': '#fff',
+        })
+    });
+
+    $(".div-search").click(function () {
+        $(".input-search").css({
+            "top": "0", //modificamos el bottom a 0
+            "box-shadow": '0px 0px #ccc',
+        });
+        $(".bsc-btn").css({
+            // "opacity": "1",
+            // "z-index": "10000"
+        })
+    });
+    $(".div-search").mouseout(function () {
+        $(".input-search").css({
+            // "top" : "-100%" //modificamos el bottom a 0
+            'width': '0',
+            'border-color': 'transparent',
+            'border-radius': '0',
+            'box-shadow': '0px 0px #ccc',
+        });
+
+    });
+}
+
     </script>
     
 </body>

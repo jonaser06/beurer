@@ -481,10 +481,10 @@
                 style="background-color:white;border-radius:8%;width:29.33333333%;margin:2%;padding:2em;text-align:center;">
                 <div class="font-bold" style="font-size:1.92em;text-align:center;">Llámanos</div>
                 <img src="assets/images/icons/telefono.svg" style="width:28%;margin:1.5% 0%;">
-                <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> (+51) 920 198 522
+                <span class="font-light" style="font-size:1.2rem;padding:0%;display:block;"> (+51) 920 198 522
                 </span>
 
-                <span class="font-light" style="font-size:1.2rem;padding:0% 16%;display:block;"> (+51) 978 440 034
+                <span class="font-light" style="font-size:1.2rem;padding:0%;display:block;"> (+51) 978 440 034
                 </span>
 
             </div>

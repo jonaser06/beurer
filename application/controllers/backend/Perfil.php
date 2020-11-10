@@ -32,6 +32,7 @@ class Perfil extends CI_Controller {
         $data = array();
 //        $data['paginas']=$this->sistema->getPaginas();
         $data['modulos']=$this->sistema->getModulos($user);
+        $data['mods']=$this->sistema->getModulos($user);
         
         $data['pags']=$this->sistema->getPaginas();
         $data['perfil'] = $this->mperfil->getPerfil($this->manager['user']['iduser']);
