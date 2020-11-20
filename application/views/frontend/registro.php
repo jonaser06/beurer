@@ -203,9 +203,9 @@
 
     <div style="text-align:center !important;">
         <div class="checkbox"
-            style="display:inline-block;  border:3px solid #c51152; background-color:whitesmoke; display:none;"
+            style="display:inline-block;  border-radius:25px;border:3px solid #c51152; background-color:whitesmoke; display:none;"
             id="dp_error">
-            <div style="display:inline-block; font-size:1.3em; font-weight:bold; margin: 12px 32px;" id="d_error"> -
+            <div style="display:inline-block;border-radius:25px; font-size:1.3em; font-weight:bold; margin: 12px 32px;" id="d_error"> -
             </div>
         </div>
     </div>
@@ -243,6 +243,9 @@
     <!--Fin de cuerpo-->
 </main>
 <style>
+    #btn_sgt:focus {
+        color:#fff;
+    }
     input ,select{
     height: 30px !important;
 	border: 1px solid #999;
