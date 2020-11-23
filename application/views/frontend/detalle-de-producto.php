@@ -187,17 +187,13 @@
                                 data-peso   = <?= $product['precio'] ?>
                                 data-volumen   = <?= $product['volumen'] ?>
                                 data-cantidad ="1">
-                                <a href="#" style="color:white;border: 2px solid #c51152;" tabindex="-1"
+                                <a  style="color:white;border: 2px solid #c51152;" tabindex="-1"
                                 >AÑADIR AL CARRO
                                 </a>
                             </button>
                         </div>
-
                         <br>
-
-
-
-
+                        <div class="addCarritoError"> </div>
                         <div class="tabs col-xs-12">
                             <div class="tab-button-outer">
                                 <ul id="tab-button">
@@ -336,7 +332,10 @@
     <?php endif ?>
 
 </main>
-
+<?php
+        include 'src/includes/footer.php'
+    ?>
+</body>
 <script src="<?= base_url('assets/js/libraries/fancybox.min.js'); ?>"></script>
 <script>
 $(document).ready(function() {
@@ -548,9 +547,6 @@ $(function() {
         background-color: #fff!important;
     }
 </style>
-<?php
-        include 'src/includes/footer.php'
-    ?>
-</body>
+
 
 </html>

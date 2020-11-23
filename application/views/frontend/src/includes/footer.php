@@ -119,6 +119,7 @@
 <script src="<?= base_url(); ?>assets/js/libraries/fullpage.js"></script>
 <script src="<?= base_url(); ?>assets/js/main.js"></script>
 
+
 <script>
     /* menu */
     $(document).ready(function () {

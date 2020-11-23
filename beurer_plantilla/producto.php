@@ -282,7 +282,7 @@ include 'src\includes\header.php'
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-5 col-xs-5"><img src="assets/sources/BF198.jpg" alt=""
-                            style="width:100%; height:auto;align:left;"></div>
+                            style="width:100%; height:auto;text-align:left;"></div>
                     <div class="col-md-7 col-xs-7" style=" display: flex;
                     justify-content: center;
                     align-content: center;

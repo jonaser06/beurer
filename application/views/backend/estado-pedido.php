@@ -111,6 +111,9 @@
                             case '3':
                                 salida = '<span class="label"style="background-color:#C51152">Listo en tienda</span>';
                                 break;
+                            case '4':
+                                salida = '<span class="label"style="background-color:#C51152">Pedido Entregado</span>';
+                                break;
                             default:
                                 salida= '<span class="label"style="background-color:#C51152"></span>';
                                 break;
@@ -124,7 +127,7 @@
                                 salida = '<span class="label"style="background-color:#C51152">Preparando Pedido</span>';
                                 break;
                             case '3':
-                                salida = '<span class="label"style="background-color:#C51152">Listo para recojo</span>';
+                                salida = '<span class="label"style="background-color:#C51152">Envío en curso</span>';
                                 break;
                             case '4':
                                 salida = '<span class="label"style="background-color:#C51152">Pedido Entregado</span>';

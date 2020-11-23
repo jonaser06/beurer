@@ -1391,7 +1391,7 @@ ObjMain = {
         const $states_messages = document.querySelector('.state_messages');
 
         if (type) {
-            document.querySelector('.unstep').style.display = 'none';
+            // document.querySelector('.unstep').style.display = 'none';
             $containerSteps.innerHTML = `<div class="section-content discovery active">
 
             <div align="center">
@@ -1434,6 +1434,25 @@ ObjMain = {
 
             </div>
         </div>
+        <div class="section-content creative">
+            <div align="center">
+                <h1
+                    style="text-align:left;border-bottom:3px solid #c51152;width:100%;font-size:2.5em;padding-bottom:1%;">
+                    Listo en tienda </h1>
+
+                <br>
+                <div style="font-size:1.3em;font-weight:bold;color:black;">Estado:<p class="estado"
+                        style="font-weight:normal;"> Incompleto</p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
+                        style="font-weight:normal;">En esta etapa el Pedido esta disponible para su recojo. </p>
+                </div>
+                <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
+                        style="font-weight:normal;"> En proceso</p>
+                </div>
+
+            </div>
+        </div>
 
         
 
@@ -1462,16 +1481,24 @@ ObjMain = {
 
                                         <span class="step_arrow"></span>
                                         <span class="step step02 step_off ">Preparando Pedido</span>
+                                        <span class="step_arrow"></span>
+                                        <span class="step step03 step_off ">Listo en Tienda</span>
+
 
                                         <span class="step_arrow"></span>
-                                        <span class="step step03 step_off ">Pedido Entregado</span>`;
+                                        <span class="step step04 step_off ">Pedido Entregado</span>`;
 
             $(".step02").click(function() {
-                $("#line-progress").css("width", "50%");
+                $("#line-progress").css("width", "33.33%");
                 $(".strategy").addClass("active").siblings().removeClass("active");
             });
 
             $(".step03").click(function() {
+                $("#line-progress").css("width", "66.66%");
+                $(".creative").addClass("active").siblings().removeClass("active");
+            });
+
+            $(".step04").click(function() {
                 $("#line-progress").css("width", "100%");
                 $(".production").addClass("active").siblings().removeClass("active");
             });
@@ -1569,7 +1596,7 @@ ObjMain = {
                                         <span class="step step02 step_off ">Preparando Pedido</span>
 
                                         <span class="step_arrow"></span>
-                                        <span class="step step03 step_off ">Listo para recojo</span>
+                                        <span class="step step03 step_off ">Envío en curso</span>
 
                                         <span class="step_arrow"></span>
                                         <span class="step step04 step_off ">Pedido entregado</span>`
@@ -1588,6 +1615,7 @@ ObjMain = {
                 $(".production").addClass("active").siblings().removeClass("active");
             });
         }
+
         $(".step").click(function() {
             $(this).addClass("active").prevAll().addClass("active");
             $(this).nextAll().removeClass("active");
@@ -1741,19 +1769,22 @@ ObjMain = {
                             <i class="fa fa-check"></i> Preparando Pedido
                         </div>
                         <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
-                            <i class="fa fa-check"></i> Listo para recojo
+                            <i class="fa fa-check"></i> Envío en curso
                         </div>
                         <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
                             <i class="fa fa-check"></i> Pedido Entregado
                         </div>` :
-                            `<div class="progress-bar bar-${pos}" role="progressbar" style="width:33.3%;background-color:#CCC">
+                            `<div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
                             <i class="fa fa-check"></i> Orden Generada
                         </div>
-                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:33.3%;background-color:#CCC">
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
                             <i class="fa fa-check"></i> Preparando Pedido
                         </div>
-                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:33.3%;background-color:#CCC">
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
                             <i class="fa fa-check"></i> Listo en Tienda
+                        </div>
+                        <div class="progress-bar bar-${pos}" role="progressbar" style="width:25%;background-color:#CCC">
+                            <i class="fa fa-check"></i> Pedido Entregado
                         </div>
                         `;
 
@@ -1829,6 +1860,7 @@ class Carrito {
             productos: []
         }
         this.$btnAddCarrito = document.querySelector(btnAddCarrito);
+        this.$btnAddCarritoError = document.querySelector('.addCarritoError');
         this.TRIGGUER();
     }
     filter() {
@@ -1842,8 +1874,20 @@ class Carrito {
         const producto = this.filter();
         if (localStorage.getItem('productos')) {
             this.stateCarrito.productos = JSON.parse(localStorage.getItem('productos'));
-            this.addState(producto);
-            this.addStorage();
+            const result = this.stateCarrito.productos.filter(prod => prod.id == producto.id)
+            if (result.length == 0) {
+                this.addState(producto);
+                this.addStorage();
+            } else {
+                this.$btnAddCarrito.dataset.toggle = '';
+                this.$btnAddCarritoError.textContent = 'El producto ya se agregó al carrito'
+                this.$btnAddCarritoError.classList.add('errorAdd')
+                setTimeout(function() {
+                    document.querySelector('.addCarritoError').classList.remove('errorAdd')
+                    document.querySelector('.addCarritoError').textContent = ''
+                }, 4000)
+
+            }
         } else {
             console.log("carrito:" + producto);
             this.addState(producto);
