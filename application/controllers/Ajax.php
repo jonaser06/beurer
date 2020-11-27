@@ -115,7 +115,7 @@ class Ajax extends MY_Controller
             $this->resp['code'] = 200;
             $this->resp['message'] = 'find One!';
             $this->resp['data'] = $query;
-    
+            
             $this->resp['currentpage'] 	= $currentpage;
             $this->resp['paginas'] 		= $pagination['pagination'];
             $this->resp['previus_page'] = $pagination['previus_page'];
@@ -350,6 +350,10 @@ class Ajax extends MY_Controller
 
         $salida = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><table border="1">';
         $salida .= '<tr>';
+        $salida .= '<td>Fecha de Reclamo</td>';
+        $salida .= '<td>N° ORDEN </td>';
+        $salida .= '<td>Fecha Pedido</td>';
+        $salida .= '<td>Tipo de Entrega</td>';
         $salida .= '<td>reclamo</td>';
         $salida .= '<td>Tipo de documento</td>';
         $salida .= '<td>Numero de documento</td>';
@@ -374,7 +378,6 @@ class Ajax extends MY_Controller
         $salida .= '<td>Tipo de reclamo</td>';
         $salida .= '<td>Descripcion del reclamo</td>';
         $salida .= '<td>Pedido</td>';
-        $salida .= '<td>Fecha</td>';
         $salida .= '</tr>';    
 
         $start = $this->input->post('fecha');
@@ -389,10 +392,18 @@ class Ajax extends MY_Controller
 
             $reclamos = $this->dbSelect('*','reclamos', $w);
             foreach ($reclamos as $key => $value) {
+                $pedido = $this->get('pedido',['codigo' => $value['r_codigo']]) ;
+                $tipo_entrega = intval($pedido['recojo']) == 1 ? 'Recoger en Tienda' : 'Envío a domicilio';
                 $menor = ($value['r_menor'] == 1 )?'Si':'No';
+                $tipo = intval($value['r_tipo_doc']);
+                $tipoDoc = $tipo == 1 ? 'DNI' : ( $tipo == 2 ? 'PASAPORTE' :'CE');
                 $salida .= '<tr>';
+                $salida .= '<td>'.$value['r_fecha'].'</td>';
+                $salida .= '<td>'.$pedido['codigo'].'</td>';
+                $salida .= '<td>'.$pedido['pedido_fecha'].'</td>';
+                $salida .= '<td>'.$tipo_entrega.'</td>';
                 $salida .= '<td>'.$value['id_reclamo'].'</td>';
-                $salida .= '<td>'.$value['r_tipo_doc'].'</td>';
+                $salida .= '<td>'.$tipoDoc.'</td>';
                 $salida .= '<td>'.$value['r_n_doc'].'</td>';
                 $salida .= '<td>'.$value['r_nombr'].'</td>';
                 $salida .= '<td>'.$value['r_apat'].'</td>';
@@ -415,7 +426,6 @@ class Ajax extends MY_Controller
                 $salida .= '<td>'.$value['r_tip_rec'].'</td>';
                 $salida .= '<td>'.$value['r_rec_desc'].'</td>';
                 $salida .= '<td>'.$value['r_rec_pedi'].'</td>';
-                $salida .= '<td>'.$value['r_fecha'].'</td>';
                 $salida .= '</tr>';    
             }
     
@@ -430,10 +440,18 @@ class Ajax extends MY_Controller
 
         $reclamos = $this->dbSelect('*','reclamos', []);
         foreach ($reclamos as $key => $value) {
+            $pedido = $this->get('pedido',['codigo' => $value['r_codigo']]) ;
+            $tipo_entrega = intval($pedido['recojo']) == 1 ? 'Recoger en Tienda' : 'Envío a domicilio';
             $menor = ($value['r_menor'] == 1 )?'Si':'No';
+            $tipo = intval($value['r_tipo_doc']);
+            $tipoDoc = $tipo == 1 ? 'DNI' : ( $tipo == 2 ? 'PASAPORTE' :'CE');
             $salida .= '<tr>';
+            $salida .= '<td>'.$value['r_fecha'].'</td>';
+            $salida .= '<td>'.$pedido['codigo'].'</td>';
+            $salida .= '<td>'.$pedido['pedido_fecha'].'</td>';
+            $salida .= '<td>'.$tipo_entrega.'</td>';
             $salida .= '<td>'.$value['id_reclamo'].'</td>';
-            $salida .= '<td>'.$value['r_tipo_doc'].'</td>';
+            $salida .= '<td>'.$tipoDoc.'</td>';
             $salida .= '<td>'.$value['r_n_doc'].'</td>';
             $salida .= '<td>'.$value['r_nombr'].'</td>';
             $salida .= '<td>'.$value['r_apat'].'</td>';
@@ -456,7 +474,6 @@ class Ajax extends MY_Controller
             $salida .= '<td>'.$value['r_tip_rec'].'</td>';
             $salida .= '<td>'.$value['r_rec_desc'].'</td>';
             $salida .= '<td>'.$value['r_rec_pedi'].'</td>';
-            $salida .= '<td>'.$value['r_fecha'].'</td>';
             $salida .= '</tr>';    
         }
 
@@ -498,6 +515,7 @@ class Ajax extends MY_Controller
                 'r_tipo_bn' => $this->input->post('r_tipo_bn'),
                 'r_mont' => $this->input->post('r_mont'),
                 'r_descr' => $this->input->post('r_descr'),
+                'r_codigo' => $this->input->post('r_codigo'),
                 'r_tip_rec' => $this->input->post('r_tip_rec'),
                 'r_rec_desc' => $this->input->post('r_rec_desc'),
                 'r_rec_pedi' => $this->input->post('r_rec_pedi'),

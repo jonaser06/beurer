@@ -17,7 +17,7 @@
                 <section class="content-header">
                     <?php if($permiso['ver']==1){?>
                     <h1>
-                        Administrador de Suscriptores
+                        Administrador de Reportes
                     </h1>
                     <?php }?>
                 </section>

@@ -17,7 +17,7 @@
                 <section class="content-header">
                     <?php if($permiso['ver']==1){?>
                     <h1>
-                        Administrador de Suscriptores
+                        Administrador de Reclamos
                     </h1>
                     <?php }?>
                 </section>
@@ -65,8 +65,8 @@
                                     <thead>
                                         <tr>
                                             <th>Reclamo</th>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
+                                            <th>Tipo</th>
+                                            <th>Nombres y Apellidos</th>
                                             <th>Correo</th>
                                             <th>Fecha</th>
                                         </tr>

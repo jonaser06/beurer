@@ -40,15 +40,11 @@ class Pedidos extends MY_Controller {
     }
 
     public function getPedidos(){
-
         $pedidos = $this->mpedidos->getAll('pedido');
         return $this->output
                     ->set_content_type('application/json')
-                    ->set_output( json_encode( ['data'=> $pedidos ] ));
-                    
+                    ->set_output( json_encode( ['data'=> $pedidos ] ));             
     }
-    
-  
     
     public function save (){
         $post=$this->input->post();
@@ -81,8 +77,6 @@ class Pedidos extends MY_Controller {
         }
         echo json_encode($mensaje);      
     }
-   
-
     public function edit() {
         $id_pedido = $this->input->post('id_pedido', TRUE);
         $pedido = $this->mpedidos->getAll('pedido' , ['id_pedido' => $id_pedido]);

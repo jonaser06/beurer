@@ -1252,3 +1252,94 @@ section2 {
     opacity: 1;
     margin: 8px 0;
 }
+
+.popupBtn {
+    width: 80%!important;
+    padding: 1rem 1.2rem!important;
+    margin-top: 10px;
+    font-size: 15px;
+    height: 35px!important;
+    line-height: 0px;
+}
+
+@media (max-width:480px) {
+    .popupBtn {
+        width: 100%!important;
+    }
+}
+
+
+/* modal verify code */
+
+.content-modal-body {
+    font-family: 'nexaregularuploaded_file';
+    width: 100%;
+    text-align: left;
+    color: #333333;
+    background-color: #fff;
+    padding: .5rem 1rem;
+    border-radius: 25px;
+}
+
+#modal-verification>.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verify-form {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.verify-form>small {
+    font-family: 'nexa-bolduploaded_file';
+    font-weight: bold;
+    margin: 10px 0
+}
+
+.code-group {
+    display: flex;
+}
+
+.code-group>* {
+    padding: 0px;
+    width: 55px;
+    margin-left: .5rem;
+    border-radius: 0;
+    border: none;
+    height: 3rem !important;
+    font-size: 2rem !important;
+    border-bottom: 1px solid gray;
+    color: #333333;
+    padding-bottom: 9px;
+    text-align: center;
+}
+
+.email-verify {
+    font-family: 'nexa-bolduploaded_file';
+    font-weight: bold;
+}
+
+.send-verify {
+    font-weight: 500;
+    font-size: 1.1rem !important;
+    width: fit-content !important;
+    padding: 1rem 2rem !important;
+    align-self: flex-end;
+    margin-top: 1.3rem;
+    outline: none;
+}
+
+.send-verify:focus {
+    outline: none;
+}
+
+.reenviar-btn {
+    font-weight: bold;
+    margin: 10px 10px 0 0;
+    font-size: .8rem;
+    cursor: pointer;
+    color: #c51152
+}

@@ -56,55 +56,7 @@
                     <div class="carrito-container"></div>
 
                 </div>  
-                
-                <?php if ( !$sesion ): ?>
-                <div style="float:left;width:100%; text-align:left;color:black;background-color:white; padding:.5rem 2rem;border-radius:25px;">
-                    <div class="row">
-                        <div class="titulo font-nexaheavy" style="margin-top:2%;margin-left:2%;padding-left:1% !important;border-left:2px solid #c51152;">
-                            INGRESA TUS DATOS
-                        </div>
-                        <br>
-                        <div class="col-md-4" style="padding-left:2% !important; margin-bottom:10%;">
-                            <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Nuevos clientes</div>
-                            <span class="font-light">¿Eres nuevo? Regístrate aquí y compra ahora. </span>
-                            <br><br>
-                            <span>
-                                <a class="btn btn-cmn" onclick="ObjMain.register_cart(event);" style="width:80%;padding:7px 0px;font-size:1em;">REGÍSTRATE AQUÍ</a>
-                            </span>
-
-                        </div>
-                        <div class="col-md-4 compra-sin-clave" style="border-left:1px solid rgba(169,169,169,0.5);border-right:1px solid rgba(169,169,169,0.5);padding-left:2% !important; margin-bottom:10%;">
-                            <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">
-                                Compra sin clave
-                            </div>
-                            <span class="font-light">
-                                Solo te pediremos algunos datos para el despacho. No serán guardados para tu próxima compra.
-                            </span>
-                            <br><br><br>
-                            <span class="btn-nextCarrito">
-                                <a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" style="width:80%;padding:7px 0px;font-size:1em;">
-                                    CONTINUAR SIN REGISTRARSE
-                                </a>
-                            </span>
-                        </div>
-                        <div class="col-md-4" style="padding-left:2% !important;">
-                            <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Inicia sesión
-                            </div>
-                            <span class="font-light">Inicia sesión para caja rápida. </span>
-                            <form class="login-container lcc" style="padding:12px 0px;font-size: 1.2em !important;">
-                                <p class="font-light" style="line-height:0px;">Correo Electrónico</p>
-                                <p><input type="email" id="username__" style="width:85% !important"></p>
-                                <p class="font-light" style="line-height:0px;">Contraseña</p>
-                                <p><input type="password" id="pasword__" style="width:85% !important"></p>
-                                <p class="font-light"><a href="#">¿Has olvidado la contraseña?</a></p>
-                                <br>
-                                <input class="btn btn-cmn" type="submit" value="INICIAR SESIÓN Y COMPRAR" style="width:fit-content!important;padding:7px 10px !important;font-size:.95em !important; height: 35px!important; line-height: 23px;">                                
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                <?php endif; ?>
+             
                 
             </div>
         </main2>
@@ -187,8 +139,9 @@
                     </div>
                 </div>
             </div>
-            <span><a class="btn btn-cmn" href="<?php echo base_url(); ?>" tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
+            <span data-toggle="modal"  data-target="#select-stepOne"><a class="btn btn-cmn" data-toggle="modal"  tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
             <?php if ( $sesion ): ?>
+                
             <span class="btn-nextCarrito"><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;outline: none;">Comprar</a></span>
             <?php endif; ?>
             <br>
@@ -199,25 +152,7 @@
     </div>
     <!--Fin de cuerpo-->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" id="modal_foto" role="document">
-            <div class="modal-content" style="width:100%">
-                <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalCenterTitle" style="text-align:center;font-size:1.8em;font-weight:bold;">MASAJEADOR ANTICELULÍTICO CM 50</h1>
-
-                </div>
-                <div class="modal-body">
-                    <img src="https://beurer.pe/assets/sources/CM50_01.jpg" style="width: 100%;box-shadow:-3px 3px 25px -3px rgba(0,0,0,0.3); " alt="Placholder Image 2">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary1" style="font-size:1.4em;"
-                        data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
 
 </main>
 
@@ -274,6 +209,193 @@
     </div>
 </div>
 <br>
+<?php if ( !$sesion ): ?>
+    <div class="modal fade" id="select-stepOne" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" id="modal_foto" role="document">
+            <div class="modal-content" style="width:100%">
+                
+                <div class="modal-body" >
+                <div style="width:100%; color: #333333;text-align:left;color:black;background-color:white; padding:.5rem 2rem;border-radius:25px;">
+                    <div class="row" style="display:flex;flex-direction:column">
+
+                       
+                        <div class="col-md-12" style="font-size: 1rem; margin:10px 0">
+                            <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;font-size:.9rem">Nuevos clientes</div>
+                            <span class="font-light" >¿Eres nuevo? Regístrate aquí y compra ahora. </span>
+                            <br>
+                            <span>
+                                <a class="btn btn-cmn popupBtn" onclick="ObjMain.register_cart(event);">REGÍSTRATE AQUÍ</a>
+                            </span>
+
+                        </div>
+                        <hr>
+                        <div class="col-md-12 compra-sin-clave" style="font-size: 1rem; margin:10px 0">
+                            <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;font-size:.9rem">
+                                Compra sin clave
+                            </div>
+                            <span class="font-light">
+                                Solo te pediremos algunos datos para el despacho. No serán guardados para tu próxima compra.
+                            </span>
+                            <br>
+                            <input class="btn btn-cmn popupBtn " id="btn-aviso"type="submit" value="CONTINUAR SIN REGISTRARSE" >
+                        </div>
+                        <hr>
+                        <div class="col-md-12" style="font-size: 1rem;">
+                            <div class=" font-nexaregular" style="font-weight:bold;margin-bottom:2%;">Inicia sesión
+                            </div>
+                            <span class="font-light">Inicia sesión para caja rápida. </span>
+                            <form class="login-container lcc" style="padding:12px 0px;">
+                                <p class="font-light" style="line-height:0px; font-size:.9rem">Correo Electrónico</p>
+                                <p><input type="email" id="username__" style="width:85% !important"></p>
+                                <p class="font-light" style="line-height:0px;font-size:.9rem">Contraseña</p>
+                                <p><input type="password" id="pasword__" style="width:85% !important"></p>
+                                <p  style="font-size:.9rem;color:#c51152 !important"><a href="<?= base_url('recovery')?>"
+                                style="color:#c51152;font-weight:400">¿Has olvidado la contraseña?</a></p>
+
+                                <input class="btn btn-cmn popupBtn" type="submit" value="INICIAR SESIÓN Y COMPRAR" >                                
+                            </form>
+
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <script>
+                    document.querySelector('#btn-aviso').addEventListener('click' ,e => {
+                        console.log()
+                        e.preventDefault();
+                        $('#select-stepOne').modal('hide'); 
+                        $('#modal-nextStep').modal('show');
+                    })
+                    
+                </script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary1" style="font-size:1.4em;"
+                        data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="modal-nextStep" tabindex="1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modal_foto" role="document">
+                <div class="modal-content" style="width:100%">
+                    <div class="modal-header" style="display:flex;justify-content:space-aro">
+
+                        <figure class="header-icon-modal">
+                            <img style="width:70px;margin-left:2em"src="<?= base_url('beurer_plantilla/assets/images/steps/paso1.png')?>" alt="icon-modal">
+                        </figure>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"class="modal-close" >&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <div style="width:100%; text-align:left;color:black;background-color:white; padding:.5rem 2rem;border-radius:25px;">
+                        <div class="row" >
+
+                            <div class="col-md-12" style="font-size:1rem;width:100%">
+                                <p class="font-nexaregular " style="color:#333333">
+                                    Si continuas sin iniciar sesión al hacer el seguimiento de tu pedido mediante tu DNI , sólo
+                                    podras acceder ver el estado del último de estos.
+                                </p>
+                                <br>
+
+                            
+                                <span style="opacity:0"class="btn-nextCarrito" >
+                                    <a href="<?php echo base_url('facturacion'); ?>">
+                                    </a>
+                                </span>
+                                <span class="btn-nextCarrito" >
+                                    <a href="<?php echo base_url('facturacion'); ?>" style="display: flex;justify-content:center">
+                                        <span class="btn btn-modal-sgt" >Continuar sin Iniciar sesión</span>                                
+                                    </a>
+                                </span>
+                                
+                            </div>
+                        
+                        </div>
+                    </div>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+    </div>
+
+    <div class="modal fade" id="modal-verification" tabindex="-1" 
+    role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modal_foto" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="display:flex">
+
+                        <figure class="header-icon-modal">
+                            <img style="width:40px;margin-left:2em"src="<?= base_url('beurer_plantilla/assets/images/steps/paso1.png')?>" alt="icon-modal">
+                        </figure>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"class="modal-close" >&times;</span>
+                        </button>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-modal-body" >
+
+                        <form  class="verify-form" action="#" method="POST" >
+
+                             <p>Te hemos enviado un código de verificación a tu correo : 
+                             </p>
+                            <b class="email-verify">renzoedward23@gmail.com</b>
+                            <small>Ingresa los 6 dígitos</small>
+                            <div class="code-group">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                            </div>
+                            <a href="#"
+                                class="reenviar-btn">
+                                Reenviar Código
+                            </a>
+                            
+                            <input type="submit"
+                            disabled 
+                            class="send-verify btn btn-cmn popupBtn"
+                            value="Enviar">
+                        </form>
+                            
+                        </div>
+                    
+                </div>
+                    
+                </div>
+            </div>
+    </div>
+<?php endif ?>
+<script>
+    const $btnVerify = document.querySelector('.send-verify');
+    const $numberInputs = document.querySelectorAll('.code-group > input');
+    
+    $numberInputs.forEach( input => {
+        input.addEventListener('keyup' , e => {
+            e.target.setAttribute('maxlength','1');
+
+            let count = 0;
+            for (let index = 0; index < $numberInputs.length; index++) {
+                 let number = $numberInputs[index].value != "" ? 1 : 0
+                 count = count + number;
+            }  
+            $btnVerify.disabled = count < $numberInputs.length ? true : false;
+        } )
+    })
+
+</script>
+
 <?php include 'src/includes/footer.php' ?>
 
 </body>
@@ -283,6 +405,47 @@
    body {
        font-size: 62.5%!important;
    }
+.header-icon-modal {
+    flex:1
+}
+.modal-close {
+ color:#c51152 !important;
+ font-weight:bold !important;
+ font-size:2em!important;
+}
+.modal-header button {
+ display: flex;
+ }
+.btn-modal-sgt {
+    font-family: 'nexa-bolduploaded_file';
+    margin:0  auto;
+    color: #c51152;
+    font-weight:500;
+    padding: .9rem 1.4rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    border:1.5px solid #c51152;
+    transition: .3s all ease-in;
+    outline:none
+}
+.btn-modal-sgt:hover{
+     color: #c51152;
+    border:2px solid #c51152;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding:.5rem 1rem;
+    /* color:#fff;
+    background:#c51152 */
+}
+#modal-nextStep>.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popupBtn:focus, .btn-cmn:focus {
+    outline:none!important;
+    border:none!important
+}
     
 </style>
 </html>

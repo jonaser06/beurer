@@ -212,6 +212,12 @@
                                             <textarea id="r_descr" class="form-control" style="width:100%;height:8vh;background-color:white;" aria-label="With textarea"></textarea>
                                         </div>
                                     </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell" style="width:100%;">
+                                            <div class="etiquetaFormulario">Código de Pedido <div class="d_ob">*</div></div>
+                                            <input id="r_codigo" type="text" size="4" maxlength="10" name="campo1" value="">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

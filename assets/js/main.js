@@ -130,6 +130,7 @@ ObjMain = {
 
         let r_mont = document.querySelector('#r_mont').value;
         let r_descr = document.querySelector('#r_descr').value;
+        let r_codigo = document.querySelector('#r_codigo').value;
 
         let r_tip_rec
         let radios2 = document.getElementsByName('r_tip_rec');
@@ -141,7 +142,7 @@ ObjMain = {
         let r_rec_desc = document.querySelector('#r_rec_desc').value;
         let r_rec_pedi = document.querySelector('#r_rec_pedi').value;
 
-        if (r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != '') {
+        if (r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_codigo != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != '') {
 
             let formData = new FormData();
             formData.append('r_tipo_doc', r_tipo_doc);
@@ -164,6 +165,7 @@ ObjMain = {
             formData.append('r_tipo_bn', r_tipo_bn);
             formData.append('r_mont', r_mont);
             formData.append('r_descr', r_descr);
+            formData.append('r_codigo', r_codigo);
             formData.append('r_tip_rec', r_tip_rec);
             formData.append('r_rec_desc', r_rec_desc);
             formData.append('r_rec_pedi', r_rec_pedi);
