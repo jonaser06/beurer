@@ -826,7 +826,7 @@ ObjMain = {
                             }
                         });
 
-                        
+
                     })
                     .catch((err) => {
                         err = JSON.parse(err);
@@ -1275,8 +1275,8 @@ ObjMain = {
             `<div>Av.Caminos del Inca N.257 Tienda N° 149 Santiago de Surco - Lima</div>
                                                                 <br>`;
         document.querySelector('.title-envio').textContent = !recojo ? 'INFORMACIÓN DE ENVÍO' : 'RECOJO EN TIENDA';
-        const messageEnvio = !recojo ? 'Su pedido llegará en un plazo de 4 días.' :
-            'Recordar que tiene un plazo de 30 días para recoger su pedido, de no recogerlo, se procederá con la devolución de la compra.'
+        const messageEnvio = !recojo ? `Su pedido llegará en un plazo de máximo de 4 días hábiles.` :
+            `Recordar que tiene un plazo de 30 días para recoger su pedido, de no recogerlo, se procederá con la devolución de la compra.`
             // if(session) {
             //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
             //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
@@ -1362,14 +1362,16 @@ ObjMain = {
             document.querySelector('.espaciado').style.display = `none`
             document.querySelector('.title_recojo').textContent = 'Fecha de Recojo'
             document.querySelector('.destinatario').textContent = data.dest_nombres ? `Lo puede recoger: ${data.dest_nombres} ` : 'La entrega es personal'
-            document.querySelector('.fecha_entrega').textContent = `Recordar que tiene un plazo de 30 días para recoger su pedido , de no recogerlo, se procederá con la devolución de la compra.`
+            document.querySelector('.horario-detalle').textContent = 'Horario de tienda : de lunes a sábado de 9:00 am a 6:00 pm.'
+            document.querySelector('.fecha_entrega').textContent = `Su pedido estará disponible para recojo en un plazo máximo de 2 días hábiles ,apartir del ${ObjMain.formatFecha(data.pedido_fecha)}
+            `
         } else {
             document.querySelector('.title-envio').textContent = `Dirección de envío`
             document.querySelector('.dir_envio').textContent = `${data.dir_envio}`
             document.querySelector('.distrito').textContent = `${data.distrito.toUpperCase()}`
             document.querySelector('.destinatario').textContent = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres}.` : 'La entrega es personal'
             document.querySelector('.referencia').textContent = data.referencia
-            document.querySelector('.fecha_entrega').textContent = ` Desde el ${ObjMain.formatFecha(data.pedido_fecha)} , su pedido llegara en un plazo de 4 días habiles`
+            document.querySelector('.fecha_entrega').textContent = `Su pedido llegara en un plazo información máximo de 4 días hábiles,apartir del ${ObjMain.formatFecha(data.pedido_fecha)}`
         }
         document.querySelector('.titular').textContent = `${data.nombres} ${data.apellidos}`
         document.querySelector('.provincia').textContent = `${data.provincia.toUpperCase()} LIMA`

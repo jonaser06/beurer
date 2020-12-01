@@ -121,6 +121,16 @@ include 'src/includes/header.php'
 
                         <li class="title_recojo" style="font-weight:bold;">Fecha de entrega</li>
                         <div class="fecha_entrega"style="text-align:left;"></div>
+                        <div style="font-size:.8rem">
+                        </br>Para obtener mayor sobre sus pedidos comunícate:
+                        <br>
+                        <span style="display:flex;align-items:center"><img style="width:25px;cursor:pointer;margin-right:5px" src="<?= base_url('assets/images/icons/telefono.svg')?>" alt="logo-phone">WhatsApp 978440034.</span>
+                        
+                        <span style="display:flex;align-items:center"><img style="width:20px;cursor:pointer;margin-right:7px" src="<?= base_url('assets/images/icons/email.png')?>" alt="logo-phone">Correo : <a href="mailto:Servicioalcliente@beurer.pe">Servicioalcliente@beurer.pe</a></span>
+                         <br>
+                         <b class="horario-detalle" style="margin-bottom:.2rem;display:block"></b>
+       <b> Nuestros asesores de servicio al cliente están disponibles de lunes a viernes de 09:00 a 17:00 h Haremos todo lo posible para responder sus preguntas dentro del horario establecido.
+                        </div>
                         <br> 
 
                         <li style="font-weight:bold;">Código de Pedido</li>

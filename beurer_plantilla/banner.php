@@ -187,9 +187,6 @@ include 'src\includes\header.php'
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <!-- Initialize Swiper -->
-<!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <script>
   var swiper = new Swiper('.swiper-container', {

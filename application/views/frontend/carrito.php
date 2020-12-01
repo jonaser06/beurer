@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <span data-toggle="modal"  data-target="#select-stepOne"><a class="btn btn-cmn" data-toggle="modal"  tabindex="2" style="width:100%;margin: 10px 0px;">Seguir comprando</a></span>
+            <span data-toggle="modal"  data-target="#select-stepOne"><a class="btn btn-cmn" data-toggle="modal"  tabindex="2" style="width:100%;margin: 10px 0px;">Ir a Comprar</a></span>
             <?php if ( $sesion ): ?>
                 
             <span class="btn-nextCarrito"><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;outline: none;">Comprar</a></span>

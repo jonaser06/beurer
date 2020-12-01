@@ -40,13 +40,17 @@ class Novedades extends MY_Controller {
         return $this->__output($output);
     }
     public function getNovedades(){
-        $pedidos = $this->mnovedades->getAll('clientes_ofertas');
+        $this->db->select('nombres ,apellidos ,correo ,id_session, COUNT(correo) as checked');
+        $this->db->group_by([ 'correo','id_session','nombres','apellidos']);
+        $result = $this->db->get('clientes_ofertas')->result_array();
+        
+        // var_dump($result);exit();
         return $this->output
                     ->set_content_type('application/json')
-                    ->set_output( json_encode( ['data'=> $pedidos ] ));             
+                    ->set_output( json_encode( ['data'=> $result ] ));             
     }
     
-  
+    
     private function __output($html = NULL) {
         $this->output->set_output($html);
     }

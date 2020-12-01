@@ -39,9 +39,10 @@
                                 <table id="table_novedades" class="table table-bordered table-striped table-hover nowrap dataTable dtr-inline collapsed">
                                     <thead>
                                         <tr>
-                                            <th>nombres</th>
-                                            <th>correo</th>
+                                            <th>Nombres</th>
+                                            <th style="display: flex;align-items:center"><i style="color:#C51152;margin: 0 10px;font-size:22px" class="fa fa-envelope-square "></i>Correo</th>
                                             <th>Tipo Cliente</th>
+                                            <th style="display: flex;align-items:center"><i style="color:#C51152;margin: 0 10px;font-size:18px" class="fa fa-check"></i>N° de veces check</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -87,26 +88,29 @@
                     } },
                     { "data": "correo" ,'render' : function (data , type , row ) {
                     
-                        return `<span class="label label-warning"><i class="fas fa-envelope-square ml-4"></i>
+                        return `<span>
                                 ${data}</span>`;
                     }},
                     { "data": "id_session" , 'render' : function (data , type , row ) {
                         let salida = '';
+                        $data = parseInt(data)
                         
-                        if(parseInt(data)) {
                             switch (data) {
                             case '0':
-                                salida = 'Invitado';
+                                salida = `<i class="fa fa-user" style="margin-right:7px" aria-hidden="true"></i> Invitado`;
                                 break;
                         
                             default:
-                                salida= 'Autenticado';
+                                salida= `<i class="fa fa-user" style="color:#C51152;margin-right:7px" aria-hidden="true"></i> Autenticado`;;
                                 break;
-                        }
+                        
                         
                         }
                         return salida;
                     } },
+                    {"data": "checked" , 'render' : function(data,type,row) {
+                        return `<span style="width:100% ;display:flex;juntify-content:center;font-weight:bold">${data}</span>`;
+                    }}
                    
                 ]
             });
