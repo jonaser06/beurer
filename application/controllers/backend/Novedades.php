@@ -18,6 +18,7 @@ class Novedades extends MY_Controller {
         }
     } 
     
+    
     public function index() {
         $user = $this->manager['user']['idperfil']; 
         $data['pags'] = $this->sistema->getPaginas();
@@ -38,7 +39,6 @@ class Novedades extends MY_Controller {
         $output = $this->load->view('backend/novedades', $data, TRUE);
         return $this->__output($output);
     }
-
     public function getNovedades(){
         $pedidos = $this->mnovedades->getAll('clientes_ofertas');
         return $this->output

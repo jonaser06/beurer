@@ -25,7 +25,7 @@
                 <?php }?>
                 <!-- Main content -->
                 <section class="content container-fluid">
-                <?php if(in_array($modulo['idmodulo'],$modulosjm)){
+                <?php if(! in_array($modulo['idmodulo'],$modulosjm)){
                 ?>
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -75,10 +75,10 @@
         <!-- REQUIRED JS SCRIPTS -->
         <?= $this->load->view('backend/chunks/scripts', array(), TRUE) ?>
 
-       <script src="<?= getFilex('mgr/exeperu/js/novedades.js')?>"></script>
+       <script src="<?= getFilex('mgr/exeperu/js/ofertas.js')?>"></script>
         
         <script>
-            
+           
             let table = $('#table_novedades').DataTable({
             "ajax": "manager/novedades/getNovedades",
                 "columns": [
