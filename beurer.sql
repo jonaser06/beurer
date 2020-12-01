@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2020 a las 05:21:16
+-- Tiempo de generación: 01-12-2020 a las 07:12:11
 -- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.33
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -130,30 +130,31 @@ CREATE TABLE `clientes` (
   `documento` int(11) NOT NULL,
   `idperfil` int(11) NOT NULL,
   `politicas` int(11) NOT NULL,
-  `ofertas` int(11) NOT NULL
+  `ofertas` int(11) NOT NULL,
+  `verificado` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido_paterno`, `apellido_materno`, `correo`, `contrasena`, `departamento`, `provincia`, `distrito`, `direccion`, `referencia`, `telefono`, `fecha_nacimiento`, `tipo_documento`, `documento`, `idperfil`, `politicas`, `ofertas`) VALUES
-(128, 'renzo e', 'lopez', 'galarza', 'test@gmail.com', 'ccb711f092ac8ef1805b5045fab7e8a6189cb97ad04565e21b5fbcfc9e542e42', 'Lima', 'Lima', 'Ate', 'calle perseo la molina', 'calle', 989848484, '1993-01-01', 'PASAPORTE', 434534535, 4, 1, 0),
-(129, 'renzo', 'patana', 'lopez', 'testrenzo@gmail.com', 'fe44cf7c8086d9252bd158a3b388dad680a26e467a241624dc3a8bb630c1a443', 'Lima', 'Lima', 'Ate', 'renzo', 'calle electra', 232433243, '1997-01-01', 'DNI', 93939933, 4, 1, 0),
-(130, 'renzo', 'patana', 'lopez', 'renzoedward23@gmail.com', '7f2845915145895b788bdd6bd7c5418ac958e376ea79e6d6e7c37a9873bfa5c6', 'Lima', 'Lima', 'La Victoria', 'calle electra', 'avenida faisanes', 232332323, '1995-01-01', 'DNI', 2147483647, 4, 1, 0),
-(131, 'renzo', 'patana', 'maañ', 'renzo@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(132, 'renzo', 'patana', 'maañ', 'renzo1234@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(133, 'renzo', 'patana', 'maañ', 'renzo34@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(134, 'renzo', 'patana', 'maañ', 'r@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(135, 'renzo', 'patana', 'maañ', 'ramon123@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(136, 'renzo', 'patana', 'maañ', 'ramon123456@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(137, 'renzo', 'patana', 'maañ', 'mumu@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0),
-(138, 'renzo', 'patana', 'mama', 'mama@gmail.com', '7af50550d27bc2b4f0ce36767e5572991e33c38cd645319caf369acd06788ee0', 'Lima', 'Lima', 'Chorrillos', 'caleelectra', 'calle', 434324234, '1992-01-01', 'Pasaporte', 1233333, 4, 1, 0),
-(139, 'renzo', 'patana', 'mama', 'lili@gmail.com', '7af50550d27bc2b4f0ce36767e5572991e33c38cd645319caf369acd06788ee0', 'Lima', 'Lima', 'Chorrillos', 'caleelectra', 'calle', 434324234, '1992-01-01', 'Pasaporte', 1233333, 4, 1, 0),
-(140, 'renzo edward', 'patana', 'lopez', 'test@gmail.com', 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', 'Lima', 'Lima', 'Los Olivos', 'calle electa lt14 mz W', 'AVENIDA DEL SOL', 989878789, '1997-01-01', 'DNI', 453433443, 4, 1, 1),
-(141, 'carlos', 'carlos@gmail.com', 'mamani', 'contreras@gmail.com', '5cefc030cc77830ac258c2ab34f5f9d725910d5c4188de1e87f6897838a62b65', 'Lima', 'Lima', 'Cieneguilla', 'calle electra', 'avenida icaro', 242343243, '1996-01-01', 'DNI', 3243244, 4, 1, 1),
-(142, 'fabian', 'lopez', 'galarza', 'fabian@gmail.com', 'e149cb059f81b53bed18c0286f56d899cdbc95bb634a568a8f15c617408fc6a2', 'Lima', 'Lima', 'null', 'calle electra minezota', 'avenida icaro', 12345454, '1995-01-01', 'PASAPORTE', 123312321, 4, 1, 1),
-(143, 'gonzalo', 'lopez', 'galarza', 'gonzalo@gmail.com', 'f48b1888dc77e1539112871d364bf1b1d13c9095d17b333299c31a92d4e28eff', 'Lima', 'Lima', 'La Molina', 'calle perseo', 'Avenida del Sol', 493030393, '1993-01-01', 'DNI', 22332323, 4, 1, 0);
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido_paterno`, `apellido_materno`, `correo`, `contrasena`, `departamento`, `provincia`, `distrito`, `direccion`, `referencia`, `telefono`, `fecha_nacimiento`, `tipo_documento`, `documento`, `idperfil`, `politicas`, `ofertas`, `verificado`) VALUES
+(128, 'renzo e', 'lopez', 'galarza', 'test@gmail.com', 'ccb711f092ac8ef1805b5045fab7e8a6189cb97ad04565e21b5fbcfc9e542e42', 'Lima', 'Lima', 'Ate', 'calle perseo la molina', 'calle', 989848484, '1993-01-01', 'PASAPORTE', 434534535, 4, 1, 0, 0),
+(129, 'renzo', 'patana', 'lopez', 'testrenzo@gmail.com', 'fe44cf7c8086d9252bd158a3b388dad680a26e467a241624dc3a8bb630c1a443', 'Lima', 'Lima', 'Ate', 'renzo', 'calle electra', 232433243, '1997-01-01', 'DNI', 93939933, 4, 1, 0, 0),
+(130, 'renzo', 'patana', 'lopez', 'renzoedward23@gmail.com', '7f2845915145895b788bdd6bd7c5418ac958e376ea79e6d6e7c37a9873bfa5c6', 'Lima', 'Lima', 'La Victoria', 'calle electra', 'avenida faisanes', 232332323, '1995-01-01', 'DNI', 2147483647, 4, 1, 0, 0),
+(131, 'renzo', 'patana', 'maañ', 'renzo@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(132, 'renzo', 'patana', 'maañ', 'renzo1234@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(133, 'renzo', 'patana', 'maañ', 'renzo34@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(134, 'renzo', 'patana', 'maañ', 'r@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(135, 'renzo', 'patana', 'maañ', 'ramon123@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(136, 'renzo', 'patana', 'maañ', 'ramon123456@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(137, 'renzo', 'patana', 'maañ', 'mumu@hotmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Lima', 'Lima', 'El Agustino', 'calle', 'rrer', 434343, '1994-01-01', 'DNI', 4343434, 4, 1, 0, 0),
+(138, 'renzo', 'patana', 'mama', 'mama@gmail.com', '7af50550d27bc2b4f0ce36767e5572991e33c38cd645319caf369acd06788ee0', 'Lima', 'Lima', 'Chorrillos', 'caleelectra', 'calle', 434324234, '1992-01-01', 'Pasaporte', 1233333, 4, 1, 0, 0),
+(139, 'renzo', 'patana', 'mama', 'lili@gmail.com', '7af50550d27bc2b4f0ce36767e5572991e33c38cd645319caf369acd06788ee0', 'Lima', 'Lima', 'Chorrillos', 'caleelectra', 'calle', 434324234, '1992-01-01', 'Pasaporte', 1233333, 4, 1, 0, 0),
+(140, 'renzo edward', 'patana', 'lopez', 'test@gmail.com', 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', 'Lima', 'Lima', 'Los Olivos', 'calle electa lt14 mz W', 'AVENIDA DEL SOL', 989878789, '1997-01-01', 'DNI', 453433443, 4, 1, 1, 0),
+(141, 'carlos', 'carlos@gmail.com', 'mamani', 'contreras@gmail.com', '5cefc030cc77830ac258c2ab34f5f9d725910d5c4188de1e87f6897838a62b65', 'Lima', 'Lima', 'Cieneguilla', 'calle electra', 'avenida icaro', 242343243, '1996-01-01', 'DNI', 3243244, 4, 1, 1, 0),
+(142, 'fabian', 'lopez', 'galarza', 'fabian@gmail.com', 'e149cb059f81b53bed18c0286f56d899cdbc95bb634a568a8f15c617408fc6a2', 'Lima', 'Lima', 'null', 'calle electra minezota', 'avenida icaro', 12345454, '1995-01-01', 'PASAPORTE', 123312321, 4, 1, 1, 0),
+(143, 'gonzalo', 'lopez', 'galarza', 'gonzalo@gmail.com', 'f48b1888dc77e1539112871d364bf1b1d13c9095d17b333299c31a92d4e28eff', 'Lima', 'Lima', 'La Molina', 'calle perseo', 'Avenida del Sol', 493030393, '1993-01-01', 'DNI', 22332323, 4, 1, 0, 0);
 
 -- --------------------------------------------------------
 
