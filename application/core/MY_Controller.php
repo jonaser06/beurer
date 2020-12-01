@@ -173,7 +173,7 @@ class MY_Controller extends CI_Controller
         return $pagination;
     }
     
-    public function sendmail($to, $data, $subject,$template){
+    public function sendmail($to, $data, $subject, $template){
         $config = [
             'protocol'  => 'smtp', 
             'smtp_host' => 'ssl://mail.beurer.pe', 

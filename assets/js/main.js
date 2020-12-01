@@ -814,15 +814,19 @@ ObjMain = {
                         let formData2 = new FormData();
                         formData2.append("username", correo);
                         formData2.append("contrasena", pass1);
-                        ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((resp) => {});
+                        ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((resp) => {
+                            if (resp.status) {
+                                let redirect = localStorage.getItem('reg-redir');
+                                if (redirect) {
+                                    localStorage.removeItem('reg-redir');
+                                    window.location = redirect;
+                                } else {
+                                    window.location = DOMAIN;
+                                }
+                            }
+                        });
 
-                        let redirect = localStorage.getItem('reg-redir');
-                        if (redirect) {
-                            localStorage.removeItem('reg-redir');
-                            window.location = redirect;
-                        } else {
-                            window.location = DOMAIN;
-                        }
+                        
                     })
                     .catch((err) => {
                         err = JSON.parse(err);
