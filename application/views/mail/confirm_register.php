@@ -17,19 +17,14 @@
         </tr>
         <tr>
             <td>
-                <table>
+                <table width="100%" height="320">
                     <tr>
-                        <td align="center" style="padding: 14px; position: relative;">
-                            <img width="95%" src="<?php echo base_url('assets/images/fondomail.png'); ?>" alt="#" style="border-radius: 14px;">
+                        <td align="center" style="padding: 14px; position: relative;" background="<?php echo base_url('assets/images/fondomail.png'); ?>">
+                            <!-- <img width="95%" src="<?php echo base_url('assets/images/fondomail.png'); ?>" alt="#" style="border-radius: 14px;"> -->
                             <span style="padding:14px 25px;font-size:45px;position: absolute;top:40px;left:30px; color: #fff;text-align: left">
                                 <span style="display: block;">Bienvenido a beurer.pe</span> 
                                 <span style="display: block; font-size: 25px;margin-top:20px">Tu Cuenta se ha registrado correctamente</span>
                             </span>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
 
                         </td>
                     </tr>
