@@ -17,9 +17,9 @@
         </tr>
         <tr>
             <td>
-                <table width="100%" height="320">
+                <table width="100%" height="310">
                     <tr>
-                        <td align="center" style="padding: 14px; position: relative;" background="<?php echo base_url('assets/images/fondomail.png'); ?>">
+                        <td align="center" style="padding: 14px; position: relative; background-size: 100% 100%;" background="<?php echo base_url('assets/images/fondomail.png'); ?>">
                             <!-- <img width="95%" src="<?php echo base_url('assets/images/fondomail.png'); ?>" alt="#" style="border-radius: 14px;"> -->
                             <span style="padding:14px 25px;font-size:45px;position: absolute;top:40px;left:30px; color: #fff;text-align: left">
                                 <span style="display: block;">Bienvenido a beurer.pe</span> 
