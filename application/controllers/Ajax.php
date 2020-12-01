@@ -563,9 +563,7 @@ class Ajax extends MY_Controller
                 'idperfil' => 4,
                 'verificado' => 0
             ];
-            $enviar = $this->sendmail($data['correo'], '', 'PEDIDO CONFIRMADO', 'confirm_register.php');
-            echo json_encode($data);
-            exit;
+
             $query = $this->dbSelect('*','clientes', ['correo' => $this->input->post('correo')]);
 
             if($query){
@@ -579,7 +577,14 @@ class Ajax extends MY_Controller
                     ->set_output(json_encode($this->resp));
                 return;
             }else{
-                $this->dbInsert('clientes',$data);
+                $dbid = $this->dbInsert('clientes',$data);
+                $hid = $this->salt_encrypt($dbid);
+                $ndata = [
+                    'id' => $hid
+                ];
+                $enviar = $this->sendmail($data['correo'], $ndata, 'CREADA CORRECTAMENTE', 'confirm_register.php');
+                echo json_encode($hid);
+                exit;
                 $this->resp['status'] = true;
                 $this->resp['code'] = 200;
                 $this->resp['message'] = 'find One!';

@@ -32,7 +32,7 @@ class MY_Controller extends CI_Controller
     public function dbInsert($table, $data)
     {
         $query = $this->db->insert($table, $data);
-        if ($query) return true;
+        if ($query) return $this->db->insert_id();
         return false;
     }
     public function dbSelect($label, $table, $where = [], $o = '', $limit = false, $forpage = 0, $offset = 0)

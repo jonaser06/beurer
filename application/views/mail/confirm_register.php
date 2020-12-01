@@ -12,7 +12,7 @@
         <!-- HEADER  -->
         <tr>
             <td align="center" style="padding-top :20px;padding-bottom:20px;margin-bottom:10px">
-                <img src="<?php echo base_url('assets/images/logos/logo-beurer.svg'); ?>" alt="logo-beurer" style="width:180px ; height:auto;display: block;">
+                <img src="<?php echo base_url('assets/images/logos/logo-beurer.png'); ?>" alt="logo-beurer" style="width:180px ; height:auto;display: block;">
             </td>
         </tr>
         <tr>
@@ -22,7 +22,7 @@
                         <td align="center" style="padding: 14px; position: relative;">
                             <img width="95%" src="<?php echo base_url('assets/images/fondo.png'); ?>" alt="#" style="border-radius: 14px;">
                             <span style="padding:14px 25px;font-size:45px;position: absolute;top:40px;left:30px; color: #fff;text-align: left">
-                                <span style="display: block;">Bienvenido a beurer.pe  </span>
+                                <span style="display: block;">Bienvenido a beurer.pe</span>
                                 <span style="display: block; font-size: 25px;margin-top:20px">Tu Cuenta se ha registrado correctamente</span>
                             </span>
 
@@ -37,7 +37,7 @@
             </td>
         </tr>
         <tr>
-            <td style="color:#646464; padding: 1rem;text-align: center;">Para confirmar tu cuenta haz click <a href="#">aqui!</a> </td>
+            <td style="color:#646464; padding: 1rem;text-align: center;">Para confirmar tu cuenta haz click <a href="<?php echo URL_BASE.'activate?code='.$id; ?>">aqui!</a></td>
         </tr>
         <tr>
             <td>
@@ -57,7 +57,7 @@
                                             <tr>
                                                 <td>
                                                     <a href="# " target="_blank ">
-                                                        <img src="<?php echo base_url('assets/images/icons/telefono.svg'); ?>" alt="phone " width="30" style="margin :10px 0 ">
+                                                        <img src="<?php echo base_url('assets/images/icons/telefono.png'); ?>" alt="phone " width="30" style="margin :10px 0 ">
                                                     </a>
                                                 </td>
                                             </tr>
@@ -76,7 +76,7 @@
                                             <tr>
                                                 <td>
                                                     <a href="# " target="_blank ">
-                                                        <img src="<?php echo base_url('assets/images/icons/mensajero.svg'); ?>" alt="facebook " width="25 " style="margin :10px 0 ">
+                                                        <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="facebook " width="25 " style="margin :10px 0 ">
                                                     </a>
                                                 </td>
                                             </tr>
@@ -125,17 +125,17 @@
                                 <tr>
                                     <td align="center ">
                                         <a href="#" target="_blank ">
-                                            <img src="<?php echo base_url('assets/images/icons/mensajero.svg'); ?>" alt="siguenos en Facebbok " width="25">
+                                            <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="siguenos en Facebbok " width="25">
                                         </a>
                                     </td>
                                     <td align="center ">
                                         <a href="#" target="_blank ">
-                                            <img src="<?php echo base_url('assets/images/icons/telefono.svg'); ?>" alt="siguenos en Instagram " width="30">
+                                            <img src="<?php echo base_url('assets/images/icons/telefono.png'); ?>" alt="siguenos en Instagram " width="30">
                                         </a>
                                     </td>
                                     <td align="center ">
                                         <a href="https://www.linkedin.com/company/hope-corporation/r " target="_blank ">
-                                            <img src="<?php echo base_url('assets/images/icons/telefono.svg'); ?>" alt="siguenos en LinkedIn " width="30">
+                                            <img src="<?php echo base_url('assets/images/icons/telefono.png'); ?>" alt="siguenos en LinkedIn " width="30">
                                         </a>
                                     </td>
                                 </tr>
