@@ -25,6 +25,7 @@ class Ajax extends MY_Controller
                 'nombres' => $this->input->post('nombres'),
                 'apellidos' => $this->input->post('apellidos'),
                 'correo' => $this->input->post('correo'),
+                'id_session' => (int)$this->input->post('session'),
                 'ofertas' => 1
             ];
             $this->dbInsert('clientes_ofertas', $data);
@@ -1209,6 +1210,47 @@ class Ajax extends MY_Controller
             ->set_content_type('application/json')
             ->set_status_header(404)
             ->set_output(json_encode($resp));
+    
+    }
+    public function getProducto ()
+    {
+        $resp = [
+            'status'  => false,
+            'code'    => 404,
+            'message' => 'Metodo POST requerido',
+        ];
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+           $product = $this->get('productos' ,['id ' => $this->input->post('id')]);
+    
+            if (!empty($product)) {
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['data'] = $product;
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                return;
+                
+            } else {
+                $resp = [
+                    'status'  => false,
+                    'code'    => 404,
+                    'message' => 'no se encuentra el producto ...'
+                ];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode($resp));
+    
     }
  
 }

@@ -212,6 +212,7 @@
 
 
 <script>
+console.log('send')
 Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         const session       = parseInt(document.querySelector('.dataUser').dataset.id);
         const productos     = localStorage.getItem('productos') ? JSON.parse(localStorage.getItem('productos')) :[]
@@ -242,22 +243,22 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             total = `${((parseFloat(envio) + parseFloat(subtotal))).toFixed(2) *100}`;
         }
         
-        Culqi.settings({
-            title: 'BEURER',
-            currency: 'PEN',
-            description: 'Completamos tu pago con toda la seguridad que tú necesitas',
-            amount: total
-        });
-        Culqi.options({
-            lang: 'auto',
-            style: {
-            logo: "<?php echo base_url('assets/images/logos/logo.png') ?>",
-            maincolor: '#C51152',
-            buttontext: '#ffffff',
-            maintext: '#4A4A4A',
-            desctext: '#4A4A4A'
-            }
-        });
+        // Culqi.settings({
+        //     title: 'BEURER',
+        //     currency: 'PEN',
+        //     description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+        //     amount: total
+        // });
+        // Culqi.options({
+        //     lang: 'auto',
+        //     style: {
+        //     logo: "<?php echo base_url('assets/images/logos/logo.png') ?>",
+        //     maincolor: '#C51152',
+        //     buttontext: '#ffffff',
+        //     maintext: '#4A4A4A',
+        //     desctext: '#4A4A4A'
+        //     }
+        // });
         document.getElementById('buy').addEventListener('click', event => {
             Culqi.open();
             $('html, body').animate({scrollTop:0}, 'slow');
@@ -362,7 +363,11 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             Swal.fire({
             icon: icon ,
             title: title,
-            text: message ,     
+            text: message , 
+            showCancelButton: false,
+        	confirmButtonColor: '#C51152',
+        	confirmButtonText: "continuar",
+        	closeOnConfirm: false    
             })
         }
         function culqi() {

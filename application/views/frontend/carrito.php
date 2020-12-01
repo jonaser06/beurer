@@ -420,9 +420,11 @@
     font-family: 'nexa-bolduploaded_file';
     margin:0  auto;
     color: #c51152;
-    font-weight:500;
-    padding: .9rem 1.4rem;
-    font-size: 1rem;
+    font-weight:bold;
+    /* color:#fff;
+    background:#c51152; */
+    padding: .5rem 1rem;
+    font-size: 1.1rem;
     border-radius: 25px;
     border:1.5px solid #c51152;
     transition: .3s all ease-in;
@@ -434,8 +436,8 @@
     font-size: 1.1rem;
     font-weight: bold;
     padding:.5rem 1rem;
-    /* color:#fff;
-    background:#c51152 */
+    color:#fff;
+    background:#c51152
 }
 #modal-nextStep>.modal-dialog {
     display: flex;

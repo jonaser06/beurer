@@ -42,6 +42,7 @@ ObjMain = {
             // ObjMain.defaultUbigeo();
         }
         if (window.location.href == (`${DOMAIN}send-payment`)) {
+
             ObjMain.showDataSales();
         }
         if (document.querySelector('.login') != null) {
@@ -82,11 +83,13 @@ ObjMain = {
                 let nombres = document.getElementById('c_nombres1').value;
                 let apellidos = document.getElementById('c_apellido_paterno').value + ' ' + document.getElementById('c_apellido_materno').value;
                 let correo = document.getElementById('c_correo1').value;
-                if (nombres != null, apellidos != null, correo != null) {
+
+                if (nombres != "", apellidos != "", correo != "") {
                     let formData = new FormData();
                     formData.append('nombres', nombres);
                     formData.append('apellidos', apellidos);
                     formData.append('correo', correo);
+                    formData.append('session', session)
                     ObjMain.ajax_post('POST', DOMAIN + 'ajax/setoferta', formData)
                         .then((resp) => {
                             resp = JSON.parse(resp);
@@ -1205,7 +1208,7 @@ ObjMain = {
             productos
         }
     },
-    showDataSales: () => {
+    showDataSales: async() => {
 
         const session = parseInt(document.querySelector('.dataUser').dataset.id);
         const objSales = ObjMain.getDataSales(session);
@@ -1215,7 +1218,7 @@ ObjMain = {
         const cupon = localStorage.getItem('descuento') ? true : false
         const recojo = localStorage.getItem('recojo') ? true : false
         const volumen_total = localStorage.getItem('volumen_total') ? localStorage.getItem('volumen_total') : 0
-        const subtotal = localStorage.getItem('subtotal') ? localStorage.getItem('subtotal') : 0
+        let subtotal = 0
         const envio = localStorage.getItem('costo_envio') ? localStorage.getItem('costo_envio') : 0
         let cantidad = 0;
         let containerProd = document.querySelector('.table-products');
@@ -1228,26 +1231,35 @@ ObjMain = {
 
         if (localStorage.getItem('productos')) {
             productos = JSON.parse(localStorage.getItem('productos'))
-            productos.forEach((prod, index) => {
+            let index = 0
+            for (prod of productos) {
+                let formData = new FormData()
+                formData.append('id', prod.id)
+
+                let resp = await ObjMain.ajax_post('POST', `${DOMAIN}ajax/getProducto`, formData)
+
+                const { titulo: title, precio: precio_online } = JSON.parse(resp).data
                 cantidad += parseInt(prod.cantidad);
+                subtotal += precio_online * prod.cantidad
+
                 let $tr = document.createElement('tr');
                 let childOne = document.createElement('td')
                 childOne.setAttribute('scope', 'row')
-
                 let childTwo = document.createElement('td')
                 childTwo.style.textAlign = 'left';
-
                 let childThree = document.createElement('td')
                 childThree.classList.add('subtotalr')
+                childThree.classList.add('subt')
                 childThree.style.textAlign = 'right'
 
                 $tr.appendChild(childOne).innerHTML = `${index + 1 }`
-                $tr.appendChild(childTwo).textContent = `${prod.title}`;
-                $tr.appendChild(childThree).textContent = `${parseFloat(prod.precio_online * prod.cantidad).toFixed(2)}`
+                $tr.appendChild(childTwo).textContent = `${title}`;
+                $tr.appendChild(childThree).textContent = `${parseFloat(precio_online * prod.cantidad).toFixed(2)}`
                 containerProd.appendChild($tr)
-            })
-        }
+                index++;
+            }
 
+        }
         let dataUser = objSales.comprador;
 
         const innerEnvio = !recojo ? `<div>LIMA LIMA </div>
@@ -1257,9 +1269,10 @@ ObjMain = {
                                         <div>Peso total de la carga: ${peso_total} kg </div>
                                         <br><br>` :
             `<div>Av.Caminos del Inca N.257 Tienda N° 149 Santiago de Surco - Lima</div>
-                                    <br>`;
+                                                                <br>`;
         document.querySelector('.title-envio').textContent = !recojo ? 'INFORMACIÓN DE ENVÍO' : 'RECOJO EN TIENDA';
-        const messageEnvio = !recojo ? 'Su pedido llegará en un plazo de 4 días.' : 'Recordar que tiene un plazo de 30 días para recoger su pedido, de no recogerlo, se procederá con la devolución de la compra.'
+        const messageEnvio = !recojo ? 'Su pedido llegará en un plazo de 4 días.' :
+            'Recordar que tiene un plazo de 30 días para recoger su pedido, de no recogerlo, se procederá con la devolución de la compra.'
             // if(session) {
             //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
             //     dataUser = !localStorage.getItem('domicilio') ? objSales.destinatario : objSales.comprador ; 
@@ -1281,6 +1294,7 @@ ObjMain = {
                         <p style="font-weight:600;font-size:1.2em;margin-top:15px">${messageEnvio} </p>
 
                         `;
+
         if (cupon) {
             document.querySelector('.tr_cupon').style.display = 'table-row';
             if (tipo_cupon == 1) {
@@ -1289,7 +1303,7 @@ ObjMain = {
             }
             if (tipo_cupon == 2) {
                 $cupon.textContent = `- ${parseFloat(descuento).toFixed(2)}`
-                total_payment = `${(parseFloat(envio) + parseFloat(subtotal)- descuento).toFixed(2)  }`
+                total_payment = `${(parseFloat(envio) + parseFloat(subtotal)- descuento).toFixed(2)}`
             }
         } else {
             total_payment = `${(parseFloat(envio) + parseFloat(subtotal)).toFixed(2)} `;
@@ -1298,6 +1312,23 @@ ObjMain = {
         subtotal_pago.textContent = `${parseFloat(subtotal).toFixed(2)}`;
         envio_pago.textContent = `${parseFloat(envio).toFixed(2)}`
         total_pago.textContent = total_payment;
+
+        Culqi.settings({
+            title: 'BEURER',
+            currency: 'PEN',
+            description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+            amount: parseFloat(total_payment).toFixed(2) * 100
+        });
+        Culqi.options({
+            lang: 'auto',
+            style: {
+                logo: `${DOMAIN}assets/images/logos/logo.png`,
+                maincolor: '#C51152',
+                buttontext: '#ffffff',
+                maintext: '#4A4A4A',
+                desctext: '#4A4A4A'
+            }
+        });
 
     },
     resumePedido: (id) => {

@@ -42,7 +42,7 @@ include 'src\includes\header.php'
             <div class="col-md-4" style="text-align:center;border-right:2px solid #E5E5E5;height:19vh; display: table; height:200px;" >
                 <div class="beneficios-txt" style="display: table-cell; vertical-align: middle;">
                     <a href="https://www.rosen.com.pe/informativo-clientes-covid19" target="_blank">
-                        <h3 class="divisor__title --small" style="color:#C51152;font-weight:bold;">Informativo BEURER</h3>
+                        <h3 class="divisor__title --small" style="color:#C51152;font-weight:bold;">Atencion al Cliente</h3>
                         <br>
                             <p class="divisor__subtitle --small" style="font-weight:600;color:#353535;font-size:136%;">Conoce qué tiendas están<br>abiertas y nuestras políticas<br>de despacho.<br></p>
                     </a>
@@ -58,16 +58,15 @@ include 'src\includes\header.php'
             <div class="col-md-4" style="text-align:center; height:19vh;">
                 <div class="beneficios-txt">
                     <a href="tel: 5112029520">
-                        <h3 class="divisor__title --small phone" style="color:#c51152;font-weight:bold;">Venta Telefónica</h3>
+                        <h3 class="divisor__title --small phone" style="color:#c51152;font-weight:bold;">Pedido</h3>
                             <p class="divisor__subtitle --small"><span style="line-height: 15px; letter-spacing: .1em; color: #000; font-size: 11px;font-weight:bold;">Te asesoramos en tu compra</span><br> 511 2029520 - Opción 1</p>
-                                <img src="./assets/images/banner2/huincha-Despacho-MAY223.png" alt="" style="width: 55%; margin: auto; ">
+                            <img src="./assets/images/banner2/huincha-Despacho-MAY223.png" alt="" style="width: 55%; margin: auto; ">
                     </a>
                 </div>
             </div>
 
         </div>
-
-        <!-- BANNER -->
+<!-- BANNER -->
 
 
       <!-- PRODUCTOS RELACIONADOS -->
@@ -188,6 +187,10 @@ include 'src\includes\header.php'
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <!-- Initialize Swiper -->
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <script>
   var swiper = new Swiper('.swiper-container', {
     navigation: {
