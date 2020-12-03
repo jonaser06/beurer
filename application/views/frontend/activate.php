@@ -2,13 +2,22 @@
 
 <div class="content-recovery">
     <div class="row-content-recovery">
-        <h2>Cuenta activada correctamente</h2>
-        <p>se redirigira a la pagina principal para que inicie sesión.</p>
+        <h2><?php echo $mail['title']; ?></h2>
+        <p><?php echo $mail['message']; ?></p>
         <hr>
     </div>
 </div>
 
 <?php include 'src/includes/footer.php' ?>
+
+<?php if($mail['redirect']): ?>
+<script>
+    setTimeout(() => {
+        console.log('redirigiendo..');
+        window.location = DOMAIN;
+    }, 1000);
+</script>
+<?php endif; ?>
 
 </body>
 
