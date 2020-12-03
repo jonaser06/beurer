@@ -1093,7 +1093,7 @@ class Ajax extends MY_Controller
                 #sumando el total
                 $subtotal = 0.0;
                 foreach ($data as $key => $value) {
-                    $subtotal = $subtotal + ( float )$value['precio_online'];
+                    $subtotal = $subtotal + ( ( float ) $value['precio_online'] * ( int ) $value['cantidad'] );
                 }
                 $total = $subtotal + ( double ) $pedido['entrega_precio'] - ( double ) $pedido['cupon_descuento'] ;
 
