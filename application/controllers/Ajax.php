@@ -1443,7 +1443,7 @@ class Ajax extends MY_Controller
                       'data' => $objectOrder
                       );
                     }
-                if($state == 'peending') { 
+                if($state == 'pending') { 
                     $array = array(
                         "response" => "Webhook de Culqi $state ",
                          'data' => $objectOrder
