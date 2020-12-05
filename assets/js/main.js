@@ -44,6 +44,8 @@ ObjMain = {
         if (window.location.href == (`${DOMAIN}send-payment`)) {
 
             ObjMain.showDataSales();
+            // ObjMain.createOrder();
+            ObjMain.culqiInit();
         }
         if (document.querySelector('.login') != null) {
             ObjMain.sign_in();
@@ -1317,12 +1319,16 @@ ObjMain = {
         envio_pago.textContent = `${parseFloat(envio).toFixed(2)}`
         total_pago.textContent = total_payment;
 
-        Culqi.settings({
-            title: 'BEURER',
-            currency: 'PEN',
-            description: 'Completamos tu pago con toda la seguridad que tú necesitas',
-            amount: parseFloat(total_payment).toFixed(2) * 100
-        });
+        // Culqi.settings({
+        //     title: 'BEURER',
+        //     currency: 'PEN',
+        //     description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+        //     amount: parseFloat(total_payment).toFixed(2) * 100,
+        // });
+
+    },
+    culqiInit: () => {
+        ObjMain.createOrder();
         Culqi.options({
             lang: 'auto',
             style: {
@@ -1333,7 +1339,49 @@ ObjMain = {
                 desctext: '#4A4A4A'
             }
         });
+        document.getElementById('buy').addEventListener('click', event => {
+            event.preventDefault();
+            Culqi.open()
 
+        })
+    },
+    paymentSelected: () => {
+
+        document.querySelector('#pagoEfectivo').addEventListener('click', async event => {
+
+            if (event.target.checked) {
+                if (!localStorage.getItem('orden')) {
+                    await ObjMain.createOrder();
+                    localStorage.setItem('order', true)
+                } else {
+                    Culqi.open();
+                }
+            } else {
+                Culqi.open()
+            }
+        })
+
+    },
+
+    createOrder: () => {
+        const formOrder = dataFormSendOrder()
+        ObjMain.ajax_post('POST', `${DOMAIN}ajax/createOrder`, formOrder)
+            .then(order => {
+                let streamOrder = JSON.parse(order);
+                streamOrder = JSON.parse(streamOrder)
+                console.log(streamOrder)
+                Culqi.settings({
+                    title: 'BEURER',
+                    currency: 'PEN',
+                    description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+                    amount: parseFloat(streamOrder.amount).toFixed(2),
+                    order: streamOrder.id
+                });
+
+            }).catch(err => {
+                let error = JSON.parse(JSON.parse(err))
+                console.log(error)
+            })
     },
     resumePedido: (id) => {
         const formData = new FormData();

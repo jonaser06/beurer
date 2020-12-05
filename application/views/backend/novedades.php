@@ -18,20 +18,21 @@
               ?>
                 <section class="content-header">
                     <h1>
-                        Reporte de Nodedades: 
-                        <small>PERSONAS QUE DIERON CLICK EN EL CHECK QUIERO RECIBIR NOVEDADES EN RPOCESO DE COMPRA</small>
+                        Reporte de Novedades
+                       
                     </h1>
                 </section>
                 <?php }?>
                 <!-- Main content -->
                 <section class="content container-fluid">
-                <?php if(! in_array($modulo['idmodulo'],$modulosjm)){
+                <?php if( in_array($modulo['idmodulo'],$modulosjm)){
                 ?>
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <!--<h3 class="box-title">Filtrar</h3>-->
+                            <h3 class="box-title"><small style="margin-bottom:3rem">PERSONAS QUE DIERON CLICK EN EL CHECK QUIERO RECIBIR NOVEDADES EN EL PROCESO DE COMPRA</small>
+</h3>
                             <div class="container">
-                                
+                              
                             </div>
                         </div>
                         <div class="box-body">
@@ -39,11 +40,13 @@
                                 <table id="table_novedades" class="table table-bordered table-striped table-hover nowrap dataTable dtr-inline collapsed">
                                     <thead>
                                         <tr>
+                                        <!-- <i style="color:#C51152;margin: 0 10px;font-size:22px" class="fa fa-envelope-square "></i> -->
+                                        <!-- <i style="color:#C51152;margin: 0 10px;font-size:18px" class="fa fa-check"> -->
                                             <th>Nombres</th>
-                                            <th style="display: flex;align-items:center"><i style="color:#C51152;margin: 0 10px;font-size:22px" class="fa fa-envelope-square "></i>Correo</th>
+                                            <th style="display: flex;align-items:center">Correo</th>
                                             <th>Tipo Cliente</th>
-                                            <th style="display: flex;align-items:center"><i style="color:#C51152;margin: 0 10px;font-size:18px" class="fa fa-check"></i>N° de veces check</th>
-                                            <th></th>
+                                            <th style="display: flex;align-items:center">N° de veces check</i></th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -78,6 +81,11 @@
 
        <script src="<?= getFilex('mgr/exeperu/js/ofertas.js')?>"></script>
         
+       <style>
+           #table_novedades tr {
+               font-weight: bold;
+           }
+       </style>
         <script>
            
             let table = $('#table_novedades').DataTable({
@@ -109,7 +117,7 @@
                         return salida;
                     } },
                     {"data": "checked" , 'render' : function(data,type,row) {
-                        return `<span style="width:100% ;display:flex;juntify-content:center;font-weight:bold">${data}</span>`;
+                        return `<span style="width:100% ;display:flex;juntify-content:center;color:#C51152; font-weight:bold"><i style="color:#C51152;margin: 0 10px;font-size:17px" class="fa fa-check"></i>${data}</span>`;
                     }}
                    
                 ]

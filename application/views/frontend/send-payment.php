@@ -152,6 +152,12 @@
                                         click en el siguiente botón para ingresar los datos de su tarjeta. Todo el
                                         proceso está 100% seguro.</div>
                                     <br>
+                                    <div class="checkbox" style="display:inline-block;text-align:left;padding-left:4%;">
+                                    <label class="font-light label-pol" style="display:inline;">
+                                        <input type="checkbox" id="pagoEfectivo" /><i class="helper"></i>
+                                    </label>
+                                    <div style="display:inline-block; font-size:1.55em;font-family:'nexaheavyuploaded_file';">Compra en efectivo</div>
+                                </div>
                                     <div>
                                         <button id="buy" class="btn btn-cmn buy" style="font-size:1.5em">PAGAR</button>
                                     </div>
@@ -202,7 +208,7 @@
 
 
 
-<?php include 'src/includes/footer.php'?>
+<!-- <?php include 'src/includes/footer.php'?> -->
 
 
 
@@ -259,12 +265,13 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         //     desctext: '#4A4A4A'
         //     }
         // });
-        document.getElementById('buy').addEventListener('click', event => {
-            Culqi.open();
-            $('html, body').animate({scrollTop:0}, 'slow');
-            event.preventDefault();
+        // document.getElementById('buy').addEventListener('click', event => {
 
-        })
+        //     Culqi.open();
+        //     // $('html, body').animate({scrollTop:0}, 'slow');
+        //     event.preventDefault();
+
+        // })
         function converter () {
             let id_products = [] , cant_products = [] , subtotal_products=[]
             productos.forEach(prod => {
@@ -359,6 +366,49 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             }
             return formData;
         }
+        function dataFormSendOrder () {
+           
+            
+            const formData = new FormData();
+            formData.append('correo' , user.correo );
+            formData.append('id_session' , session );
+            formData.append('nombres' , `${user.nombres}`);
+            formData.append('apellidos' , `${user.apellido_paterno} ${user.apellido_materno}`);
+            formData.append('telefono' , user.telefono );
+            formData.append('distrito' , `${user.distrito}`);
+            formData.append('d_envio' , user.d_envio);
+            formData.append('referencia' , user.referencia);
+            formData.append('tipo_documento' , user.tipo_doc);
+            formData.append('numero_documento' ,user.number_doc );
+
+            formData.append('id_productos' , converter().id_products );
+            formData.append('cantidades' , converter().cant_products);
+            formData.append('subtotales' ,  converter().subtotal_products);
+
+            formData.append('cantidad_total' , cantidad );
+            formData.append('subtotal_coste' , subtotal );
+            formData.append('envio_coste' , envio );
+            formData.append('tipo_cupon' , `${tipo_cupon == null ? 0 : tipo_cupon }` );
+            formData.append('cupon_descuento' , cupon_descuento );
+            formData.append('cupon_codigo' , cupon_codigo );
+            formData.append('total_coste' , total );
+            if(dest){
+                formData.append('flag_dest',true)
+                formData.append('dest_nombres',dest.nombres)
+                formData.append('dest_apellidos',dest.apellidos)
+                formData.append('dest_telefono',dest.telefono)
+                formData.append('dest_tipo_doc',dest.tipo_doc)
+                formData.append('dest_number_doc',dest.number_doc)
+            }
+            if(facturacion){
+                formData.append('flag_facturacion',true)
+                formData.append('ruc',facturacion.ruc)
+                formData.append('r_social',facturacion.r_social)
+                formData.append('r_fiscal',facturacion.r_fiscal)
+            }
+            return formData;
+        }
+
         function modalCheckout (title , icon ,message , color) {
             Swal.fire({
             icon: icon ,
@@ -370,13 +420,18 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         	closeOnConfirm: false    
             })
         }
+        
         function culqi() {
+            
             if (Culqi.token) { 
+                console.log('token')
                 const token      = Culqi.token.id;
                 const email      = Culqi.token.email;
                 const formSend   = dataFormSend(token,email)
+                Culqi.close()
                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/createCharge`, formSend)
                     .then( resp => {
+
                         resp = JSON.parse(resp);
                         resp = JSON.parse(resp)
                         if(resp.object == 'charge') {
@@ -392,6 +447,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                                 .then( resp => {
                                 resp = JSON.parse( resp );
                                     if(resp.status) {
+                                        
                                         localStorage.setItem('id_pedido',resp.data.codigo_pedido);
                                         modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
                                         setTimeout( () => window.location = `${DOMAIN}order-summary` , 1000);
@@ -409,7 +465,15 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                         console.log(err)
                             
                     });
-            } else { 
+            } else if (Culqi.order) {
+                console.log(Culqi.order)
+
+
+                /* Aqui enviar al servidor el order Id y asociarlo al detalle la venta.
+                    Además, tu venta en tu comercio debe quedar estado pendiente.
+                    */
+            }
+             else { 
                 console.log(Culqi.error);
                 alert(Culqi.error.user_message);
             }

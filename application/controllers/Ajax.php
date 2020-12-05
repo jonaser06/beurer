@@ -836,7 +836,7 @@ class Ajax extends MY_Controller
             ->set_status_header(404)
             ->set_output(json_encode($resp));
     }
-    // CREAR TOKEN CULQI
+    // CREAR TOKEN CARGO
     public function createCharge () 
     {
         $resp = [
@@ -1256,5 +1256,229 @@ class Ajax extends MY_Controller
             ->set_output(json_encode($resp));
     
     }
+     // CREAR TOKEN ORDER
+     public function createOrder () 
+     {
+         $resp = [
+             'status'  => false,
+             'code'    => 404,
+             'message' => 'Metodo POST requerido',
+         ];
+         if ($this->input->server('REQUEST_METHOD') == 'POST') {
+             try
+             { 
+                 include_once APPPATH.'third_party/request/library/Requests.php';
+                 Requests::register_autoloader();
+                 include_once APPPATH.'third_party/culqi/lib/culqi.php';
+     
+              
+               $culqi = new Culqi\Culqi(['api_key' => PRIVATE_KEY]);
+               $metadata = [
+                 "id_session" =>$this->input->post('id_session'),
+                 "tipo_documento" =>$this->input->post('tipo_documento'),
+                 "numero_documento" =>$this->input->post('numero_documento'),
+                 "correo" =>$this->input->post('correo'),
+                 "distrito"    => $this->input->post('distrito'),
+                 "nombres" => $this->input->post('nombres'),
+                 "apellidos" => $this->input->post('apellidos'),
+                 "d_envio" => $this->input->post('d_envio'),
+                 "referencia" => $this->input->post('referencia'),
+                 "id_productos" =>$this->input->post('id_productos'),
+                 "cantidades" =>$this->input->post('cantidades'),
+                 "subtotales" =>$this->input->post('subtotales'),
+                 "cantidad_total" =>$this->input->post('cantidad_total'),
+                 "envio" =>$this->input->post('envio_coste'),
+                 "cupon_descuento" =>$this->input->post('cupon_descuento'),
+                 "tipo_cupon" =>$this->input->post('tipo_cupon'),
+                 "cupon_codigo" =>$this->input->post('cupon_codigo'),
+                 "subtotal" =>$this->input->post('subtotal_coste'),
+                 
+               ];
+               $dest = [];
+               if($this->input->post('flag_dest')) {
+                 $dest["dest_nombres"]    = $this->input->post('dest_nombres');
+                 // $dest["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                 $dest["dest_telefono"]   = $this->input->post('dest_telefono');
+                 $dest["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
+                 $dest["dest_number_doc"] = $this->input->post('dest_number_doc');
+                 $metadata["destinatario"] = json_encode($dest);
+               };
+               $facturacion = [];
+               if($this->input->post('flag_facturacion')) {
+                 $facturacion["ruc"]    = $this->input->post('ruc');
+                 $facturacion["r_social"]  = $this->input->post('r_social');
+                 $facturacion["r_fiscal"]   = $this->input->post('r_fiscal');
+                 $metadata["facturacion"] = json_encode($facturacion);
+               };
+
+               $order_number = 'id-'.uniqid() ;
+               $charge = $culqi->Orders->create(
+                         [
+                             "amount"        =>$this->input->post('total_coste'),
+                             "capture"       =>true,
+                             "currency_code" =>"PEN",
+                             "description"   => 'Compra desde web BEURER' ,
+                             "order_number"     => $order_number,
+                             "metadata" =>$metadata,
+                             "client_details"=>[
+                                 "address"    => 'Distrito:'.$this->input->post('distrito'),
+                                 "address_city"    => 'LIMA - PERU ',
+                                 "first_name" => $this->input->post('nombres'),
+                                 "last_name" => $this->input->post('apellidos'),
+                                 "email" => $this->input->post('correo'),
+                                 "phone_number" => $this->input->post('telefono'),
+                             ],
+                             "confirm" => false,
+                             "expiration_date" => time() + 24*60*60,   // Orden con un dia de validez
+
+                         ]
+                 );    
+                 $response = $charge ? json_encode($charge) :null;
+                 $this->output
+                         ->set_content_type('application/json')
+                         ->set_status_header(200)
+                         ->set_output(json_encode($response));
+                     return;
+             } catch (Exception $e) {
+                 $this->output
+                         ->set_content_type('application/json')
+                         ->set_status_header(200)
+                         ->set_output(json_encode($e->getMessage()));
+                     return;
+                 
+                 
+                
+             }
+             
+         }
+         $this->output
+             ->set_content_type('application/json')
+             ->set_status_header(404)
+             ->set_output(json_encode($resp));
+     }
+     public function purchaseOrder () 
+     {
+         $resp = [
+             'status'  => false,
+             'code'    => 404,
+             'message' => 'Metodo POST requerido',
+         ];
+         if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            #evaluamos si la compra está aprobada //en culqui si existe un token actual-registro de comtra current
+             $id_productos = explode('-',$this->input->post('id_productos'));
+             $cantidades   = explode('-',$this->input->post('cantidades'));
+             $subtotales   = explode('-',$this->input->post('subtotales'));
+             date_default_timezone_set("America/Lima");          
+               $data =[ 
+                          'id_cliente' => $this->input->post('id_cliente'),
+                          'codigo'   => $this->input->post('codigo_venta'),
+                          'nombres'   => $this->input->post('nombres'),
+                          'apellidos' => $this->input->post('apellidos'),
+                          'correo'    => $this->input->post('correo'),
+                          'telefono'    => $this->input->post('telefono'),
+                          'tipo_documento'=> $this->input->post('tipo_documento'),
+                          'numero_documento'=> $this->input->post('numero_documento'),
+                          'provincia'=> $this->input->post('provincia'),
+                          'distrito'=> $this->input->post('distrito'),
+                          'dir_envio'=> $this->input->post('d_envio'),
+                          'referencia'=> $this->input->post('referencia'),
+                          'cupon_codigo'=> $this->input->post('cupon_codigo'),
+                          'cupon_descuento'=> $this->input->post('cupon_descuento'),
+                          'entrega_precio'=> floatval($this->input->post('entrega_precio')),
+                          'productos_precio'=> floatval($this->input->post('subtotal')),
+                          'pedido_fecha'=> date('y-m-d'),
+                          'pedido_estado'=> 1 ,
+                          'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
+                     
+             ];
+             if($this->input->post('dest_nombres')) {
+                 $data["dest_nombres"]    = $this->input->post('dest_nombres');
+                 // $data["dest_apellidos"]  = $this->input->post('dest_apellidos');
+                 $data["dest_telefono"]   = $this->input->post('dest_telefono');
+                 $data["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
+                 $data["dest_number_doc"] = $this->input->post('dest_number_doc');
+               };
+             if($this->input->post('ruc')) {
+                 $data["ruc"]    = $this->input->post('ruc');
+                 $data["r_social"]  = $this->input->post('r_social');
+                 $data["r_fiscal"]   = $this->input->post('r_fiscal');
+               };
+             $id_pedido = $this->savePedido($data);
+             $pedido_estado = [
+                 'id_pedido'        => $id_pedido,
+                 'id_estado_pedido' => 1,
+                 'observacion'      => 'pedido solicitado',
+                 'fecha_estado'     => date('y-m-d')
+             ];
+             $this->dbInsert('pedido_estado',$pedido_estado);
+ 
+             if($id_pedido) {
+                 for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
+                     $datos = [
+                         'id_pedido'   => (int)$id_pedido,
+                         'id_producto' => (int)$id_productos[$i],
+                         'cantidad'    => (int)$cantidades[$i],
+                         'subtotal_precio' => $subtotales[$i],
+                     ];
+                     $response = $this->dbInsert('pedido_detalle',$datos);
+                     
+                     if($response){
+                         $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
+                         $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
+                         $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
+                         
+                     }else{
+                         $this->resp = [
+                             'message' => 'error al guardar dato de pedido detalle'
+                         ];
+                         $this->output
+                          ->set_content_type('application/json')
+                          ->set_status_header(404)
+                          ->set_output(json_encode($this->resp));
+                          return;
+                         }
+                     };
+                     // enviar correo 
+                     
+                 $this->resp = [
+                     'status'  => true,
+                     'code'    => 201 ,
+                     'message' => 'venta registrada',
+                     'data'    => [
+                         'pedido'       => 'created payment register !!',
+                         'codigo_pedido' => $id_pedido,
+                         'state_pedido' => 1
+                         ]
+                     ];
+                     $this->output
+                     ->set_content_type('application/json')
+                     ->set_status_header(200)
+                     ->set_output(json_encode($this->resp));
+                     return;
+                 }else {
+                 $resp = [
+                     'status'  => false,
+                     'code'    => 500 ,
+                     'message' => 'Hubo problemas al almacenar los datos.',
+                     'data'    => [
+                         'pedido'       => false,
+                         'state_pedido' => 0
+                     ]
+                 ];
+                 $this->output
+                     ->set_content_type('application/json')
+                     ->set_status_header(500)
+                     ->set_output(json_encode($resp));
+                 return;
+             }
+             
+             
+           }else {
+             $this->output
+             ->set_content_type('application/json')
+             ->set_status_header(404)
+             ->set_output(json_encode($resp));
+           }
+     }
  
 }
