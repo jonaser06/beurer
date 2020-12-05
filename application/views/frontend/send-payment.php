@@ -210,15 +210,12 @@
 
 <!-- <?php include 'src/includes/footer.php'?> -->
 
-
-
 <script src="https://checkout.culqi.com/js/v3"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
 
 <script>
-console.log('send')
 Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
         const session       = parseInt(document.querySelector('.dataUser').dataset.id);
         const productos     = localStorage.getItem('productos') ? JSON.parse(localStorage.getItem('productos')) :[]
@@ -324,8 +321,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             return formData;
         }
         function dataFormSend (token,email) {
-           
-            
+  
             const formData = new FormData();
             formData.append('token' , token );
             formData.append('correo' , email );
@@ -408,7 +404,21 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             }
             return formData;
         }
-
+        function dataFormOrder ( order ) {
+            const formData = new FormData();
+            const monto = order.amount / 100;
+            const user_type = parseInt(order.metadata.id_session) == 0 ? 'invitado':'autenticado';
+            formData.append('id_orden' ,order.id );
+            formData.append('estado' , order.state );
+            formData.append('cip' , order.payment_code );
+            formData.append('monto' , monto);
+            formData.append('usuario' , `${order.metadata.nombres} ${order.metadata.apellidos}`);
+            formData.append('telefono' , order.metadata.telefono);
+            formData.append('correo' , order.metadata.correo);
+            formData.append('tipo_user' ,user_type );
+            formData.append('detalles' ,JSON.stringify(order.metadata) );
+            return formData;
+        }
         function modalCheckout (title , icon ,message , color) {
             Swal.fire({
             icon: icon ,
@@ -428,7 +438,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                 const token      = Culqi.token.id;
                 const email      = Culqi.token.email;
                 const formSend   = dataFormSend(token,email)
-                Culqi.close()
+                // Culqi.close()
                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/createCharge`, formSend)
                     .then( resp => {
 
@@ -467,8 +477,21 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                     });
             } else if (Culqi.order) {
                 console.log(Culqi.order)
+                const formOrder = dataFormOrder(Culqi.order)
 
-
+                // enviar al server la orden y almacenarla
+                ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchaseOrder`, formOrder)
+                                .then( resp => {
+                                resp = JSON.parse( resp );
+                                    if(resp.status) {
+                                        localStorage.setItem('id_order',resp.data.orden_id);
+                                        // modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
+                                        // setTimeout( () => window.location = `${DOMAIN}order-summary` , 1000);
+                                    }
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                });
                 /* Aqui enviar al servidor el order Id y asociarlo al detalle la venta.
                     Además, tu venta en tu comercio debe quedar estado pendiente.
                     */

@@ -12,11 +12,6 @@ class Ajax extends MY_Controller
         $this->load->model('backend/msuscriptores');
         $this->load->helper('general');
 
-        // if ($this->session->has_userdata('manager')) {
-        //     $this->manager = $this->session->userdata('manager');
-        // } else {
-        //     redirect('manager');
-        // }
     }
 
     public function setoferta(){
@@ -563,7 +558,9 @@ class Ajax extends MY_Controller
                 'idperfil' => 4,
                 'verificado' => 0
             ];
-
+            $enviar = $this->sendmail($data['correo'], '', 'PEDIDO CONFIRMADO', 'confirm_register.php');
+            echo json_encode($data);
+            exit;
             $query = $this->dbSelect('*','clientes', ['correo' => $this->input->post('correo')]);
 
             if($query){
@@ -577,12 +574,7 @@ class Ajax extends MY_Controller
                     ->set_output(json_encode($this->resp));
                 return;
             }else{
-                $dbid = $this->dbInsert('clientes',$data);
-                $hid = $this->salt_encrypt($dbid);
-                $ndata = [
-                    'id' => $hid
-                ];
-                $enviar = $this->sendmail($data['correo'], $ndata, 'CREADA CORRECTAMENTE', 'confirm_register.php');
+                $this->dbInsert('clientes',$data);
                 $this->resp['status'] = true;
                 $this->resp['code'] = 200;
                 $this->resp['message'] = 'find One!';
@@ -935,6 +927,7 @@ class Ajax extends MY_Controller
             ->set_status_header(404)
             ->set_output(json_encode($resp));
     }
+
     public function purchase () 
     {
         $resp = [
@@ -1068,77 +1061,58 @@ class Ajax extends MY_Controller
           ];
           if ($this->input->server('REQUEST_METHOD') == 'POST') {
   
-                $id_pedido = $this->input->post('id_pedido');
-                $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
-                
-                if ($pedido) {
-                $data = [];
-                $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
+              $id_pedido = $this->input->post('id_pedido');
+              $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
 
-                for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
-                    $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
-                    $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
-                    
-                    $productoDB = [
-                        'nombre' => $prod['titulo'],
-                        'precio' => $prod['precio_anterior'],
-                        'imagen' => $imagenes[0]['imagen'],
-                        'precio_online' => $prod['precio'],
-                        'producto_sku' => $prod['producto_sku'],
-                        'cantidad' => $pedido_detalle[$i]['cantidad'],
-                        'subtotal' => $pedido_detalle[$i]['subtotal_precio']
-                    ];
-                    array_push($data ,$productoDB);
-                };
-                #sumando el total
-                $subtotal = 0.0;
-                foreach ($data as $key => $value) {
-                    $subtotal = $subtotal + ( ( float ) $value['precio_online'] * ( int ) $value['cantidad'] );
-                }
-                $total = $subtotal + ( double ) $pedido['entrega_precio'] - ( double ) $pedido['cupon_descuento'] ;
+              if ($pedido) {
+                  $data = [];
+                  $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
 
-                #listando productos para enviar al correo
-                $newdata['orders'] = [
-                    'cod_pedido' => $pedido['codigo'],
-                    'recojo' => ($pedido['codigo']==0)?'Recojo en tienda':'Despacho a domicilio',
-                    'direccion' => $pedido['dir_envio'].', '.$pedido['distrito']. ', LIMA',
-                    'subtotal' => number_format($subtotal, 2, '.', ''),
-                    'descuento' => $pedido['cupon_descuento'],
-                    'envio' => $pedido['entrega_precio'],
-                    'total' => number_format($total, 2, '.', ''),
-                    'productos' => $data
-                ];
+                  for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
+                      $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
+                      $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
+                      
+                      $productoDB = [
+                          'nombre' => $prod['titulo'],
+                          'precio' => $prod['precio_anterior'],
+                          'imagen' => $imagenes[0]['imagen'],
+                          'precio_online' => $prod['precio'],
+                          'producto_sku' => $prod['producto_sku'],
+                          'cantidad' => $pedido_detalle[$i]['cantidad'],
+                          'subtotal' => $pedido_detalle[$i]['subtotal_precio']
+                      ];
+                      array_push($data ,$productoDB);
+                  };
+
             
+                  $enviar = $this->sendmail($pedido['correo'], $pedido, 'PEDIDO CONFIRMADO', 'order_confirm.php');
 
-                $enviar = $this->sendmail($pedido['correo'], $newdata, 'PEDIDO CONFIRMADO', 'order_confirm.php');
-
-                $resp = [
-                    'status'  => true,
-                    'code'    => 200,
-                    'data'    => [
-                        'pedido'   => $pedido,
-                        'detalle'  => $data
-                    ]
-                ];
-                
-                $this->output
-                    ->set_content_type('application/json')
-                    ->set_status_header(200)
-                    ->set_output(json_encode($resp));
-                return;
-                
-                } else {
-                    $resp = [
-                        'status'  => true,
-                        'code'    => 404,
-                        'message' => 'Ocurrio un error en el Core',
-                    ];
-                    $this->output
-                        ->set_content_type('application/json')
-                        ->set_status_header(404)
-                        ->set_output(json_encode($resp));
-                    return;
-                }
+                  $resp = [
+                      'status'  => true,
+                      'code'    => 200,
+                      'data'    => [
+                          'pedido'   => $pedido,
+                          'detalle'  => $data
+                      ]
+                  ];
+                  
+                  $this->output
+                      ->set_content_type('application/json')
+                      ->set_status_header(200)
+                      ->set_output(json_encode($resp));
+                  return;
+              } else {
+                  $resp = [
+                      'status'  => true,
+                      'code'    => 404,
+                      'message' => 'Ocurrio un error en el Core',
+                  ];
+                  $this->output
+                      ->set_content_type('application/json')
+                      ->set_status_header(404)
+                      ->set_output(json_encode($resp));
+                  return;
+              }
           }
           $this->output
               ->set_content_type('application/json')
@@ -1207,6 +1181,7 @@ class Ajax extends MY_Controller
             $this->db->order_by('id_pedido','desc');
             $this->db->limit(5);
             $pedidos = $this->db->get('pedido')->result_array();
+    
             if (!empty($pedidos)) {
                 $this->resp['status'] = true;
                 $this->resp['code'] = 200;
@@ -1302,6 +1277,7 @@ class Ajax extends MY_Controller
                  "distrito"    => $this->input->post('distrito'),
                  "nombres" => $this->input->post('nombres'),
                  "apellidos" => $this->input->post('apellidos'),
+                 "telefono" => $this->input->post('telefono'),
                  "d_envio" => $this->input->post('d_envio'),
                  "referencia" => $this->input->post('referencia'),
                  "id_productos" =>$this->input->post('id_productos'),
@@ -1385,90 +1361,29 @@ class Ajax extends MY_Controller
              'message' => 'Metodo POST requerido',
          ];
          if ($this->input->server('REQUEST_METHOD') == 'POST') {
-            #evaluamos si la compra está aprobada //en culqui si existe un token actual-registro de comtra current
-             $id_productos = explode('-',$this->input->post('id_productos'));
-             $cantidades   = explode('-',$this->input->post('cantidades'));
-             $subtotales   = explode('-',$this->input->post('subtotales'));
              date_default_timezone_set("America/Lima");          
                $data =[ 
-                          'id_cliente' => $this->input->post('id_cliente'),
-                          'codigo'   => $this->input->post('codigo_venta'),
-                          'nombres'   => $this->input->post('nombres'),
-                          'apellidos' => $this->input->post('apellidos'),
-                          'correo'    => $this->input->post('correo'),
+                          'order_id' => $this->input->post('id_orden'),
+                          'estado'   => $this->input->post('estado'),
+                          'cip'   => $this->input->post('cip'),
+                          'monto' => floatval($this->input->post('monto')),
+                          'usuario'    => $this->input->post('usuario'),
                           'telefono'    => $this->input->post('telefono'),
-                          'tipo_documento'=> $this->input->post('tipo_documento'),
-                          'numero_documento'=> $this->input->post('numero_documento'),
-                          'provincia'=> $this->input->post('provincia'),
-                          'distrito'=> $this->input->post('distrito'),
-                          'dir_envio'=> $this->input->post('d_envio'),
-                          'referencia'=> $this->input->post('referencia'),
-                          'cupon_codigo'=> $this->input->post('cupon_codigo'),
-                          'cupon_descuento'=> $this->input->post('cupon_descuento'),
-                          'entrega_precio'=> floatval($this->input->post('entrega_precio')),
-                          'productos_precio'=> floatval($this->input->post('subtotal')),
-                          'pedido_fecha'=> date('y-m-d'),
-                          'pedido_estado'=> 1 ,
-                          'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
-                     
+                          'correo'=> $this->input->post('correo'),
+                          'tipo_user'=> $this->input->post('tipo_user'),
+                          'detalles'=> $this->input->post('detalles'),
+                          'fecha'=> date('y-m-d')
              ];
-             if($this->input->post('dest_nombres')) {
-                 $data["dest_nombres"]    = $this->input->post('dest_nombres');
-                 // $data["dest_apellidos"]  = $this->input->post('dest_apellidos');
-                 $data["dest_telefono"]   = $this->input->post('dest_telefono');
-                 $data["dest_tipo_doc"]   = $this->input->post('dest_tipo_doc');
-                 $data["dest_number_doc"] = $this->input->post('dest_number_doc');
-               };
-             if($this->input->post('ruc')) {
-                 $data["ruc"]    = $this->input->post('ruc');
-                 $data["r_social"]  = $this->input->post('r_social');
-                 $data["r_fiscal"]   = $this->input->post('r_fiscal');
-               };
-             $id_pedido = $this->savePedido($data);
-             $pedido_estado = [
-                 'id_pedido'        => $id_pedido,
-                 'id_estado_pedido' => 1,
-                 'observacion'      => 'pedido solicitado',
-                 'fecha_estado'     => date('y-m-d')
-             ];
-             $this->dbInsert('pedido_estado',$pedido_estado);
- 
-             if($id_pedido) {
-                 for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
-                     $datos = [
-                         'id_pedido'   => (int)$id_pedido,
-                         'id_producto' => (int)$id_productos[$i],
-                         'cantidad'    => (int)$cantidades[$i],
-                         'subtotal_precio' => $subtotales[$i],
-                     ];
-                     $response = $this->dbInsert('pedido_detalle',$datos);
-                     
-                     if($response){
-                         $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
-                         $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
-                         $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
-                         
-                     }else{
-                         $this->resp = [
-                             'message' => 'error al guardar dato de pedido detalle'
-                         ];
-                         $this->output
-                          ->set_content_type('application/json')
-                          ->set_status_header(404)
-                          ->set_output(json_encode($this->resp));
-                          return;
-                         }
-                     };
-                     // enviar correo 
-                     
+            
+             $id_orden = $this->dbInsert('ordenes',$data);
+             
+             if($id_orden) {
                  $this->resp = [
                      'status'  => true,
                      'code'    => 201 ,
-                     'message' => 'venta registrada',
+                     'message' => 'Orden registrada',
                      'data'    => [
-                         'pedido'       => 'created payment register !!',
-                         'codigo_pedido' => $id_pedido,
-                         'state_pedido' => 1
+                         'orden_id' => $id_orden
                          ]
                      ];
                      $this->output
@@ -1476,15 +1391,11 @@ class Ajax extends MY_Controller
                      ->set_status_header(200)
                      ->set_output(json_encode($this->resp));
                      return;
-                 }else {
+              }else {
                  $resp = [
                      'status'  => false,
                      'code'    => 500 ,
-                     'message' => 'Hubo problemas al almacenar los datos.',
-                     'data'    => [
-                         'pedido'       => false,
-                         'state_pedido' => 0
-                     ]
+                     'message' => 'No se pudo almacenar la orden.',
                  ];
                  $this->output
                      ->set_content_type('application/json')
@@ -1501,5 +1412,46 @@ class Ajax extends MY_Controller
              ->set_output(json_encode($resp));
            }
      }
- 
+     public function changueState () 
+     {
+         $resp = [
+             'status'  => false,
+             'code'    => 404,
+             'message' => 'Metodo POST requerido',
+         ];
+    /* Recuperar el cuerpo de la solicitud y parsearlo como JSON */
+            $input = json_decode(file_get_contents('php://input'), true);
+            // Recuperar el cuerpo de la solicitud y analizarlo como JSON
+
+            $input_json = file_get_contents("php://input");
+            //$event_json = json_decode($input);
+            $array = array();
+
+
+            // Escribir el Webhook en mi archivo "log/log-webhooks.json" de ejemplo
+            $myfile = fopen("log-webhooks.text", "w") or die("Imposible abrir el archivo.");
+            fwrite($myfile, $input_json);
+            /* Reconocer tipo de evento recibido */  
+            if($input['type'] == 'order.status.changed') {
+
+            // Obtener objeto Order
+            $objectOrder = json_decode($input['data'], true);    
+
+            // Parametros   
+            $state = trim($objectOrder['state']);         
+            $id = trim($objectOrder['id']); 
+            $payment_code = trim($objectOrder['payment_code']); 
+            $order_number = trim($objectOrder['order_number']);
+            $amount = trim($objectOrder['amount']);
+
+                
+                /* Acciones según nuevo estado */ 
+
+                // Orden pagada
+                if($state == 'create') { 
+                    
+                
+                }
+            }
+ } 
 }

@@ -1340,8 +1340,8 @@ ObjMain = {
             }
         });
         document.getElementById('buy').addEventListener('click', event => {
-            event.preventDefault();
             Culqi.open()
+            event.preventDefault();
 
         })
     },
@@ -1367,6 +1367,7 @@ ObjMain = {
         const formOrder = dataFormSendOrder()
         ObjMain.ajax_post('POST', `${DOMAIN}ajax/createOrder`, formOrder)
             .then(order => {
+
                 let streamOrder = JSON.parse(order);
                 streamOrder = JSON.parse(streamOrder)
                 console.log(streamOrder)
@@ -1383,6 +1384,7 @@ ObjMain = {
                 console.log(error)
             })
     },
+
     resumePedido: (id) => {
         const formData = new FormData();
         formData.append('id_pedido', id);

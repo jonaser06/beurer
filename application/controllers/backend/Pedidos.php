@@ -88,10 +88,6 @@ class Pedidos extends MY_Controller {
         $output = $this->load->view('backend/popups/edit_estadoPedido', $data, TRUE);
         return $this->__output($output);
     }
-
-
-
-
     private function __output($html = NULL) {
         $this->output->set_output($html);
     }
