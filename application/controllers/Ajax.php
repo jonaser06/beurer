@@ -1419,13 +1419,8 @@ class Ajax extends MY_Controller
              'code'    => 404,
              'message' => 'Metodo POST requerido',
          ];
-    /* Recuperar el cuerpo de la solicitud y parsearlo como JSON */
-            $input = json_decode(file_get_contents('php://input'), true);
-            // Recuperar el cuerpo de la solicitud y analizarlo como JSON
-
-            $input_json = file_get_contents("php://input");
-            //$event_json = json_decode($input);
-            $array = array();
+        $input = json_decode(file_get_contents('php://input'), true);
+        $input_json = file_get_contents("php://input");
 
 
             // Escribir el Webhook en mi archivo "log/log-webhooks.json" de ejemplo
@@ -1434,28 +1429,30 @@ class Ajax extends MY_Controller
             /* Reconocer tipo de evento recibido */  
             if($input['type'] == 'order.status.changed') {
 
-            // Obtener objeto Order
             $objectOrder = json_decode($input['data'], true);    
 
             // Parametros   
             $state = trim($objectOrder['state']);         
-            $id = trim($objectOrder['id']); 
-            $payment_code = trim($objectOrder['payment_code']); 
-            $order_number = trim($objectOrder['order_number']);
-            $amount = trim($objectOrder['amount']);
-
-                
-                /* Acciones según nuevo estado */ 
 
                 // Orden pagada
-                if($state == 'created') { 
+                if($state == 'paid') { 
+                    // Aquí cambiar estado de la orden en tu sistema ... 
+                    $array = array(
+                      "response" => "Webhook de Culqi $state ",
                     
-                    var_dump($state);
+                      );
+                    }
+                if($state == 'peending') { 
+                    $array = array(
+                        "response" => "Webhook de Culqi $state ",
+                      
+                        );
+                      }
                 }
-            }
+            
             $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
-            ->set_output(json_encode($state));
+            ->set_output(json_encode($array));
           }
  } 

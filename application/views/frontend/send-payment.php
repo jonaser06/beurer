@@ -208,9 +208,9 @@
 
 
 
-<!-- <?php include 'src/includes/footer.php'?> -->
-
+<?php include 'src/includes/footer.php'?> 
 <script src="https://checkout.culqi.com/js/v3"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
@@ -246,22 +246,8 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             total = `${((parseFloat(envio) + parseFloat(subtotal))).toFixed(2) *100}`;
         }
         
-        // Culqi.settings({
-        //     title: 'BEURER',
-        //     currency: 'PEN',
-        //     description: 'Completamos tu pago con toda la seguridad que tú necesitas',
-        //     amount: total
-        // });
-        // Culqi.options({
-        //     lang: 'auto',
-        //     style: {
-        //     logo: "<?php echo base_url('assets/images/logos/logo.png') ?>",
-        //     maincolor: '#C51152',
-        //     buttontext: '#ffffff',
-        //     maintext: '#4A4A4A',
-        //     desctext: '#4A4A4A'
-        //     }
-        // });
+       
+        
         // document.getElementById('buy').addEventListener('click', event => {
 
         //     Culqi.open();
@@ -427,7 +413,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             showCancelButton: false,
         	confirmButtonColor: '#C51152',
         	confirmButtonText: "continuar",
-        	closeOnConfirm: false    
+        	// closeOnConfirm: false    
             })
         }
         
@@ -438,7 +424,7 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                 const token      = Culqi.token.id;
                 const email      = Culqi.token.email;
                 const formSend   = dataFormSend(token,email)
-                // Culqi.close()
+                Culqi.close()
                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/createCharge`, formSend)
                     .then( resp => {
 
@@ -492,9 +478,6 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                                 .catch(err => {
                                     console.log(err)
                                 });
-                /* Aqui enviar al servidor el order Id y asociarlo al detalle la venta.
-                    Además, tu venta en tu comercio debe quedar estado pendiente.
-                    */
             }
              else { 
                 console.log(Culqi.error);
