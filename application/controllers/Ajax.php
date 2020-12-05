@@ -1448,10 +1448,15 @@ class Ajax extends MY_Controller
                 /* Acciones según nuevo estado */ 
 
                 // Orden pagada
-                if($state == 'create') { 
+                if($state == 'created') { 
                     
-                
+                    var_dump($state);
                 }
             }
+            $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($state));
+          }
  } 
 }
