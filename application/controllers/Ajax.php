@@ -1424,7 +1424,7 @@ class Ajax extends MY_Controller
 
 
             // Escribir el Webhook en mi archivo "log/log-webhooks.json" de ejemplo
-            $myfile = fopen(base_url('log/log-webhooks.json'), "w") or die("Imposible abrir el archivo.");
+            $myfile = fopen('log/log-webhooks.json', "w") or die("Imposible abrir el archivo.");
             fwrite($myfile, $input_json);
             /* Reconocer tipo de evento recibido */  
             if($input['type'] == 'order.status.changed') {
