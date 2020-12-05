@@ -563,9 +563,7 @@ class Ajax extends MY_Controller
                 'idperfil' => 4,
                 'verificado' => 0
             ];
-            $enviar = $this->sendmail($data['correo'], '', 'PEDIDO CONFIRMADO', 'confirm_register.php');
-            echo json_encode($data);
-            exit;
+
             $query = $this->dbSelect('*','clientes', ['correo' => $this->input->post('correo')]);
 
             if($query){
@@ -579,7 +577,12 @@ class Ajax extends MY_Controller
                     ->set_output(json_encode($this->resp));
                 return;
             }else{
-                $this->dbInsert('clientes',$data);
+                $dbid = $this->dbInsert('clientes',$data);
+                $hid = $this->salt_encrypt($dbid);
+                $ndata = [
+                    'id' => $hid
+                ];
+                $enviar = $this->sendmail($data['correo'], $ndata, 'CREADA CORRECTAMENTE', 'confirm_register.php');
                 $this->resp['status'] = true;
                 $this->resp['code'] = 200;
                 $this->resp['message'] = 'find One!';
@@ -1065,58 +1068,77 @@ class Ajax extends MY_Controller
           ];
           if ($this->input->server('REQUEST_METHOD') == 'POST') {
   
-              $id_pedido = $this->input->post('id_pedido');
-              $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
+                $id_pedido = $this->input->post('id_pedido');
+                $pedido =  $this->get('pedido', ['id_pedido'=> $id_pedido]);
+                
+                if ($pedido) {
+                $data = [];
+                $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
 
-              if ($pedido) {
-                  $data = [];
-                  $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
+                for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
+                    $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
+                    $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
+                    
+                    $productoDB = [
+                        'nombre' => $prod['titulo'],
+                        'precio' => $prod['precio_anterior'],
+                        'imagen' => $imagenes[0]['imagen'],
+                        'precio_online' => $prod['precio'],
+                        'producto_sku' => $prod['producto_sku'],
+                        'cantidad' => $pedido_detalle[$i]['cantidad'],
+                        'subtotal' => $pedido_detalle[$i]['subtotal_precio']
+                    ];
+                    array_push($data ,$productoDB);
+                };
+                #sumando el total
+                $subtotal = 0.0;
+                foreach ($data as $key => $value) {
+                    $subtotal = $subtotal + ( ( float ) $value['precio_online'] * ( int ) $value['cantidad'] );
+                }
+                $total = $subtotal + ( double ) $pedido['entrega_precio'] - ( double ) $pedido['cupon_descuento'] ;
 
-                  for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
-                      $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
-                      $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
-                      
-                      $productoDB = [
-                          'nombre' => $prod['titulo'],
-                          'precio' => $prod['precio_anterior'],
-                          'imagen' => $imagenes[0]['imagen'],
-                          'precio_online' => $prod['precio'],
-                          'producto_sku' => $prod['producto_sku'],
-                          'cantidad' => $pedido_detalle[$i]['cantidad'],
-                          'subtotal' => $pedido_detalle[$i]['subtotal_precio']
-                      ];
-                      array_push($data ,$productoDB);
-                  };
-
+                #listando productos para enviar al correo
+                $newdata['orders'] = [
+                    'cod_pedido' => $pedido['codigo'],
+                    'recojo' => ($pedido['codigo']==0)?'Recojo en tienda':'Despacho a domicilio',
+                    'direccion' => $pedido['dir_envio'].', '.$pedido['distrito']. ', LIMA',
+                    'subtotal' => number_format($subtotal, 2, '.', ''),
+                    'descuento' => $pedido['cupon_descuento'],
+                    'envio' => $pedido['entrega_precio'],
+                    'total' => number_format($total, 2, '.', ''),
+                    'productos' => $data
+                ];
             
-                  $enviar = $this->sendmail($pedido['correo'], $pedido, 'PEDIDO CONFIRMADO', 'order_confirm.php');
 
-                  $resp = [
-                      'status'  => true,
-                      'code'    => 200,
-                      'data'    => [
-                          'pedido'   => $pedido,
-                          'detalle'  => $data
-                      ]
-                  ];
-                  
-                  $this->output
-                      ->set_content_type('application/json')
-                      ->set_status_header(200)
-                      ->set_output(json_encode($resp));
-                  return;
-              } else {
-                  $resp = [
-                      'status'  => true,
-                      'code'    => 404,
-                      'message' => 'Ocurrio un error en el Core',
-                  ];
-                  $this->output
-                      ->set_content_type('application/json')
-                      ->set_status_header(404)
-                      ->set_output(json_encode($resp));
-                  return;
-              }
+                $enviar = $this->sendmail($pedido['correo'], $newdata, 'PEDIDO CONFIRMADO', 'order_confirm.php');
+
+                $resp = [
+                    'status'  => true,
+                    'code'    => 200,
+                    'data'    => [
+                        'pedido'   => $pedido,
+                        'detalle'  => $data
+                    ]
+                ];
+                
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($resp));
+                return;
+                
+                } else {
+                    $resp = [
+                        'status'  => true,
+                        'code'    => 404,
+                        'message' => 'Ocurrio un error en el Core',
+                    ];
+                    $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(404)
+                        ->set_output(json_encode($resp));
+                    return;
+                }
           }
           $this->output
               ->set_content_type('application/json')
@@ -1185,7 +1207,6 @@ class Ajax extends MY_Controller
             $this->db->order_by('id_pedido','desc');
             $this->db->limit(5);
             $pedidos = $this->db->get('pedido')->result_array();
-    
             if (!empty($pedidos)) {
                 $this->resp['status'] = true;
                 $this->resp['code'] = 200;

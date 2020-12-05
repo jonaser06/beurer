@@ -120,6 +120,7 @@ $route['myaccount'] = 'frontend/perfil';
 $route['myaccount/update/(:num)'] = 'frontend/perfil/updateCuenta/$1';
 
 $route['recovery'] = 'frontend/recovery/index';
+$route['activate'] = 'frontend/activate/index';
 $route['recovery/(:any)'] = 'frontend/recovery/restore/$1';
 $route['ajax/(:any)']        = 'ajax/$1';
 
