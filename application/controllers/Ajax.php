@@ -1439,13 +1439,13 @@ class Ajax extends MY_Controller
                     // Aquí cambiar estado de la orden en tu sistema ... 
                     $array = array(
                       "response" => "Webhook de Culqi $state ",
-                    
+                      'data' => $objectOrder
                       );
                     }
                 if($state == 'peending') { 
                     $array = array(
                         "response" => "Webhook de Culqi $state ",
-                      
+                         'data' => $objectOrder
                         );
                       }
                 }
