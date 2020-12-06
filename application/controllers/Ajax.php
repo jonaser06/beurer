@@ -1119,7 +1119,6 @@ class Ajax extends MY_Controller
               ->set_status_header(404)
               ->set_output(json_encode($resp));
     }
-
     public function estadoPedido ()
     {
         $resp = [

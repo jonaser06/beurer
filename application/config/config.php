@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-    $config['base_url'] = 'https://www.blogingenieria.site/';
-    // $config['base_url'] = 'http://localhost/beurer/';
+    // $config['base_url'] = 'https://www.blogingenieria.site/';
+    $config['base_url'] = 'http://localhost/beurer/';
 /*
   |--------------------------------------------------------------------------
   | Index File
@@ -532,3 +532,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 $config['akey'] = md5(md5('LuisZagaceta@' . date('Y-m-d')));
 $config['project'] = 'NEGOCIOS';
+
+$config['composer_autoload'] = 'vendor/autoload.php';

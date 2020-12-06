@@ -1384,7 +1384,6 @@ ObjMain = {
                 console.log(error)
             })
     },
-
     resumePedido: (id) => {
         const formData = new FormData();
         formData.append('id_pedido', id);
@@ -1898,6 +1897,9 @@ ObjMain = {
                     <span>${fecha}</span>
                     <span>Comprador : ${pedido.nombres} ${pedido.apellidos}</span>
                     
+                    <a style="color:#C51152;margin:5px auto;" target="_blank" href="${DOMAIN}pdf/${pedido.codigo}/show">ver detalles</a>
+                    <a class="pdfDown" href="${DOMAIN}pdf/${pedido.codigo}/0">Descargar</a>
+                
                 </div>
             </article>
             

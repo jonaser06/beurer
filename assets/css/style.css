@@ -1347,3 +1347,17 @@ section2 {
     cursor: pointer;
     color: #c51152
 }
+
+.pdfDown {
+    margin: 8px auto;
+    border-radius: 10px;
+    color: #C51152;
+    border: 1.4px solid #C51152;
+    padding: 5px 9px;
+    transition: .3s all ease-in;
+}
+
+.pdfDown:hover {
+    background-color: #C51152;
+    color: #fff;
+}

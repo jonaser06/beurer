@@ -39,6 +39,8 @@ class Mcontenido extends CI_Model {
     }*/
 	
 	public function getPaginas($search = NULL, $length = 0, $start = 0, $idparent = 0){
+        $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+
         $this->db->select('paginas.*, sitemap.*, IF( p.idpagina > 0,  "si", "no" ) as hijos');
         $this->db->join('sitemap','paginas.idsitemap=sitemap.idsitemap');
         $this->db->join('paginas as p', 'paginas.idpagina = p.idparent',"LEFT");            

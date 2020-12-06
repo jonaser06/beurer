@@ -155,7 +155,8 @@
                                         <div class="form form-group">
                                                 <div class="form-check">
                                                     <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd"
-                                                    <?= isset($producto['detalles-multimedia']) 
+                                                    <?= var_dump($producto['detalles-multimedia'])?>
+                                                    <?= isset($producto['detalles-multimedia']) && $producto['detalles-multimedia']!='[]'
                                                         ? 'checked':'';  ?>
                                                     >
                                                     <label class="form-check-label" for="colorAdd">colores</label>
@@ -704,6 +705,7 @@
             }
             
             showModule();
+        
          </script>
 
    
@@ -715,6 +717,8 @@
 <script>
     
 $(document).ready(function(){
+    showModule();
+
     Exeperu.tableComplementosRelacionados();
     Exeperu.tableComplementosAccesorios();
     Exeperu.tableComplementosMarcas()

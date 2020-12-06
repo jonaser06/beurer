@@ -51,12 +51,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['default_controller'] = 'request';
+
 $route['noticias/(:num)-(:any)'] = 'request/detallenoticia/$1';
 $route['form/enviar'] = 'request/enviarform';
 
 $route['categorias/lissubcategorias'] = 'frontend/categorias/lissubcategorias/';
 $route['categorias/getProducto'] = 'frontend/categorias/getProducto/';
 $route['categorias/list'] = 'frontend/categorias/liscategorias';
+$route['pdf/(:any)/(:any)'] = function ($codigo, $condition ) {
+   return 'frontend/pdf/toPDF/'.$codigo.'/'.$condition;
+};
+$route['pdf/rotulado/(:any)'] = 'frontend/pdf/tcpdf/$1';
+
 
 $route['categoria/(:num)'] = 'backend/productos/read/$1';
 $route['categoria/save/(:num)'] = 'backend/productos/save/$1';
