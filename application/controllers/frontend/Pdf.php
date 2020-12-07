@@ -43,6 +43,7 @@ class Pdf extends MY_Controller
     $pedido = $this->getCompra(['codigo' => $codigo]);
     if (!empty($pedido)){
         $this->mpdf = new \Mpdf\Mpdf([
+            'tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
             "mode" => 'utf-8',
             "forrmat" => [190, 236]
             ] 

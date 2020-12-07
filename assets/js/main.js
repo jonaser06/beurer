@@ -42,7 +42,9 @@ ObjMain = {
             // ObjMain.defaultUbigeo();
         }
         if (window.location.href == (`${DOMAIN}send-payment`)) {
-
+            if (localStorage.getItem('id_order')) {
+                localStorage.removeItem('id_order')
+            }
             ObjMain.showDataSales();
             // ObjMain.createOrder();
             ObjMain.culqiInit();
