@@ -246,8 +246,6 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             total = `${((parseFloat(envio) + parseFloat(subtotal))).toFixed(2) *100}`;
         }
         
-       
-        
         // document.getElementById('buy').addEventListener('click', event => {
 
         //     Culqi.open();
@@ -293,7 +291,6 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             if(charge['destinatario']){
                 charge.destinatario = JSON.parse(charge.destinatario)
                 formData.append('dest_nombres',charge.destinatario.dest_nombres)
-                formData.append('dest_apellidos',charge.destinatario.dest_apellidos)
                 formData.append('dest_telefono',charge.destinatario.dest_telefono)
                 formData.append('dest_tipo_doc',charge.destinatario.dest_tipo_doc)
                 formData.append('dest_number_doc',charge.destinatario.dest_number_doc)
@@ -377,7 +374,6 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
             if(dest){
                 formData.append('flag_dest',true)
                 formData.append('dest_nombres',dest.nombres)
-                formData.append('dest_apellidos',dest.apellidos)
                 formData.append('dest_telefono',dest.telefono)
                 formData.append('dest_tipo_doc',dest.tipo_doc)
                 formData.append('dest_number_doc',dest.number_doc)
@@ -463,21 +459,25 @@ Culqi.publicKey = "<?php echo PUBLIC_KEY ?>"
                     });
             } else if (Culqi.order) {
                 console.log(Culqi.order)
-                const formOrder = dataFormOrder(Culqi.order)
+                const { ...order } = Culqi.order;
+                localStorage.setItem('order',JSON.stringify(order));
+                const formOrder = dataFormOrder(Culqi.order);
+                const phone = JSON.parse(localStorage.getItem('Comprador')).telefono;
+                formOrder.append('telefono',phone)
 
-                // enviar al server la orden y almacenarla
                 ObjMain.ajax_post( 'POST', `${DOMAIN}ajax/purchaseOrder`, formOrder)
-                                .then( resp => {
-                                resp = JSON.parse( resp );
-                                    if(resp.status) {
-                                        localStorage.setItem('id_order',resp.data.orden_id);
-                                        // modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
-                                        // setTimeout( () => window.location = `${DOMAIN}order-summary` , 1000);
-                                    }
-                                })
-                                .catch(err => {
-                                    console.log(err)
-                                });
+                    .then( resp => {
+                        resp = JSON.parse( resp );
+                        if(resp.status) {
+                            localStorage.setItem('id_order', resp.data.orden_id);
+                            
+                            // modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
+                            setTimeout( () => window.location = `${DOMAIN}order-summary` , 1000);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
             }
              else { 
                 console.log(Culqi.error);

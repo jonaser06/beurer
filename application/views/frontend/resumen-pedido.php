@@ -89,9 +89,36 @@ include 'src/includes/header.php'
             <span class="font-nexaheavy" style="font-size:2rem;color:#c51152;"> ¡Gracias por tu compra! </span>
             <p style="font-size:1.2rem;color:#c51152;"> El equipo de beurer.pe </p>
             <hr style="border-color:#c51152;">
-            <p class="font-nexaheavy" style="font-size:1.2rem;color:black;"> Recibirás una confirmación a través de tu
-                correo electrónico con el resumen del pedido. </p>
+            <p class="font-nexaheavy" style="font-size:1.2rem;color:black;">
+                Recibirás una confirmación a través de tu
+                correo electrónico con el resumen del pedido.
+            </p>
         </div>
+        <div class="orden-head" style="display: none;">
+            <span style="align-self:center"><b>Si aun no has cancelado :</b></span>
+            <br>
+            <span>
+                Para finalizar esta compra debes acercarte a pagar con el siguiente <b>código de pago</b>
+            </span>
+            <button class="pdfDown codigo-cip">
+            </button>
+            <span style="align-self:center">¿Dónde puedo pagarlo?</span>
+            <br>
+            <span>Puedes pagar tu compra en los <b>Bancos o Agentes</b> que se encuentran mostrados abajo. Además,
+                también podrás usar la banca movil via celular o web. ¡Recuerda que debes pagar este código antes que
+                expire!</span>
+            <img style="align-self:center;width:190px"
+                src="https://ci5.googleusercontent.com/proxy/dNpAuaG7l9N3YmrbOfdiUFrC8xVDGuTpyubPKGkPMHAS1CnK9wn32ZaoreBKs0rJmcc=s0-d-e1-ft#https://i.imgur.com/VwtuoES.png"
+                alt="">
+            <br>
+            <img style="margin:auto"
+                src="https://ci4.googleusercontent.com/proxy/LxzltqoeQE5Blpekv4qWog30Mju-TFOmiemvitRvXOZ1zvoatR9kl4YcAe8D1JE2_Ak=s0-d-e1-ft#https://i.imgur.com/mbjYqem.png"
+                alt="">
+
+            <span class="font-nexaheavy">Si ya lo hiciste atraves de tu banca movíl te enviaremos un correo con la
+                confirmación de tu compra</span>
+        </div>
+
         <div style="text-align:center;">
             <div class="row paso3"
                 style="text-align:left; margin:auto; width:85%;background-color:white;border-radius:20px;">
@@ -115,25 +142,33 @@ include 'src/includes/header.php'
                         <div class="distrito" style="text-align:left;"></div>
                         <div class="provincia" style="text-align:left;"></div>
                         <br>
-                        <li class="title_referencia"style="font-weight:bold;">Referencia</li>
+                        <li class="title_referencia" style="font-weight:bold;">Referencia</li>
                         <div class="referencia" style="text-align:left;"> </div>
                         <br class="espaciado">
 
                         <li class="title_recojo" style="font-weight:bold;">Fecha de entrega</li>
-                        <div class="fecha_entrega"style="text-align:left;"></div>
+                        <div class="fecha_entrega" style="text-align:left;"></div>
                         <div style="font-size:.8rem">
-                        </br>Para obtener mayor sobre sus pedidos comunícate:
-                        <br>
-                        <span style="display:flex;align-items:center"><img style="width:25px;cursor:pointer;margin-right:5px" src="<?= base_url('assets/images/icons/telefono.svg')?>" alt="logo-phone">WhatsApp 978440034.</span>
-                        
-                        <span style="display:flex;align-items:center"><img style="width:20px;cursor:pointer;margin-right:7px" src="<?= base_url('assets/images/icons/email.png')?>" alt="logo-phone">Correo : <a href="mailto:Servicioalcliente@beurer.pe">Servicioalcliente@beurer.pe</a></span>
-                         <br>
-                         <b class="horario-detalle" style="margin-bottom:.2rem;display:block"></b>
-       <b> Nuestros asesores de servicio al cliente están disponibles de lunes a viernes de 09:00 a 17:00 h Haremos todo lo posible para responder sus preguntas dentro del horario establecido.
-                        </div>
-                        <br> 
+                            </br>Para obtener mayor informacións sobre sus pedidos comunícate:
+                            <br>
+                            <span style="display:flex;align-items:center"><img
+                                    style="width:25px;cursor:pointer;margin-right:5px"
+                                    src="<?= base_url('assets/images/icons/telefono.svg')?>" alt="logo-phone">WhatsApp
+                                978440034.</span>
 
-                        <li style="font-weight:bold;">Código de Pedido</li>
+                            <span style="display:flex;align-items:center"><img
+                                    style="width:20px;cursor:pointer;margin-right:7px"
+                                    src="<?= base_url('assets/images/icons/email.png')?>" alt="logo-phone">Correo : <a
+                                    href="mailto:Servicioalcliente@beurer.pe">Servicioalcliente@beurer.pe</a></span>
+                            <br>
+                            <b class="horario-detalle" style="margin-bottom:.2rem;display:block"></b>
+                            <b> Nuestros asesores de servicio al cliente están disponibles de lunes a viernes de 09:00 a
+                                17:00 h Haremos todo lo posible para responder sus preguntas dentro del horario
+                                establecido.
+                        </div>
+                        <br>
+
+                        <li class="codigo-pago" style="font-weight:bold;">Código de Pedido</li>
                         <div class="codigo-venta" style="text-align:left;"></div>
                     </ul>
 
@@ -156,9 +191,9 @@ include 'src/includes/header.php'
                             </div>
 
                             <div class="pedido-products">
-                              
+
                             </div>
-                            
+
 
 
 

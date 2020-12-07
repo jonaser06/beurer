@@ -4,12 +4,7 @@ Helpers.prototype.init = function(datos) {
 
     this.table_pedido_estado();
 
-    //    $("#filter_0").on("change", function (event) {
-    //        self.filter0(event);
-    //    });
-    //    $("#filter_1, #filter_2, #filter_3, #filter_4").on("change", function () {
-    //        self.filterss();
-    //    });
+
 };
 
 Helpers.prototype.table_pedido_estado = function() {
@@ -22,14 +17,7 @@ Helpers.prototype.table_pedido_estado = function() {
         "ajax": {
             "type": "POST",
             "url": this.dataApp.url,
-            //            "data": function (d) {
-            //                var data = {};
-            //                $.each($('#form_exportable').serializeArray(), function (index, item) {
-            //                    data[item['name']] = item['value'];
-            //                });
-            //
-            //                return $.extend({}, d, data);
-            //            }
+
         },
         "columns": [
             { "data": "pedido" },

@@ -74,9 +74,16 @@ ObjMain = {
             ObjMain.nextStepCarrito();
         }
         if (window.location.href == (`${DOMAIN}order-summary`)) {
-            ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
-            setTimeout(localStorage.clear(), 2000)
-            console.log('****resumen pedido *******')
+            if (localStorage.getItem('id_order')) {
+                ObjMain.resumeOrder();
+                console.log('****** resumen orden ******');
+                setTimeout(localStorage.clear(), 2000)
+                return
+            } else {
+                ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
+                setTimeout(localStorage.clear(), 2000)
+                console.log('****resumen pedido *******')
+            }
         }
     },
     recibir_ofertas: () => {
@@ -1384,6 +1391,87 @@ ObjMain = {
                 console.log(error)
             })
     },
+    resumeOrder: () => {
+        const orden = JSON.parse(localStorage.getItem('order'));
+        const productos = JSON.parse(localStorage.getItem('productos'))
+        orden['recojo'] = orden.metadata.envio,
+            orden['dest_nombres'] = orden.metadata.destinatario ? JSON.parse(orden.metadata.destinatario).dest_nombres : null
+        orden['dir_envio'] = orden.metadata.d_envio;
+        ObjMain.resumeOrderView(orden)
+        ObjMain.resumeOrderProductsView(productos)
+    },
+    resumeOrderView: data => {
+
+        const recojo = parseFloat(data.recojo);
+        if (recojo == 0) {
+            document.querySelector('.title-envio').textContent = `Dirección de Recojo`
+            document.querySelector('.dir_envio').textContent = `Av.Caminos del Inca N.257 Tienda N° 149`
+            document.querySelector('.distrito').textContent = `Santiago de Surco.`
+            document.querySelector('.title_referencia').style.display = `none`
+            document.querySelector('.espaciado').style.display = `none`
+            document.querySelector('.title_recojo').textContent = 'Fecha de Recojo'
+            document.querySelector('.destinatario').textContent = data.dest_nombres ? `Lo puede recoger: ${data.dest_nombres} ` : 'La entrega es personal'
+            document.querySelector('.horario-detalle').textContent = 'Horario de tienda : de lunes a sábado de 9:00 am a 6:00 pm.'
+            document.querySelector('.fecha_entrega').textContent = `Su pedido estará disponible para recojo en un plazo máximo de 2 días hábiles ,apartir de la fecha en que haya cancelado la orden.
+            `
+        } else {
+            document.querySelector('.title-envio').textContent = `Dirección de envío`
+            document.querySelector('.dir_envio').textContent = `${data.dir_envio}`
+            document.querySelector('.distrito').textContent = `${data.metadata.distrito.toUpperCase()}`
+            document.querySelector('.destinatario').textContent = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres}.` : 'La entrega es personal'
+            document.querySelector('.referencia').textContent = data.metadata.referencia
+            document.querySelector('.fecha_entrega').textContent = `Su pedido llegara en un plazo información máximo de 4 días hábiles una vez confirme su pedido`;
+        }
+        document.querySelector('.orden-head').style.display = 'flex';
+        document.querySelector('.codigo-cip').textContent = data.payment_code
+
+        document.querySelector('.titular').textContent = `${data.metadata.nombres} ${data.metadata.apellidos}`
+        document.querySelector('.provincia').textContent = `LIMA LIMA`
+        document.querySelector('.numero_documento').textContent = `${data.metadata.numero_documento}`
+        document.querySelector('.correo').textContent = data.metadata.correo
+
+        document.querySelector('.codigo-venta').textContent = data.payment_code
+        document.querySelector('.codigo-pago').innerHTML = 'Código CIP de pago'
+
+    },
+    resumeOrderProductsView: productos => {
+
+        const $containerResume = document.querySelector('.pedido-products');
+        productos.forEach(prod => {
+            $containerResume.innerHTML +=
+                `<div class="basket-product" style="text-align:center;">
+                <div class="item">
+                    <a class="product-image"
+                    >
+                        <img src="${DOMAIN}${prod.img}" alt=""
+                            class="product-frame">
+                    </a>
+                    <div class="product-details">
+                        <span>${prod.title}</span>
+                        <p>SKU: ${prod.producto_sku}</p>
+                        <p>Envío a domicilio</p>
+                    </div>
+                </div>
+
+                <div class="price" id="preuni">
+                    <div class="info-prod" style="display:block;">
+                        <img src="assets/images/precio-online.png">
+                        <div class="font-nexaheav text-left price rprice"> ${parseFloat(prod.precio_online).toFixed(2)}</div>
+                    </div>
+                    <div class="font-nexaheav"
+                        style="font-size:1.1em;text-align:center;font-weight:bold;font-family:'nexa-lightuploaded_file';">
+                        Normal: S/ ${parseFloat(prod.precio).toFixed(2)}</div>
+                </div>
+
+                <div class="quantity">
+
+                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                        min="1" readonly>
+                </div>
+                <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
+            </div>`
+        })
+    },
     resumePedido: (id) => {
         const formData = new FormData();
         formData.append('id_pedido', id);
@@ -1401,6 +1489,7 @@ ObjMain = {
 
             });
     },
+
     resumeInfoView: data => {
         const recojo = parseInt(data.recojo);
         if (recojo) {

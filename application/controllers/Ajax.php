@@ -1268,6 +1268,7 @@ class Ajax extends MY_Controller
      
               
                $culqi = new Culqi\Culqi(['api_key' => PRIVATE_KEY]);
+               
                $metadata = [
                  "id_session" =>$this->input->post('id_session'),
                  "tipo_documento" =>$this->input->post('tipo_documento'),
@@ -1276,7 +1277,6 @@ class Ajax extends MY_Controller
                  "distrito"    => $this->input->post('distrito'),
                  "nombres" => $this->input->post('nombres'),
                  "apellidos" => $this->input->post('apellidos'),
-                 "telefono" => $this->input->post('telefono'),
                  "d_envio" => $this->input->post('d_envio'),
                  "referencia" => $this->input->post('referencia'),
                  "id_productos" =>$this->input->post('id_productos'),
