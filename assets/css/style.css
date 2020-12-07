@@ -1374,4 +1374,150 @@ section2 {
     flex-direction: column;
 }
 
-.orden-head>* {}
+
+/* 
+ */
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.cards-container {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.cards-container>* {
+    flex: 50%;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cards>* {
+    padding: 3px;
+    width: 30px;
+    flex: 33%
+}
+
+.wrapper-slide {
+    /* border:1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.content-slide>img {
+    margin-right: 3rem
+}
+
+.content-slide,
+.slider,
+.phones {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.content-slide figure {
+    font-size: .9rem!important;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex: 50%
+}
+
+.content-slide figure img {
+    height: 85px;
+}
+
+.slider {
+    flex-direction: column;
+}
+
+.phones {
+    justify-content: space-evenly;
+}
+
+.container-banner {
+    width: 90%!important;
+    margin: 3rem auto;
+    font-size: .9rem;
+}
+
+.container-banner .wrapper-slide {
+    /* border:1px solid red; */
+    padding: 0px;
+}
+
+.container-banner .content-slide>img {
+    /* width:75px!important; */
+    margin-right: 0rem
+}
+
+.container-banner .cards>* {
+    padding: 3px;
+    /* width: 45px; */
+    flex: 33%
+}
+
+.container-banner .content-slide figure img {
+    height: 66px !important;
+}
+
+.container-banner .content-slide figure {
+    margin-top: 1rem;
+    font-size: .95rem;
+}
+
+.container-banner>div>div:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 30%;
+    width: 2px;
+    background-color: #c51152;
+    height: 60%;
+    /* border: 1px solid red; */
+}
+
+.container-banner>div>div:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 30%;
+    width: 2px;
+    background-color: #c51152;
+    height: 60%;
+    /* border: 1px solid red; */
+}
+
+@media only screen and(max-width:480px) {
+    .wrapper-slide {
+        padding: 4rem !important;
+    }
+}

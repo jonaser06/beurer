@@ -1549,7 +1549,7 @@ ObjMain = {
 
                 <div class="quantity">
 
-                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important;font-size:1.5rem" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
                 <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
