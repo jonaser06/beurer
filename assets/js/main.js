@@ -1894,7 +1894,7 @@ ObjMain = {
 
                 </div>
                 <div class="item-fecha">
-                    <span>-${fecha}</span>
+                    <span>${fecha}</span>
                     <span>Comprador : ${pedido.nombres} ${pedido.apellidos}</span>
                     
                     <a style="color:#C51152;margin:5px auto;" target="_blank" href="${DOMAIN}pdf/${pedido.codigo}/show">ver detalles</a>

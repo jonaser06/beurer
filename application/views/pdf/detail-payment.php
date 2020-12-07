@@ -10,6 +10,8 @@
 
 <body style=" font-size:1rem;margin: 0 auto ; padding:0;color:#333333; padding: 0rem;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;border-right: 1px solid #333333;">
     <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+        <!-- code bar  -->
+
         <!-- HEADER  -->
         <tr>
             <td align="center" style="padding-top :20px;padding-bottom:20px;margin-bottom:10px">
@@ -199,6 +201,7 @@
             </td>
 
         </tr>
+       
     </table>
     
 </body>

@@ -58,10 +58,15 @@ $route['form/enviar'] = 'request/enviarform';
 $route['categorias/lissubcategorias'] = 'frontend/categorias/lissubcategorias/';
 $route['categorias/getProducto'] = 'frontend/categorias/getProducto/';
 $route['categorias/list'] = 'frontend/categorias/liscategorias';
+
+#factura cliente
 $route['pdf/(:any)/(:any)'] = function ($codigo, $condition ) {
    return 'frontend/pdf/toPDF/'.$codigo.'/'.$condition;
 };
-$route['pdf/rotulado/(:any)'] = 'frontend/pdf/tcpdf/$1';
+#rotulado Admin
+$route['rotulado/(:any)/(:any)'] = function ($codigo, $condition ) {
+   return 'frontend/pdf/rotulado/'.$codigo.'/'.$condition;
+};
 
 
 $route['categoria/(:num)'] = 'backend/productos/read/$1';
