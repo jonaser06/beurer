@@ -262,16 +262,22 @@ if (cupon) {
 function converter() {
     let id_products = [],
         cant_products = [],
-        subtotal_products = []
+        subtotal_products = [];
+        colores_productos = [];
     productos.forEach(prod => {
         id_products.push(prod.id);
         cant_products.push(prod.cantidad);
         subtotal_products.push(prod.cantidad * prod.precio_online);
+        // filtro para producto color 
+        let color = prod.color ? prod.color : 'none';
+        colores_productos.push(color);
     })
     return {
         id_products: id_products.join('-'),
         cant_products: cant_products.join('-'),
-        subtotal_products: subtotal_products.join('-')
+        subtotal_products: subtotal_products.join('-'),
+        colores_prods: colores_productos.join('-')
+
     }
 }
 
@@ -426,6 +432,7 @@ function modalCheckout(title, icon, message, color) {
     })
 }
 
+
 function culqi() {
 
     if (Culqi.token) {
@@ -452,8 +459,8 @@ function culqi() {
                         } = charge;
                         const formCharge = dataFormPurchase(metadata);
                         formCharge.append('codigo_venta', charge.reference_code);
-                        formCharge.append('telefono', antifraud_details.phone)
-
+                        formCharge.append('telefono', antifraud_details.phone);
+                        formCharge.append('xratioColors',converter().colores_productos); // enviamos colores
                         ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchase`, formCharge)
                             .then(resp => {
                                 resp = JSON.parse(resp);
@@ -492,8 +499,6 @@ function culqi() {
                 resp = JSON.parse(resp);
                 if (resp.status) {
                     localStorage.setItem('id_order', resp.data.orden_id);
-
-                    // modalCheckout('Gracias por su compra' ,'success',`${charge.outcome.user_message}`,'#C5115')
                     setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
                 }
             })

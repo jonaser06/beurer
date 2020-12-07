@@ -23,7 +23,7 @@ class Pdf extends MY_Controller
          $pedido = $this->getCompra(['codigo' => $codigo]);
         if (!empty($pedido)){
 
-            $this->mpdf = new \Mpdf\Mpdf();
+            $this->mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf']);
             $this->mpdf->SetHTMLHeader($this->setHeader());
             $this->mpdf->SetHTMLFooter($this->setFooter());
 

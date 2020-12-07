@@ -940,6 +940,7 @@ class Ajax extends MY_Controller
             $id_productos = explode('-',$this->input->post('id_productos'));
             $cantidades   = explode('-',$this->input->post('cantidades'));
             $subtotales   = explode('-',$this->input->post('subtotales'));
+            $colores      = explode('-', $this->input->post('xratioColors'));
             date_default_timezone_set("America/Lima");          
               $data =[ 
                          'id_cliente' => $this->input->post('id_cliente'),
@@ -995,9 +996,26 @@ class Ajax extends MY_Controller
                     $response = $this->dbInsert('pedido_detalle',$datos);
                     
                     if($response){
+                        // actualizo los detalles por producto : stock y si tiene un color actualizamos color y stock
+                        
                         $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
                         $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
-                        $this->dbUpdate(['stock'=> $stock],'productos',['id' => (int) $id_productos[$i]]);
+                        #start colrs update
+                        // $color = $colores[$i];
+                        // if( $color !== 'none'){
+                        // $detalles = json_decode($productoDB['detalles_multimedia'],TRUE);
+                        // $detallesUpdate = [];
+
+                        // foreach($detalles as $detalle):
+                        //     $stock_prod = (int)$detalle['stock'];
+                        //     $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $stock_prod;
+                        //     array_push($detallesUpdate , $detalle );
+                        // endforeach;
+                        
+                        // $this->dbUpdate(['detalles-multimedia' => json_encode($detallesUpdate) ],'productos',['id' => (int) $id_productos[$i]]);
+                        // }
+                        #end colors update
+                        $this->dbUpdate(['stock' => $stock ],'productos',['id' => (int) $id_productos[$i]]);
                         
                     }else{
                         $this->resp = [
