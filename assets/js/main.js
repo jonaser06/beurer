@@ -825,6 +825,10 @@ ObjMain = {
                         let formData2 = new FormData();
                         formData2.append("username", correo);
                         formData2.append("contrasena", pass1);
+                        
+                        // validacion del codigo q se envia por correo
+                        
+
                         ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((respl) => {
                             respl = JSON.parse(respl);
                             console.log(respl);
