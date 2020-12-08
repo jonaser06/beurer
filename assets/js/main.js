@@ -819,14 +819,20 @@ ObjMain = {
 
                 ObjMain.ajax_post('POST', DOMAIN + 'ajax/setregister', formData)
                     .then((resp) => {
-                        resp = JSON.parse(resp);
+                        // resp = JSON.parse(resp);
 
                         /* login */
                         let formData2 = new FormData();
                         formData2.append("username", correo);
                         formData2.append("contrasena", pass1);
-                        ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((resp) => {
-                            if (resp.status) {
+                        
+                        // validacion del codigo q se envia por correo
+                        
+
+                        ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((respl) => {
+                            respl = JSON.parse(respl);
+                            console.log(respl);
+                            if (respl.status) {
                                 let redirect = localStorage.getItem('reg-redir');
                                 if (redirect) {
                                     localStorage.removeItem('reg-redir');
