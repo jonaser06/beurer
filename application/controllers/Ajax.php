@@ -562,9 +562,7 @@ class Ajax extends MY_Controller
                 'idperfil' => 4,
                 'verificado' => 0
             ];
-            $enviar = $this->sendmail($data['correo'], '', 'PEDIDO CONFIRMADO', 'confirm_register.php');
-            echo json_encode($data);
-            exit;
+            $enviar = $this->sendmail($data['correo'], '', 'CUENTA CREADA', 'confirm_register.php');
             $query = $this->dbSelect('*','clientes', ['correo' => $this->input->post('correo')]);
 
             if($query){
