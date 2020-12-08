@@ -79,7 +79,7 @@ ObjMain = {
             if (localStorage.getItem('id_order')) {
                 ObjMain.resumeOrder();
                 console.log('****** resumen orden ******');
-                setTimeout(localStorage.clear(), 2000)
+                // setTimeout(localStorage.clear(), 2000)
                 return
             } else {
                 ObjMain.resumePedido(parseInt(localStorage.getItem('id_pedido')));
@@ -1426,6 +1426,9 @@ ObjMain = {
             document.querySelector('.referencia').textContent = data.metadata.referencia
             document.querySelector('.fecha_entrega').textContent = `Su pedido llegara en un plazo información máximo de 4 días hábiles una vez confirme su pedido`;
         }
+        document.querySelector('.title-resume').textContent = `!Gracias por tu Preferencia!`
+        document.querySelector('.message-resume').textContent = `Recibirás una confirmación a través de tu correo electrónico indicandote como debes proceder.`
+
         document.querySelector('.orden-head').style.display = 'flex';
         document.querySelector('.codigo-cip').textContent = data.payment_code
 
@@ -1469,7 +1472,7 @@ ObjMain = {
 
                 <div class="quantity">
 
-                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                    <input class="form-control-field cantidad" style="font-size:1.5rem!important;width:21%;font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
                 <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
@@ -1553,7 +1556,7 @@ ObjMain = {
 
                 <div class="quantity">
 
-                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important;font-size:1.5rem" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                    <input class="form-control-field cantidad" style="font-size:1.5rem!important;width:21%;font-family:nexaheavyuploaded_file!important;" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
                 <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
@@ -2031,6 +2034,22 @@ ObjMain = {
             }
         })
 
+    },
+    modalRegister: () => {
+        const $btnVerify = document.querySelector('.send-verify');
+        const $numberInputs = document.querySelectorAll('.code-group > input');
+        $numberInputs.forEach(input => {
+            input.addEventListener('keyup', e => {
+                e.target.setAttribute('maxlength', '1');
+                let count = 0;
+                for (let index = 0; index < $numberInputs.length; index++) {
+                    let number = $numberInputs[index].value != "" ? 1 : 0
+                    count = count + number;
+                }
+                $btnVerify.disabled = count < $numberInputs.length ? true : false;
+            })
+        });
+        $('#modal-verification').modal('show');
     }
 }
 

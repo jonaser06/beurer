@@ -86,10 +86,10 @@ include 'src/includes/header.php'
     <div class="container2 gracias-compra" style="width:80%;">
         <div
             style="height:100%;background-image:url('assets/images/fondo1.png');background-color:white;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;margin-bottom:2%;">
-            <span class="font-nexaheavy" style="font-size:2rem;color:#c51152;"> ¡Gracias por tu compra! </span>
+            <span class="font-nexaheavy title-resume" style="font-size:2rem;color:#c51152;"> ¡Gracias por tu compra! </span>
             <p style="font-size:1.2rem;color:#c51152;"> El equipo de beurer.pe </p>
             <hr style="border-color:#c51152;">
-            <p class="font-nexaheavy" style="font-size:1.2rem;color:black;">
+            <p class="font-nexaheavy message-resume" style="font-size:1.2rem;color:black;">
                 Recibirás una confirmación a través de tu
                 correo electrónico con el resumen del pedido.
             </p>
