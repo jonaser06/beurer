@@ -532,3 +532,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 $config['akey'] = md5(md5('LuisZagaceta@' . date('Y-m-d')));
 $config['project'] = 'NEGOCIOS';
+
+$config['composer_autoload'] = 'vendor/autoload.php';

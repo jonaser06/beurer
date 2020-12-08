@@ -63,9 +63,9 @@
                                         <?php if($pedido['recojo']== '1'){?>
 										<select id="selected_pedido"name="pedido[pedido_estado]" class="form-control">
 											<option value="1" <?= ($pedido['pedido_estado'] == 1 ? 'selected disabled' : '') ?>>Orden generada</option>
-											<option value="2" <?= ($pedido['pedido_estado'] == 2? 'selected disabled ' : '') ?>>Prepando Pedido</option>
+											<option value="2" <?= ($pedido['pedido_estado'] == 2 ? 'selected disabled ' : '') ?>>Prepando Pedido</option>
 											<option value="3" <?= ($pedido['pedido_estado'] == 3 ? 'selected disabled' : '') ?>>Listo en Tienda</option>
-											<option value="4" <?= ($pedido['pedido_estado'] == 3 ? 'selected disabled' : '') ?>>Pedido entregado</option>
+											<option value="4" <?= ($pedido['pedido_estado'] == 4 ? 'selected disabled' : '') ?>>Pedido entregado</option>
                                         </select>
                                         <?php } else {?>
                                             <select name="pedido[pedido_estado]" class="form-control">

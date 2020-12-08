@@ -215,5 +215,40 @@ class MY_Controller extends CI_Controller
         $this->db->insert('pedido', $data );
         return $this->db->insert_id();
     }
+    function getCompra( array $label = []):array
+    {           
+        $response = [];
+        $pedido =  $this->get('pedido',$label );
+        if ($pedido) {
+            $data = [];
+            $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $pedido['id_pedido']]);
+
+            for ($i = 0 ; $i < count($pedido_detalle); $i++) { 
+                $prod = $this->get('productos', ['id' =>$pedido_detalle[$i]['id_producto'] ]);
+                $imagenes  = $this->dbSelect('imagen','imagenes', [ 'producto_id' => $pedido_detalle[$i]['id_producto']]);
+                
+                $productoDB = [
+                    'nombre' => $prod['titulo'],
+                    'precio' => $prod['precio_anterior'],
+                    'imagen' => $imagenes[0]['imagen'],
+                    'precio_online' => $prod['precio'],
+                    'producto_sku' => $prod['producto_sku'],
+                    'cantidad' => $pedido_detalle[$i]['cantidad'],
+                    'subtotal' => $pedido_detalle[$i]['subtotal_precio']
+                ];
+                array_push($data ,$productoDB);
+            };
+
+            $pedido['total'] = -floatval($pedido['cupon_descuento']) + floatval($pedido['productos_precio'])+ floatval($pedido['entrega_precio']);
+            $response = [
+                'pedido' => $pedido,
+                'detalle'=> $data
+            ];
+            return $response;
+        } 
+        return $response;
+        
+        
+    }
 
 }

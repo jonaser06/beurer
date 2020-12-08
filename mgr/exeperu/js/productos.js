@@ -1,4 +1,4 @@
-Helpers.prototype.init = function (datos) {
+Helpers.prototype.init = function(datos) {
     var self = this;
     this.dataApp = datos;
 
@@ -6,7 +6,7 @@ Helpers.prototype.init = function (datos) {
     //this.table_modelos();
     //this.table_caracteristicas();
 
-    $("#prodjm").on("change", function () {
+    $("#prodjm").on("change", function() {
         self.filterss();
     });
 };
@@ -139,16 +139,16 @@ Helpers.prototype.table_caracteristicas = function () {
     });
 };*/
 
-Helpers.prototype.editProducto = function (idproducto) {
-    this.sendAjax('manager/productos/edit', {"id": idproducto}, 'loadResponse');
+Helpers.prototype.editProducto = function(idproducto) {
+    this.sendAjax('manager/productos/edit', { "id": idproducto }, 'loadResponse');
 };
 
-Helpers.prototype.addProducto = function () {
-    this.sendAjax('manager/productos/edit', {"idproducto": 0}, 'loadResponse');
+Helpers.prototype.addProducto = function() {
+    this.sendAjax('manager/productos/edit', { "idproducto": 0 }, 'loadResponse');
 };
 
-Helpers.prototype.eliminarProducto = function (idproducto) {
-    this.sendAjax('manager/productos/eliminar', {"idproducto": idproducto}, 'UpdateInfo');
+Helpers.prototype.eliminarProducto = function(idproducto) {
+    this.sendAjax('manager/productos/eliminar', { "idproducto": idproducto }, 'UpdateInfo');
 };
 
 /*
@@ -241,7 +241,7 @@ Helpers.prototype.tableModelosjm = function (idproductojm) {
 
 
 
-Helpers.prototype.xxcrear_complemento = function (idproducto) {
+Helpers.prototype.xxcrear_complemento = function(idproducto) {
     if (!this.cancelar_complemento())
         return false;
 
@@ -249,7 +249,7 @@ Helpers.prototype.xxcrear_complemento = function (idproducto) {
     var page = tabla.page();
     var total = tabla.data().length;
     var next = total + 1;
-//    var next = 0;
+    //    var next = 0;
 
     tabla.row.add({
         "idproducto": idproducto,
@@ -257,12 +257,12 @@ Helpers.prototype.xxcrear_complemento = function (idproducto) {
         "orden": "0.00",
         "estado": "1",
         "idcolumn": "esp_" + next,
-//        "row_edit": true
+        //        "row_edit": true
     }).draw().page('last').draw('page');
 
-//    tabla.page('last').draw('page');
+    //    tabla.page('last').draw('page');
 
-//    row.data(edit_data).page(page).draw('page');
+    //    row.data(edit_data).page(page).draw('page');
 
     return this.editar_complemento("esp_" + next);
 };
@@ -273,7 +273,7 @@ Helpers.prototype.xxcrear_complemento = function (idproducto) {
 
 
 
-Helpers.prototype.xxxeditar_complemento = function (iditem) {
+Helpers.prototype.xxxeditar_complemento = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complemento())
@@ -286,7 +286,7 @@ Helpers.prototype.xxxeditar_complemento = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
             case 'idproducto':
@@ -318,10 +318,10 @@ Helpers.prototype.xxxeditar_complemento = function (iditem) {
 
     row.data(edit_data).page(page).draw('page');
 
-    $('.sels_select2').select2({dropdownParent: $("#modalCreateEdit")});
+    $('.sels_select2').select2({ dropdownParent: $("#modalCreateEdit") });
 };
 
-Helpers.prototype.xxxguardar_complemento = function (iditem) {
+Helpers.prototype.xxxguardar_complemento = function(iditem) {
     var tabla = this.tables['table_complementos'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -330,12 +330,12 @@ Helpers.prototype.xxxguardar_complemento = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
 
-//    console.log(raw_data);
-//    return false;
+    //    console.log(raw_data);
+    //    return false;
 
     delete raw_data.row_edit;
     $_row.removeClass('row_edit');
@@ -345,7 +345,7 @@ Helpers.prototype.xxxguardar_complemento = function (iditem) {
     return this.guardar_textarea();
 };
 
-Helpers.prototype.xxxxeliminar_complemento = function (iditem) {
+Helpers.prototype.xxxxeliminar_complemento = function(iditem) {
     var tabla = this.tables['table_complementos'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
@@ -355,7 +355,7 @@ Helpers.prototype.xxxxeliminar_complemento = function (iditem) {
     return this.guardar_textarea();
 };
 
-Helpers.prototype.xxxguardar_textarea = function () {
+Helpers.prototype.xxxguardar_textarea = function() {
     var tabla = this.tables['table_complementos'];
     var texarea = $('#campo_14');
     var data = tabla.data().toArray();
@@ -364,7 +364,7 @@ Helpers.prototype.xxxguardar_textarea = function () {
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.getOptionsComplementos = function (valor) {
+Helpers.prototype.getOptionsComplementos = function(valor) {
     var salida;
 
     for (var index in this.productos) {
@@ -379,76 +379,80 @@ Helpers.prototype.getOptionsComplementos = function (valor) {
 };
 
 
-Helpers.prototype.reloadTableModelos = function (response) {
+Helpers.prototype.reloadTableModelos = function(response) {
     $('#modalCreateEdit').modal('toggle');
 
     return this.tables['table_modelos'].ajax.reload();
 };
 
-Helpers.prototype.reloadTableCaracteristicas = function (response) {
+Helpers.prototype.reloadTableCaracteristicas = function(response) {
     $('#modalCreateEdit').modal('toggle');
 
     return this.tables['table_caracteristicas'].ajax.reload();
 };
 
-Helpers.prototype.reloadTableProductos = function (response) {
+Helpers.prototype.reloadTableProductos = function(response) {
     $('#modalCreateEdit').modal('toggle');
 
     return this.tables['table_productos'].ajax.reload();
 };
 
-Helpers.prototype.refrescart = function (response) {
+Helpers.prototype.refrescart = function(response) {
     return this.tables['table_tipos'].ajax.reload();
 };
 
-Helpers.prototype.refrescarmod = function (response) {
+Helpers.prototype.refrescarmod = function(response) {
     return this.tables['table_modelos'].ajax.reload();
 };
 
-Helpers.prototype.refrescarcar = function (response) {
+Helpers.prototype.refrescarcar = function(response) {
     return this.tables['table_caracteristicas'].ajax.reload();
 };
 
-Helpers.prototype.refrescarp = function (response) {
+Helpers.prototype.refrescarp = function(response) {
     return this.tables['table_productos'].ajax.reload();
 };
 
-Helpers.prototype.filterss = function () {
+Helpers.prototype.filterss = function() {
     this.tables['table_modelos'].ajax.reload();
 };
 
-Helpers.prototype.delModelo = function (idmodelo) {
-    if(confirm('Desea eliminar')){
-        this.sendAjax('manager/productos/deletemodelo', {"id": idmodelo}, 'refrescarmod');
+Helpers.prototype.delModelo = function(idmodelo) {
+    if (confirm('Desea eliminar')) {
+        this.sendAjax('manager/productos/deletemodelo', { "id": idmodelo }, 'refrescarmod');
     }
 };
 
-Helpers.prototype.delCaracteristica = function (idcaracteristica) {
-    if(confirm('Desea eliminar')){
-        this.sendAjax('manager/productos/deletecaracteristica', {"id": idcaracteristica}, 'refrescarcar');
+Helpers.prototype.delCaracteristica = function(idcaracteristica) {
+    if (confirm('Desea eliminar')) {
+        this.sendAjax('manager/productos/deletecaracteristica', { "id": idcaracteristica }, 'refrescarcar');
     }
 };
 
-Helpers.prototype.delProducto = function (idproducto) {
-    if(confirm('Desea eliminar')){
-        this.sendAjax('manager/productos/delete', {"id": idproducto}, 'refrescarp');
+Helpers.prototype.delProducto = function(idproducto) {
+    if (confirm('Desea eliminar')) {
+        this.sendAjax('manager/productos/delete', { "id": idproducto }, 'refrescarp');
     }
 };
 
 //JM JM JM JM JM JM JM JM JM JM JM
 
-Helpers.prototype.tableModeloscar = function () {
+Helpers.prototype.tableModeloscar = function() {
     var self = this;
     var campo_14 = $('#campo_14');
     var data = JSON.parse(campo_14.val());
 
     this.loadDataTable('table_complementos', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
-        "columns": [
-            {"data": "idcaracteristica", render: function (data, type, row, meta) {
+        "columns": [{
+                "data": "idcaracteristica",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     for (var index in self.caracteristicas) {
@@ -461,9 +465,11 @@ Helpers.prototype.tableModeloscar = function () {
                     return !salida ? data : salida;
                 }
             },
-            {"data": "valor"},
-            {"data": "orden"},
-            {"data": "idcolumn", render: function (data, type, row, meta) {
+            { "data": "valor" },
+            { "data": "orden" },
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     if (row.row_edit) {
@@ -488,7 +494,7 @@ Helpers.prototype.tableModeloscar = function () {
     });
 };
 
-Helpers.prototype.cancelar_complementocar = function () {
+Helpers.prototype.cancelar_complementocar = function() {
     var tabla = this.tables['table_complementos'];
     var row = tabla.row('.row_edit');
     var page = tabla.page();
@@ -509,7 +515,7 @@ Helpers.prototype.cancelar_complementocar = function () {
 
 
 
-Helpers.prototype.getOptionsCaracteristicas = function (valor) {
+Helpers.prototype.getOptionsCaracteristicas = function(valor) {
     var salida;
 
     for (var index in this.caracteristicas) {
@@ -530,7 +536,7 @@ Helpers.prototype.getOptionsCaracteristicas = function (valor) {
 
 
 // PRODUCTOS RELACIONEDOS 
-Helpers.prototype.tableComplementosRelacionados = function () {
+Helpers.prototype.tableComplementosRelacionados = function() {
 
     var self = this;
     var campo_14 = $('#prod_relacionados');
@@ -539,15 +545,20 @@ Helpers.prototype.tableComplementosRelacionados = function () {
     console.log(data);
 
     this.loadDataTable('table_complementos_relacionados', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
             //{"data": "idcolumn"},         
-            {"data": "imagenes"},
-            {"data": "idcolumn", render: function (data, type, row, meta) {
-                //console.log(data)
+            { "data": "imagenes" },
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
+                    //console.log(data)
                     var salida;
 
                     if (row.row_edit) {
@@ -572,7 +583,7 @@ Helpers.prototype.tableComplementosRelacionados = function () {
     });
 };
 
-Helpers.prototype.crear_complemento_relacionados = function (idmodelo) {
+Helpers.prototype.crear_complemento_relacionados = function(idmodelo) {
     if (!this.cancelar_complementocar_relacionados())
         return false;
 
@@ -590,7 +601,7 @@ Helpers.prototype.crear_complemento_relacionados = function (idmodelo) {
     return this.editar_complementocar_relacionados("comp_" + next);
 };
 
-Helpers.prototype.editar_complementocar_relacionados = function (iditem) {
+Helpers.prototype.editar_complementocar_relacionados = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complementocar_relacionados())
@@ -603,35 +614,35 @@ Helpers.prototype.editar_complementocar_relacionados = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
-           //case 'idmodelo':
+                //case 'idmodelo':
                 var valuex = value;
                 break;
             case 'imagenes':
 
-                var valuex = '<select name="'+index+'" id="option_prod_'+iditem+'"  class="celda_editada" style="width: 80%">';
+                var valuex = '<select name="' + index + '" id="option_prod_' + iditem + '"  class="celda_editada" style="width: 80%">';
                 valuex += '</select>';
 
-                
+
                 $.ajax({
-                    url:'categoria/123',
-                    success:function(response){
-                        $.each(response.data, function(i,item){
+                    url: 'categoria/123',
+                    success: function(response) {
+                        $.each(response.data, function(i, item) {
                             //console.log(item.titulo);
-                            if(item.titulo == value){
-                               var sel="selected";
-                            }else{
-                                var sel="";
+                            if (item.titulo == value) {
+                                var sel = "selected";
+                            } else {
+                                var sel = "";
                             }
-                        
-                           var html='<option '+sel+' value="'+item.titulo+'">'+item.titulo+'</option>'; 
-                           $("#option_prod_"+iditem).append(html);
-                           
+
+                            var html = '<option ' + sel + ' value="' + item.titulo + '">' + item.titulo + '</option>';
+                            $("#option_prod_" + iditem).append(html);
+
                         });
                     }
-                 });
+                });
 
                 break;
             default:
@@ -648,7 +659,7 @@ Helpers.prototype.editar_complementocar_relacionados = function (iditem) {
     row.data(edit_data).page(page).draw('page');
 };
 
-Helpers.prototype.guardar_complementocar_relacionados = function (iditem) {
+Helpers.prototype.guardar_complementocar_relacionados = function(iditem) {
     var tabla = this.tables['table_complementos_relacionados'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -657,7 +668,7 @@ Helpers.prototype.guardar_complementocar_relacionados = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
     delete raw_data.row_edit;
@@ -668,17 +679,17 @@ Helpers.prototype.guardar_complementocar_relacionados = function (iditem) {
     return this.guardar_textareacar_relacionados();
 };
 
-Helpers.prototype.eliminar_complementocar_relacionados = function (iditem) {
+Helpers.prototype.eliminar_complementocar_relacionados = function(iditem) {
     var tabla = this.tables['table_complementos_relacionados'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
 
     row.remove().page(page).draw('page');
-    
+
     return this.guardar_textareacar_relacionados();
 };
 
-Helpers.prototype.guardar_textareacar_relacionados = function () {
+Helpers.prototype.guardar_textareacar_relacionados = function() {
     var tabla = this.tables['table_complementos_relacionados'];
     var texarea = $('#prod_relacionados');
     var data = tabla.data().toArray();
@@ -686,7 +697,7 @@ Helpers.prototype.guardar_textareacar_relacionados = function () {
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.cancelar_complementocar_relacionados = function () {
+Helpers.prototype.cancelar_complementocar_relacionados = function() {
     var tabla = this.tables['table_complementos_relacionados'];
     var row = tabla.row('.row_edit');
     var page = tabla.page();
@@ -709,7 +720,7 @@ Helpers.prototype.cancelar_complementocar_relacionados = function () {
 
 
 // DATA TABLE  IMAGENES
-Helpers.prototype.tableComplementosImagenes = function () {
+Helpers.prototype.tableComplementosImagenes = function() {
 
     var self = this;
     var campo_14 = $('#img_prod');
@@ -718,15 +729,20 @@ Helpers.prototype.tableComplementosImagenes = function () {
     console.log(data);
 
     this.loadDataTable('table_complementos_imagenes', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "imagenes"},
+            { "data": "imagenes" },
             //{"data": "idcolumn"}         
-            {"data": "idcolumn", render: function (data, type, row, meta) {
-                //console.log(data)
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
+                    //console.log(data)
                     var salida;
 
                     if (row.row_edit) {
@@ -751,7 +767,7 @@ Helpers.prototype.tableComplementosImagenes = function () {
     });
 };
 
-Helpers.prototype.crear_complemento_imagenes = function (idmodelo) {
+Helpers.prototype.crear_complemento_imagenes = function(idmodelo) {
     if (!this.cancelar_complementocar_imagenes())
         return false;
 
@@ -770,7 +786,7 @@ Helpers.prototype.crear_complemento_imagenes = function (idmodelo) {
 };
 
 
-Helpers.prototype.editar_complementocar_imagenes = function (iditem) {
+Helpers.prototype.editar_complementocar_imagenes = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complementocar_imagenes())
@@ -783,14 +799,14 @@ Helpers.prototype.editar_complementocar_imagenes = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
-           //case 'idmodelo':
+                //case 'idmodelo':
                 var valuex = value;
                 break;
             case 'imagenes':
-                var valuex = '<input type="text" name="' + index + '" id="cam_img_'+ iditem +'" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
+                var valuex = '<input type="text" name="' + index + '" id="cam_img_' + iditem + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
                 valuex += '<button type="button" onclick="Exeperu.popupManager(\'cam_img_' + iditem + '\',\'\',\'' + self.key + '\')"><span class="glyphicon glyphicon-picture"></span></button>';
                 break;
             default:
@@ -807,7 +823,7 @@ Helpers.prototype.editar_complementocar_imagenes = function (iditem) {
     row.data(edit_data).page(page).draw('page');
 };
 
-Helpers.prototype.guardar_complementocar_imagenes = function (iditem) {
+Helpers.prototype.guardar_complementocar_imagenes = function(iditem) {
     var tabla = this.tables['table_complementos_imagenes'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -816,7 +832,7 @@ Helpers.prototype.guardar_complementocar_imagenes = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
     delete raw_data.row_edit;
@@ -827,29 +843,29 @@ Helpers.prototype.guardar_complementocar_imagenes = function (iditem) {
     return this.guardar_textareacar_imagenes();
 };
 
-Helpers.prototype.eliminar_complementocar_imagenes = function (iditem) {
+Helpers.prototype.eliminar_complementocar_imagenes = function(iditem) {
     var tabla = this.tables['table_complementos_imagenes'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
 
     row.remove().page(page).draw('page');
 
-    
+
 
     $.ajax({
-        url: 'productos/eliminarimagen',
-        type: 'POST',
-        data: {imagen_id: iditem},
-    })
-    .done(function() {
-        console.log("success");
-    })
+            url: 'productos/eliminarimagen',
+            type: 'POST',
+            data: { imagen_id: iditem },
+        })
+        .done(function() {
+            console.log("success");
+        })
 
-    
+
     return this.guardar_textareacar_imagenes();
 };
 
-Helpers.prototype.guardar_textareacar_imagenes = function () {
+Helpers.prototype.guardar_textareacar_imagenes = function() {
     var tabla = this.tables['table_complementos_imagenes'];
     var texarea = $('#img_prod');
     var data = tabla.data().toArray();
@@ -857,7 +873,7 @@ Helpers.prototype.guardar_textareacar_imagenes = function () {
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.cancelar_complementocar_imagenes = function () {
+Helpers.prototype.cancelar_complementocar_imagenes = function() {
     var tabla = this.tables['table_complementos_imagenes'];
     var row = tabla.row('.row_edit');
     var page = tabla.page();
@@ -877,7 +893,7 @@ Helpers.prototype.cancelar_complementocar_imagenes = function () {
 };
 // DATAT TABLE DESCRIPCION
 
-Helpers.prototype.tableComplementos = function () {
+Helpers.prototype.tableComplementos = function() {
 
     var self = this;
     var campo_14 = $('#desc_prod');
@@ -886,14 +902,19 @@ Helpers.prototype.tableComplementos = function () {
     //console.log(data);
 
     this.loadDataTable('table_complementos', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "descripcion"},
+            { "data": "descripcion" },
             //{"data": "idcolumn"}         
-            {"data": "idcolumn", render: function (data, type, row, meta) {
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     if (row.row_edit) {
@@ -919,7 +940,7 @@ Helpers.prototype.tableComplementos = function () {
 };
 
 
-Helpers.prototype.crear_complemento = function (idmodelo) {
+Helpers.prototype.crear_complemento = function(idmodelo) {
     if (!this.cancelar_complementocar())
         return false;
 
@@ -937,7 +958,7 @@ Helpers.prototype.crear_complemento = function (idmodelo) {
     return this.editar_complementocar("comp_" + next);
 };
 
-Helpers.prototype.editar_complementocar = function (iditem) {
+Helpers.prototype.editar_complementocar = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complementocar())
@@ -950,10 +971,10 @@ Helpers.prototype.editar_complementocar = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
-           //case 'idmodelo':
+                //case 'idmodelo':
                 var valuex = value;
                 break;
             case 'descripcion':
@@ -974,7 +995,7 @@ Helpers.prototype.editar_complementocar = function (iditem) {
     row.data(edit_data).page(page).draw('page');
 };
 
-Helpers.prototype.guardar_complementocar = function (iditem) {
+Helpers.prototype.guardar_complementocar = function(iditem) {
     var tabla = this.tables['table_complementos'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -983,7 +1004,7 @@ Helpers.prototype.guardar_complementocar = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
     delete raw_data.row_edit;
@@ -994,7 +1015,7 @@ Helpers.prototype.guardar_complementocar = function (iditem) {
     return this.guardar_textareacar();
 };
 
-Helpers.prototype.eliminar_complementocar = function (iditem) {
+Helpers.prototype.eliminar_complementocar = function(iditem) {
     var tabla = this.tables['table_complementos'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
@@ -1004,14 +1025,14 @@ Helpers.prototype.eliminar_complementocar = function (iditem) {
     return this.guardar_textareacar();
 };
 
-Helpers.prototype.guardar_textareacar = function () {
+Helpers.prototype.guardar_textareacar = function() {
     var tabla = this.tables['table_complementos'];
     var texarea = $('#desc_prod');
     var data = tabla.data().toArray();
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.cancelar_complementocar = function () {
+Helpers.prototype.cancelar_complementocar = function() {
     var tabla = this.tables['table_complementos'];
     var row = tabla.row('.row_edit');
     var page = tabla.page();
@@ -1031,20 +1052,25 @@ Helpers.prototype.cancelar_complementocar = function () {
 };
 
 // DATA TABLE FICHA TECNIA
-Helpers.prototype.tableComplementosft = function () {
+Helpers.prototype.tableComplementosft = function() {
 
     var self = this;
     var campo_14 = $('#ft_prod');
     var data = JSON.parse(campo_14.val());
     this.loadDataTable('table_complementos_ft', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "denominacion"},
-            {"data": "sensor"},         
-            {"data": "idcolumn", render: function (data, type, row, meta) {
+            { "data": "denominacion" },
+            { "data": "sensor" },
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     if (row.row_edit) {
@@ -1069,7 +1095,7 @@ Helpers.prototype.tableComplementosft = function () {
     });
 };
 
-Helpers.prototype.crear_complemento_ft = function (idmodelo) {
+Helpers.prototype.crear_complemento_ft = function(idmodelo) {
     if (!this.cancelar_complementocar_ft())
         return false;
 
@@ -1087,7 +1113,7 @@ Helpers.prototype.crear_complemento_ft = function (idmodelo) {
     return this.editar_complementocarft("comp_" + next);
 };
 
-Helpers.prototype.editar_complementocarft = function (iditem) {
+Helpers.prototype.editar_complementocarft = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complementocar_ft())
@@ -1100,10 +1126,10 @@ Helpers.prototype.editar_complementocarft = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
-           //case 'idmodelo':
+                //case 'idmodelo':
                 var valuex = value;
                 break;
 
@@ -1127,7 +1153,7 @@ Helpers.prototype.editar_complementocarft = function (iditem) {
     row.data(edit_data).page(page).draw('page');
 };
 
-Helpers.prototype.guardar_complementocarft = function (iditem) {
+Helpers.prototype.guardar_complementocarft = function(iditem) {
     var tabla = this.tables['table_complementos_ft'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -1136,7 +1162,7 @@ Helpers.prototype.guardar_complementocarft = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
 
@@ -1148,7 +1174,7 @@ Helpers.prototype.guardar_complementocarft = function (iditem) {
     return this.guardar_textareacar_ft();
 };
 
-Helpers.prototype.eliminar_complementocarft = function (iditem) {
+Helpers.prototype.eliminar_complementocarft = function(iditem) {
     var tabla = this.tables['table_complementos_ft'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
@@ -1158,14 +1184,14 @@ Helpers.prototype.eliminar_complementocarft = function (iditem) {
     return this.guardar_textareacar_ft();
 };
 
-Helpers.prototype.guardar_textareacar_ft = function () {
+Helpers.prototype.guardar_textareacar_ft = function() {
     var tabla = this.tables['table_complementos_ft'];
     var texarea = $('#ft_prod');
     var data = tabla.data().toArray();
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.cancelar_complementocar_ft = function () {
+Helpers.prototype.cancelar_complementocar_ft = function() {
     var tabla = this.tables['table_complementos_ft'];
     var row = tabla.row('.row_edit');
     var page = tabla.page();
@@ -1186,21 +1212,26 @@ Helpers.prototype.cancelar_complementocar_ft = function () {
 
 // DATA TABLE  MARCAS
 
-Helpers.prototype.tableComplementosMarcas = function () {
+Helpers.prototype.tableComplementosMarcas = function() {
 
     var self = this;
     var campo_14 = $('#marcas_prod');
     var data = JSON.parse(campo_14.val());
 
     this.loadDataTable('table_complementos_marcas', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "imagen_marcas"},
-            {"data": "enlace"},         
-            {"data": "idcolumn", render: function (data, type, row, meta) {
+            { "data": "imagen_marcas" },
+            { "data": "enlace" },
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     if (row.row_edit) {
@@ -1225,7 +1256,7 @@ Helpers.prototype.tableComplementosMarcas = function () {
     });
 };
 
-Helpers.prototype.crear_complemento_marca = function (idproducto) {
+Helpers.prototype.crear_complemento_marca = function(idproducto) {
     if (!this.cancelar_complemento_marcas())
         return false;
 
@@ -1245,7 +1276,7 @@ Helpers.prototype.crear_complemento_marca = function (idproducto) {
     return this.editar_complemento_marcas("marca_" + next);
 };
 
-Helpers.prototype.editar_complemento_marcas = function (iditem) {
+Helpers.prototype.editar_complemento_marcas = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complemento_marcas())
@@ -1258,13 +1289,13 @@ Helpers.prototype.editar_complemento_marcas = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
                 var valuex = value;
                 break;
             case 'imagen_marcas':
-                var valuex = '<input type="text" name="' + index + '" id="cam_'+ iditem +'" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
+                var valuex = '<input type="text" name="' + index + '" id="cam_' + iditem + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
                 valuex += '<button type="button" onclick="Exeperu.popupManager(\'cam_' + iditem + '\',\'\',\'' + self.key + '\')"><span class="glyphicon glyphicon-picture"></span></button>';
                 break;
             case 'enlace':
@@ -1284,7 +1315,7 @@ Helpers.prototype.editar_complemento_marcas = function (iditem) {
     row.data(edit_data).page(page).draw('page');
 };
 
-Helpers.prototype.guardar_complementocar_marcas = function (iditem) {
+Helpers.prototype.guardar_complementocar_marcas = function(iditem) {
     var tabla = this.tables['table_complementos_marcas'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -1293,7 +1324,7 @@ Helpers.prototype.guardar_complementocar_marcas = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
     delete raw_data.row_edit;
@@ -1304,7 +1335,7 @@ Helpers.prototype.guardar_complementocar_marcas = function (iditem) {
     return this.guardar_textareacar_marcas();
 };
 
-Helpers.prototype.cancelar_complemento_marcas = function () {
+Helpers.prototype.cancelar_complemento_marcas = function() {
     var tabla = this.tables['table_complementos_marcas'];
     var row = tabla.row('.row_edit');
     var page = tabla.page();
@@ -1323,7 +1354,7 @@ Helpers.prototype.cancelar_complemento_marcas = function () {
     return true;
 };
 
-Helpers.prototype.eliminar_complemento_marcas = function (iditem) {
+Helpers.prototype.eliminar_complemento_marcas = function(iditem) {
     var tabla = this.tables['table_complementos_marcas'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
@@ -1333,7 +1364,7 @@ Helpers.prototype.eliminar_complemento_marcas = function (iditem) {
     return this.guardar_textareacar_marcas();
 };
 
-Helpers.prototype.guardar_textareacar_marcas = function () {
+Helpers.prototype.guardar_textareacar_marcas = function() {
     var tabla = this.tables['table_complementos_marcas'];
     var texarea = $('#marcas_prod');
     var data = tabla.data().toArray();
@@ -1343,21 +1374,26 @@ Helpers.prototype.guardar_textareacar_marcas = function () {
 
 
 // DATA TABLE  ACCESORIOS
-Helpers.prototype.tableComplementosAccesorios = function () {
+Helpers.prototype.tableComplementosAccesorios = function() {
 
     var self = this;
     var campo_14 = $('#accesorio_prod');
     var data = JSON.parse(campo_14.val());
 
     this.loadDataTable('table_complementos_accesorio', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "nombre"},
-            {"data": "imagen"} ,        
-            {"data": "idcolumn", render: function (data, type, row, meta) {
+            { "data": "nombre" },
+            { "data": "imagen" },
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     if (row.row_edit) {
@@ -1382,7 +1418,7 @@ Helpers.prototype.tableComplementosAccesorios = function () {
     });
 };
 
-Helpers.prototype.crear_complemento_accesorio = function (idmodelo) {
+Helpers.prototype.crear_complemento_accesorio = function(idmodelo) {
     if (!this.cancelar_complementocar_accesorio())
         return false;
 
@@ -1401,7 +1437,7 @@ Helpers.prototype.crear_complemento_accesorio = function (idmodelo) {
 };
 
 
-Helpers.prototype.editar_complementocar_accesorio = function (iditem) {
+Helpers.prototype.editar_complementocar_accesorio = function(iditem) {
     var self = this;
 
     if (!this.cancelar_complementocar_accesorio())
@@ -1414,17 +1450,17 @@ Helpers.prototype.editar_complementocar_accesorio = function (iditem) {
     var raw_data = this.raw_data_current = row.data();
     var edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
-           //case 'idmodelo':
+                //case 'idmodelo':
                 var valuex = value;
                 break;
             case 'nombre':
                 var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%">';
                 break;
             case 'imagen':
-                var valuex = '<input type="text" name="' + index + '" id="accesorio_img_'+ iditem +'" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
+                var valuex = '<input type="text" name="' + index + '" id="accesorio_img_' + iditem + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
                 valuex += '<button type="button" onclick="Exeperu.popupManager(\'accesorio_img_' + iditem + '\',\'\',\'' + self.key + '\')"><span class="glyphicon glyphicon-picture"></span></button>';
                 break;
             default:
@@ -1441,7 +1477,7 @@ Helpers.prototype.editar_complementocar_accesorio = function (iditem) {
     row.data(edit_data).page(page).draw('page');
 };
 
-Helpers.prototype.guardar_complementocar_accesorio = function (iditem) {
+Helpers.prototype.guardar_complementocar_accesorio = function(iditem) {
     var tabla = this.tables['table_complementos_accesorio'];
     var row = tabla.row('#' + iditem);
     var $_row = $(row.node());
@@ -1450,7 +1486,7 @@ Helpers.prototype.guardar_complementocar_accesorio = function (iditem) {
     var new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     var new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
     delete raw_data.row_edit;
@@ -1461,7 +1497,7 @@ Helpers.prototype.guardar_complementocar_accesorio = function (iditem) {
     return this.guardar_textareacar_accesorio();
 };
 
-Helpers.prototype.eliminar_complementocar_accesorio = function (iditem) {
+Helpers.prototype.eliminar_complementocar_accesorio = function(iditem) {
     var tabla = this.tables['table_complementos_accesorio'];
     var row = tabla.row('#' + iditem);
     var page = tabla.page();
@@ -1471,7 +1507,7 @@ Helpers.prototype.eliminar_complementocar_accesorio = function (iditem) {
     return this.guardar_textareacar_accesorio();
 };
 
-Helpers.prototype.guardar_textareacar_accesorio = function () {
+Helpers.prototype.guardar_textareacar_accesorio = function() {
     let tabla = this.tables['table_complementos_accesorio'];
     let texarea = $('#accesorio_prod');
     let data = tabla.data().toArray();
@@ -1479,7 +1515,7 @@ Helpers.prototype.guardar_textareacar_accesorio = function () {
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.cancelar_complementocar_accesorio = function () {
+Helpers.prototype.cancelar_complementocar_accesorio = function() {
     let tabla = this.tables['table_complementos_accesorio'];
     let row = tabla.row('.row_edit');
     let page = tabla.page();
@@ -1498,23 +1534,28 @@ Helpers.prototype.cancelar_complementocar_accesorio = function () {
 
 // COLORES 
 
-Helpers.prototype.tableComplementosColors = function () {
+Helpers.prototype.tableComplementosColors = function() {
     let self = this;
     let campo_14 = $('#color_prod');
     let data = JSON.parse(campo_14.val());
 
     this.loadDataTable('table_complementos_color', {
-        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "Todos"]],
+        "lengthMenu": [
+            [10, 20, 30, -1],
+            [10, 20, 30, "Todos"]
+        ],
         "pagingType": "full_numbers",
         "rowId": "idcolumn",
         "data": data,
         "columns": [
-            {"data": "producto_sku"},
-            {"data": "stock"},
-            {"data": "foto"} ,  
-            {"data": "color"} ,  
-            {"data": "estado"} ,  
-            {"data": "idcolumn", render: function (data, type, row, meta) {
+            { "data": "producto_sku" },
+            { "data": "stock" },
+            { "data": "foto" },
+            { "data": "color" },
+            { "data": "estado" },
+            {
+                "data": "idcolumn",
+                render: function(data, type, row, meta) {
                     var salida;
 
                     if (row.row_edit) {
@@ -1539,7 +1580,7 @@ Helpers.prototype.tableComplementosColors = function () {
     });
 };
 
-Helpers.prototype.crear_complemento_color = function (idmodelo) {
+Helpers.prototype.crear_complemento_color = function(idmodelo) {
     if (!this.cancelar_complementocar_color())
         return false;
 
@@ -1561,7 +1602,7 @@ Helpers.prototype.crear_complemento_color = function (idmodelo) {
 };
 
 
-Helpers.prototype.editar_complementocar_color = function (iditem) {
+Helpers.prototype.editar_complementocar_color = function(iditem) {
     let self = this;
 
     if (!this.cancelar_complementocar_color())
@@ -1574,10 +1615,10 @@ Helpers.prototype.editar_complementocar_color = function (iditem) {
     let raw_data = this.raw_data_current = row.data();
     let edit_data = {};
 
-    $.each(raw_data, function (index, value) {
+    $.each(raw_data, function(index, value) {
         switch (index) {
             case 'idcolumn':
-           //case 'idmodelo':
+                //case 'idmodelo':
                 var valuex = value;
                 break;
             case 'producto_sku':
@@ -1590,11 +1631,11 @@ Helpers.prototype.editar_complementocar_color = function (iditem) {
                 var valuex = '<select name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 100%"><option value="activo">activo</option><option value="inactivo">inactivo</option></select>';
                 break;
             case 'foto':
-                var valuex = '<input type="text" name="' + index + '" id="color_img_'+ iditem +'" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
+                var valuex = '<input type="text" name="' + index + '" id="color_img_' + iditem + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="width: 80%">';
                 valuex += '<button type="button" onclick="Exeperu.popupManager(\'color_img_' + iditem + '\',\'\',\'' + self.key + '\')"><span class="glyphicon glyphicon-picture"></span></button>';
                 break;
             case 'color':
-                    var valuex = '<input type="color" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="cursor:pointer;width:30px;height:30px;border:0;padding:0;border-radius;outline:none">';
+                var valuex = '<input type="color" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada" style="cursor:pointer;width:30px;height:30px;border:0;padding:0;border-radius;outline:none">';
                 break;
             default:
                 var valuex = '<input type="text" name="' + index + '" value="' + (!value ? '' : value) + '" class="celda_editada">';
@@ -1611,7 +1652,7 @@ Helpers.prototype.editar_complementocar_color = function (iditem) {
 };
 
 
-Helpers.prototype.guardar_complementocar_color = function (iditem) {
+Helpers.prototype.guardar_complementocar_color = function(iditem) {
     let tabla = this.tables['table_complementos_color'];
     let row = tabla.row('#' + iditem);
     let $_row = $(row.node());
@@ -1620,7 +1661,7 @@ Helpers.prototype.guardar_complementocar_color = function (iditem) {
     let new_values = $('#' + iditem + ' .celda_editada').serializeArray();
     let new_data = {};
 
-    $.each(new_values, function (index, value) {
+    $.each(new_values, function(index, value) {
         raw_data[value.name] = value.value;
     });
     delete raw_data.row_edit;
@@ -1631,7 +1672,7 @@ Helpers.prototype.guardar_complementocar_color = function (iditem) {
     return this.guardar_textareacar_color();
 };
 
-Helpers.prototype.eliminar_complementocar_color = function (iditem) {
+Helpers.prototype.eliminar_complementocar_color = function(iditem) {
     let tabla = this.tables['table_complementos_color'];
     let row = tabla.row('#' + iditem);
     let page = tabla.page();
@@ -1641,14 +1682,14 @@ Helpers.prototype.eliminar_complementocar_color = function (iditem) {
     return this.guardar_textareacar_color();
 };
 
-Helpers.prototype.guardar_textareacar_color = function () {
+Helpers.prototype.guardar_textareacar_color = function() {
     let tabla = this.tables['table_complementos_color'];
     let texarea = $('#color_prod');
     let data = tabla.data().toArray();
     texarea.val(JSON.stringify(data));
 };
 
-Helpers.prototype.cancelar_complementocar_color = function () {
+Helpers.prototype.cancelar_complementocar_color = function() {
     let tabla = this.tables['table_complementos_color'];
     let row = tabla.row('.row_edit');
     let page = tabla.page();
