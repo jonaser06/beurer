@@ -460,7 +460,7 @@ function culqi() {
                         const formCharge = dataFormPurchase(metadata);
                         formCharge.append('codigo_venta', charge.reference_code);
                         formCharge.append('telefono', antifraud_details.phone);
-                        formCharge.append('xratioColors',converter().colores_productos); // enviamos colores
+                        formCharge.append('xratioColors',converter().colores_prods); // enviamos colores
                         ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchase`, formCharge)
                             .then(resp => {
                                 resp = JSON.parse(resp);

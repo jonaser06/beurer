@@ -1001,19 +1001,19 @@ class Ajax extends MY_Controller
                         $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
                         $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
                         #start colrs update
-                        // $color = $colores[$i];
-                        // if( $color !== 'none'){
-                        // $detalles = json_decode($productoDB['detalles_multimedia'],TRUE);
-                        // $detallesUpdate = [];
+                        $color = $colores[$i];
+                        if($color != 'none'){
+                        $detalles = json_decode($productoDB['detalles-multimedia'],TRUE);
+                        $detallesUpdate = [];
 
-                        // foreach($detalles as $detalle):
-                        //     $stock_prod = (int)$detalle['stock'];
-                        //     $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $stock_prod;
-                        //     array_push($detallesUpdate , $detalle );
-                        // endforeach;
-                        
-                        // $this->dbUpdate(['detalles-multimedia' => json_encode($detallesUpdate) ],'productos',['id' => (int) $id_productos[$i]]);
-                        // }
+                        foreach($detalles as $detalle):
+                            $stock_prod = (int)$detalle['stock'];
+                            $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $color;
+                            array_push($detallesUpdate , $detalle );
+                        endforeach;
+                        $this->dbUpdate(['detalles-multimedia' => json_encode($detallesUpdate) ],'productos',['id' => (int) $id_productos[$i]]);
+                        }
+
                         #end colors update
                         $this->dbUpdate(['stock' => $stock ],'productos',['id' => (int) $id_productos[$i]]);
                         

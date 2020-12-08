@@ -138,28 +138,36 @@
                         <span class="px-0 col-xs-12  font-nexaregular"
                             style="font-size:1.2em; font-family:'nexaheavyuploaded_file';padding-bottom:11px; ">
                             <?php 
-                                    $detalles = $product["detalles-multimedia"];
-                                    echo !empty($detalles) ? 'COLORES DISPONIBLES' : 'COLOR UNICO';
-                                ?>
+                             $detalles = $product["detalles-multimedia"];
+                            
+                             if(!empty($detalles)){
+                                $products_colors = array_filter($detalles , function ($detalle) {
+                                    return intval($detalle['stock']) !== 0 ;
+                                 });
+                                echo !empty($products_colors) ? 'COLORES DISPONIBLES' : '';
+                             }else {
+                                 echo 'COLOR UNICO';
+                             }
+                            ?>
                         </span>
                         <ul class="colors" id="div-colors" style="display:block;">
 
                             <?php 
-                                            if(!empty($detalles)){
-                                                foreach ($detalles as $key => $value) {
-                                                    if($value['estado']== 'activo'){
-                                                        echo '<li class="btn btnprimary1 color active selectColor" 
-                                                        style="background-color:'.$value['color'].';"
-                                                        data-img = "'.$value['foto'].'"
-                                                        data-color =  "'.$value['color'].'"
-                                                        data-stock =  "'.$value['stock'].'"
-                                                        data-producto_sku =  "'.$value['producto_sku'].'"
-                                                        ></li>';
-                                                    }
-                                                    
-                                                }
-                                            }
-                                    ?>
+                                if(!empty($detalles)){
+                                    foreach ($detalles as $key => $value) {
+                                        if($value['estado']== 'activo'&& intval($value['stock']) !== 0 ){
+                                            echo '<li class="btn btnprimary1 color active selectColor" 
+                                            style="background-color:'.$value['color'].';"
+                                            data-img = "'.$value['foto'].'"
+                                            data-color =  "'.$value['color'].'"
+                                            data-stock =  "'.$value['stock'].'"
+                                            data-producto_sku =  "'.$value['producto_sku'].'"
+                                            ></li>';
+                                        }
+                                        
+                                    }
+                                }
+                            ?>
 
                         </ul>
 
@@ -171,24 +179,23 @@
                             <div class="cantidad_btn" style="display:inline-block;">
                                 <button id="dism" style="margin:0 2%;width:42px;height:42px">-</button>
                                 <input class="form-control-field" name="pwd" value="1" type="text" id="cantidad_prod"
-                                    min="1" style="padding:0px;width:10%; border:none!important;text-align:center; 
-                                    vertical-align: middle!important;font-size:2em!important;font-family:nexaheavyuploaded_file!important;background-color:transparent!important" readonly>
+                                    min="1"
+                                    style="padding:0px;width:10%; border:none!important;text-align:center; 
+                                    vertical-align: middle!important;font-size:2em!important;font-family:nexaheavyuploaded_file!important;background-color:transparent!important"
+                                    readonly>
                                 <button id="aum" style="margin:0 2%;width:42px;height:42px">+</button>
                             </div>
                             <br> <br>
                             <button class="btnAddCarrito btn btn-cmn" type="button" data-toggle="modal"
-                                data-target="#DetalleProducto" 
-                                data-title="<?php echo $product['titulo']?>"
-                                data-id       = "<?php echo $product['id']?>"
-                                data-precio   = "<?php echo $product['precio_anterior']?>"
-                                data-producto_sku   = "<?php echo $product['producto_sku']?>"
-                                data-precio_online   = "<?php echo $product['precio']?>"
-                                data-img   = "<?= $product['imagen'][0] ?>"
-                                data-peso   = <?= $product['precio'] ?>
-                                data-volumen   = <?= $product['volumen'] ?>
-                                data-cantidad ="1">
-                                <a  style="color:white;border: 2px solid #c51152;" tabindex="-1"
-                                >AÑADIR AL CARRO
+                                data-target="#DetalleProducto" data-title="<?php echo $product['titulo']?>"
+                                data-id="<?php echo $product['id']?>"
+                                data-precio="<?php echo $product['precio_anterior']?>"
+                                data-producto_sku="<?php echo $product['producto_sku']?>"
+                                data-precio_online="<?php echo $product['precio']?>"
+                                data-img="<?= $product['imagen'][0] ?>" data-peso=<?= $product['precio'] ?>
+                                data-volumen=<?= $product['volumen'] ?> data-cantidad="1"
+                                data-stock=<?php echo $product['stock'] ?> >
+                                <a style="color:white;border: 2px solid #c51152;" tabindex="-1">AÑADIR AL CARRO
                                 </a>
                             </button>
                         </div>
@@ -305,7 +312,7 @@
         <div class="row">
             <h1 class="ttl-prl font-bold text-center">PRODUCTOS QUE TE PUEDEN INTERESAR</h1>
             <div class="carrosuel-two-home">
-                
+
                 <?php 
                 if(isset($producto_rel) ){ ?>
                 <?php foreach ($producto_rel as $value): ?>
@@ -407,9 +414,10 @@ $(function() {
                 </button>
 
                 <div style="display:block;text-align:center;">
-                    <div style="display:inline-block"> 
-                    <img src="<?= base_url(); ?>assets/images/icono-comprobar.svg"
-                            id="img-check" style="width:1.5rem;height:auto;"></div>
+                    <div style="display:inline-block">
+                        <img src="<?= base_url(); ?>assets/images/icono-comprobar.svg" id="img-check"
+                            style="width:1.5rem;height:auto;">
+                    </div>
                     <div style="display:inline-block;vertical-align:middle;margin-left:1.5%;">
                         <h2 class="modal-title" id="txt-exito"
                             style="font-size:1.7rem;vertical-align:middle;font-family:'nexaheavyuploaded_file';text-align:center;">
@@ -421,21 +429,15 @@ $(function() {
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-5 col-xs-5">
-                        <img 
-                        class="img-modal"
-                        src="<?= base_url($product['imagen'][0]); ?>" 
-                        alt="<?= $product['titulo']; ?>" 
-                        style="width:100%; height:auto;text-align:left;"
-                        >
+                        <img class="img-modal" src="<?= base_url($product['imagen'][0]); ?>"
+                            alt="<?= $product['titulo']; ?>" style="width:100%; height:auto;text-align:left;">
                     </div>
-                    <div class="col-md-7 col-xs-7" 
-                    style=" display: flex;
+                    <div class="col-md-7 col-xs-7" style=" display: flex;
                     justify-content: center;
                     align-content: center;
-                    flex-direction: column;"
-                    >
+                    flex-direction: column;">
                         <h2 class="modal-title" id="title-principal" style="font-size:1.3rem;font-weight:bold;">
-                        <?= $product['titulo']?>
+                            <?= $product['titulo']?>
                         </h2>
                         <div class="font-nexaheav cantidadModal"
                             style="text-align:left;font-size:1.3em;font-family:'nexaregularuploaded_file';font-weight:100">
@@ -451,7 +453,8 @@ $(function() {
                                 S/ <?=$product['precio'] ?></div>
                         </div>
                         <div class="font-nexaheav"
-                            style="font-weight:100;text-align:left;font-size:1.1em;font-family:'nexaregularuploaded_file';">Normal: S/ <?=$product['precio_anterior'] ?></div>
+                            style="font-weight:100;text-align:left;font-size:1.1em;font-family:'nexaregularuploaded_file';">
+                            Normal: S/ <?=$product['precio_anterior'] ?></div>
                     </div>
 
                 </div>
@@ -460,7 +463,7 @@ $(function() {
                 style="text-align:center;border-top:0 none;padding-top:7px;border-bottom:1px solid #c3c3c3;padding-bottom:35px;">
 
                 <a href="<?php echo base_url('carrito'); ?>"><button type="button" class="btn  btn-cmn"
-                style="width:75%!important;text-align:center;font-size:1.2rem!important;padding-top:7px;padding-bottom:7px; padding-left:0px;padding-right:0px; ">IR
+                        style="width:75%!important;text-align:center;font-size:1.2rem!important;padding-top:7px;padding-bottom:7px; padding-left:0px;padding-right:0px; ">IR
                         AL CARRO</button></a>
                 <br>
                 <br>
@@ -479,14 +482,14 @@ $(function() {
                     </div>';
             }
             ?>
-            
-           
+
+
             <div class="modal-body" style="padding:0px;">
                 <div class="row" style="margin:0px;">
                     <div class="col-md-12 ">
                         <div class="row" style="margin:0px;">
-                            
-                        <?php 
+
+                            <?php 
                         if(!empty($producto_rel)) {
                             $sugeridos = array_slice($producto_rel,0,3);
                             
@@ -533,7 +536,7 @@ $(function() {
                             endforeach;
                            
                         }
-                        ?> 
+                        ?>
                         </div>
                     </div>
                 </div>
@@ -543,9 +546,9 @@ $(function() {
 </div>
 
 <style>
-    body {
-        background-color: #fff!important;
-    }
+body {
+    background-color: #fff !important;
+}
 </style>
 
 

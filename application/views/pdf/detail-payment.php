@@ -57,7 +57,7 @@
                                  <img width="130px " src="<?php echo base_url($value['imagen']); ?>">
                              </td>
                              <td style="text-align:left;display: block;width:25% "><?php echo $value['nombre']; ?></td>
-                             <td style="text-align:center;display: block;width:15%  ">rerere </td>
+                             <td style="text-align:center;display: block;width:15%  "><?php echo $value['producto_sku']?> </td>
                              <td style="text-align:center;display: block;width:15%  "> <?php echo $value['cantidad']; ?></td>
                              <td style="text-align:center;display: block;width:15%  "> S/. <?php echo $value['precio_online']; ?></td>   
                          </tr>
@@ -136,7 +136,7 @@
                     </tr>
                     <tr>
                         <td align="right" style="font-weight:bold;padding-right:20px">Teléfono:</td>
-                        <td align="left"><?php echo $pedido['dest:telefono']; ?></td>
+                        <td align="left"><?php echo $pedido['dest_telefono']; ?></td>
                     </tr>
                   
                 </table>

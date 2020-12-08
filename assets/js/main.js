@@ -1340,6 +1340,8 @@ ObjMain = {
         ObjMain.createOrder();
         Culqi.options({
             lang: 'auto',
+            modal: true,
+            customButton: 'Pagar {{moneda}} {{amount}} {{stringcurrency}}',
             style: {
                 logo: `${DOMAIN}assets/images/logos/logo.png`,
                 maincolor: '#C51152',
