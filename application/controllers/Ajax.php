@@ -531,6 +531,10 @@ class Ajax extends MY_Controller
                  ->set_content_type('application/json')
                  ->set_status_header(200)
                  ->set_output(json_encode($this->resp));
+                 $data['message'] = 'Tu reclamo se envio correctamente.';
+                 $data2['message'] = 'Tienes un nuevo reclamo a travez de beurer.pe';
+                 $enviar = $this->sendmail('reclamos@beurer.pe', $data, 'RECLAMO ENVIADO', 'new_reclam.php');
+                 $enviar = $this->sendmail('reclamos@beurer.pe', $data2, 'TIENES UN NUEVO RECLAMO', 'new_reclam.php');
                  return;
         }
         $this->resp['message'] = 'Ocurrio un error en la petición';
@@ -582,7 +586,7 @@ class Ajax extends MY_Controller
                 $ndata = [
                     'id' => $hid
                 ];
-                $enviar = $this->sendmail($data['correo'], $ndata, 'CREADA CORRECTAMENTE', 'confirm_register.php');
+                $enviar = $this->sendmail($data['correo'], $ndata, 'CUENTA CREADA CORRECTAMENTE', 'confirm_register.php');
                 $this->resp['status'] = true;
                 $this->resp['code'] = 200;
                 $this->resp['message'] = 'find One!';
@@ -1110,8 +1114,6 @@ class Ajax extends MY_Controller
                 ];
             
 
-                $enviar = $this->sendmail($pedido['correo'], $newdata, 'PEDIDO CONFIRMADO', 'order_confirm.php');
-
                 $resp = [
                     'status'  => true,
                     'code'    => 200,
@@ -1125,6 +1127,11 @@ class Ajax extends MY_Controller
                     ->set_content_type('application/json')
                     ->set_status_header(200)
                     ->set_output(json_encode($resp));
+
+                $enviar = $this->sendmail($pedido['correo'], $newdata, 'PEDIDO CONFIRMADO', 'order_confirm.php');
+                #copia a beurer
+                $enviar = $this->sendmail('ventas@beurer.pe', $newdata, 'TIENES UN NUEVO PEDIDO', 'new_order.php');
+
                 return;
                 
                 } else {
