@@ -192,6 +192,8 @@
                                             <div class="d_ob">*</div> <span>Datos obligatorios.</span>
                                         </div>
                                     </div>
+                                    <button class="btn-show-modal btn btn-primary1" style="margin:auto;display:none; "onclick="ObjMain.showVerify()">Verificar Correo</button>
+
                                 </div>
                             </div>
                         </div>
@@ -233,12 +235,13 @@
 
         <span style="text-align:left;"><a class="btn " style="background-color:darkgray; color:white;" href="#">VOLVER</a></span>
         <span><a class="btn btn-primary1" id="btn_sgt" href="#" onclick="ObjMain.submit_form(event);">COMPLETAR REGISTRO</a></span>
+        <br>
+
     </div>
 
     <div class="linea"></div>
-
+                                             
     <br>
-
     </div>
     <!--Fin de cuerpo-->
 </main>
@@ -263,7 +266,7 @@
                     <div class="modal-body">
                         <div class="content-modal-body" >
 
-                        <form  class="verify-form" action="#" method="POST" >
+                        <div  class="verify-form" >
 
                              <p>Te hemos enviado un código de verificación a tu correo : 
                              </p>
@@ -282,11 +285,11 @@
                                 Reenviar Código
                             </a>
                             
-                            <input type="submit"
+                            <input type="text" onclick="ObjMain.confirmAccount()"
                             disabled 
                             class="send-verify btn btn-cmn popupBtn"
                             value="Confirmar">
-                        </form>
+                             </div>
                             
                         </div>
                     

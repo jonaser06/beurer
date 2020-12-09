@@ -819,33 +819,25 @@ ObjMain = {
 
                 ObjMain.ajax_post('POST', DOMAIN + 'ajax/setregister', formData)
                     .then((resp) => {
-                        // resp = JSON.parse(resp);
+                        resp = JSON.parse(resp);
+                        console.log(resp)
+                            /* login */
 
-                        /* login */
-                        let formData2 = new FormData();
-                        formData2.append("username", correo);
-                        formData2.append("contrasena", pass1);
+
+                        document.querySelector('.email-verify').textContent = resp.data.correo;
+                        document.querySelector('.email-verify').dataset.pass = pass1;
+                        document.querySelector('.send-verify').dataset.id_cliente = resp.data.id_cliente;
+
+                        ObjMain.showModalRegister();
 
                         // validacion del codigo q se envia por correo
 
 
-                        ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((respl) => {
-                            respl = JSON.parse(respl);
-                            console.log(respl);
-                            if (respl.status) {
-                                let redirect = localStorage.getItem('reg-redir');
-                                if (redirect) {
-                                    localStorage.removeItem('reg-redir');
-                                    window.location = redirect;
-                                } else {
-                                    window.location = DOMAIN;
-                                }
-                            }
-                        });
 
 
                     })
                     .catch((err) => {
+                        console.log(err)
                         err = JSON.parse(err);
                         ObjMain.alert_form(false, err.message);
                     });
@@ -1430,7 +1422,7 @@ ObjMain = {
             document.querySelector('.distrito').textContent = `${data.metadata.distrito.toUpperCase()}`
             document.querySelector('.destinatario').textContent = data.dest_nombres ? `Lo puede recibir: ${data.dest_nombres}.` : 'La entrega es personal'
             document.querySelector('.referencia').textContent = data.metadata.referencia
-            document.querySelector('.fecha_entrega').textContent = `Su pedido llegara en un plazo información máximo de 4 días hábiles una vez confirme su pedido`;
+            document.querySelector('.fecha_entrega').textContent = `Su pedido llegara en un plazo máximo de 4 días hábiles una vez confirme su pedido`;
         }
         document.querySelector('.title-resume').textContent = `!Gracias por tu Preferencia!`
         document.querySelector('.message-resume').textContent = `Recibirás una confirmación con los detalles de la orden y como proceder a través de tu correo.`
@@ -2042,7 +2034,8 @@ ObjMain = {
         })
 
     },
-    modalRegister: () => {
+    showModalRegister: () => {
+
         const $btnVerify = document.querySelector('.send-verify');
         const $numberInputs = document.querySelectorAll('.code-group > input');
         $numberInputs.forEach(input => {
@@ -2056,15 +2049,66 @@ ObjMain = {
                 $btnVerify.disabled = count < $numberInputs.length ? true : false;
             })
         });
+        document.querySelector('.btn-show-modal').style.display = 'flex'
         $('#modal-verification').modal('show');
     },
     codeVerify: () => {
         let code = '';
         const $digits = document.querySelectorAll('.code-group > input');
-        $digits.forEach($chunk => code += trim($chunk.value));
-        const formData = new FormData();
-        formData.append('code', code)
-        return formData
+        $digits.forEach($chunk => code += $chunk.value.trim())
+        return code
+    },
+    showVerify: () => {
+        $('#modal-verification').modal('show');
+    },
+    confirmAccount: () => {
+        const code = ObjMain.codeVerify();
+        const { id_cliente } = document.querySelector('.send-verify').dataset;
+        const formData = new FormData()
+        formData.append('codigo', code);
+        formData.append('id_cliente', id_cliente)
+
+        ObjMain.ajax_post('POST', DOMAIN + 'ajax/validatecode', formData).then(resp => {
+            let response = JSON.parse(resp);
+            Swal.fire({
+                title: 'Cuenta Verificada',
+                text: 'Tu cuenta ha sido verificada y ahora puedes iniciar sesión',
+                showCancelButton: false,
+                confirmButtonColor: '#C51152',
+                confirmButtonText: "continuar",
+            })
+            setTimeout(() => {
+                let formData2 = new FormData();
+                const correo = document.querySelector('.email-verify').textContent
+                const pass1 = document.querySelector('.email-verify').dataset.pass
+                formData2.append("username", correo);
+                formData2.append("contrasena", pass1);
+                ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((respl) => {
+                    respl = JSON.parse(respl);
+                    console.log(respl);
+                    if (respl.status) {
+                        let redirect = localStorage.getItem('reg-redir');
+                        if (redirect) {
+                            localStorage.removeItem('reg-redir');
+                            window.location = redirect;
+                        } else {
+                            window.location = DOMAIN;
+                        }
+                    }
+                });
+            }, 4000);
+
+        }).catch(err => {
+            let error = JSON.parse(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Hubo un problema al verificar tu cuenta',
+                text: error.message,
+                showCancelButton: false,
+                confirmButtonColor: '#C51152',
+                confirmButtonText: "continuar",
+            })
+        })
     }
 }
 

@@ -139,7 +139,10 @@
                     </div>
                 </div>
             </div>
+            <?php if ( !$sesion ): ?>
             <span data-toggle="modal"  data-target="#select-stepOne"><a class="btn btn-cmn" data-toggle="modal"  tabindex="2" style="width:100%;margin: 10px 0px;">Ir a Comprar</a></span>
+            <?php endif; ?>
+
             <?php if ( $sesion ): ?>
                 
             <span class="btn-nextCarrito"><a class="btn btn-cmn" href="<?php echo base_url('facturacion'); ?>" tabindex="2" style="width:100%;margin: 0px 0px;outline: none;">Comprar</a></span>
@@ -377,7 +380,6 @@
             </div>
     </div>
 <?php endif ?>
-
 
 <?php include 'src/includes/footer.php' ?>
 
