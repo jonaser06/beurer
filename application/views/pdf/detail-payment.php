@@ -93,7 +93,7 @@
         </tr>
         <tr>
             <td>
-            <?php $mensaje = (int)$pedido['recojo'] ? 'Dirección de Entrega':'Entrega en Tienda' ?>
+            <?php $mensaje = !(int)$pedido['recojo'] ? 'Dirección de Entrega':'Entrega en Tienda' ?>
              <span style="padding-right:13px;font-weight: bold;display:block"><?php echo $mensaje ?></span>
              
              <span ><?php echo (int)$pedido['recojo'] ? $pedido['dir_envio'].' - ' .$pedido['distrito']:'Av. Caminos del Inca Nº 257 Tienda Nº 149 Santiago de Surco - Lima' ?></span>
