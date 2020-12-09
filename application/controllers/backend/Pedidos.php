@@ -68,7 +68,7 @@ class Pedidos extends MY_Controller {
                 "tipo" => 1 
             ];
             $query = $this->get('pedido', ['id_pedido'=>$id_pedido]);
-            $enviar = $this->sendmail($query['correo'], $query, 'PEDIDO ACTUALIZADO', 'Tu pedido a cambiado de estado');//corregir
+            // $enviar = $this->sendmail($query['correo'], $query, 'PEDIDO ACTUALIZADO', 'order_confirm.php');
         }else {
             $mensaje = [
                 "mensaje"=>  "Hubo un problema",
