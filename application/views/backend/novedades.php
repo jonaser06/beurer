@@ -4,6 +4,8 @@
         <?= $this->load->view('backend/chunks/head', array(), TRUE) ?>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
+      
+   
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             <?= $this->load->view('backend/chunks/header', array(), TRUE) ?>
@@ -69,7 +71,7 @@
                 </section>
 
             </div>
-
+      
             <!-- Main Footer -->
             <?= $this->load->view('backend/chunks/footer', array(), TRUE) ?>
         </div>
@@ -80,12 +82,26 @@
         <?= $this->load->view('backend/chunks/scripts', array(), TRUE) ?>
 
        <script src="<?= getFilex('mgr/exeperu/js/ofertas.js')?>"></script>
-        
+    
        <style>
            #table_novedades tr {
                font-weight: bold;
            }
        </style>
+             <!-- <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> -->
+        <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js
+"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js
+"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js
+"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js
+"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js
+"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js
+"></script>
         <script>
            
             let table = $('#table_novedades').DataTable({
@@ -120,10 +136,13 @@
                         return `<span style="width:100% ;display:flex;juntify-content:center;color:#C51152; font-weight:bold"><i style="color:#C51152;margin: 0 10px;font-size:17px" class="fa fa-check"></i>${data}</span>`;
                     }}
                    
-                ]
+                ],dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf', 'print'
+                ], 
             });
             
-          
+        
 
         </script>
 

@@ -12,7 +12,7 @@ class Pdf extends MY_Controller
         parent::__construct();
 
         if (!isset($_SESSION['id_cliente'])) {
-			redirect();
+			// redirect();
         } 
         // $this->mpdf = new \Mpdf\Mpdf();
         // $this->mpdf->SetHTMLHeader($this->setHeader());
