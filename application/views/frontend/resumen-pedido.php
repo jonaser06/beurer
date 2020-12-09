@@ -86,10 +86,10 @@ include 'src/includes/header.php'
     <div class="container2 gracias-compra" style="width:80%;">
         <div
             style="height:100%;background-image:url('assets/images/fondo1.png');background-color:white;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;margin-bottom:2%;">
-            <span class="font-nexaheavy" style="font-size:2rem;color:#c51152;"> ¡Gracias por tu compra! </span>
+            <span class="font-nexaheavy title-resume" style="font-size:2rem;color:#c51152;"> ¡Gracias por tu compra! </span>
             <p style="font-size:1.2rem;color:#c51152;"> El equipo de beurer.pe </p>
             <hr style="border-color:#c51152;">
-            <p class="font-nexaheavy" style="font-size:1.2rem;color:black;">
+            <p class="font-nexaheavy message-resume" style="font-size:1.2rem;color:black;">
                 Recibirás una confirmación a través de tu
                 correo electrónico con el resumen del pedido.
             </p>
@@ -102,21 +102,34 @@ include 'src/includes/header.php'
             </span>
             <button class="pdfDown codigo-cip">
             </button>
+            <span style="margin:auto">
+               Monto: S/.<b class="order-amount"></b>
+            </span>
+            <img style="align-self:center;width:190px"
+                src="https://ci5.googleusercontent.com/proxy/dNpAuaG7l9N3YmrbOfdiUFrC8xVDGuTpyubPKGkPMHAS1CnK9wn32ZaoreBKs0rJmcc=s0-d-e1-ft#https://i.imgur.com/VwtuoES.png"
+                alt="logo-pago-efectivo">
+            <a 
+            target="_blank"
+            style="display:flex;align-items:center;margin:10px auto;padding:7px 12px;border-radius:9px;font-weight:bold"
+            href="https://ubicanos.pagoefectivo.pe/"
+            >
+            <img style="margin-right:12px"src="<?= base_url('assets/images/icons/ubicacion.png')?>" alt="punto-pago">
+            Encuentra tu punto de pago</a>
+            <br>
+
             <span style="align-self:center">¿Dónde puedo pagarlo?</span>
             <br>
             <span>Puedes pagar tu compra en los <b>Bancos o Agentes</b> que se encuentran mostrados abajo. Además,
                 también podrás usar la banca movil via celular o web. ¡Recuerda que debes pagar este código antes que
                 expire!</span>
-            <img style="align-self:center;width:190px"
-                src="https://ci5.googleusercontent.com/proxy/dNpAuaG7l9N3YmrbOfdiUFrC8xVDGuTpyubPKGkPMHAS1CnK9wn32ZaoreBKs0rJmcc=s0-d-e1-ft#https://i.imgur.com/VwtuoES.png"
-                alt="">
-            <br>
+            
             <img style="margin:auto"
                 src="https://ci4.googleusercontent.com/proxy/LxzltqoeQE5Blpekv4qWog30Mju-TFOmiemvitRvXOZ1zvoatR9kl4YcAe8D1JE2_Ak=s0-d-e1-ft#https://i.imgur.com/mbjYqem.png"
                 alt="">
-
+            <br>
             <span class="font-nexaheavy">Si ya lo hiciste atraves de tu banca movíl te enviaremos un correo con la
                 confirmación de tu compra</span>
+                <br>
         </div>
 
         <div style="text-align:center;">

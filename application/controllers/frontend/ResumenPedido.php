@@ -24,17 +24,7 @@ class ResumenPedido extends MY_Controller
         
 
         $output = $this->load->view("frontend/resumen-pedido.php", $this->data, TRUE);
-
+        
         echo $output;
-    }
-    function resumeOrder() {
-        $uri_segment = $this->uri->segment_array();
-        $uri = implode('/',$uri_segment);
-
-        $this->data['varify_product'] = false;
-        $this->data['pagina'] = $this->taxonomia->getPaginaurl($uri);
-        $this->data['uri'] = $uri;
-        $this->data['confif'] = $this->contenido->getContenido(1);
-        $this->data['menu'] = $this->contenido->getMenu();
     }
 }

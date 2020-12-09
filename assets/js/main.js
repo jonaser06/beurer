@@ -825,9 +825,9 @@ ObjMain = {
                         let formData2 = new FormData();
                         formData2.append("username", correo);
                         formData2.append("contrasena", pass1);
-                        
+
                         // validacion del codigo q se envia por correo
-                        
+
 
                         ObjMain.ajax_post('POST', DOMAIN + 'ajax/login', formData2).then((respl) => {
                             respl = JSON.parse(respl);
@@ -1432,8 +1432,12 @@ ObjMain = {
             document.querySelector('.referencia').textContent = data.metadata.referencia
             document.querySelector('.fecha_entrega').textContent = `Su pedido llegara en un plazo información máximo de 4 días hábiles una vez confirme su pedido`;
         }
+        document.querySelector('.title-resume').textContent = `!Gracias por tu Preferencia!`
+        document.querySelector('.message-resume').textContent = `Recibirás una confirmación con los detalles de la orden y como proceder a través de tu correo.`
+
         document.querySelector('.orden-head').style.display = 'flex';
         document.querySelector('.codigo-cip').textContent = data.payment_code
+        document.querySelector('.order-amount').textContent = (parseFloat(data.amount) / 100).toFixed(2);
 
         document.querySelector('.titular').textContent = `${data.metadata.nombres} ${data.metadata.apellidos}`
         document.querySelector('.provincia').textContent = `LIMA LIMA`
@@ -1475,7 +1479,7 @@ ObjMain = {
 
                 <div class="quantity">
 
-                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                    <input class="form-control-field cantidad" style="font-size:1.5rem!important;width:21%;font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
                 <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
@@ -1559,7 +1563,7 @@ ObjMain = {
 
                 <div class="quantity">
 
-                    <input class="form-control-field cantidad" style="font-family:nexaheavyuploaded_file!important;font-size:1.5rem" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
+                    <input class="form-control-field cantidad" style="font-size:1.5rem!important;width:21%;font-family:nexaheavyuploaded_file!important;" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
                 <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
@@ -2037,6 +2041,30 @@ ObjMain = {
             }
         })
 
+    },
+    modalRegister: () => {
+        const $btnVerify = document.querySelector('.send-verify');
+        const $numberInputs = document.querySelectorAll('.code-group > input');
+        $numberInputs.forEach(input => {
+            input.addEventListener('keyup', e => {
+                e.target.setAttribute('maxlength', '1');
+                let count = 0;
+                for (let index = 0; index < $numberInputs.length; index++) {
+                    let number = $numberInputs[index].value != "" ? 1 : 0
+                    count = count + number;
+                }
+                $btnVerify.disabled = count < $numberInputs.length ? true : false;
+            })
+        });
+        $('#modal-verification').modal('show');
+    },
+    codeVerify: () => {
+        let code = '';
+        const $digits = document.querySelectorAll('.code-group > input');
+        $digits.forEach($chunk => code += trim($chunk.value));
+        const formData = new FormData();
+        formData.append('code', code)
+        return formData
     }
 }
 

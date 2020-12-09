@@ -242,6 +242,59 @@
     </div>
     <!--Fin de cuerpo-->
 </main>
+
+<!-- modalsito -->
+<div class="modal fade" id="modal-verification" tabindex="-1" 
+    role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modal_foto" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="display:flex">
+
+                        <figure class="header-icon-modal">
+                            <img style="width:40px;margin-left:2em"src="<?= base_url('beurer_plantilla/assets/images/steps/paso1.png')?>" alt="icon-modal">
+                        </figure>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"class="modal-close" >&times;</span>
+                        </button>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-modal-body" >
+
+                        <form  class="verify-form" action="#" method="POST" >
+
+                             <p>Te hemos enviado un código de verificación a tu correo : 
+                             </p>
+                            <b class="email-verify">renzoedward23@gmail.com</b>
+                            <small>Ingresa los 6 dígitos</small>
+                            <div class="code-group">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                                <input type="text">
+                            </div>
+                            <a href="#"
+                                class="reenviar-btn">
+                                Reenviar Código
+                            </a>
+                            
+                            <input type="submit"
+                            disabled 
+                            class="send-verify btn btn-cmn popupBtn"
+                            value="Confirmar">
+                        </form>
+                            
+                        </div>
+                    
+                </div>
+                    
+                </div>
+            </div>
+</div>
 <style>
     #btn_sgt:focus {
         color:#fff;
@@ -253,6 +306,51 @@
 	color: #161616;
 	font-family:'nexa-lightuploaded_file'!important;
     }
+        
+    .header-icon-modal {
+        flex:1
+    }
+    .modal-close {
+    color:#c51152 !important;
+    font-weight:bold !important;
+    font-size:2em!important;
+    }
+    .modal-header button {
+    display: flex;
+    }
+    .btn-modal-sgt {
+        font-family: 'nexa-bolduploaded_file';
+        margin:0  auto;
+        color: #c51152;
+        font-weight:bold;
+        /* color:#fff;
+        background:#c51152; */
+        padding: .5rem 1rem;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        border:1.5px solid #c51152;
+        transition: .3s all ease-in;
+        outline:none
+    }
+    .btn-modal-sgt:hover{
+        color: #c51152;
+        border:2px solid #c51152;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding:.5rem 1rem;
+        color:#fff;
+        background:#c51152
+    }
+    #modal-nextStep>.modal-dialog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .popupBtn:focus, .btn-cmn:focus {
+        outline:none!important;
+        border:none!important
+    }
+    
 </style>
 
 <!-- <script src="assets/js/registro.js"></script>    -->

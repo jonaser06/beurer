@@ -366,7 +366,7 @@
                             <input type="submit"
                             disabled 
                             class="send-verify btn btn-cmn popupBtn"
-                            value="Enviar">
+                            value="Confirmar">
                         </form>
                             
                         </div>
@@ -377,24 +377,7 @@
             </div>
     </div>
 <?php endif ?>
-<script>
-    const $btnVerify = document.querySelector('.send-verify');
-    const $numberInputs = document.querySelectorAll('.code-group > input');
-    
-    $numberInputs.forEach( input => {
-        input.addEventListener('keyup' , e => {
-            e.target.setAttribute('maxlength','1');
 
-            let count = 0;
-            for (let index = 0; index < $numberInputs.length; index++) {
-                 let number = $numberInputs[index].value != "" ? 1 : 0
-                 count = count + number;
-            }  
-            $btnVerify.disabled = count < $numberInputs.length ? true : false;
-        } )
-    })
-
-</script>
 
 <?php include 'src/includes/footer.php' ?>
 
