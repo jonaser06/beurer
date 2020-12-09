@@ -132,7 +132,7 @@
                     </tr>
                     <tr>
                         <td align="right" style="font-weight:bold;padding-right:20px">DNI:</td>
-                        <td align="left"><?php echo $pedido['correo'];?></td>
+                        <td align="left"><?php echo $pedido['dest_number_doc'];?></td>
                     </tr>
                     <tr>
                         <td align="right" style="font-weight:bold;padding-right:20px">Teléfono:</td>
