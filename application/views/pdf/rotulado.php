@@ -179,7 +179,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width:20% "><b>Referencia</b></td>
-                                    <td style="width:80% ">: <?php echo $pedido['referencia'] ?$pedido['referencia'] : '' ?></td>
+                                    <td style="width:80% ">: <?php echo ($pedido['referencia']&&$pedido['referencia'] !== 'undefined' ) ?$pedido['referencia'] : ''  ?></td>
                                 </tr>
 
                             </table>
