@@ -32,9 +32,12 @@
             </td>
         </tr>
         <tr>
-            <td style="color:#646464; padding: 1rem;text-align: center;">Para confirmar tu cuenta haz click <a href="<?php echo URL_BASE.'activate?code='.$id; ?>">aqui!</a></td>
+            <!-- <td style="color:#646464; padding: 1rem;text-align: center;">Para confirmar tu cuenta haz click <a href="<?php echo URL_BASE.'activate?code='.$id; ?>">aqui!</a></td> -->
+            <td style="color:#646464; padding: 1rem;text-align: center;">A continuación le indicamos el código de validación: </td>
         </tr>
-
+        <tr>
+            <td style="text-align: center; font-size: 30px; font-weight: bold;"><p><?php echo $codigo; ?></p></td>
+        </tr>
         <?php include 'tpl/footermail.php'; ?>
 
     </table>

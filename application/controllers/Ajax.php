@@ -141,26 +141,39 @@ class Ajax extends MY_Controller
         
 
         $salida = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><table border="1">';
+        // $salida .= '<tr>';
+        // $salida .= '<td>Reporte</td>';
+        // $salida .= '<td>Pedido</td>';
+        // $salida .= '<td>id Producto</td>';
+        // $salida .= '<td>Nombres</td>';
+        // $salida .= '<td>Apellidos</td>';
+        // $salida .= '<td>Telefono</td>';
+        // $salida .= '<td>Correo</td>';
+        // $salida .= '<td>Tipo documento</td>';
+        // $salida .= '<td>N° documento</td>';
+        // $salida .= '<td>Provincia</td>';
+        // $salida .= '<td>Distrito</td>';
+        // $salida .= '<td>Direccion</td>';
+        // $salida .= '<td>Precio de envio</td>';
+        // $salida .= '<td>Precio de producto</td>';
+        // $salida .= '<td>Cupon</td>';
+        // $salida .= '<td>Fecha</td>';
+        // $salida .= '<td>Estado</td>';
+        // $salida .= '<td>Producto</td>';
+        // $salida .= '</tr>'; 
+        
         $salida .= '<tr>';
-        $salida .= '<td>Reporte</td>';
-        $salida .= '<td>Pedido</td>';
-        $salida .= '<td>id Producto</td>';
-        $salida .= '<td>Nombres</td>';
-        $salida .= '<td>Apellidos</td>';
-        $salida .= '<td>Telefono</td>';
-        $salida .= '<td>Correo</td>';
-        $salida .= '<td>Tipo documento</td>';
-        $salida .= '<td>N° documento</td>';
-        $salida .= '<td>Provincia</td>';
-        $salida .= '<td>Distrito</td>';
-        $salida .= '<td>Direccion</td>';
+        $salida .= '<td>Producto</td>';
+        $salida .= '<td>Cantidad</td>';
         $salida .= '<td>Precio de envio</td>';
         $salida .= '<td>Precio de producto</td>';
         $salida .= '<td>Cupon</td>';
-        $salida .= '<td>Fecha</td>';
+        $salida .= '<td>PRECIO TOTAL</td>';
+        $salida .= '<td>TIPO DE ENTREGA</td>';
         $salida .= '<td>Estado</td>';
-        $salida .= '<td>Producto</td>';
-        $salida .= '</tr>';    
+        $salida .= '<td>Fecha</td>';
+        $salida .= '<td>Fecha límite de envío</td>';
+        $salida .= '</tr>';
 
         $start = $this->input->post('fecha');
         if( $start != null ) {
@@ -172,7 +185,7 @@ class Ajax extends MY_Controller
                 'p.pedido_fecha <='=> $end
             ];
 
-            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
             $this->db->from('pedido_detalle as pd');
             $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
             $this->db->join('productos as pr', 'pr.id = pd.id_producto');
@@ -181,6 +194,8 @@ class Ajax extends MY_Controller
             /* var_dump($reclamos);
             exit; */
             foreach ($query as $key => $value) {
+
+                #estado de pedido
                 $estado = '';
                 if($value['pedido_estado'] =='1'){
                     $estado = 'Orden Generada';
@@ -191,26 +206,56 @@ class Ajax extends MY_Controller
                 }else{
                     $estado = 'Pedido entregado';
                 }
+
+                #entrega de pedido
+                if($value['codigo']==0){
+                    #envios 4 dias mas
+                    $entrega = 'Recojo en tienda';
+                    $fecdess= $value['pedido_fecha'];
+                    $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
+                    $mFecha->add(new DateInterval('P4D'));
+                    $newfecha = $mFecha->format('Y-m-d');
+                }else{
+                    #recojo 2 dias mas
+                    $entrega = 'Despacho a domicilio';
+                    $fecdess= $value['pedido_fecha'];
+                    $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
+                    $mFecha->add(new DateInterval('P4D'));
+                    $newfecha = $mFecha->format('Y-m-d');
+                }
+
+                // $salida .= '<tr>';
+                // $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
+                // $salida .= '<td>'.$value['id_pedido'].'</td>';
+                // $salida .= '<td>'.$value['id_producto'].'</td>';
+                // $salida .= '<td>'.$value['nombres'].'</td>';
+                // $salida .= '<td>'.$value['apellidos'].'</td>';
+                // $salida .= '<td>'.$value['telefono'].'</td>';
+                // $salida .= '<td>'.$value['correo'].'</td>';
+                // $salida .= '<td>'.$value['tipo_documento'].'</td>';
+                // $salida .= '<td>'.$value['numero_documento'].'</td>';
+                // $salida .= '<td>'.$value['provincia'].'</td>';
+                // $salida .= '<td>'.$value['distrito'].'</td>';
+                // $salida .= '<td>'.$value['dir_envio'].'</td>';
+                // $salida .= '<td>'.$value['entrega_precio'].'</td>';
+                // $salida .= '<td>'.$value['productos_precio'].'</td>';
+                // $salida .= '<td>'.$value['cupon_descuento'].'</td>';
+                // $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+                // $salida .= '<td>'.$estado.'</td>';
+                // $salida .= '<td>'.$value['titulo'].'</td>';
+                // $salida .= '</tr>'; 
                 $salida .= '<tr>';
-                $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
-                $salida .= '<td>'.$value['id_pedido'].'</td>';
-                $salida .= '<td>'.$value['id_producto'].'</td>';
-                $salida .= '<td>'.$value['nombres'].'</td>';
-                $salida .= '<td>'.$value['apellidos'].'</td>';
-                $salida .= '<td>'.$value['telefono'].'</td>';
-                $salida .= '<td>'.$value['correo'].'</td>';
-                $salida .= '<td>'.$value['tipo_documento'].'</td>';
-                $salida .= '<td>'.$value['numero_documento'].'</td>';
-                $salida .= '<td>'.$value['provincia'].'</td>';
-                $salida .= '<td>'.$value['distrito'].'</td>';
-                $salida .= '<td>'.$value['dir_envio'].'</td>';
+                $salida .= '<td>'.$value['titulo'].'</td>';
+                $salida .= '<td>'.$value['cantidad'].'</td>';
                 $salida .= '<td>'.$value['entrega_precio'].'</td>';
                 $salida .= '<td>'.$value['productos_precio'].'</td>';
                 $salida .= '<td>'.$value['cupon_descuento'].'</td>';
-                $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+                $salida .= '<td>0</td>';
+                $salida .= '<td>'.$entrega.'</td>';
                 $salida .= '<td>'.$estado.'</td>';
-                $salida .= '<td>'.$value['titulo'].'</td>';
-                $salida .= '</tr>';    
+                $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+                $salida .= '<td>'.$newfecha.'</td>';
+                $salida .= '</tr>';   
             }
     
             $salida .= '</table></body></html>';
@@ -223,7 +268,7 @@ class Ajax extends MY_Controller
 
         }
 
-        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
         $this->db->from('pedido_detalle as pd');
         $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
         $this->db->join('productos as pr', 'pr.id = pd.id_producto');
@@ -240,26 +285,35 @@ class Ajax extends MY_Controller
             }else{
                 $estado = 'Pedido entregado';
             }
+
+            if($value['codigo']==0){
+                #envios 4 dias mas
+                $entrega = 'Recojo en tienda';
+                $fecdess= $value['pedido_fecha'];
+                $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
+                $mFecha->add(new DateInterval('P4D'));
+                $newfecha = $mFecha->format('Y-m-d');
+            }else{
+                #recojo 2 dias mas
+                $entrega = 'Despacho a domicilio';
+                $fecdess= $value['pedido_fecha'];
+                $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
+                $mFecha->add(new DateInterval('P4D'));
+                $newfecha = $mFecha->format('Y-m-d');
+            }
+
             $salida .= '<tr>';
-            $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
-            $salida .= '<td>'.$value['id_pedido'].'</td>';
-            $salida .= '<td>'.$value['id_producto'].'</td>';
-            $salida .= '<td>'.$value['nombres'].'</td>';
-            $salida .= '<td>'.$value['apellidos'].'</td>';
-            $salida .= '<td>'.$value['telefono'].'</td>';
-            $salida .= '<td>'.$value['correo'].'</td>';
-            $salida .= '<td>'.$value['tipo_documento'].'</td>';
-            $salida .= '<td>'.$value['numero_documento'].'</td>';
-            $salida .= '<td>'.$value['provincia'].'</td>';
-            $salida .= '<td>'.$value['distrito'].'</td>';
-            $salida .= '<td>'.$value['dir_envio'].'</td>';
+            $salida .= '<td>'.$value['titulo'].'</td>';
+            $salida .= '<td>'.$value['cantidad'].'</td>';
             $salida .= '<td>'.$value['entrega_precio'].'</td>';
             $salida .= '<td>'.$value['productos_precio'].'</td>';
             $salida .= '<td>'.$value['cupon_descuento'].'</td>';
-            $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+            $salida .= '<td>0</td>';
+            $salida .= '<td>'.$entrega.'</td>';
             $salida .= '<td>'.$estado.'</td>';
-            $salida .= '<td>'.$value['titulo'].'</td>';
-            $salida .= '</tr>';   
+            $salida .= '<td>'.$value['pedido_fecha'].'</td>';
+            $salida .= '<td>'.$newfecha.'</td>';
+            $salida .= '</tr>'; 
         }
 
         $salida .= '</table></body></html>';
@@ -578,8 +632,18 @@ class Ajax extends MY_Controller
             }else{
                 $dbid = $this->dbInsert('clientes',$data);
                 $hid = $this->salt_encrypt($dbid);
+
+                #generamos un token valido
+                while(true){
+                    $num = $this->generatenum($dbid);
+                    if($num){
+                        break;
+                    }
+                }
+
                 $ndata = [
-                    'id' => $hid
+                    'id' => $hid,
+                    'codigo' => $num
                 ];
                 $enviar = $this->sendmail($data['correo'], $ndata, 'CUENTA CREADA CORRECTAMENTE', 'confirm_register.php');
                 $this->resp['status'] = true;
@@ -601,6 +665,62 @@ class Ajax extends MY_Controller
              ->set_content_type('application/json')
              ->set_status_header(404)
              ->set_output(json_encode($this->resp));
+    }
+    private function generatenum( $id = 6){
+        $generate = '';
+        for ($i=0; $i < 6 ; $i++) { 
+            $d = mt_rand(0,9);
+            $generate .= $d;
+        }
+        $query = $this->dbSelect('*','codigo',['code_gen' => $generate]);
+
+        if(!$query){
+            $data = [
+                'code_gen' => $generate,
+                'fecha' => date('Y-m-d H:i:s'),
+                'verificado' => 0,
+                'id_cliente' => $id
+            ];
+            $this->dbInsert('codigo', $data);
+            return $generate;
+        }
+        return false;
+    }
+    public function validatecode(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $codigo = $this->input->post('codigo');
+            $id_cliente = $this->input->post('id_cliente');
+            #query DB
+            $query = $this->dbSelect('*','codigo', ['id_cliente'=> $id_cliente, 'code_gen' => $codigo, 'verificado' => 0 ] );
+            $query2 = $this->dbSelect('*','clientes', ['id_cliente'=> $id_cliente, 'verificado' => 0 ] );
+
+            if($query && $query2){
+                $this->dbUpdate([ 'verificado' => 1 ], 'codigo', [ 'id_cliente' => $id_cliente ]);
+                $this->dbUpdate([ 'verificado' => 1 ], 'clientes', [ 'id_cliente' => $id_cliente ]);
+
+                $this->resp['status'] = true;
+                $this->resp['code'] = 200;
+                $this->resp['message'] = 'Correo Activado!';
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode($this->resp));
+                    return;
+            }else{
+                $this->resp['message'] = 'No existe el codigo o ya fue usado';
+            }
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(404)
+                ->set_output(json_encode($this->resp));
+                return;
+        }
+        $this->resp['message'] = 'This use POST method';
+        $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(404)
+                ->set_output(json_encode($this->resp));
+                return;
     }
     
     public function login(){
@@ -1457,6 +1577,18 @@ class Ajax extends MY_Controller
              ->set_status_header(404)
              ->set_output(json_encode($resp));
            }
+     }
+
+     public function reportstock( $id = 0 ){
+        $products = $this->dbSelect('titulo, stock','productos',['id'=> (int) $id ]);
+        $stock = (int) $products[0]['stock'];
+        $newdata['alert'] = [
+            "titulo" => $products[0]['titulo']
+        ];
+        if($stock < 5 ){
+            $this->sendmail('jonaser2017@gmail.com', $newdata, 'BAJO STOCK', 'alert_stock.php');
+        }
+        return true;
      }
      
      public function changueState () 
