@@ -306,6 +306,7 @@
 
         </div>
     </section>
+
     <!-- PRODUCTOS RELACIONADOS -->
     <?php if ($product['active'] == 1): ?>
     <section class="sct-product-rel container-fluid">
@@ -316,6 +317,8 @@
                 <?php 
                 if(isset($producto_rel) ){ ?>
                 <?php foreach ($producto_rel as $value): ?>
+                   
+                <?php if($value) {?>
                 <div class="wrapper-cards-products">
                     <a class="linkabsolute"
                         href="<?php echo base_url($value['cat_url'].'/'.$value['subcat_url'].'/'.$value['prod_url']) ?>"></a>
@@ -331,6 +334,8 @@
                         </div>
                     </div>
                 </div>
+                <?php  }?>
+
                 <?php endforeach ?>
                 <?php } ?>
             </div>
@@ -496,6 +501,8 @@ $(function() {
                             $col = 12/count($sugeridos);
 
                             foreach($sugeridos as $value ):
+                                if($value) {
+
                                 echo 
                                 '
                                 <div class="col-md-'.$col.' col-xs-'.$col.'" style="padding:0;">
@@ -533,7 +540,10 @@ $(function() {
                                  </div>
                            
                                  ';
-                            endforeach;
+                        
+                        
+                                };
+                                endforeach;
                            
                         }
                         ?>

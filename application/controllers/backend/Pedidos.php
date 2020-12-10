@@ -51,30 +51,44 @@ class Pedidos extends MY_Controller {
 
         $id_pedido     = (int)$post['pedido']['id_pedido'];
         $pedido_estado = (int)$post['pedido']['pedido_estado'];
+        
+        $estado_where = $pedido_estado -1 ;
 
-        $respuesta = $this->dbUpdate(['pedido_estado' => $pedido_estado ], 'pedido' , ['id_pedido' => $id_pedido]);
-
-        if($respuesta) {
-            date_default_timezone_set("America/Lima");    
-            $data = [
-                'id_pedido'        => $id_pedido,
-                'id_estado_pedido' => $pedido_estado,
-                'fecha_estado'     => date('y-m-d')
-            ];   
-            $response = $this->dbInsert('pedido_estado',$data );
-    
-            $mensaje = [
-                "mensaje"=>  "Se envío el correo de cambio de estado al cliente",
-                "tipo" => 1 
-            ];
-            $query = $this->get('pedido', ['id_pedido'=>$id_pedido]);
-            // $enviar = $this->sendmail($query['correo'], $query, 'PEDIDO ACTUALIZADO', 'order_confirm.php');
+        $pedido =   $this->get('pedido',['id_pedido' => $id_pedido ]);
+        $estadoDB = (int)$pedido['pedido_estado'];
+       
+       
+        if($estadoDB == $estado_where){
+            $respuesta = $this->dbUpdate(['pedido_estado' => $pedido_estado ], 'pedido' , ['id_pedido' => $id_pedido,'pedido_estado' => $estado_where ] );
+            if($respuesta) {
+                date_default_timezone_set("America/Lima");    
+                $data = [
+                    'id_pedido'        => $id_pedido,
+                    'id_estado_pedido' => $pedido_estado,
+                    'fecha_estado'     => date('y-m-d')
+                ];   
+                $response = $this->dbInsert('pedido_estado',$data );
+        
+                $mensaje = [
+                    "mensaje"=>  "Se envío el correo de cambio de estado al cliente",
+                    "tipo" => 1 
+                ];
+                $query = $this->get('pedido', ['id_pedido'=>$id_pedido]);
+                // $enviar = $this->sendmail($query['correo'], $query, 'PEDIDO ACTUALIZADO', 'order_confirm.php');
+            }else {
+                $mensaje = [
+                    "mensaje"=>  "Hubo un problema",
+                    "tipo" => 2 
+                ]; 
+            }
         }else {
+            
             $mensaje = [
-                "mensaje"=>  "Hubo un problema",
+                "mensaje"=>  "Solo puede mandar el correo de cambio de estado en el orden requerido",
                 "tipo" => 2 
-            ]; 
+            ];  
         }
+       
         echo json_encode($mensaje);      
     }
     public function edit() {

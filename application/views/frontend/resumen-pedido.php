@@ -127,8 +127,7 @@ include 'src/includes/header.php'
                 src="https://ci4.googleusercontent.com/proxy/LxzltqoeQE5Blpekv4qWog30Mju-TFOmiemvitRvXOZ1zvoatR9kl4YcAe8D1JE2_Ak=s0-d-e1-ft#https://i.imgur.com/mbjYqem.png"
                 alt="">
             <br>
-            <span class="font-nexaheavy">Si ya lo hiciste atraves de tu banca movíl te enviaremos un correo con la
-                confirmación de tu compra</span>
+            <span class="font-nexaheavy">Si el pago se realizó por banca móvil te enviaremos un correo con la confirmación de tu compra.</span>
                 <br>
         </div>
 
@@ -162,7 +161,7 @@ include 'src/includes/header.php'
                         <li class="title_recojo" style="font-weight:bold;">Fecha de entrega</li>
                         <div class="fecha_entrega" style="text-align:left;"></div>
                         <div style="font-size:.8rem">
-                            </br>Para obtener mayor informacións sobre sus pedidos comunícate:
+                            </br>Para obtener mayor información sobre sus pedidos comunícate:
                             <br>
                             <span style="display:flex;align-items:center"><img
                                     style="width:25px;cursor:pointer;margin-right:5px"
@@ -176,7 +175,7 @@ include 'src/includes/header.php'
                             <br>
                             <b class="horario-detalle" style="margin-bottom:.2rem;display:block"></b>
                             <b> Nuestros asesores de servicio al cliente están disponibles de lunes a viernes de 09:00 a
-                                17:00 h Haremos todo lo posible para responder sus preguntas dentro del horario
+                                17:00 horas Haremos todo lo posible para responder sus preguntas dentro del horario
                                 establecido.
                         </div>
                         <br>

@@ -1241,7 +1241,7 @@ class Ajax extends MY_Controller
                 #listando productos para enviar al correo
                 $newdata['orders'] = [
                     'cod_pedido' => $pedido['codigo'],
-                    'recojo' => ($pedido['codigo']==0)?'Recojo en tienda':'Despacho a domicilio',
+                    'recojo' => ($pedido['recojo']==1)?'Recojo en tienda':'Despacho a domicilio',
                     'direccion' => $pedido['dir_envio'].', '.$pedido['distrito']. ', LIMA',
                     'subtotal' => number_format($subtotal, 2, '.', ''),
                     'descuento' => $pedido['cupon_descuento'],
