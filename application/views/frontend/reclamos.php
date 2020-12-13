@@ -307,7 +307,7 @@
             </div>
         </div>
 
-        <span><a class="btn btn-primary1" id="env_reclamo" href="#" onclick="ObjMain.reclamos(event);">ENVIAR</a></span>
+        <span><a class="btn btn-primary1" id="env_reclamo"  href="#"   onclick="ObjMain.reclamos(event);">ENVIAR</a></span>
 
         <br>
 

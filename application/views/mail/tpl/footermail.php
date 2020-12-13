@@ -80,21 +80,21 @@
             <!-- REDES SOCIALES  -->
             <tr>
                 <td>
-                    <table style="margin:auto " align="center " width="150 " cellpadding="0 " cellspacing="0 " border="0 ">
+                    <table style="margin:auto" align="center " width="150 " cellpadding="0 " cellspacing="0 " border="0 ">
                         <tr>
                             <td align="center ">
-                                <a href="#" target="_blank ">
-                                    <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="siguenos en Facebbok " width="25">
+                                <a href="https://www.facebook.com/beurerperu/" target="_blank" style="background-color: #fff; height:33px;width:33px;border-radius:50%">
+                                    <img src="<?php echo base_url('assets/images/icons/face.png'); ?>" alt="siguenos en Facebbok " width="25">
                                 </a>
                             </td>
                             <td align="center ">
-                                <a href="#" target="_blank ">
-                                    <img src="<?php echo base_url('assets/images/icons/telefono.png'); ?>" alt="siguenos en Instagram " width="30">
+                                <a href="https://instagram.com/beurerperu?igshid=vnrvppz3nm6f" target="_blank" style="background-color: #fff; height:33px;width:33px;border-radius:50%">
+                                    <img src="<?php echo base_url('assets/images/icons/insta.png'); ?>" alt="siguenos en Instagram " width="35">
                                 </a>
                             </td>
                             <td align="center ">
-                                <a href="https://www.linkedin.com/company/hope-corporation/r " target="_blank ">
-                                    <img src="<?php echo base_url('assets/images/icons/telefono.png'); ?>" alt="siguenos en LinkedIn " width="30">
+                                <a href="https://www.youtube.com/channel/UCORqBGCGe3NOrllUAal4COg" target="_blank" style="background-color: #fff; height:33px;width:33px;border-radius:50%" >
+                                    <img src="<?php echo base_url('assets/images/icons/youtu.png'); ?>" alt="siguenos en youtube " width="25">
                                 </a>
                             </td>
                         </tr>

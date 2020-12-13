@@ -2804,3 +2804,13 @@ input::placeholder {
 .buy {
     font-size: 1.5em !important;
 }
+
+@media only screen and(max-width:480px) {
+    /*  header de el proceso de compra*/
+    .crumb img {
+        height: 40px;
+    }
+    #checkout_crumb .step_off {
+        font-size: .7rem;
+    }
+}

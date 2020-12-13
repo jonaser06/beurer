@@ -472,7 +472,7 @@ $(function() {
                         AL CARRO</button></a>
                 <br>
                 <br>
-                <a href="<?php echo base_url('belleza/cuidado-del-rostro'); ?>"
+                <a href="<?php echo base_url($value['cat_url'].'/'.$value['subcat_url']); ?>"
                     style="font-size: 0.95rem;font-weight:bold;text-decoration-line:underline;">Seguir comprando</a>
             </div>
             <?php 
@@ -515,7 +515,7 @@ $(function() {
                                                     <div>
                                                         <div class="wrapper-cards-products pro-suger"
                                                             style="background-color:transparent !important;width: 100%; height:100%; display: inline-block;">
-                                                            <a class="linkabsolute" href="#" tabindex="0"></a>
+                                                            <a class="linkabsolute" href="'.base_url($value['cat_url'].'/'.$value['subcat_url'].'/'.$value['prod_url']).'" tabindex="0"></a>
                                                             <div class="content-img-card"
                                                                 style="width:100% !important; margin-top:8%; height:auto;">
                                                                 <img src="'.base_url($value['imagen']).'" alt=""

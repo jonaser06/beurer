@@ -163,10 +163,10 @@ class Ajax extends MY_Controller
         // $salida .= '</tr>'; 
         
         $salida .= '<tr>';
-        $salida .= '<td>Producto</td>';
-        $salida .= '<td>Cantidad</td>';
+        $salida .= '<td>Código de Compra</td>';
+        $salida .= '<td>Cantidad Productos</td>';
         $salida .= '<td>Precio de envio</td>';
-        $salida .= '<td>Precio de producto</td>';
+        $salida .= '<td>Precio por Productos</td>';
         $salida .= '<td>Cupon</td>';
         $salida .= '<td>PRECIO TOTAL</td>';
         $salida .= '<td>TIPO DE ENTREGA</td>';
@@ -223,7 +223,7 @@ class Ajax extends MY_Controller
                     $mFecha->add(new DateInterval('P4D'));
                     $newfecha = $mFecha->format('Y-m-d');
                 }
-
+                $total = floatval($value['productos_precio']) - floatval($value['cupon_descuento']) + floatval($value['entrega_precio']);
                 // $salida .= '<tr>';
                 // $salida .= '<td>'.$value['id_pedido_detalle'].'</td>';
                 // $salida .= '<td>'.$value['id_pedido'].'</td>';
@@ -245,12 +245,12 @@ class Ajax extends MY_Controller
                 // $salida .= '<td>'.$value['titulo'].'</td>';
                 // $salida .= '</tr>'; 
                 $salida .= '<tr>';
-                $salida .= '<td>'.$value['titulo'].'</td>';
+                $salida .= '<td>'.$value['codigo'].'</td>';
                 $salida .= '<td>'.$value['cantidad'].'</td>';
                 $salida .= '<td>'.$value['entrega_precio'].'</td>';
                 $salida .= '<td>'.$value['productos_precio'].'</td>';
                 $salida .= '<td>'.$value['cupon_descuento'].'</td>';
-                $salida .= '<td>0</td>';
+                $salida .= '<td>'.$total.'</td>';
                 $salida .= '<td>'.$entrega.'</td>';
                 $salida .= '<td>'.$estado.'</td>';
                 $salida .= '<td>'.$value['pedido_fecha'].'</td>';
@@ -301,14 +301,15 @@ class Ajax extends MY_Controller
                 $mFecha->add(new DateInterval('P4D'));
                 $newfecha = $mFecha->format('Y-m-d');
             }
+            $total = floatval($value['productos_precio']) - floatval($value['cupon_descuento']) + floatval($value['entrega_precio']);
 
             $salida .= '<tr>';
-            $salida .= '<td>'.$value['titulo'].'</td>';
+            $salida .= '<td>'.$value['codigo'].'</td>';
             $salida .= '<td>'.$value['cantidad'].'</td>';
             $salida .= '<td>'.$value['entrega_precio'].'</td>';
             $salida .= '<td>'.$value['productos_precio'].'</td>';
             $salida .= '<td>'.$value['cupon_descuento'].'</td>';
-            $salida .= '<td>0</td>';
+            $salida .= '<td>'.$total.'</td>';
             $salida .= '<td>'.$entrega.'</td>';
             $salida .= '<td>'.$estado.'</td>';
             $salida .= '<td>'.$value['pedido_fecha'].'</td>';
@@ -544,6 +545,8 @@ class Ajax extends MY_Controller
 
     public function setreclamo(){
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            date_default_timezone_set("America/Lima");          
+
             $data = [
                 'r_tipo_doc' => $this->input->post('r_tipo_doc'),
                 'r_n_doc' => $this->input->post('r_n_doc'),

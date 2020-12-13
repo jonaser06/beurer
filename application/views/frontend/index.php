@@ -149,6 +149,7 @@
         padding: 4rem !important;
     }
 }
+
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
@@ -601,5 +602,13 @@ if (screen && screen.width > 992) {
     </script>
     
 </body>
+<style>
+@media (max-width: 480px){
+body {
+       font-size: 72.5%!important;
+   }
+}
+     
+</style>
 
 </html>

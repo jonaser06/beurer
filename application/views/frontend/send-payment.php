@@ -326,7 +326,8 @@ function dataFormSend(token, email) {
     formData.append('correo', email);
     formData.append('id_session', session);
     formData.append('nombres', `${user.nombres}`);
-    formData.append('apellidos', `${user.apellido_paterno} ${user.apellido_materno}`);
+    // formData.append('apellidos', `${user.apellido_paterno} ${user.apellido_materno}`);
+    formData.append('apellidos', `${user.apellidos}`);
     formData.append('telefono', user.telefono);
     formData.append('distrito', `${user.distrito}`);
     formData.append('d_envio', user.d_envio);
@@ -507,7 +508,6 @@ function culqi() {
             });
     } else {
         console.log(Culqi.error);
-        alert(Culqi.error.user_message);
     }
 }
 </script>

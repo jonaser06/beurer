@@ -1811,13 +1811,13 @@ select {
 		display:none ; */
 
 
-}
-
 /*Provisional */
+
 .colors {
     height: 100%;
     text-align: right;
 }
+
 .colors .color {
     list-style: none;
     width: 36px;
@@ -1837,50 +1837,60 @@ select {
     -moz-box-shadow: 0px 4px 0px whitesmoke;
     box-shadow: 0px 4px 0px whitesmoke;
 }
+
 .colors .color.active {
     position: relative;
     transition: all 0.3s;
 }
+
 .rprice {
     font-weight: bold;
     font-size: 1.5em;
 }
+
 .rsubtotal {
     font-weight: bold;
     font-size: 2em;
 }
+
 .btn-primary2 {
     box-shadow: 7px 7px 7px 7px rgba(50, 50, 50, 0.75);
     background-color: white;
     display: contents !important;
     border: 2px solid black;
 }
+
 button {
     outline: none !important;
 }
+
 a {
     text-decoration: none;
     color: black;
 }
+
 @media (max-width: 991px) {
     #banner {
         display: none;
     }
-    
     #slider {
         display: block !important;
     }
 }
+
 .swiper-button-next:after,
 .swiper-container-rtl .swiper-button-prev:after {
     color: #c51152;
 }
+
 .swiper-button-prev:after,
 .swiper-container-rtl .swiper-button-next:after {
     color: #c51152;
 }
 
+
 /* CARRITO DE COMPRAS */
+
 .basket,
 .aside {
     padding: 1rem 2rem;
@@ -1888,19 +1898,24 @@ a {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .basket {
     width: 70%;
 }
+
 .aside {
     background-color: white;
 }
+
 .basket-module {
     color: #111;
 }
+
 label {
     display: block;
     margin-bottom: 0.3125rem;
 }
+
 .promo-code-field {
     border: 1px solid #ccc;
     padding: 0.5rem;
@@ -1912,42 +1927,51 @@ label {
     -o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
+
 .promo-code-field:hover,
 .promo-code-field:focus {
     border: 1px solid #999;
 }
+
 .promo-code-cta {
     border-radius: 4px;
     font-size: 0.625rem;
     margin-left: 0.625rem;
     padding: 0.6875rem 1.25rem 0.625rem;
 }
+
 .basket-labels {
     border-top: 1px solid #ccc;
     margin-top: 0.6rem;
 }
+
 .basket-product {
     background-color: transparent !important;
 }
+
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+
 /* li {
   color: #111;
   display: inline-block;
   padding: 0.625rem 0;
 } */
+
 .basket-labels li {
     display: inline-block;
     padding: 0.625rem 0;
 }
+
 li.price:before,
 li.subtotal:before {
     content: '';
 }
+
 .rprice:before,
 .subtotal:before,
 .subtotalr:before,
@@ -1956,16 +1980,20 @@ li.subtotal:before {
 .promo-value:before {
     content: 'S/ ';
 }
+
 .item {
     width: 34%;
 }
+
 .quantity,
 .subtotal {
     width: 20%;
 }
+
 .price {
     width: 26%;
 }
+
 .remove {
     bottom: 1.125rem;
     float: right;
@@ -1974,6 +2002,7 @@ li.subtotal:before {
     text-align: right;
     width: 45%;
 }
+
 .remove button {
     background-color: transparent;
     color: #777;
@@ -1981,62 +2010,72 @@ li.subtotal:before {
     text-decoration: underline;
     text-transform: uppercase;
 }
+
 .item-heading {
     padding-left: 4.375rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .basket-product {
     border-top: 1px solid #ccc;
     padding: 1rem 0;
     position: relative;
 }
+
 .product-image {
     width: 38%;
 }
+
 .product-details {
     width: 62%;
     text-align: left;
 }
+
 .product-details span {
     font-family: 'nexaregularuploaded_file';
     font-weight: bold;
     font-size: 1.1em;
     color: black;
 }
+
 .product-details p {
     font-family: 'nexa-lightuploaded_file';
     font-size: 1em;
     color: black;
     line-height: 10px;
 }
+
 .info-prod .price {
     display: contents;
     color: black;
     font-size: 1.3em;
     font-family: 'nexaheavyuploaded_file';
 }
+
 .info-prod img {
     display: inline-block;
     /*width:25.5%;*/
-    
     width: 6vh;
     height: auto;
     margin-right: 3%;
     padding-bottom: 4%;
 }
+
 .basket-product .subtotal {
     color: black;
     font-size: 1.8em;
     font-family: 'nexaheavyuploaded_file';
 }
+
 .product-details {
     padding: 0 1.5rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .quantity-field {
     background-color: #ccc;
     border: 1px solid #aaa;
@@ -2045,11 +2084,13 @@ li.subtotal:before {
     padding: 2px;
     width: 3.75rem;
 }
+
 .aside {
     float: right;
     position: relative;
     width: 29%;
 }
+
 .summary {
     background-color: #eee;
     border: 1px solid #aaa;
@@ -2060,11 +2101,13 @@ li.subtotal:before {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .summary-total-items {
     color: #666;
     font-size: 0.875rem;
     text-align: center;
 }
+
 .summary-subtotal,
 .summary-total {
     border-top: 1px solid #ccc;
@@ -2074,6 +2117,7 @@ li.subtotal:before {
     overflow: hidden;
     padding: 0.5rem 0;
 }
+
 .subtotal-title,
 .subtotal-value,
 .total-title,
@@ -2084,36 +2128,44 @@ li.subtotal:before {
     float: left;
     width: 50%;
 }
+
 .summary-promo {
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
 }
+
 .promo-title {
     float: left;
     width: 70%;
 }
+
 .promo-value {
     color: #8B0000;
     float: left;
     text-align: right;
     width: 30%;
 }
+
 .summary-delivery {
     padding-bottom: 3rem;
 }
+
 .subtotal-value,
 .total-value {
     text-align: right;
 }
+
 .total-title {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .summary-checkout {
     display: block;
 }
+
 .checkout-cta {
     display: block;
     float: none;
@@ -2123,6 +2175,7 @@ li.subtotal:before {
     padding: 0.625rem 0;
     width: 100%;
 }
+
 .summary-delivery-selection {
     background-color: #ccc;
     border: 1px solid #aaa;
@@ -2132,6 +2185,7 @@ li.subtotal:before {
     height: 34px;
     width: 100%;
 }
+
 @media screen and (max-width: 640px) {
     .aside,
     .basket,
@@ -2141,50 +2195,39 @@ li.subtotal:before {
         width: 100%;
         margin-left: 0% !important;
     }
-    
     #aum,
     #dism {
         height: 42px;
     }
-    
     .basket-labels {
         display: none;
     }
-    
     .basket-module {
         margin-bottom: 1rem;
     }
-    
     .item {
         margin-bottom: 1rem;
     }
-    
     .product-image {
         width: 40%;
     }
-    
     .price {
         width: 100%;
         margin-bottom: 3%;
     }
-    
     .product-details {
         width: 60%;
     }
-    
     .subtotal {
         width: 40%;
     }
-    
     .quantity {
         text-align: center;
         width: 60%;
     }
-    
     .quantity-field {
         float: none;
     }
-    
     .remove {
         bottom: 0;
         text-align: left;
@@ -2193,83 +2236,92 @@ li.subtotal:before {
         text-align: right;
         ;
     }
-    
     .remove button {
         padding: 0;
     }
-    
     .summary {
         margin-top: 1.25rem;
         position: relative;
     }
-    
     .compra-sin-clave {
         border-left: 0 none !important;
         border-right: 0 none !important;
     }
 }
+
 @media screen and (min-width: 641px) and (max-width: 960px) {
     aside {
         padding: 0 1rem 0 0;
     }
-    
     .summary {
         width: 28%;
     }
 }
+
 @media screen and (max-width: 960px) {
     main2 {
         width: 100%;
     }
-    
     .product-details {
         padding: 0 1rem;
     }
 }
 
+
 /* CARRITO DE COMPRAS */
+
 
 /* 
  * Hide the inputs. 
  */
+
 #radios_1 {
     text-align: center !important;
 }
+
 #radios_1 input {
     display: none;
 }
+
 
 /*
    * Then, style the label so it looks like however you want.
    * Here's a quick rundown of how I did it here:
    */
 
+
 /*
    * Some basic positioning styles, and we give it the pointer cursor to show 
    * that it's clickable
    */
+
 #radios_1 label {
     display: inline-block;
     padding: 5px 10px;
     cursor: pointer;
 }
 
+
 /*
    * With how I decided to build this, the position: relative is super important.
    * We're going to position a pseudo element within this element(As it is the containing box)
    */
+
 #radios_1 label span {
     position: relative;
     line-height: 22px;
 }
 
+
 /* 
    * Because we're using pseudo elements, a content property is required to make them appear.
    */
+
 #radios_1 label span:before,
 #radios_1 label span:after {
     content: '';
 }
+
 
 /*
    * We are using the :before peudo elemnt as the actual button,
@@ -2278,6 +2330,7 @@ li.subtotal:before {
    * For the specific style we're going for, this approach is simply the easiest, but
    * once you understand the concept you can really do it however you like.
    */
+
 #radios_1 label span:before {
     border: 1px solid #222021;
     width: 20px;
@@ -2286,6 +2339,7 @@ li.subtotal:before {
     display: inline-block;
     vertical-align: top;
 }
+
 #radios_1 label span:after {
     background: #c51152;
     width: 12px;
@@ -2297,6 +2351,7 @@ li.subtotal:before {
     opacity: 0;
 }
 
+
 /*
    * This is the most important part of this whole file, if you understand what's happening here
    * you can really make this in so many different ways.
@@ -2306,31 +2361,34 @@ li.subtotal:before {
    * selector(+) to select the span, and then it's pseudo element :after(What we are using to mark the button)
    * Because we already styled the :after, all we have to do is set the opacity to 1, making it fade in.
    */
+
 #radios_1 label input:checked+span:after {
     opacity: 1;
 }
+
 .infoReclamo .divTableCell {
     text-align: left;
     font-size: 13.5px;
 }
+
 @media (max-width: 640px) and (min-height:500px) {
     .cont_datos {
         width: 90% !important;
     }
-    
     .cont_datos .divTableCell {
         width: 99% !important;
     }
 }
+
 @media (max-height:500px) {
     .cont_datos {
         width: 120vh !important;
     }
-    
     .cont_datos .divTableCell {
         width: 99% !important;
     }
 }
+
 #icon-description2 a {
     display: block;
     padding: 31px .5em .5em;
@@ -2344,20 +2402,24 @@ li.subtotal:before {
     font-size: medium;
     font-weight: bolder;
 }
+
 #icon-description2 a {
     border-bottom-color: transparent;
     background: #fff;
     border-top: 5px solid #c51152;
 }
+
 #icon-description2 a {
     background-image: url(../images/icono-descripcion.svg);
     background-position: center -50px;
     background-repeat: no-repeat;
 }
+
 #icon-description2 a {
     background-position: center 4px;
     color: #000000;
 }
+
 .p_user {
     width: 100%;
     text-align: left;
@@ -2365,19 +2427,22 @@ li.subtotal:before {
     border-radius: 0%;
     transition: all 0.3s ease-out;
 }
+
 .p_user.active {
     /*border-left:22px solid #c51152;*/
-    
     background-color: #c51152;
     color: white;
 }
+
 .p_user.active h3 {
     font-weight: bold;
 }
+
 .p_user h3 {
     font-size: 1.2vw;
     font-weight: 600;
 }
+
 .btn-cmn {
     border-radius: 30px;
     padding: 5px 87px;
@@ -2387,6 +2452,7 @@ li.subtotal:before {
     background-color: #c51152;
     color: white;
 }
+
 .cantidad {
     width: 10%;
     padding: 0px;
@@ -2395,83 +2461,87 @@ li.subtotal:before {
     background-color: white;
     border-radius: 0%;
 }
+
 .btn-cmn {
     color: white !important;
 }
+
 .pro-suger:before {
     background-color: transparent !important;
 }
+
 .carrosuel-two-home .pro-suger:hover:before {
     background-color: white !important;
 }
+
 @media (max-width:700px) {
     #img-check {
         width: 1.2rem;
     }
-    
     #txt-exito {
         font-size: 1.3rem !important;
     }
-    
     #panel-user1 {
         width: 100% !important;
         display: block;
         margin-top: 3.5%;
     }
-    
     #info_puser {
         width: 100% !important;
         display: none;
     }
-    
     #back-section-user {
         display: block !important;
     }
 }
+
 .p_user {
     background-color: white;
     border: none;
 }
+
 @media (max-width:500px) {
     #txt-exito {
         font-size: 1.15rem !important;
     }
-    
     #title-principal {
         font-size: 1rem !important;
     }
-    
     .title-sugerido {
         font-size: 0.6rem !important;
     }
-    
     .ver-prod {
         font-size: 0.96vh !important;
     }
 }
+
 @media (max-width:420px) {
     #txt-exito {
         font-size: 1.05rem !important;
     }
 }
+
 @media (max-width:350px) {
     #img-check {
         width: 1rem;
     }
-    
     #txt-exito {
         font-size: 0.8rem !important;
     }
 }
+
 .tbl-resumen {
     font-family: 'nexaregularuploaded_file';
     text-align: left;
 }
+
 input::placeholder {
     color: rgba(169, 169, 169, 0.5);
 }
 
+
 /* PROCESO DE COMPRA ICONOS */
+
 #checkout_crumb .crumb a,
 #checkout_crumb .step_off:first-child,
 #checkout_crumb .step_on:first-child,
@@ -2480,6 +2550,7 @@ input::placeholder {
 #checkout_crumb_four .step_on:first-child {
     margin-left: 0;
 }
+
 #checkout_crumb .step_on,
 #checkout_crumb_four .step_on {
     background: none;
@@ -2489,6 +2560,7 @@ input::placeholder {
     padding: 0;
     text-align: center;
 }
+
 #checkout_crumb .step_off,
 #checkout_crumb .step_on,
 #checkout_crumb_four .step_off,
@@ -2507,6 +2579,7 @@ input::placeholder {
     z-index: 1;
     font-size: 1.2em;
 }
+
 #checkout_crumb_four span.step_on:first-child::before,
 #checkout_crumb span.step_on:first-child::before {
     content: "1";
@@ -2514,6 +2587,7 @@ input::placeholder {
     color: white;
     font-weight: bold;
 }
+
 #checkout_crumb_four span.step_on:before,
 #checkout_crumb span.step_on:before {
     background: #c51152;
@@ -2521,6 +2595,7 @@ input::placeholder {
     position: relative;
     top: 0;
 }
+
 #checkout_crumb_four span.step_off:before,
 #checkout_crumb_four span.step_on:before,
 #checkout_crumb span.step_off:before,
@@ -2535,6 +2610,7 @@ input::placeholder {
     margin: 0 auto;
     margin-bottom: 15px;
 }
+
 #checkout_crumb_four span.step_on:after,
 #checkout_crumb span.step_on:after {
     display: block;
@@ -2545,6 +2621,7 @@ input::placeholder {
     font-family: "nexa-lightuploaded_file";
     color: #c5c5c5;
 }
+
 #checkout_crumb .step_off,
 #checkout_crumb .step_on,
 #checkout_crumb_four .step_off,
@@ -2563,6 +2640,7 @@ input::placeholder {
     z-index: 1;
     font-size: 1.2em;
 }
+
 .step_off1,
 .step_on1 {
     text-decoration: none;
@@ -2579,6 +2657,7 @@ input::placeholder {
     z-index: 1;
     font-size: 1.2em;
 }
+
 #checkout_crumb_four span.step_off:before,
 #checkout_crumb span.step_off:before {
     background: darkgray;
@@ -2586,6 +2665,7 @@ input::placeholder {
     position: relative;
     top: 0;
 }
+
 #checkout_crumb_four span.step_off:before,
 #checkout_crumb_four span.step_off:before,
 #checkout_crumb span.step_off:before,
@@ -2600,6 +2680,7 @@ input::placeholder {
     margin: 0 auto;
     margin-bottom: 15px;
 }
+
 #checkout_crumb_four span.step_off:nth-child(3):before,
 #checkout_crumb span.step_off:nth-child(3):before {
     content: "2";
@@ -2607,6 +2688,7 @@ input::placeholder {
     color: white;
     font-weight: bold;
 }
+
 #checkout_crumb_four span.step_off:nth-child(5):before,
 #checkout_crumb span.step_off:nth-child(5):before {
     content: "3";
@@ -2614,6 +2696,7 @@ input::placeholder {
     color: white;
     font-weight: bold;
 }
+
 #checkout_crumb_four span.step_off:nth-child(7):before,
 #checkout_crumb span.step_off:nth-child(7):before {
     content: "4";
@@ -2621,6 +2704,7 @@ input::placeholder {
     color: white;
     font-weight: bold;
 }
+
 #checkout_crumb:after,
 #checkout_crumb_four:after {
     content: "";
@@ -2632,69 +2716,77 @@ input::placeholder {
     left: 0;
     top: 20px;
 }
+
 .crumb img {
     height: 60px;
 }
+
 .crumb .active:before {
     background-color: #c51152 !important;
 }
+
 .crumb .noactive:before {
     background-color: darkgray !important;
 }
 
+
 /* PROCESO DE COMPRA ICONOS */
+
 @media (max-width: 640px) {
     .section-contacto {
         width: 100% !important;
     }
-    
     .gracias-compra {
         width: 100% !important;
     }
-    
     .resumen-pedido3 {
         padding: 5% 0% !important;
     }
-    
     .paso3 {
         width: 92% !important;
     }
-    
     ´ .compra-sin-clave {
         border: 0 none !important;
     }
 }
+
 @media (max-width: 640px) {
     .dv-segui {
         width: 100% !important;
     }
-    
     #result_seg1,
     #result_seg2 {
         width: 100% !important;
     }
 }
+
 #result_seg2 {
     width: 85%;
     padding: 5% 1%;
 }
+
 .process-wrapper {
     max-width: 100%;
 }
+
 #progress-bar-container {
     margin-top: 0px !important;
 }
+
 .basket-module,
 .basket-labels,
 .basket-product {
     width: 100%;
 }
+
 .item img {
     width: 92%;
 }
+
 .basket {
     border-radius: 5%;
 }
+
 .basket,
 .basket-module,
 .basket-labels,
@@ -2707,6 +2799,7 @@ input::placeholder {
 .product-details {
     float: left;
 }
+
 .basket-labels ul li {
     color: #c51152;
     text-transform: uppercase;
@@ -2714,6 +2807,7 @@ input::placeholder {
     font-size: 1rem;
     font-weight: bold;
 }
+
 .paso3 li {
     color: black;
 }

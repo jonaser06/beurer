@@ -158,7 +158,7 @@
                             <table width="100% " align="left " cellpadding="1" cellspacing="0 ">
                                 <tr>
                                     <td style="width:10% "><b>Dirección</b></td>
-                                    <td style="width:80% ">: <?php echo $pedido['dir_envio']?></td>
+                                    <td style="width:80% ">: <?php echo $pedido['dir_envio'] ?></td>
                                 </tr>
                                 <tr>
                                     <td style="width:10% "><b>Nro. /Lote</b></td>

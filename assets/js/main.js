@@ -155,9 +155,13 @@ ObjMain = {
 
         let r_rec_desc = document.querySelector('#r_rec_desc').value;
         let r_rec_pedi = document.querySelector('#r_rec_pedi').value;
+        let terminos = document.getElementById("terycon");
+        let politicas = document.getElementById("politicas2");
 
         if (r_tipo_doc != '' && r_n_doc != '' && r_nombr != '' && r_apat != '' && r_amat != '' && r_telef != '' && r_correo != '' && r_depa != '' && r_prov != '' && r_dist != '' && r_direc != '' && r_tipo_bn != '' && r_mont != '' && r_descr != '' && r_codigo != '' && r_tip_rec != '' && r_rec_desc != '' && r_rec_pedi != '') {
-
+            if (!terminos.checked && !politicas.checked) {
+                return ObjMain.alert_form(false, 'Debe aceptar las políticas y terminos para continuar');
+            }
             let formData = new FormData();
             formData.append('r_tipo_doc', r_tipo_doc);
             formData.append('r_n_doc', r_n_doc);
@@ -1297,7 +1301,7 @@ ObjMain = {
                         ${innerEnvio}
                         <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">COMPRA A NOMBRE DE </li>
                         <div>${dataUser.tipo_doc}: ${dataUser.number_doc }</div>
-                        <div>${dataUser.nombres} ${dataUser.apellido_paterno } ${dataUser.apellido_materno} </div>
+                        <div>${dataUser.nombres} ${dataUser.apellidos} </div>
                         <br> <br>
 
                         <li class="font-nexaheavy" style="list-style:none;font-size:1.2em;">RESUMEN DEL PEDIDO</li>

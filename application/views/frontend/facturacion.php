@@ -147,17 +147,10 @@
                                         </div>
 
                                         <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Apellidos Paterno <div class="d_ob">*</div>
+                                            <div class="etiquetaFormulario">Apellidos <div class="d_ob">*</div>
                                             </div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="c_apellido_paterno"
-                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['apellido_paterno'] : '' ?>">
-
-                                        </div>
-                                        <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Apellidos Materno <div class="d_ob">*</div>
-                                            </div>
-                                            <input type="text" size="20" maxlength="20" name="campo1" id="c_apellido_materno"
-                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['apellido_materno'] : '' ?>">
+                                            <input type="text" size="20" maxlength="20" name="campo1" id="c_apellidos"
+                                                onkeypress="return soloLetras(event)" value="<?= $userData ? $userData['apellido_paterno'].' '.$userData['apellido_materno']: '' ?>">
 
                                         </div>
                                     </div>
@@ -214,16 +207,12 @@
                                     </div>
 
                                     <div class="divTableRow">
-                                        <div class="divTableCell">
-                                            <div class="etiquetaFormulario">Teléfono fijo</div>
-                                            <input type="text" size="9" maxlength="9" name="campo1"  onkeypress="return soloNumeros(event)"  id="c_telfij"
-                                                 value="<?= $session? $userData['telefono'] :'' ?>">
-                                        </div>
-                                        <div class="divTableCell">
+                                       
+                                        <div class="divTableCell" style="margin: auto;">
                                             <div class="etiquetaFormulario">Teléfono celular: <div class="d_ob">*</div>
                                             </div>
                                             <input type="text" size="9" maxlength="9" onkeypress="return soloNumeros(event)" name="campo1" id="c_telcel"
-                                                value="">
+                                            value="<?= $session? $userData['telefono'] :'' ?>">
                                         </div>
                                     </div>
 
@@ -568,15 +557,17 @@
                         tipo_doc :  document.getElementById('s_tipodoc').value ,
                         number_doc :  document.getElementById('campo1').value ,
                         nombres :  document.getElementById('c_nombres1').value ,
-                        apellido_paterno :  document.getElementById('c_apellido_paterno').value ,
-                        apellido_materno :  document.getElementById('c_apellido_materno').value ,
+                        // apellido_paterno :  document.getElementById('c_apellido_paterno').value ,
+                        // apellido_materno :  document.getElementById('c_apellido_materno').value ,
+                        apellidos :  document.getElementById('c_apellidos').value ,
+
                         correo :  document.getElementById('c_correo1').value ,
                         departamento :  document.getElementById('s_depa').value ,
                         provincia :  document.getElementById('sprov').value ,
                         distrito :  distrito ,
                         d_envio :   this.estadoRecojo? 'recoger en tienda' :document.getElementById('c_dir').value,
                         referencia : this.estadoRecojo? '....compra de recojo' :document.getElementById('c_ref').value ,
-                        fijo :  document.getElementById('c_telfij').value ,
+                        // fijo :  document.getElementById('c_telfij').value ,
                         telefono :  document.getElementById('c_telcel').value ,
                     }
                 }
@@ -610,7 +601,8 @@
                 
                 filter (obj){
                     for (const property in obj) {
-                        if((property== "fijo") ||(property =="referencia") ){
+                        // if((property== "fijo") ||(property =="referencia") ){
+                        if((property =="referencia") ){
                         }else {
                             if(obj[property] == ''||obj[property] == 'SELECCIONE DISTRITO'){
                             this.estado = false;

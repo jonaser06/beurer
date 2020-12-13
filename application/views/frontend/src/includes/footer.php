@@ -100,6 +100,13 @@
             </div>
         </div>
     </footer>
+    <style>
+         @media (max-width: 480px){
+        body {
+            font-size: 72.5%!important;
+        }
+    }
+    </style>
 </div>
 <!-- <div class="popup-ini" id="login" style="display: none;">
     <div class="popup-inner">

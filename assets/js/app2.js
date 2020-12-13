@@ -1,13 +1,13 @@
 // rastrea pedido campo
 
-$(document).ready(function () {
-    
+$(document).ready(function() {
+
 
     // new CampoNumerico2('#cod_seg');
 
 
 });
-$(document).ready(function () {
+$(document).ready(function() {
 
     class CampoTexto {
 
@@ -18,7 +18,7 @@ $(document).ready(function () {
             this.empezarAEscucharEventos();
         }
         empezarAEscucharEventos() {
-            this.nodo.addEventListener('keydown', function (evento) {
+            this.nodo.addEventListener('keydown', function(evento) {
                 const teclaPresionada = evento.key;
                 const teclaPresionadaEsUnNumero =
                     Number.isInteger(parseInt(teclaPresionada));
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
             }.bind(this));
 
-            this.nodo.addEventListener('input', function (evento) {
+            this.nodo.addEventListener('input', function(evento) {
                 const cumpleFormatoEsperado = new RegExp(/[a-zA-Z\s]+{2,254}/).test(this.nodo.value);
 
                 if (cumpleFormatoEsperado) {
@@ -203,7 +203,7 @@ $(document).ready(function () {
 //       tipoDoc.addEventListener('change' , event => {
 //          userData.tipo_documento = event.target.value
 //       })
-    
+
 
 
 //     if (screen && screen.width < 700) {
@@ -275,7 +275,7 @@ $(document).ready(function () {
 //         ObjMain.comparePass()
 //         ObjMain.updatePass()
 //         ObjMain.limitPass('#currentPass',5)
-        
+
 // 			document.addEventListener("click", (e) => {
 // 				if (e.target.matches(".eyes")) {
 // 					let $pass = e.target.parentElement.children[1]
@@ -283,18 +283,18 @@ $(document).ready(function () {
 // 				}
 // 			});
 //     });
-    
+
 // });
 
 // adaptando codigo de envio-pago para botones de colores
-$(document).ready(function () {
+$(document).ready(function() {
 
     // var btnContainer2 = document.getElementById("div-colors");
     var principali = document.getElementById("principal-img");
     var secondaryi = document.getElementById("secondary-img");
     var imgs = ['<img src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt="">', '<img  src="assets/sources/61sJPfVV7BL._AC_SL1500__11.jpg" alt="">', '<img  src="assets/sources/61sJPfVV7BL._AC_SL1500__12.jpg" alt="">']
     var imgs = ['<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__1.jpg" alt="">', '<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__11.jpg" alt="">', '<img class="img-cover" src="assets/sources/61sJPfVV7BL._AC_SL1500__12.jpg" alt="">']
-    // Get all buttons with class="btn" inside the container
+        // Get all buttons with class="btn" inside the container
 
     // var btns2 = btnContainer2.getElementsByClassName("color");
     var imgsmall = document.getElementsByClassName("animated fadeInLeftShort tabs_goto go");
@@ -348,7 +348,7 @@ if (screen && screen.width > 1300) {
             scrollBar: true,
             scrollOverflow: true,
             verticalCentered: true,
-            afterRender: function () {}
+            afterRender: function() {}
         });
     }
 }
@@ -357,12 +357,12 @@ $('#login').fadeOut();
 
 
 
-$(".popup-btn").click(function () {
+$(".popup-btn").click(function() {
     var target = $(this).attr("href");
     $(target).fadeIn();
 });
 
-$(".popup-ini .close").click(function () {
+$(".popup-ini .close").click(function() {
     $(".popup-ini").fadeOut();
 });
 
@@ -370,15 +370,15 @@ $(".popup-ini .close").click(function () {
 
 
 
-$('.search_get').keyup(function (event) {
+$('.search_get').keyup(function(event) {
     $('show_result').html('<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" width="30">')
     $.ajax({
             url: 'productos/search/' + $(this).val(),
         })
-        .done(function (data) {
+        .done(function(data) {
             $('#show_result').html(data)
         })
-        .always(function () {
+        .always(function() {
             console.log("complete");
         });
 
@@ -386,13 +386,13 @@ $('.search_get').keyup(function (event) {
 });
 
 
-$('.box-search').hover(function (event) {
+$('.box-search').hover(function(event) {
     $('#show_result').html('')
 });
 
 
 if (screen && screen.width > 992) {
-    $(".div-search").mouseover(function (event) {
+    $(".div-search").mouseover(function(event) {
         $(".input-search").css({
             'width': '18.5vw',
             'border-color': '#c51152',
@@ -406,7 +406,7 @@ if (screen && screen.width > 992) {
 
         })
     });
-    $(".div-search").mouseout(function (event) {
+    $(".div-search").mouseout(function(event) {
         $(".input-search").css({
             'width': '0',
             'border-color': 'transparent',
@@ -416,7 +416,7 @@ if (screen && screen.width > 992) {
         })
     });
 } else {
-    $(".div-search").mouseover(function (event) {
+    $(".div-search").mouseover(function(event) {
         $(".input-search").css({
             'width': '18.5vw',
             'border-color': '#c51152',
@@ -430,7 +430,7 @@ if (screen && screen.width > 992) {
         })
     });
 
-    $(".div-search").click(function () {
+    $(".div-search").click(function() {
         $(".input-search").css({
             "top": "0", //modificamos el bottom a 0
             "box-shadow": '0px 0px #ccc',
@@ -440,7 +440,7 @@ if (screen && screen.width > 992) {
             // "z-index": "10000"
         })
     });
-    $(".div-search").mouseout(function () {
+    $(".div-search").mouseout(function() {
         $(".input-search").css({
             // "top" : "-100%" //modificamos el bottom a 0
             'width': '0',
@@ -504,7 +504,7 @@ if (screen && screen.width > 992) {
 //     buscarpedido2.style.display = "none";
 // });
 
-$("#btn_nb").click(function () {
+$("#btn_nb").click(function() {
     seguimiento = document.getElementById("div_seg");
     buscarpedido = document.getElementById("div_buscarp");
     codseg = document.getElementById("cod_seg");
@@ -517,7 +517,7 @@ $("#btn_nb").click(function () {
 
 
 
-$('#subscribe').submit(function (event) {
+$('#subscribe').submit(function(event) {
     event.preventDefault();
 
     $.ajax({
@@ -525,7 +525,7 @@ $('#subscribe').submit(function (event) {
             type: 'POST',
             data: $(this).serialize(),
         })
-        .done(function (data) {
+        .done(function(data) {
             if (data.resp == true) {
                 $('#subscribe').attr('title', '' + data.msj + '');
                 $('#subscribe').attr('data-original-title', '' + data.msj + '');
@@ -542,7 +542,7 @@ $('#subscribe').submit(function (event) {
 });
 
 // registrarse , tabs
-$('#otra-persona').click(function () {
+$('#otra-persona').click(function() {
     var chequeo1 = document.getElementById("otra-persona");
     var emi = document.getElementById("emisor");
     var receptor = document.getElementById("d_formularios2");
@@ -567,7 +567,7 @@ $('#otra-persona').click(function () {
 //     siguiente.classList.toggle("disabled");
 // });
 
-$('#dfactura').click(function () {
+$('#dfactura').click(function() {
     var chequeo2 = document.getElementById("dfactura");
     var fac = document.getElementById("factura");
 
@@ -578,7 +578,7 @@ $('#dfactura').click(function () {
     }
 });
 
-$('#politicas2').click(function () {
+$('#politicas2').click(function() {
     var terminos = document.getElementById("terycon");
     var enviarreclamo = document.getElementById("env_reclamo");
     if (this.checked == true) {
@@ -592,7 +592,7 @@ $('#politicas2').click(function () {
     }
 });
 
-$('#terycon').click(function () {
+$('#terycon').click(function() {
     var politicas = document.getElementById("politicas2");
     var enviarreclamo = document.getElementById("env_reclamo");
     if (this.checked == true) {
@@ -608,8 +608,8 @@ $('#terycon').click(function () {
 
 
 
-$(document).ready(function () {
-    $('.tabs span').click(function () {
+$(document).ready(function() {
+    $('.tabs span').click(function() {
         var tab_id = $(this).attr('data-tab');
 
         $('.tabs span').removeClass('current');
@@ -621,7 +621,7 @@ $(document).ready(function () {
 })
 
 
-$(".tabs_goto").click(function () {
+$(".tabs_goto").click(function() {
     $(this)
         .addClass("-active")
         .siblings()
@@ -634,7 +634,7 @@ $(".tabs_goto").click(function () {
         .removeClass("-open")
 })
 
-$(function () {
+$(function() {
     var $tabButtonItem = $('#tab-button li'),
         $tabSelect = $('#tab-select'),
         $tabContents = $('.tab-contents'),
@@ -643,7 +643,7 @@ $(function () {
     $tabButtonItem.first().addClass(activeClass);
     $tabContents.not(':first').hide();
 
-    $tabButtonItem.find('a').on('click', function (e) {
+    $tabButtonItem.find('a').on('click', function(e) {
         var target = $(this).attr('href');
 
         $tabButtonItem.removeClass(activeClass);
@@ -654,7 +654,7 @@ $(function () {
         e.preventDefault();
     });
 
-    $tabSelect.on('change', function () {
+    $tabSelect.on('change', function() {
         var target = $(this).val(),
             targetSelectNum = $(this).prop('selectedIndex');
 
@@ -680,7 +680,7 @@ function loginn() {
 
 // Eliminar elemento , efecto.
 
-$('#trash').click(function () {
+$('#trash').click(function() {
     Swal.fire({
         title: 'Está seguro de eliminar el producto?',
 
@@ -769,7 +769,7 @@ $('#trash').click(function () {
 // PARA EL CAMPO DE CANTIDAD NO SEA NEGATIVO, NI LETRAS, NI SIGNOS, SOLO NUMEROS NO NEGATIVOS Y MAYOR O IGUAL A 1 , Q NO EMPIEZE EN CERO
 
 
-$(document).ready(function () {
+$(document).ready(function() {
     class CampoNumerico {
 
         constructor(selector) {
@@ -780,7 +780,7 @@ $(document).ready(function () {
         }
 
         empezarAEscucharEventos() {
-            this.nodo.addEventListener('keydown', function (evento) {
+            this.nodo.addEventListener('keydown', function(evento) {
                 const teclaPresionada = evento.key;
                 const teclaPresionadaEsUnNumero =
                     Number.isInteger(parseInt(teclaPresionada));
@@ -806,7 +806,7 @@ $(document).ready(function () {
 
             }.bind(this));
 
-            this.nodo.addEventListener('input', function (evento) {
+            this.nodo.addEventListener('input', function(evento) {
                 const cumpleFormatoEsperado = new RegExp(/^[0-9]+/).test(this.nodo.value);
 
                 if (!cumpleFormatoEsperado) {
@@ -826,7 +826,7 @@ $(document).ready(function () {
 
 // codigo de cupon
 
-$('#cupon').click(function () {
+$('#cupon').click(function() {
     var checkBox1 = document.getElementById("cupon");
     var cce1 = document.getElementById("campo-cupon");
     if (checkBox1.checked == true) {
@@ -882,7 +882,7 @@ $('#cupon').click(function () {
 //     }
 // });
 
-$('#dfactura').click(function () {
+$('#dfactura').click(function() {
 
     var chequeo2 = document.getElementById("dfactura");
     var fac = document.getElementById("factura");
@@ -896,7 +896,7 @@ $('#dfactura').click(function () {
 
 
 
-$('#menor_edad').click(function () {
+$('#menor_edad').click(function() {
     var menor_edad = document.getElementById("d_menore");
     menor_edad.classList.toggle("hidden");
 });
