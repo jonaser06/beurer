@@ -83,18 +83,18 @@
                     <table style="margin:auto" align="center " width="150 " cellpadding="0 " cellspacing="0 " border="0 ">
                         <tr>
                             <td align="center ">
-                                <a href="https://www.facebook.com/beurerperu/" target="_blank" style="background-color: #fff; height:33px;width:33px;border-radius:50%">
-                                    <img src="<?php echo base_url('assets/images/icons/face.png'); ?>" alt="siguenos en Facebbok " width="25">
+                                <a href="https://www.facebook.com/beurerperu/" target="_blank" >
+                                    <img src="<?php echo base_url('assets/images/icons/face.png'); ?>" alt="siguenos en Facebbok " style="width:auto;height:20px;background-color:#fff;width: 18px;height:20px;padding:5px;border-radius: 50%;">
                                 </a>
                             </td>
                             <td align="center ">
-                                <a href="https://instagram.com/beurerperu?igshid=vnrvppz3nm6f" target="_blank" style="background-color: #fff; height:33px;width:33px;border-radius:50%">
-                                    <img src="<?php echo base_url('assets/images/icons/insta.png'); ?>" alt="siguenos en Instagram " width="35">
+                                <a href="https://instagram.com/beurerperu?igshid=vnrvppz3nm6f" target="_blank" style="width:auto;height:20px;background-color:#fff;width: 18px;height:20px;padding:5px;border-radius: 50%">
+                                    <img src="<?php echo base_url('assets/images/icons/insta.png'); ?>" alt="siguenos en Instagram " >
                                 </a>
                             </td>
                             <td align="center ">
-                                <a href="https://www.youtube.com/channel/UCORqBGCGe3NOrllUAal4COg" target="_blank" style="background-color: #fff; height:33px;width:33px;border-radius:50%" >
-                                    <img src="<?php echo base_url('assets/images/icons/youtu.png'); ?>" alt="siguenos en youtube " width="25">
+                                <a href="https://www.youtube.com/channel/UCORqBGCGe3NOrllUAal4COg" target="_blank" style="width:auto;height:20px;background-color:#fff;width: 18px;height:20px;padding:5px;border-radius: 50%; ">
+                                    <img src="<?php echo base_url('assets/images/icons/youtu.png'); ?>" alt="siguenos en youtube " >
                                 </a>
                             </td>
                         </tr>
