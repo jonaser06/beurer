@@ -472,12 +472,14 @@ $(function() {
                         AL CARRO</button></a>
                 <br>
                 <br>
-                <a href="<?php echo base_url($value['cat_url'].'/'.$value['subcat_url']); ?>"
+                <a href="<?= base_url($pagina['url'].'/'.$product['subcat_url']); ?>"
                     style="font-size: 0.95rem;font-weight:bold;text-decoration-line:underline;">Seguir comprando</a>
             </div>
             <?php 
+            
             $sugeridos = $product["sugeridos"];
-            if(!empty($sugeridos)) {
+
+            if(!empty($sugeridos) && isset($sugeridos)) {
                 echo 
                     '<div class="modal-header" style="text-align:center;border-bottom:0 none;">
                     <h4 class="modal-title font-nexaheavy" id="exampleModalLongTitle"
@@ -495,7 +497,7 @@ $(function() {
                         <div class="row" style="margin:0px;">
 
                             <?php 
-                        if(!empty($producto_rel)) {
+                        if(!empty($producto_rel) && isset($producto_rel)) {
                             $sugeridos = array_slice($producto_rel,0,3);
                             
                             $col = 12/count($sugeridos);
