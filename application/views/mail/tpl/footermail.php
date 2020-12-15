@@ -88,13 +88,13 @@
                                 </a>
                             </td>
                             <td align="center ">
-                                <a href="https://instagram.com/beurerperu?igshid=vnrvppz3nm6f" target="_blank" width="25">
-                                    <img src="<?php echo base_url('assets/images/icons/insta.png'); ?>" alt="siguenos en Instagram " >
+                                <a href="https://instagram.com/beurerperu?igshid=vnrvppz3nm6f" target="_blank" >
+                                    <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="siguenos en Instagram" width="25" >
                                 </a>
                             </td>
                             <td align="center ">
-                                <a href="https://www.youtube.com/channel/UCORqBGCGe3NOrllUAal4COg" target="_blank" width="25">
-                                    <img src="<?php echo base_url('assets/images/icons/youtu.png'); ?>" alt="siguenos en youtube " >
+                                <a href="https://www.youtube.com/channel/UCORqBGCGe3NOrllUAal4COg" target="_blank" >
+                                    <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="siguenos en youtube " width="25">
                                 </a>
                             </td>
                         </tr>
