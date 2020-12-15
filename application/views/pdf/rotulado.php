@@ -93,16 +93,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>MASTER MEDIC</td>
+                        <td>BEURER </td>
                     </tr>
                     <tr>
                         <td>
-                            Av Los Forestales MZ F LT 5-Sectores C -10A - Villa el Salvador
+                        Av. Caminos del Inca Nº 257 2da etapa Tienda Nº 149 
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            VILLA EL SALVADOR - LIMA - LIMA
+                            SANTIAGO DE SURCO - LIMA - LIMA
                         </td>
                     </tr>
                 </table>
@@ -158,7 +158,7 @@
                             <table width="100% " align="left " cellpadding="1" cellspacing="0 ">
                                 <tr>
                                     <td style="width:10% "><b>Dirección</b></td>
-                                    <td style="width:80% ">: <?php echo $pedido['dir_envio'] ?></td>
+                                    <td style="width:80% ">: <?php echo intval($pedido['recojo']) ? 'Av. Caminos del Inca Nº 257 - Tienda Nº 149': $pedido['dir_envio'] ?></td>
                                 </tr>
                                 <tr>
                                     <td style="width:10% "><b>Nro. /Lote</b></td>
@@ -171,7 +171,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width:10% "><b>Distrito</b></td>
-                                    <td style="width:80% ">: <?php echo $pedido['distrito']?></td>
+                                    <td style="width:80% ">: <?php echo intval($pedido['recojo'])? 'SANTIAGO DE SURCO': $pedido['distrito']?></td>
                                 </tr>
                                 <tr>
                                     <td style="width:10% "><b>Provincia</b></td>
@@ -179,7 +179,12 @@
                                 </tr>
                                 <tr>
                                     <td style="width:20% "><b>Referencia</b></td>
+                                    <?php if(intval($pedido['recojo'])) { ?>
+                                        <td style="width:80% ">: Av. Caminos del Inca 2da etapa </td>
+                                    <?php } else {?>
                                     <td style="width:80% ">: <?php echo ($pedido['referencia']&&$pedido['referencia'] !== 'undefined' ) ?$pedido['referencia'] : ''  ?></td>
+                                    <?php }?>
+                                    
                                 </tr>
 
                             </table>

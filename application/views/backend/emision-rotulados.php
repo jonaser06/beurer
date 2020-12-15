@@ -3,6 +3,8 @@
     <head>
         <?= $this->load->view('backend/chunks/head', array(), TRUE) ?>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -73,13 +75,20 @@
 
         <!-- REQUIRED JS SCRIPTS -->
         <?= $this->load->view('backend/chunks/scripts', array(), TRUE) ?>
+        <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
 
-        <script>
-          
-        </script> 
         <script>
             
             let table = $('#table_rotulados').DataTable({
+            responsive: true,
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false,
+            "scrollCollapse": true,
+            "language"    :{"search":"Buscar", "zeroRecords":"Sin Resultados Coincidentes"},
             "ajax": "manager/pedidos/getPedidos",
                 "columns": [
                     { "data": "codigo", 'render' : function (data) {

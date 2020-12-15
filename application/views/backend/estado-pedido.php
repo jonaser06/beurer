@@ -3,6 +3,7 @@
     <head>
         <?= $this->load->view('backend/chunks/head', array(), TRUE) ?>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -35,7 +36,7 @@
                         </div>
                         <div class="box-body">
                             <div class="nav-tabs-custom">
-                                <table id="table_pedido_estado" class="table table-bordered table-striped table-hover nowrap dataTable dtr-inline collapsed">
+                                <table id="table_pedido_estado" class="table display  table-bordered table-striped table-hover nowrap dataTable dtr-inline collapsed">
                                     <thead>
                                         <tr>
                                             <th>Código Pedido</th>
@@ -70,18 +71,28 @@
             <?= $this->load->view('backend/chunks/footer', array(), TRUE) ?>
         </div>
 
+       
         <?= $this->load->view('backend/chunks/modalLoading', array(), TRUE) ?>
 
         <!-- REQUIRED JS SCRIPTS -->
         <?= $this->load->view('backend/chunks/scripts', array(), TRUE) ?>
-
+     
        <script src="<?= getFilex('mgr/exeperu/js/estadoPedidos.js')?>"></script>
-        <script>
-          
-        </script> 
+       <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+        
         <script>
             
             let table = $('#table_pedido_estado').DataTable({
+                responsive: true,
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false,
+                "scrollCollapse": true,
+                "order": [[ 0, "desc" ]],
+                "language"    :{"search":"Buscar", "zeroRecords":"Sin Resultados Coincidentes"},
             "ajax": "manager/pedidos/getPedidos",
                 "columns": [
                     { "data": "codigo" },
@@ -146,16 +157,7 @@
                         return  salida;
                     } },
                 ]
-            });
-            
-           class TableEstados {
-                constructor(  ) {
-                    
-                }
-                 addEstado() {
-                     
-                 }
-           }
+            });  
 
         </script>
 

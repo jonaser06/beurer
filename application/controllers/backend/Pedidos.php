@@ -51,6 +51,8 @@ class Pedidos extends MY_Controller {
 
         $id_pedido     = (int)$post['pedido']['id_pedido'];
         $pedido_estado = (int)$post['pedido']['pedido_estado'];
+        $estado_message = ( $pedido_estado == 2 ) ? 'Preparando Pedido' : ( $pedido_estado == 3 ? 'Listo para la Entrega' : 'Pedido Entregado' );
+        // $observacion   = $post['pedido']['observacion']; // observacion desde form edit
         
         $estado_where = $pedido_estado -1 ;
 
@@ -73,8 +75,10 @@ class Pedidos extends MY_Controller {
                     "mensaje"=>  "Se envío el correo de cambio de estado al cliente",
                     "tipo" => 1 
                 ];
+
                 $query = $this->get('pedido', ['id_pedido'=>$id_pedido]);
-                // $enviar = $this->sendmail($query['correo'], $query, 'PEDIDO ACTUALIZADO', 'order_confirm.php');
+                $query['estado_mensaje'] = $estado_message;
+                $enviar = $this->sendmail($query['correo'], $query , 'PEDIDO ACTUALIZADO', 'estate_order.php' );
             }else {
                 $mensaje = [
                     "mensaje"=>  "Hubo un problema",

@@ -3,6 +3,8 @@
     <head>
         <?= $this->load->view('backend/chunks/head', array(), TRUE) ?>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -93,9 +95,19 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+
         <script>
-           
             let table = $('#table_novedades').DataTable({
+            responsive: true,
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false,
+            "scrollCollapse": true,
+            "language"    :{"search":"Buscar", "zeroRecords":"Sin Resultados Coincidentes"},
             "ajax": "manager/novedades/getNovedades",
                 "columns": [
                     { "data": "nombres" , 'render' : function (data ,type , row) {
