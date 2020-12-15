@@ -1591,7 +1591,7 @@ ObjMain = {
                     Estado:<p class="estado" style="font-weight:normal;">Incompleto</p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        style="font-weight:normal;">Es el proceso en el cual el cliente realiza el pedido
                         culminando con el pago. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
@@ -1612,8 +1612,7 @@ ObjMain = {
                         style="font-weight:normal;">Incompleto </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
-                        culminando con el pago. </p>
+                        style="font-weight:normal;">Es el proceso se prepara el pedido a ser entregado. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
                         style="font-weight:normal;">En proceso </p>
@@ -1654,8 +1653,7 @@ ObjMain = {
                         style="font-weight:normal;">Incompleto </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
-                        culminando con el pago. </p>
+                        style="font-weight:normal;">Estado que marca la culminación de la entrega. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
                         style="font-weight:normal;">En proceso </p>
@@ -1704,7 +1702,7 @@ ObjMain = {
                     Estado:<p class="estado" style="font-weight:normal;">Incompleto</p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
+                        style="font-weight:normal;">Es el proceso en el cual el cliente realiza el pedido
                         culminando con el pago. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
@@ -1725,8 +1723,7 @@ ObjMain = {
                         style="font-weight:normal;">Incompleto </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
-                        culminando con el pago. </p>
+                        style="font-weight:normal;">Es el proceso se prepara el pedido a ser entregado. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
                         style="font-weight:normal;">En proceso </p>
@@ -1746,8 +1743,7 @@ ObjMain = {
                         style="font-weight:normal;"> Incompleto</p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
-                        culminando con el pago. </p>
+                        style="font-weight:normal;">Estado que indica que el pedido se termino de preparar y esta listo para el recojo. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
                         style="font-weight:normal;"> En proceso</p>
@@ -1767,8 +1763,7 @@ ObjMain = {
                         style="font-weight:normal;">Incompleto </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Descripción:<p
-                        style="font-weight:normal;">Es el proceso el cual el cliente realiza el pedido
-                        culminando con el pago. </p>
+                        style="font-weight:normal;">Estado que marca la culminación de la entrega. </p>
                 </div>
                 <div style="font-size:1.3em;font-weight:bold;">Fecha: <p class="fechaEstado"
                         style="font-weight:normal;">En proceso </p>
