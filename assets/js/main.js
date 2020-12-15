@@ -2133,10 +2133,38 @@ class Carrito {
     }
     add() {
         const producto = this.filter();
+        const stock = producto.stock == '' ? 0 : producto.stock;
+        const stockActual = producto.currentstock == '' ? 0 : producto.currentstock;
+        this.$btnAddCarrito.dataset.toggle = 'modal';
+        if (parseInt(stock) == 0) {
+            console.log(producto)
+            this.$btnAddCarrito.dataset.toggle = '';
+            this.$btnAddCarritoError.textContent = 'El producto no se encuentra disponible.'
+            this.$btnAddCarritoError.classList.add('errorAdd')
+            setTimeout(function() {
+                document.querySelector('.addCarritoError').classList.remove('errorAdd')
+                document.querySelector('.addCarritoError').textContent = ''
+            }, 4000)
+            return;
+        }
+
         if (localStorage.getItem('productos')) {
             this.stateCarrito.productos = JSON.parse(localStorage.getItem('productos'));
             const result = this.stateCarrito.productos.filter(prod => prod.id == producto.id)
             if (result.length == 0) {
+                if (stock < parseInt(producto.cantidad)) {
+                    this.$btnAddCarrito.dataset.toggle = '';
+                    this.$btnAddCarritoError.textContent = `Este producto solo tiene en venta ${stock} unidades disponibles.`
+                    this.$btnAddCarritoError.classList.add('errorAdd');
+
+                    setTimeout(function() {
+                        document.querySelector('.addCarritoError').classList.remove('errorAdd')
+                        document.querySelector('.addCarritoError').textContent = ''
+
+                    }, 4000)
+
+                    return;
+                }
                 this.addState(producto);
                 this.addStorage();
             } else {

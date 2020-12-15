@@ -186,18 +186,23 @@
                                 <button id="aum" style="margin:0 2%;width:42px;height:42px">+</button>
                             </div>
                             <br> <br>
-                            <button class="btnAddCarrito btn btn-cmn" type="button" data-toggle="modal"
-                                data-target="#DetalleProducto" data-title="<?php echo $product['titulo']?>"
-                                data-id="<?php echo $product['id']?>"
-                                data-precio="<?php echo $product['precio_anterior']?>"
-                                data-producto_sku="<?php echo $product['producto_sku']?>"
-                                data-precio_online="<?php echo $product['precio']?>"
-                                data-img="<?= $product['imagen'][0] ?>" data-peso=<?= $product['precio'] ?>
-                                data-volumen=<?= $product['volumen'] ?> data-cantidad="1"
-                                data-stock=<?php echo $product['stock'] ?> >
-                                <a style="color:white;border: 2px solid #c51152;" tabindex="-1">AÑADIR AL CARRO
-                                </a>
-                            </button>
+                            <?php if( floatval($product['precio']) == 0 ) {?>  
+                            <?php } else {?>
+                                <button class="btnAddCarrito btn btn-cmn" type="button" data-toggle="modal"
+                                    data-target="#DetalleProducto" data-title="<?php echo $product['titulo']?>"
+                                    data-currentstock = "<?php echo $product['stock'] ?>"
+                                    data-id="<?php echo $product['id']?>"
+                                    data-precio="<?php echo $product['precio_anterior']?>"
+                                    data-producto_sku="<?php echo $product['producto_sku']?>"
+                                    data-precio_online="<?php echo $product['precio']?>"
+                                    data-img="<?= $product['imagen'][0] ?>" data-peso=<?= $product['peso'] ?>
+                                    data-volumen=<?= $product['volumen'] ?> data-cantidad="1"
+                                    data-stock=<?php echo $product['stock'] ?> >
+                                
+                                    <a style="color:white;border: 2px solid #c51152;" tabindex="-1">AÑADIR AL CARRO
+                                    </a>
+                                </button>
+                            <?php } ?>
                         </div>
                         <br>
                         <div class="addCarritoError"> </div>
