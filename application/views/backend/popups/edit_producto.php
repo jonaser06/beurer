@@ -156,7 +156,7 @@
                                                 <div class="form-check">
                                                     <input onchange ="showModule()" type="checkbox" class="form-check-input" id="colorAdd"
                                                     <?= var_dump($producto['detalles-multimedia'])?>
-                                                    <?= isset($producto['detalles-multimedia']) && $producto['detalles-multimedia']!='[]'
+                                                    <?= isset($producto['detalles-multimedia']) && trim($producto['detalles-multimedia'])!='[]'
                                                         ? 'checked':'';  ?>
                                                     >
                                                     <label class="form-check-label" for="colorAdd">colores</label>
