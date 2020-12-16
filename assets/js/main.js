@@ -223,6 +223,7 @@ ObjMain = {
         let sub = 0;
         let vol = 0;
         let weight = 0;
+        let medida = 0;
         /* table vol */
         let vol_big = parseFloat(120.20);
         let vol_small = parseFloat(90.50);
@@ -240,9 +241,12 @@ ObjMain = {
             /* peso x cantidad */
             let pxc = parseFloat(p.peso) * parseInt(p.cantidad);
             weight = weight + pxc;
+
+            let mxc = parseFloat(p.peso) * parseInt(p.cantidad) * parseInt(p.volumen);
+            medida = medida + mxc;
         });
         document.querySelector('.sub_cost').innerHTML = (sub).toFixed(2);
-        const {...resp } = ObjMain.calcEnvio(vol, weight)
+        const {...resp } = ObjMain.calcEnvio(vol, weight, medida)
 
         localStorage.setItem('subtotal', sub);
         localStorage.setItem('volumen_total', vol);
@@ -1163,7 +1167,7 @@ ObjMain = {
                 });
         }
     },
-    calcEnvio: (vol, peso) => {
+    calcEnvio: (vol, peso, dimension) => {
         const peso_small = 30;
         const peso_big = 60;
         const vol_small = 240;
@@ -1175,6 +1179,16 @@ ObjMain = {
                 total_coste: 0
             }
         }
+        if (dimension > 0 && dimension < 22100) {
+            return {
+                total_coste: 10
+            }
+        } else {
+            return {
+                total_coste: 20
+            }
+        }
+
         // if(peso < peso_small && vol < vol_small ) {
         //     return {
         //         paquete_small : 1,
@@ -1200,13 +1214,13 @@ ObjMain = {
         //         total_coste : caja_small * paq_small + caja * paq_big,
         //     }
         // }
-        return {
-            paquete_big: 1,
-            paquete_small: 1,
-            coste_small: 0,
-            coste_big: 20,
-            total_coste: 10
-        }
+        // return {
+        //     paquete_big: 1,
+        //     paquete_small: 1,
+        //     coste_small: 0,
+        //     coste_big: 20,
+        //     total_coste: 10
+        // }
     },
     getDataSales: (sesion) => {
         const comprador = localStorage.getItem('Comprador') ? JSON.parse(localStorage.getItem('Comprador')) : null
