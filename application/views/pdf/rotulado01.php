@@ -258,7 +258,7 @@
                                             <tr>
                                                 <td align="center"
                                                     style="padding-top :8px;padding-bottom:8px;margin-bottom:10px">
-                                                    <img src="https://www.blogingenieria.site/assets/images/logos/logo-beurer.svg"
+                                                    <img src="https://beurer.pe/assets/images/logos/logo-beurer.svg"
                                                         alt="logo-beurer"
                                                         style="width:90px ; height:auto;display: block;">
                                                 </td>
