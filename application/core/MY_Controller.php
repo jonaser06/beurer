@@ -176,7 +176,7 @@ class MY_Controller extends CI_Controller
     public function sendmail($to, $data, $subject, $template){
         $config = [
             'protocol'  => 'smtp', 
-            'smtp_host' => 'ssl://mail.beurer.pe', 
+            'smtp_host' => 'ssl://smtp.zoho.com', 
             'smtp_port' =>  465, 
             'smtp_user' => MAIL_USER,
             'smtp_pass' => MAIL_PASS, 
