@@ -124,7 +124,7 @@
 <script src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/fancybox.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/libraries/fullpage.js"></script>
-<script src="<?= base_url(); ?>assets/js/main.js"></script>
+<script src="<?= base_url(); ?>assets/js/main.js?v2"></script>
 
 <script>
     /* menu */

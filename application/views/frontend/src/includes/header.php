@@ -91,6 +91,9 @@
     padding: 10px;
     text-align: center;
 }
+#primary-nav{
+    display: none;
+}
 @media only screen and (max-width: 767px) {
     #primary-nav{
         display: flex;
