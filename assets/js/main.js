@@ -421,18 +421,18 @@ ObjMain = {
     },
     mas: (id) => {
         /* verificamos stock */
-        let limit_stock = 0 ;
-        let stock = JSON.parse( localStorage.getItem('productos') );
+        let limit_stock = 0;
+        let stock = JSON.parse(localStorage.getItem('productos'));
         for (let i = 0; i < stock.length; i++) {
-            if (stock[i].id == id) { 
-                if( stock[i].stock > 6 ){
+            if (stock[i].id == id) {
+                if (stock[i].stock > 6) {
                     limit_stock = 6;
-                }else if ( stock[i].stock < 6) {
+                } else if (stock[i].stock < 6) {
                     limit_stock = stock[i].stock;
                 }
             }
         }
-        if (parseInt(document.querySelector('.cant-' + id).value) < limit_stock ) {
+        if (parseInt(document.querySelector('.cant-' + id).value) < limit_stock) {
             let cantidad = parseInt(document.querySelector('.cant-' + id).value);
             let ncantidad = cantidad + 1;
             let precio = parseFloat(document.querySelector('.precio-' + id).value).toFixed(2);
