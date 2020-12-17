@@ -104,7 +104,7 @@
 
         <?= $this->load->view('backend/chunks/modalLoading', array(), TRUE) ?>
 
-        <script src="<?= getFilex('mgr/exeperu/js/reclamos.js') ?>"></script>
+        <script src="<?= getFilex('mgr/exeperu/js/reclamos.js') ?>?v2"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="mgr/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>

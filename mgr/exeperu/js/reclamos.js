@@ -1,7 +1,8 @@
 let DOMAIN;
 let ObjReclamos = {
     init: () => {
-        DOMAIN = (window.location.hostname == 'localhost') ? 'http://localhost/beurer/' : 'https://beurer.pe/';
+        // DOMAIN = (window.location.hostname == 'localhost') ? 'http://localhost/beurer/' : 'https://beurer.pe/';
+        DOMAIN = 'https://beurer.pe/';
         if (document.querySelector('.section_reclamos') != null) {
             ObjReclamos.load_reclamos();
         }
