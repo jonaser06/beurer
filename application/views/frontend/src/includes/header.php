@@ -43,52 +43,110 @@
     </script>
 </head>
 <style>
-.navigation-menu{
-    display: none;
+/* menu nav */
+#primary-nav{
+    bottom: -10px;
+    background-color: #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
+    color: rgba(0,0,0,0.6);
+    padding-top: 10px;
+    list-style: none;
     position: fixed;
-    height: 60px;
-    width: 100%;
-    background: #FFF;
-    z-index: 999;
-    bottom: 0px;
-    padding-top: 5px;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
-}
-.navigation-menu ul{
+    z-index: 100;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    margin: auto;
-    width: 60%;
-    padding-left: 15px;
+    width: 100%;
+    height: 62px;
 }
-
-.navigation-menu ul li{
-    padding: 5px;
+#primary-nav .nav-item {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-weight: normal;
     text-align: center;
 }
-
+.boton-btn{
+    border: navajowhite;
+    background: none;
+}
+.login-mdl, .login-menu{
+    width: 80%;
+    /* height: 300px; */
+    background: #fff;
+    margin: 100px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.login-menu{
+    margin: 200px auto;
+}
+.option-menu{
+    display: block;
+    padding: 10px;
+    text-align: center;
+}
 @media only screen and (max-width: 767px) {
-    .navigation-menu{
-        display: block;
+    #primary-nav{
+        display: flex;
     }
 }
 
 </style>
 <body style='background-color:rgba(255,255,255,0);'>
-    <div class="navigation-menu">
-        <ul>
-            <li>
-                <a href="<?= base_url('carrito'); ?>"><img class="img_nav" style="width: 29px;" src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt=""></a>
-                <div class="icon_nav">Carrito</div>
-            </li>
-            <li>
+    <ol id="primary-nav">
+        <li class="nav-item">
+            <a href="<?= base_url('carrito'); ?>"><img class="img_nav" style="width: 29px;" src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt=""></a>
+            <div class="icon_nav">Carrito</div>
+        </li>
+        <li class="nav-item">
+            <button class="boton-btn" type="button" data-toggle="modal" data-target="#login-modal" data-title="test">
                 <a href="#"><img class="img_nav" style="width: 19px;" src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt=""></a>
-                <div class="icon_nav">Mi Cuenta</div>
-            </li>
-            <li>
-                <a href="<?= base_url('estado-pedido'); ?>"><img class="img_nav" style="width: 40px;" src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt=""></a>
-                <div class="icon_nav">Tracking</div>
-            </li>
-        </ul>
+            </button>
+            <div class="icon_nav">Mi Cuenta</div></li>
+        <li class="nav-item">
+            <a href="<?= base_url('estado-pedido'); ?>"><img class="img_nav" style="width: 40px;" src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt=""></a>
+            <div class="icon_nav">Tracking</div>
+        </li>
+    </ol>
+    <div class="modal fade" id="login-modal" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <?php  $sesion = ( isset($_SESSION['status']) && $_SESSION['status'])?true:false; ?>
+        <?php if ( !$sesion ): ?>
+        <div class="login-mdl">
+            <h2 class="login-header" style="padding: 10px">INICIA SESIÓN</h2>
+            <form class="login-container" >
+                <p><input type="text" id="username_" style="text-align:center;" placeholder="Email"></p>
+                <p><input type="password" id="pasword_" style="text-align:center;" placeholder="Contraseña"></p>
+                <p class="response_sesion"></p>
+                <div class="checkbox" style=" text-align:left; padding-left:5px;">
+                    <label class="font-light label-pol" style="display:inline;">
+                    <input type="checkbox" id="remember_"/>
+                    <i class="helper"></i>
+                    </label>
+                    <div style="display:inline-block; font-size:.9em;">Recuérdame</div>
+                </div>
+                <p style="padding-top:0px !important;margin-top:0px;">
+                    <input class="btn btn-primary1" type="submit" value="Iniciar sesión" style="padding:0;">
+                </p>
+                <p><a href="<?php echo base_url('recovery'); ?>">¿Ha olvidado la contraseña?</a></p>
+                <hr style="margin-top:0px;">
+                <div style="text-align:center;">
+                    <a class="btn btn-primary1" href="<?php echo base_url('registro'); ?>" style="color:white;"> Deseo registrarme</a>
+                </div>
+            </form>
+        </div>
+        <?php endif; ?>
+        <?php if ( $sesion ): ?>
+        <div class="login-menu">
+            <div class="option-menu"><a href="<?= base_url('myaccount'); ?>">Mi Cuenta</a></div>
+            <div class="option-menu"><a href="<?= base_url('ajax/logout'); ?>">Cerrar Sesión</a></div>
+        </div>
+        <?php endif; ?>
     </div>
     <?php  $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));     ?>
     <div class="wrapper-header" id="cabecera" <?php echo (isset($carrito) && $carrito )?'style="display:none;"':''; ?> >
