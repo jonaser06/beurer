@@ -1502,7 +1502,7 @@ class Ajax extends MY_Controller
                                  "phone_number" => $this->input->post('telefono'),
                              ],
                              "confirm" => false,
-                             "expiration_date" => time() + 24*60*60,   // Orden con un dia de validez
+                             "expiration_date" => time() + 24*60*60*3,   // Orden con un dia de validez
 
                          ]
                  );    
