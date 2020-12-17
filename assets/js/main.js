@@ -1462,6 +1462,7 @@ ObjMain = {
 
         const $containerResume = document.querySelector('.pedido-products');
         productos.forEach(prod => {
+            let sub = parseInt(prod.cantidad) * parseFloat(prod.precio_online)
             $containerResume.innerHTML +=
                 `<div class="basket-product" style="text-align:center;">
                 <div class="item">
@@ -1492,7 +1493,7 @@ ObjMain = {
                     <input class="form-control-field cantidad" style="font-size:1.5rem!important;width:21%;font-family:nexaheavyuploaded_file!important" name="pwd" value="${parseInt(prod.cantidad)}" type="text"
                         min="1" readonly>
                 </div>
-                <div class="subtotal rsubtotal">${parseFloat(prod.subtotal).toFixed(2)}</div>
+                <div class="subtotal rsubtotal">${parseFloat(sub).toFixed(2)}</div>
             </div>`
         })
     },

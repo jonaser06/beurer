@@ -264,6 +264,7 @@ function converter() {
         cant_products = [],
         subtotal_products = [];
         colores_productos = [];
+        skus_productos = [];
     productos.forEach(prod => {
         id_products.push(prod.id);
         cant_products.push(prod.cantidad);
@@ -271,12 +272,17 @@ function converter() {
         // filtro para producto color 
         let color = prod.color ? prod.color : 'none';
         colores_productos.push(color);
+
+        // filtro para producto sku 
+        let sku = prod.producto_sku ? prod.producto_sku : 'none';
+        skus_productos.push(sku);
     })
     return {
         id_products: id_products.join('-'),
         cant_products: cant_products.join('-'),
         subtotal_products: subtotal_products.join('-'),
-        colores_prods: colores_productos.join('-')
+        colores_prods: colores_productos.join('-'),
+        skus_prods: skus_productos.join('-'),
 
     }
 }
@@ -370,7 +376,7 @@ function dataFormSendOrder() {
     formData.append('correo', user.correo);
     formData.append('id_session', session);
     formData.append('nombres', `${user.nombres}`);
-    formData.append('apellidos', `${user.apellido_paterno} ${user.apellido_materno}`);
+    formData.append('apellidos', `${user.apellidos}`);
     formData.append('telefono', user.telefono);
     formData.append('distrito', `${user.distrito}`);
     formData.append('d_envio', user.d_envio);
@@ -381,11 +387,13 @@ function dataFormSendOrder() {
     formData.append('id_productos', converter().id_products);
     formData.append('cantidades', converter().cant_products);
     formData.append('subtotales', converter().subtotal_products);
+    formData.append('colores', converter(). colores_prods);
+    formData.append('skus', converter(). skus_prods);
 
     formData.append('cantidad_total', cantidad);
     formData.append('subtotal_coste', subtotal);
     formData.append('envio_coste', envio);
-    formData.append('tipo_cupon', `${tipo_cupon == null ? 0 : tipo_cupon }`);
+    // formData.append('tipo_cupon', `${tipo_cupon == null ? 0 : tipo_cupon }`);
     formData.append('cupon_descuento', cupon_descuento);
     formData.append('cupon_codigo', cupon_codigo);
     formData.append('total_coste', total);
@@ -462,6 +470,7 @@ function culqi() {
                         formCharge.append('codigo_venta', charge.reference_code);
                         formCharge.append('telefono', antifraud_details.phone);
                         formCharge.append('xratioColors',converter().colores_prods); // enviamos colores
+                        formCharge.append('skus',converter().skus_prods); // enviamos skus
                         ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchase`, formCharge)
                             .then(resp => {
                                 resp = JSON.parse(resp);
@@ -493,7 +502,9 @@ function culqi() {
         localStorage.setItem('order', JSON.stringify(order));
         const formOrder = dataFormOrder(Culqi.order);
         const phone = JSON.parse(localStorage.getItem('Comprador')).telefono;
-        formOrder.append('telefono', phone)
+        const correo = JSON.parse(localStorage.getItem('Comprador')).correo;
+        formOrder.append('telefono', phone);
+        formOrder.append('correo', correo);
 
         ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchaseOrder`, formOrder)
             .then(resp => {

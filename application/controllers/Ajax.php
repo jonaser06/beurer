@@ -1074,6 +1074,7 @@ class Ajax extends MY_Controller
             $cantidades   = explode('-',$this->input->post('cantidades'));
             $subtotales   = explode('-',$this->input->post('subtotales'));
             $colores      = explode('-', $this->input->post('xratioColors'));
+            $skus        = explode('-', $this->input->post('skus'));
             date_default_timezone_set("America/Lima");          
               $data =[ 
                          'id_cliente' => $this->input->post('id_cliente'),
@@ -1108,7 +1109,7 @@ class Ajax extends MY_Controller
                 $data["ruc"]    = $this->input->post('ruc');
                 $data["r_social"]  = $this->input->post('r_social');
                 $data["r_fiscal"]   = $this->input->post('r_fiscal');
-              };
+            };
             $id_pedido = $this->savePedido($data);
             $pedido_estado = [
                 'id_pedido'        => $id_pedido,
@@ -1123,6 +1124,7 @@ class Ajax extends MY_Controller
                     $datos = [
                         'id_pedido'   => (int)$id_pedido,
                         'id_producto' => (int)$id_productos[$i],
+                        'producto_sku' => $skus[$i],
                         'cantidad'    => (int)$cantidades[$i],
                         'subtotal_precio' => $subtotales[$i],
                     ];
@@ -1141,7 +1143,7 @@ class Ajax extends MY_Controller
 
                         foreach($detalles as $detalle):
                             $stock_prod = (int)$detalle['stock'];
-                            $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $color;
+                            $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $stock_prod;
                             array_push($detallesUpdate , $detalle );
                         endforeach;
                         $this->dbUpdate(['detalles-multimedia' => json_encode($detallesUpdate) ],'productos',['id' => (int) $id_productos[$i]]);
@@ -1228,7 +1230,7 @@ class Ajax extends MY_Controller
                         'precio' => $prod['precio_anterior'],
                         'imagen' => $imagenes[0]['imagen'],
                         'precio_online' => $prod['precio'],
-                        'producto_sku' => $prod['producto_sku'],
+                        'producto_sku' => $pedido_detalle[$i]['producto_sku'],
                         'cantidad' => $pedido_detalle[$i]['cantidad'],
                         'subtotal' => $pedido_detalle[$i]['subtotal_precio']
                     ];
@@ -1446,7 +1448,8 @@ class Ajax extends MY_Controller
                  "id_session" =>$this->input->post('id_session'),
                  "tipo_documento" =>$this->input->post('tipo_documento'),
                  "numero_documento" =>$this->input->post('numero_documento'),
-                 "correo" =>$this->input->post('correo'),
+                //  "correo" =>$this->input->post('correo'),
+                 "skus" =>$this->input->post('skus'),
                  "distrito"    => $this->input->post('distrito'),
                  "nombres" => $this->input->post('nombres'),
                  "apellidos" => $this->input->post('apellidos'),
@@ -1458,7 +1461,8 @@ class Ajax extends MY_Controller
                  "cantidad_total" =>$this->input->post('cantidad_total'),
                  "envio" =>$this->input->post('envio_coste'),
                  "cupon_descuento" =>$this->input->post('cupon_descuento'),
-                 "tipo_cupon" =>$this->input->post('tipo_cupon'),
+                //  "tipo_cupon" =>$this->input->post('tipo_cupon'),
+                 "colores" =>$this->input->post('colores'),
                  "cupon_codigo" =>$this->input->post('cupon_codigo'),
                  "subtotal" =>$this->input->post('subtotal_coste'),
                  
@@ -1548,7 +1552,8 @@ class Ajax extends MY_Controller
              ];
             
              $id_orden = $this->dbInsert('ordenes',$data);
-             
+            //  $this->testOrder($data['order_id']); 
+
              if($id_orden) {
                  $this->resp = [
                      'status'  => true,
@@ -1575,8 +1580,10 @@ class Ajax extends MY_Controller
                      ->set_output(json_encode($resp));
                  return;
              }
-             
-             
+            $this->testOrder($data['order_id']); 
+            //  test orden 
+
+            // 
            }else {
              $this->output
              ->set_content_type('application/json')
@@ -1599,47 +1606,227 @@ class Ajax extends MY_Controller
      
      public function changueState () 
      {
-         $resp = [
-             'status'  => false,
-             'code'    => 404,
-             'message' => 'Metodo POST requerido',
-         ];
+         // $input_json = file_get_contents("php://input");
+ 
+             // $myfile = fopen('log/log-webhooks.json', "w") or die("Imposible abrir el archivo.");
+             // fwrite($myfile, $input_json);
         $input = json_decode(file_get_contents('php://input'), true);
-        $input_json = file_get_contents("php://input");
-
-
-            // Escribir el Webhook en mi archivo "log/log-webhooks.json" de ejemplo
-            $myfile = fopen('log/log-webhooks.json', "w") or die("Imposible abrir el archivo.");
-            fwrite($myfile, $input_json);
-            /* Reconocer tipo de evento recibido */  
-            if($input['type'] == 'order.status.changed') {
+          
+        if($input['type'] == 'order.status.changed') {
 
             $objectOrder = json_decode($input['data'], true);    
-
-            // Parametros   
             $state = trim($objectOrder['state']);         
+            if($state == 'paid') { 
+                
+                // obtenemos la data de ordenes resquest con el id_order
+                $orden = $this->get('ordenes',['order_id' => $objectOrder['id']]);
+                $details = json_decode($orden['detalles'],TRUE);
+               
+                // insert a bd ****
+                $id_productos = explode('-',$details['id_productos']);
+                $cantidades   = explode('-',$details['cantidades']);
+                $subtotales   = explode('-',$details['subtotales']);
+                $colores      = explode('-', $details['colores']);
+                $skus        = explode('-', $details['skus']);
 
-                // Orden pagada
-                if($state == 'paid') { 
-                    // Aquí cambiar estado de la orden en tu sistema ... 
-                    $array = array(
-                      "response" => "Webhook de Culqi $state ",
-                      'data' => $objectOrder
-                      );
-                    }
-                if($state == 'pending') { 
-                    $array = array(
-                        "response" => "Webhook de Culqi $state ",
-                         'data' => $objectOrder
-                        );
-                      }
+                date_default_timezone_set("America/Lima");          
+                  $data =[ 
+                             'id_cliente' => (int)$details['id_session'],
+                             'codigo'   => 'P'.$orden['cip'],
+                             'nombres'   => $details['nombres'],
+                             'apellidos' => $details['apellidos'],
+                             'correo'    => $orden['correo'],
+                             'telefono'    => $orden['telefono'],
+                             'tipo_documento'=> $details['tipo_documento'],
+                             'numero_documento'=> $details['numero_documento'],
+                             'provincia'=> 'LIMA',
+                             'distrito'=> $details['distrito'],
+                             'dir_envio'=> $details['d_envio'],
+                             'referencia'=> $details['referencia'],
+                             'cupon_codigo'=> $details['cupon_codigo'],
+                             'cupon_descuento'=> $details['cupon_descuento'],
+                             'entrega_precio'=> floatval($details['envio']),
+                             'productos_precio'=> floatval($details['subtotal']),
+                             'pedido_fecha'=> date('y-m-d'),
+                             'pedido_estado'=> 1 ,
+                             'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
+                        
+                ];
+                if(isset($details['destinatario'])) {
+                    $destinatario = json_decode( $details['destinatario'],TRUE);
+
+                    $data["dest_nombres"]    = $destinatario['dest_nombres'];
+                    $data["dest_telefono"]   = $destinatario['dest_telefono'];
+                    $data["dest_tipo_doc"]   = $destinatario['dest_tipo_doc'];
+                    $data["dest_number_doc"] = $destinatario['dest_number_doc'];
+                  };
+                if(isset($details['facturacion'])) {
+                    $facturacion = json_decode( $details['facturacion'],TRUE);
+
+                    $data["ruc"]        = $facturacion['ruc'];
+                    $data["r_social"]   = $facturacion['r_social'];
+                    $data["r_fiscal"]   = $facturacion['r_fiscal'];
+                };
+                $id_pedido = $this->savePedido($data);
+
+                $pedido_estado = [
+                    'id_pedido'        => $id_pedido,
+                    'id_estado_pedido' => 1,
+                    'observacion'      => 'pedido solicitado',
+                    'fecha_estado'     => date('y-m-d')
+                ];
+                $this->dbInsert('pedido_estado',$pedido_estado);
+    
+                if($id_pedido) {
+                    for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
+                        $datos = [
+                            'id_pedido'   => (int)$id_pedido,
+                            'id_producto' => (int)$id_productos[$i],
+                            'producto_sku' => $skus[$i],
+                            'cantidad'    => (int)$cantidades[$i],
+                            'subtotal_precio' => $subtotales[$i],
+                        ];
+                        $response = $this->dbInsert('pedido_detalle',$datos);
+                        
+                        if($response){
+                            // actualizo los detalles por producto : stock y si tiene un color actualizamos color y stock
+                            
+                            $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
+                            $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
+                            #start colrs update
+                            $color = $colores[$i];
+                            if($color != 'none'){
+                            $detalles = json_decode($productoDB['detalles-multimedia'],TRUE);
+                            $detallesUpdate = [];
+    
+                            foreach($detalles as $detalle):
+                                $stock_prod = (int)$detalle['stock'];
+                                $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $stock_prod;
+                                array_push($detallesUpdate , $detalle );
+                            endforeach;
+                            $this->dbUpdate(['detalles-multimedia' => json_encode($detallesUpdate) ],'productos',['id' => (int) $id_productos[$i]]);
+                            }
+    
+                            #end colors update
+                            $this->dbUpdate(['stock' => $stock ],'productos',['id' => (int) $id_productos[$i]]);
+                            
+                        }
+                    };
+                    
+                        
+                    }else {
+                   
                 }
+
+
+
+            }
+               
+        }  
+     }
+     public function testOrder ($id) {
+         
+        $orden = $this->get('ordenes',['order_id' => $id]);
+        $details = json_decode($orden['detalles'],TRUE);
+       
+        // insert a bd ****
+        $id_productos = explode('-',$details['id_productos']);
+        $cantidades   = explode('-',$details['cantidades']);
+        $subtotales   = explode('-',$details['subtotales']);
+        $colores      = explode('-', $details['colores']);
+        $skus        = explode('-', $details['skus']);
+
+        date_default_timezone_set("America/Lima");          
+          $data =[ 
+                     'id_cliente' => (int)$details['id_session'],
+                     'codigo'   => 'P'.$orden['cip'],
+                     'nombres'   => $details['nombres'],
+                     'apellidos' => $details['apellidos'],
+                     'correo'    => $orden['correo'],
+                     'telefono'    => $orden['telefono'],
+                     'tipo_documento'=> $details['tipo_documento'],
+                     'numero_documento'=> $details['numero_documento'],
+                     'provincia'=> 'LIMA',
+                     'distrito'=> $details['distrito'],
+                     'dir_envio'=> $details['d_envio'],
+                     'referencia'=> $details['referencia'],
+                     'cupon_codigo'=> $details['cupon_codigo'],
+                     'cupon_descuento'=> $details['cupon_descuento'],
+                     'entrega_precio'=> floatval($details['envio']),
+                     'productos_precio'=> floatval($details['subtotal']),
+                     'pedido_fecha'=> date('y-m-d'),
+                     'pedido_estado'=> 1 ,
+                     'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
+                
+        ];
+        if(isset($details['destinatario'])) {
+            $destinatario = json_decode( $details['destinatario'],TRUE);
+
+            $data["dest_nombres"]    = $destinatario['dest_nombres'];
+            $data["dest_telefono"]   = $destinatario['dest_telefono'];
+            $data["dest_tipo_doc"]   = $destinatario['dest_tipo_doc'];
+            $data["dest_number_doc"] = $destinatario['dest_number_doc'];
+          };
+        if(isset($details['facturacion'])) {
+            $facturacion = json_decode( $details['facturacion'],TRUE);
+
+            $data["ruc"]        = $facturacion['ruc'];
+            $data["r_social"]   = $facturacion['r_social'];
+            $data["r_fiscal"]   = $facturacion['r_fiscal'];
+        };
+        $id_pedido = $this->savePedido($data);
+
+        $pedido_estado = [
+            'id_pedido'        => $id_pedido,
+            'id_estado_pedido' => 1,
+            'observacion'      => 'pedido solicitado',
+            'fecha_estado'     => date('y-m-d')
+        ];
+        $this->dbInsert('pedido_estado',$pedido_estado);
+
+        if($id_pedido) {
+            for ( $i = 0 ; $i < count($id_productos) ; $i++ ){
+                $datos = [
+                    'id_pedido'   => (int)$id_pedido,
+                    'id_producto' => (int)$id_productos[$i],
+                    'producto_sku' => $skus[$i],
+                    'cantidad'    => (int)$cantidades[$i],
+                    'subtotal_precio' => $subtotales[$i],
+                ];
+                $response = $this->dbInsert('pedido_detalle',$datos);
+                
+                if($response){
+                    // actualizo los detalles por producto : stock y si tiene un color actualizamos color y stock
+                    
+                    $productoDB = $this->get('productos',['id'=> (int) $id_productos[$i]]);
+                    $stock = (int)$productoDB['stock'] - (int) $cantidades[$i];
+                    #start colrs update
+                    $color = $colores[$i];
+                    if($color != 'none'){
+                    $detalles = json_decode($productoDB['detalles-multimedia'],TRUE);
+                    $detallesUpdate = [];
+
+                    foreach($detalles as $detalle):
+                        $stock_prod = (int)$detalle['stock'];
+                        $detalle['stock'] = $detalle['color'] == $color ? ($stock_prod - (int) $cantidades[$i]): $stock_prod;
+                        array_push($detallesUpdate , $detalle );
+                    endforeach;
+                    $this->dbUpdate(['detalles-multimedia' => json_encode($detallesUpdate) ],'productos',['id' => (int) $id_productos[$i]]);
+                    }
+
+                    #end colors update
+                    $this->dbUpdate(['stock' => $stock ],'productos',['id' => (int) $id_productos[$i]]);
+                    
+                }
+            };
             
-            $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($array));
-          }
+                
+            }else {
+           
+        }
+
+
+     }
      public function createSuccess () 
      {
          $resp = [

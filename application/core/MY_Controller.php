@@ -232,7 +232,7 @@ class MY_Controller extends CI_Controller
                     'precio' => $prod['precio_anterior'],
                     'imagen' => $imagenes[0]['imagen'],
                     'precio_online' => $prod['precio'],
-                    'producto_sku' => $prod['producto_sku'],
+                    'producto_sku' => $pedido_detalle[$i]['producto_sku'],
                     'cantidad' => $pedido_detalle[$i]['cantidad'],
                     'subtotal' => $pedido_detalle[$i]['subtotal_precio']
                 ];

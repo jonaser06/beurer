@@ -44,6 +44,8 @@
                                             <th>DNI</th>
                                             <th>Tipo de Entrega</th>
                                             <th>Rotulados</th>
+                                            <th>factura</th>
+
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -113,6 +115,15 @@
                         
                         salida = `<a href="<?= base_url('rotulado/${code}/0')?>" class="rotuladoDown" >DESCARGAR</a>
                         <a target="_blank"href="<?= base_url('rotulado/${code}/show')?>" class="rotuladoDown " style="margin: 0 10px" >Ver detalles</a>
+                        `;
+                        return  salida;
+                    } },
+                    { "data": "nombres", 'render': function(data, type, row){
+                       let salida;
+                       let code = row.codigo;
+                        
+                        salida = `<a href="<?= base_url('pdf/${code}/0')?>" class="rotuladoDown" >DESCARGAR</a>
+                        <a target="_blank"href="<?= base_url('pdf/${code}/show')?>" class="rotuladoDown " style="margin: 0 10px" >Ver detalles</a>
                         `;
                         return  salida;
                     } },
