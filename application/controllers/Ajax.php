@@ -1580,7 +1580,7 @@ class Ajax extends MY_Controller
                      ->set_output(json_encode($resp));
                  return;
              }
-            $this->testOrder($data['order_id']); 
+            // $this->testOrder($data['order_id']); 
             //  test orden 
 
             // 
@@ -1649,7 +1649,7 @@ class Ajax extends MY_Controller
                              'productos_precio'=> floatval($details['subtotal']),
                              'pedido_fecha'=> date('y-m-d'),
                              'pedido_estado'=> 1 ,
-                             'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
+                             'recojo'=> $details['d_envio'] == 'recoger en tienda' ? 1 : 0
                         
                 ];
                 if(isset($details['destinatario'])) {
@@ -1756,7 +1756,7 @@ class Ajax extends MY_Controller
                      'productos_precio'=> floatval($details['subtotal']),
                      'pedido_fecha'=> date('y-m-d'),
                      'pedido_estado'=> 1 ,
-                     'recojo'=> $this->input->post('d_envio') == 'recoger en tienda' ? 1 : 0
+                     'recojo'=> $details['d_envio'] == 'recoger en tienda' ? 1 : 0
                 
         ];
         if(isset($details['destinatario'])) {
