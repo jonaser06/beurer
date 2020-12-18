@@ -117,12 +117,12 @@
 
                         <button
                             class="trans-info name-product <?= $color; ?> font-nexaregular"><?= $pagina['pagina']; ?></button>
-                        <h2 class="px-0 col-xs-12 title-detail-product font-nexaheavy"><?= $product['titulo']; ?></h2>
+                        <h2 class="px-0 col-xs-12 title-detail-product font-nexaheavy" style="font-size: 1.6rem;"><?= $product['titulo']; ?></h2>
                         <span class="px-0 col-xs-12 subtitle-detail-product font-nexaregular"
                             style="border-bottom:2px solid lightgray;margin-bottom:15px;padding-bottom:15px;"><?= $product['subtitulo']; ?></span>
 
 
-
+                        <?php if( floatval($product['precio_anterior']) != floatval($product['precio'])) {?>    
                         <div style="display:block;"> <img
                                 style="display:inline-block;width:10vh;height:8vh;margin-right:3%;padding-bottom:4%;"
                                 src="<?= base_url(); ?>assets/images/precio-online.png">
@@ -130,10 +130,10 @@
                                 style="display:inline-block;color:#c51152;font-weight:bold; font-size: 2.3em;font-family:'nexaregularuploaded_file';">
                                 S/ <?= $product['precio']; ?></div>
                         </div>
-
+                        <?php }?>
                         <div class="font-nexaheav"
                             style="text-align:left;font-size:1.1em;font-weight:bold;font-family:'nexa-lightuploaded_file';margin-top:-0.5rem;">
-                            Normal: S/ <?= $product['precio_anterior']; ?></div>
+                            Precio Normal: S/ <?= $product['precio_anterior']; ?></div>
                         <br>
                         <span class="px-0 col-xs-12  font-nexaregular"
                             style="font-size:1.2em; font-family:'nexaheavyuploaded_file';padding-bottom:11px; ">
