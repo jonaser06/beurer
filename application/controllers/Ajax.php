@@ -1272,7 +1272,7 @@ class Ajax extends MY_Controller
 
                 $enviar = $this->sendmail($pedido['correo'], $newdata, 'PEDIDO CONFIRMADO', 'order_confirm.php');
                 #copia a beurer
-                $enviar = $this->sendmail('ventas@beurer.pe', $newdata, 'TIENES UN NUEVO PEDIDO', 'new_order.php');
+                $enviar = $this->sendmail('ventas1@beurer.pe', $newdata, 'TIENES UN NUEVO PEDIDO', 'new_order.php');
 
                 return;
                 
