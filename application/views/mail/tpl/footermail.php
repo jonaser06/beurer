@@ -35,7 +35,7 @@
                                     <tr>
                                         <td>
                                             <a href="# " target="_blank ">
-                                                <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="facebook " width="25 " style="margin :10px 0 ">
+                                                <img src="<?php echo base_url('assets/images/icons/mensajero.png'); ?>" alt="facebook " width="25" style="margin :10px 0 ">
                                             </a>
                                         </td>
                                     </tr>
@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <a href="# " target="_blank ">
-                                                <img src="<?php echo base_url('assets/images/icons/email.png'); ?>" width="30 " style="margin :10px 0 ">
+                                                <img src="<?php echo base_url('assets/images/icons/email.png'); ?>" width="30" style="margin :10px 0 ">
                                             </a>
                                         </td>
                                     </tr>

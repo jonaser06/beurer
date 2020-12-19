@@ -398,6 +398,7 @@ ObjMain = {
         let id = event.path[3].getAttribute('data-id');
         event.path[3].remove();
         document.querySelector('.ibr-' + id).remove();
+        document.querySelectorAll('.ind-resumen').forEach((indice, index) => indice.textContent = index + 1);
         /* eliminar de localstorage */
         let productos = localStorage.getItem('productos');
         if (productos) {
