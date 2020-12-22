@@ -80,7 +80,8 @@ class Pedidos extends MY_Controller {
                 $query['estado_mensaje'] = $estado_message;
                 $enviar = $this->sendmail($query['correo'], $query , 'PEDIDO ACTUALIZADO', 'estate_order.php' );
                 #copia a beurer
-                $enviar = $this->sendmail('ventas1@beurer.pe', $query, 'PEDIDO ACTUALIZADO', 'estate_order.php');
+                $this->sendmail('ventas1@beurer.pe', $query, 'PEDIDO ACTUALIZADO', 'estate_order.php');
+                $this->sendmail('ventas@beurer.pe', $query, 'PEDIDO ACTUALIZADO', 'estate_order.php');
 
             }else {
                 $mensaje = [
