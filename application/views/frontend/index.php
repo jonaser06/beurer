@@ -155,7 +155,7 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-    <main class="main-home" id="fullpage">
+    <main class="main-home" id="fullpage" style="background-color: #fff;">
         <div class="popup-ini" id="login">
           <div class="popup-inner">
            <img id="img-popup" src="<?php echo base_url($confif['popup']); ?>" class="img-responsive" alt="">

@@ -15,7 +15,7 @@
         return ucfirst(strtolower($html_set)).' '.strtoupper(end($select));
     }
 ?>
-<main class="main-detail-products">
+<main class="main-detail-products" style="background-color: #fff;">
     <section class="sct-detail-products">
         <div class="container cont-detail-products">
             <?php if ($product['active'] == 1): ?>
@@ -100,7 +100,7 @@
                                     case 'BIENESTAR':
                                             $color ='bg-primary';
                                         break;
-                                    case 'BELLEZA ':
+                                    case 'BELLEZA':
                                             $color ='bg-primary';
                                         break;
                                     case 'ACTIVIDAD':
@@ -117,7 +117,7 @@
 
                         <button
                             class="trans-info name-product <?= $color; ?> font-nexaregular"><?= $pagina['pagina']; ?></button>
-                        <h2 class="px-0 col-xs-12 title-detail-product font-nexaheavy" style="font-size: 1.6rem;"><?= $product['titulo']; ?></h2>
+                        <h2 class="px-0 col-xs-12 title-detail-product font-nexaheavy" style="font-size: 1.3rem;"><?= $product['titulo']; ?></h2>
                         <span class="px-0 col-xs-12 subtitle-detail-product font-nexaregular"
                             style="border-bottom:2px solid lightgray;margin-bottom:15px;padding-bottom:15px;"><?= $product['subtitulo']; ?></span>
 

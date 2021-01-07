@@ -115,7 +115,6 @@ $route['linea-bebe/(:any)/(:any)'] = 'frontend/productos/show/$2';
 
 // $route['(:any)/(:any)/(:any)'] = 'categorias/innerproducto/$3';
 
-
 $route['carrito'] = 'frontend/carrito/index/';
 $route['enviopago'] = 'frontend/enviopago/index/';
 $route['reclamos'] = 'frontend/reclamos/index/';

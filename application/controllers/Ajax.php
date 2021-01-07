@@ -1836,15 +1836,38 @@ class Ajax extends MY_Controller
          ];
         $input = json_decode(file_get_contents('php://input'), true);
         $input_json = file_get_contents("php://input");
+        $this->output
+        ->set_content_type('application/json')
+        ->set_status_header(200)
+        ->set_output(json_encode($resp));
+    }
+    public function send() {
+        $this->sendmail('renzo.edward@hotmail.com',[], 'this is a test', 'test.php');
+        $this->output
+        ->set_content_type('application/json')
+        ->set_status_header(200)
+        ->set_output(json_encode(['this is correct email send']));
+    }
+    private function mail($to, $data, $subject, $template){
+        $config = [
+            'protocol'  => 'smtp', 
+            'smtp_host' => 'ssl://smtp.zoho.com', 
+            'smtp_port' =>  465, 
+            'smtp_user' => MAIL_USER,
+            'smtp_pass' => MAIL_PASS, 
+            'mailtype'  => 'html', 
+            'charset'   => 'utf-8'
+        ];
+        $message = $this->load->view('mail/'.$template, $data,  TRUE);
 
+        $this->load->library('email',$config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('bboyborn78@gmail.com', 'test'); // change it to yours
+        $this->email->to($to);// change it to yours
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+          
+    }
 
-           
-
-            
-            
-            $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($resp));
-          }
  } 
