@@ -171,6 +171,7 @@ if ( ! empty($_FILES) || isset($_POST['url']))
 			$memory_error = FALSE;
 			if ( $extension != 'svg' && !create_img($targetFile, $targetFileThumb, 122, 91))
 			{
+				var_dump($memory_error);
 				$memory_error = TRUE;
 			}
 			else
