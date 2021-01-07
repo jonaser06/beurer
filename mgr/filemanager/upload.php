@@ -235,12 +235,12 @@ if ( ! empty($_FILES) || isset($_POST['url']))
 			}
 
 			// not enough memory
-			// if ($memory_error)
-			// {
-			// 	unlink($targetFile);
-			// 	response(trans("Not enought Memory").AddErrorLocation(), 406)->send();
-			// 	exit();
-			// }
+			if ($memory_error)
+			{
+				unlink($targetFile);
+				response(trans("Not enought Memory").AddErrorLocation(), 406)->send();
+				exit();
+			}
 		}
 
 		if($ftp){
