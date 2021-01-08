@@ -1521,3 +1521,28 @@ section2 {
         padding: 4rem !important;
     }
 }
+
+@media (max-width:480px) {
+    .crumb img {
+        height: 48px;
+    }
+    #checkout_crumb span.step_on:first-child::before,
+    #checkout_crumb span.step_off:nth-child(5):before,
+    #checkout_crumb span.step_off:nth-child(3):before,
+    #checkout_crumb span.step_off:nth-child(7):before {
+        font-size: 1rem !important;
+    }
+    .crumb {
+        font-size: .6rem!important;
+    }
+    #checkout_crumb span.step_on:before,
+    #checkout_crumb span.step_off:before {
+        width: 40px;
+        height: 40px;
+        margin: 5px auto;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

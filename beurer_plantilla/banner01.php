@@ -33,7 +33,7 @@ include 'src\includes\header.php'
 
 
 <main class="main-detail-products">
-
+  
 
     <!-- BANNER -->
     <div class="container-banner">
@@ -183,8 +183,8 @@ include 'src\includes\header.php'
 
                         <h3 class="divisor__title --small" style="font-size:22pt;">Atención al Cliente</h3>
 
-                        <div class="content-slide">
-                            <img style="width:110px" src="assets/svg/user.svg" alt="">
+                        <div class="content-slide" style="padding: 1rem;">
+                            <img style="width:110px" src="assets/svg/user.svg" alt="call">
                             <div class="slider">
                                 <p>Te acesoramos en tu compra</p>
                                 <article class="phones">
@@ -251,11 +251,129 @@ include 'src\includes\header.php'
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
+    <section class="container-banner">
+        <ul class="banners">
+            <li class="wrapper-slide">
+                
+                <h3 style="font-size:22pt;">Atención al Cliente</h3>
 
+                <div class="content-slide" style="padding:1rem">
+                    <img style="height:100px" src="assets/svg/user.svg" alt="call">
+                    <div class="slider">
+                        <p>Te asesoramos en tu compra</p>
+                        <article class="phones">
+                            <img style="width:45px" src="assets/svg/recurso.svg" alt="">
+                            <div class="phones-numbers">
+                                <span>920 198 522</span>
+                                <span>978 440 034</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </li>
+            <li class="wrapper-slide" >
+                <h3 style="font-size:22pt;">Medios de pago</h3>
+
+                <div class="content-slide cards-container">
+                    <div class="cards">
+                        <img src="assets/svg/visa@3x.png"     alt="visa">
+                        <img src="assets/svg/master@3x.png"   alt="master">
+                        <img src="assets/svg/expres@3x.png"   alt="expres">
+                        <img src="assets/svg/club@3x.png"     alt="club">
+                        <img src="assets/svg/efectivo@3x.png" alt="efectivo">
+                        <img src="assets/svg/shop.svg"        alt="logo-shop">
+                    </div>
+                    <p class="desc"> Aceptamos todos los  medios de pago y/o transferencias</p>
+                </div>    
+            </li>
+            <li class="wrapper-slide">
+
+                    <h3 style="font-size:22pt;">Pedido</h3>
+
+                    <div class="content-slide">
+                        <figure  style="display: flex;flex-direction:column; align-items:center;justify-content:flex-start">
+                            <img style="margin-bottom:10px" src="assets/svg/send.svg" alt="">
+                            <span style="margin-bottom:10px">! Envíos a todo el Perú !</span>
+                        </figure>
+
+                        <figure style="display: flex;flex-direction:column; align-items:center;justify-content:flex-start">
+                            <img  style="margin-bottom:10px !important" src="assets/svg/car.svg" alt="">
+                            <p class="desc">Retiro gratis en nuestra tienda</p>
+                        </figure>
+                    </div>
+            </li>
+        </ul>
+    </section>
 
 
 </main>
+<style>
+    .wrapper-slide h3 {
+        margin-bottom : 1.2rem
+    }
+.phones-numbers {
+    display: flex;
+    flex-direction: column;
+}
+.container-banner {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+.banners {
+    background-color: #fff;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto ;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.banners > * {
+    font-size:1.2rem;
+    padding: 2rem!important;
+    position: relative;
+    flex:  0 0 calc(100% );
+    text-align:center;
+}
+.desc {
+    padding:  0 1rem;
+}
 
+@media (min-width: 768px) {
+    .banners {
+    background-color: transparent;
+    }
+    .banners > *  {
+       font-size:1rem;
+       padding: 0rem!important;
+       flex: 0 0 calc(33%) !important
+    }
+    .banners > li:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 30%;
+    width: 2px;
+    background-color: #c51152;
+    height: 70%;
+    }
+    .banners > li:nth-child(2)::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 30%;
+        width: 2px;
+        background-color: #c51152;
+        height: 70%;
+    }
+    .content-slide {
+    flex-direction: row !important;
+}
+ }
+</style>
 
 
 <!-- MODALES -->
@@ -318,7 +436,9 @@ let swiper = new Swiper('.swiper-container', {
     display: flex;
     justify-content: space-evenly;
 }
-
+.content-slide {
+    flex-direction: column;
+}
 .content-slide figure {
     font-size: 1rem;
     align-items: center;
@@ -328,6 +448,7 @@ let swiper = new Swiper('.swiper-container', {
 }
 
 .content-slide figure img {
+    
     height: 85px;
 }
 
@@ -367,10 +488,11 @@ let swiper = new Swiper('.swiper-container', {
 
 .container-banner .content-slide figure {
     margin-top: 1rem;
-    font-size: .95rem;
+    /* font-size: .95rem; */
 }
 
-.container-banner> div >div:nth-child(2)::before{
+.container-banner> div >div:nth-child(2)::before
+{
     content: '';
     position: absolute;
     left: 0;
@@ -380,7 +502,8 @@ let swiper = new Swiper('.swiper-container', {
     height: 60%;
     /* border: 1px solid red; */
 }
-.container-banner> div >div:nth-child(2)::after{
+.container-banner> div >div:nth-child(2)::after
+{
     content: '';
     position: absolute;
     right: 0;
@@ -391,11 +514,12 @@ let swiper = new Swiper('.swiper-container', {
     /* border: 1px solid red; */
 }
 
-@media only screen and(max-width:480px) {
+/* @media only screen and(max-width:480px) {
     .wrapper-slide {
         padding: 4rem !important;
     }
-}
+} */
+
 </style>
 <?php
 

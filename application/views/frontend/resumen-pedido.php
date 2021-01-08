@@ -3,6 +3,22 @@ include 'src/includes/header.php'
 ?>
 
 <style>
+.header-resume {
+    height:100%;
+    background-image:url('assets/images/fondo1.png');
+    background-color:#fff;
+    border-radius:25px; 
+    width:85%;
+    text-align:left;
+    margin:auto;
+    padding:2.5%;
+    margin-bottom:2%;
+}
+@media (max-width: 480px) {
+    .header-resume {
+        width: 90%;
+    }
+}
 @media (max-width: 700px) {
     .quantity {
         width: 40% !important;
@@ -84,12 +100,11 @@ include 'src/includes/header.php'
 
     <br>
     <div class="container2 gracias-compra" style="width:80%;">
-        <div
-            style="height:100%;background-image:url('assets/images/fondo1.png');background-color:white;border-radius:25px; width:85%;text-align:left;margin:auto;padding:2.5%;margin-bottom:2%;">
+        <div class="header-resume">
             <span class="font-nexaheavy title-resume" style="font-size:2rem;color:#c51152;"> ¡Gracias por su compra! </span>
             <p style="font-size:1.2rem;color:#c51152;"> El equipo de beurer.pe </p>
             <hr style="border-color:#c51152;">
-            <p class="font-nexaheavy message-resume" style="font-size:1.2rem;color:black;">
+            <p class="font-nexaheavy message-resume" style="font-size:1rem;color:black;">
                 Recibirás una confirmación a través de su
                 correo electrónico con el resumen del pedido.
             </p>
@@ -136,7 +151,7 @@ include 'src/includes/header.php'
                 style="text-align:left; margin:auto; width:85%;background-color:white;border-radius:20px;">
                 <div class="col-md-12" style="background-color:white; border-radius:25px;padding:2.5% 3.5%;">
                     <div class="titulo"
-                        style="height:100%;margin-left:0%;font-weight:normal !important;font-size:1.7rem;border-left:5px solid #c51152; padding-left:1%;font-family: 'nexaheavyuploaded_file';">
+                        style="height:100%;margin-left:0%;font-weight:normal !important;font-size:1.2rem;border-left:5px solid #c51152; padding-left:1%;font-family: 'nexaheavyuploaded_file';">
                         INFORMACIÓN DE PEDIDO </div>
 
                     </br>
@@ -145,7 +160,7 @@ include 'src/includes/header.php'
                         <li style="font-weight:bold;">Comprador</li>
                         <div class="numero_documento" style="text-align:left;"></div>
                         <div class="titular" style="text-align:left;"> </div>
-                        <div class="correo" style="text-align:left;"></div>
+                        <div class="correo"  style="text-align:left;"></div>
                         <div class="destinatario">Lo puede recibir:</div>
                         <br>
 

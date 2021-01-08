@@ -335,7 +335,7 @@
                 </div>
             </div>
         </section>
-
+        <!-- BANNER E-COMERCE -->
         <section class="swiper-container"  id="slider" style="display:none;">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -480,6 +480,7 @@
                 </div>
             </div>
         </section>
+
         <section class="section fp-auto-height">
         
             <?php

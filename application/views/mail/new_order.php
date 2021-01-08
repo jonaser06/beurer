@@ -53,7 +53,7 @@
                     <table width=100%>
                         <tr>
                             <td width="50%" align="center">
-                                <img width="120px " src="<?php echo base_url($value['imagen']); ?>">
+                                <img width="120px" src="<?php echo base_url($value['imagen']); ?>">
                             </td>
                             <td width="50%">
                                 <span style="font-weight:bold;display: block; "><?php echo $value['nombre']; ?></span>
