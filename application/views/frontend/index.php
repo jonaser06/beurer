@@ -393,7 +393,7 @@
                             <div class="content-slide">
                                 <figure>
                                     <img src="assets/svg/send.svg" alt="">
-                                    <p>!Envios a todo el Perú</p>
+                                    <p>!Envíos a todo el Perú !</p>
                                 </figure>
 
                                 <figure>
@@ -451,7 +451,7 @@
                                 <img src="assets/svg/efectivo@3x.png" alt="efectivo">
                                 <img src="assets/svg/shop.svg" alt="">
                             </div>
-                            <p>Aceptamos todos los <br> medios de pago y/o Transferencias</p>
+                            <p>Aceptamos todos los <br> medios de pago y/o transferencias</p>
                         </div>
 
 
