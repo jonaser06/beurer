@@ -1235,6 +1235,7 @@ class Ajax extends MY_Controller
                         'subtotal' => $pedido_detalle[$i]['subtotal_precio']
                     ];
                     array_push($data ,$productoDB);
+                    
                 };
                 #sumando el total
                 $subtotal = 0.0;
