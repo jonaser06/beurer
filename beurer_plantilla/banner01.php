@@ -105,8 +105,6 @@ include 'src\includes\header.php'
         </div>
 
     </div>
-    
-
     <!-- BANNER -->
 
 
@@ -175,7 +173,7 @@ include 'src\includes\header.php'
 
 
 
-    <div class="swiper-container" id="slider" style="display:none;">
+    <div class="swiper-container" id="slider" style="">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="col-md-12" style="text-align:center;height:19vh; display: table; height:200px;">
@@ -251,9 +249,10 @@ include 'src\includes\header.php'
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
-    <section class="container-banner">
-        <ul class="banners">
-            <li class="wrapper-slide">
+    <!-- SECTION BANNER -->
+    <section class="container-banner" id="slider-content">
+        <ul class="banners swiper-wrapper">
+            <li class="wrapper-slide " >
                 
                 <h3 style="font-size:22pt;">Atención al Cliente</h3>
 
@@ -272,7 +271,7 @@ include 'src\includes\header.php'
                 </div>
 
             </li>
-            <li class="wrapper-slide" >
+            <li class="wrapper-slide " >
                 <h3 style="font-size:22pt;">Medios de pago</h3>
 
                 <div class="content-slide cards-container">
@@ -287,31 +286,59 @@ include 'src\includes\header.php'
                     <p class="desc"> Aceptamos todos los  medios de pago y/o transferencias</p>
                 </div>    
             </li>
-            <li class="wrapper-slide">
+            <li class="wrapper-slide ">
 
                     <h3 style="font-size:22pt;">Pedido</h3>
 
                     <div class="content-slide">
-                        <figure  style="display: flex;flex-direction:column; align-items:center;justify-content:flex-start">
+                        <figure  >
                             <img style="margin-bottom:10px" src="assets/svg/send.svg" alt="">
                             <span style="margin-bottom:10px">! Envíos a todo el Perú !</span>
                         </figure>
 
-                        <figure style="display: flex;flex-direction:column; align-items:center;justify-content:flex-start">
+                        <figure >
                             <img  style="margin-bottom:10px !important" src="assets/svg/car.svg" alt="">
                             <p class="desc">Retiro gratis en nuestra tienda</p>
                         </figure>
                     </div>
             </li>
+          
         </ul>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next next-button"></div>
+            <div class="swiper-button-prev prev-button"></div>
     </section>
 
+<script>
 
+
+document.addEventListener('click' , e => {
+    $banners = document.querySelectorAll('.banners');
+    if(e.target.matches('.prev-button')){
+        const $sibling = e.target.parentElement.firstElementChild;
+        const width = $sibling.offsetWidth;
+        
+        $sibling.scrollLeft -= width;  
+    }
+    if(e.target.matches('.next-button')){
+
+        const $sibling = e.target.parentElement.firstElementChild;
+        const width = $sibling.offsetWidth;
+        $sibling.scrollLeft += width;  
+      }
+})
+</script>
 </main>
 <style>
-    .wrapper-slide h3 {
-        margin-bottom : 1.2rem
-    }
+html {
+    scroll-behavior: smooth;
+}
+#slider-content {
+    position: relative;
+}
+.wrapper-slide h3 {
+    margin-bottom : 1.2rem
+}
 .phones-numbers {
     display: flex;
     flex-direction: column;
@@ -330,13 +357,15 @@ include 'src\includes\header.php'
     overflow-x: auto ;
     align-items: flex-start;
     justify-content: flex-start;
+    transition: all 1s ease-in-out;
 }
 .banners > * {
-    font-size:1.2rem;
+    font-size:1rem;
     padding: 2rem!important;
     position: relative;
     flex:  0 0 calc(100% );
     text-align:center;
+    transition: all .8s ease-in-out;
 }
 .desc {
     padding:  0 1rem;
@@ -347,7 +376,6 @@ include 'src\includes\header.php'
     background-color: transparent;
     }
     .banners > *  {
-       font-size:1rem;
        padding: 0rem!important;
        flex: 0 0 calc(33%) !important
     }
@@ -440,6 +468,10 @@ let swiper = new Swiper('.swiper-container', {
     flex-direction: column;
 }
 .content-slide figure {
+    display: flex;
+    flex-direction:column;
+     align-items:center;
+     justify-content:flex-start;
     font-size: 1rem;
     align-items: center;
     display: flex;

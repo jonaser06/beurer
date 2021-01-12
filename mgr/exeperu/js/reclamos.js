@@ -69,8 +69,9 @@ let ObjReclamos = {
                 resp = JSON.parse(resp);
                 console.log(resp);
                 if (resp.status) {
-                    resp.data.forEach((d) => {
+                    resp.data.forEach((d, index) => {
                         let estado;
+                        let num = Number(index + 1) + Number((parseInt(page) - 1) * 10)
                         if (d.pedido_estado == '1') {
                             estado = 'Orden Generada';
                         } else if (d.pedido_estado == '2') {
@@ -81,7 +82,7 @@ let ObjReclamos = {
                             estado = 'Pedido entregado';
                         }
                         reclamo += '<tr>';
-                        reclamo += '<th>' + d.id_pedido + '</th>';
+                        reclamo += '<th>' + num + '</th>';
                         reclamo += '<th>' + d.nombres + '</th>';
                         reclamo += '<th>' + d.apellidos + '</th>';
                         reclamo += '<th>' + d.pedido_fecha + '</th>';

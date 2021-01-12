@@ -76,7 +76,7 @@
                 <table width="100% " align="center " cellpadding="0 " cellspacing="0 ">
                     <tr>
 
-                        <td style="width:33% ; text-align: center; ">201727473</td>
+                        <td style="width:33% ; text-align: center; "><?php echo $pedido['codigo'] ?></td>
                         <td style="width:33% ; text-align: center; ">PIEZAS 1/1</td>
                         <td style="width:33% ; text-align: center; ">Boleta</td>
                     </tr>
@@ -128,6 +128,10 @@
                                 <tr>
                                     <td style="width:30% "><?php echo $pedido['tipo_documento']?></td>
                                     <td style="width:60% ">: <?php echo $pedido['numero_documento']?></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:30% ">Teléfono</td>
+                                    <td style="width:60% ">: <?php echo $pedido['telefono']?></td>
                                 </tr>
                                 <tr>
                                     <td style="width:30% ">Receptor Alternativo</td>

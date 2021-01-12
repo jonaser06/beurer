@@ -194,7 +194,7 @@
                                 <a href="<?= base_url('carrito') ?>"><img src="<?= base_url('assets/images/nuevo/carrito.png'); ?>" alt="" style="max-width:36px;"></a>
                             </div>
                             <div class="utl2">
-                                <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:26px;"></a>
+                                <a onclick="ObjMain.login()"><img src="<?= base_url('assets/images/nuevo/login.png'); ?>" alt="" style="max-width:26px;cursor:pointer"></a>
                             </div>
                             <div class="utl3">    
                                 <a href="<?= base_url('estado-pedido')?>"><img src="<?= base_url('assets/images/nuevo/delivery.png'); ?>" alt="" style="max-width:48px;"></a>
@@ -376,7 +376,7 @@
                                 foreach ($menu['menu_list'] as $row) {
                         ?>
                         <li class="item-nav d-menu d-menu<?= $num; ?> text-uppercase font-nexabold ">
-                            <a href="<?= base_url('salud'); ?>" class="link-nav"><span
+                            <a href="<?= base_url($link[$num]); ?>" class="link-nav"><span
                                     class="icon-nav <?= $icon[$num]; ?>"></span><?= $row['cat']; ?></a>
                             <ul class="submenu- ">
                                 <li>

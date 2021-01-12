@@ -344,8 +344,8 @@
 
                             <h3 class="divisor__title --small" style="font-size:22pt;">Atención al Cliente</h3>
 
-                            <div class="content-slide">
-                                <img style="width:110px" src="assets/svg/user.svg" alt="">
+                            <div class="content-slide" style="flex-direction:column">
+                                <img style="width:100px;margin:auto" src="assets/svg/user.svg" alt="">
                                 <div class="slider">
                                     <p>Te acesoramos en tu compra</p>
                                     <article class="phones">
@@ -368,7 +368,7 @@
 
                             <h3 class="divisor__title --small" style="font-size:22pt;">Medios de pago</h3>
 
-                            <div class="content-slide cards-container">
+                            <div class="content-slide cards-container" style="flex-direction:column"> 
                                 <div class="cards">
                                     <img src="assets/svg/visa@3x.png" alt="visa">
                                     <img src="assets/svg/master@3x.png" alt="master">
@@ -390,15 +390,15 @@
 
                             <h3 class="divisor__title --small" style="font-size:22pt;">Pedido</h3>
 
-                            <div class="content-slide">
-                                <figure>
-                                    <img src="assets/svg/send.svg" alt="">
-                                    <p>!Envíos a todo el Perú !</p>
+                            <div class="content-slide" style="flex-direction:column;">
+                                <figure style="display: flex; flex-direction:column ;align-items:center">
+                                    <img style="height:60px"src="assets/svg/send.svg" alt="">
+                                    <p style="font-size:1rem">!Envíos a todo el Perú !</p>
                                 </figure>
-
-                                <figure>
-                                    <img width="80" src="assets/svg/car.svg" alt="">
-                                    <p>Retiro gratis en<br> nuestra tienda</p>
+                                <br>
+                                <figure style="display: flex; flex-direction:column ;align-items:center">
+                                    <img style="height:60px" src="assets/svg/car.svg" alt="">
+                                    <p style="font-size:1rem">Retiro gratis en<br> nuestra tienda</p>
                                 </figure>
 
                             </div>
@@ -461,17 +461,18 @@
                     <div width="100%" class="wrapper-slide beneficios-txt">
 
                         <h3 class="divisor__title --small" style="font-size:20pt;">Pedido</h3>
+                       
+                        <div class="content-slide" >
+                               <figure style="display: flex; flex-direction:column ;align-items:center">
+                                    <img src="assets/svg/send.svg" alt="">
+                                    <p >!Envíos a todo el Perú !</p>
+                                </figure>
+                                <br>
+                                <figure style="display: flex; flex-direction:column ;align-items:center">
+                                    <img src="assets/svg/car.svg" alt="">
+                                    <p >Retiro gratis en<br> nuestra tienda</p>
+                                </figure>
 
-                        <div class="content-slide">
-                            <figure>
-                                <img src="assets/svg/send.svg" alt="">
-                                <span>!Envios a todo el Perú</span>
-                            </figure>
-
-                            <figure>
-                                <img width="60" src="assets/svg/car.svg" alt="">
-                                <p>Retiro gratis en<br> nuestra tienda</p>
-                            </figure>
 
                         </div>
 
