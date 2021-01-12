@@ -57,7 +57,7 @@
                             </td>
                             <td width="50%">
                                 <span style="font-weight:bold;display: block; "><?php echo $value['nombre']; ?></span>
-                                <span style="display: block; ">sku: </span>
+                                <span style="display: block; ">sku: <?php echo $value['producto_sku']; ?> </span>
                                 <span style="display: block; ">cantidad: <?php echo $value['cantidad']; ?></span>
                                 <span style="display: block; ">precio : S/. <?php echo $value['precio_online']; ?></span>
 
