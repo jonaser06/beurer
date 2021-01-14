@@ -164,6 +164,13 @@ class Ajax extends MY_Controller
         
         $salida .= '<tr>';
         $salida .= '<td>Código de Compra</td>';
+        $salida .= '<td>Nombres</td>';
+        $salida .= '<td>Telefono</td>';
+        $salida .= '<td>Correo</td>';
+        $salida .= '<td>Tipo documento</td>';
+        $salida .= '<td>N° documento</td>';
+        $salida .= '<td>Distrito</td>';
+        $salida .= '<td>Direccion</td>';
         $salida .= '<td>Cantidad Productos</td>';
         $salida .= '<td>Precio de envio</td>';
         $salida .= '<td>Precio por Productos</td>';
@@ -246,6 +253,13 @@ class Ajax extends MY_Controller
                 // $salida .= '</tr>'; 
                 $salida .= '<tr>';
                 $salida .= '<td>'.$value['codigo'].'</td>';
+                $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
+                $salida .= '<td>'.$value['telefono'].'</td>';
+                $salida .= '<td>'.$value['correo'].'</td>';
+                $salida .= '<td>'.$value['tipo_documento'].'</td>';
+                $salida .= '<td>'.$value['numero_documento'].'</td>';
+                $salida .= '<td>'.$value['distrito'].'</td>';
+                $salida .= '<td>'.$value['dir_envio'].'</td>';
                 $salida .= '<td>'.$value['cantidad'].'</td>';
                 $salida .= '<td>'.$value['entrega_precio'].'</td>';
                 $salida .= '<td>'.$value['productos_precio'].'</td>';
@@ -305,6 +319,13 @@ class Ajax extends MY_Controller
 
             $salida .= '<tr>';
             $salida .= '<td>'.$value['codigo'].'</td>';
+            $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
+            $salida .= '<td>'.$value['telefono'].'</td>';
+            $salida .= '<td>'.$value['correo'].'</td>';
+            $salida .= '<td>'.$value['tipo_documento'].'</td>';
+            $salida .= '<td>'.$value['numero_documento'].'</td>';
+            $salida .= '<td>'.$value['distrito'].'</td>';
+            $salida .= '<td>'.$value['dir_envio'].'</td>';
             $salida .= '<td>'.$value['cantidad'].'</td>';
             $salida .= '<td>'.$value['entrega_precio'].'</td>';
             $salida .= '<td>'.$value['productos_precio'].'</td>';
