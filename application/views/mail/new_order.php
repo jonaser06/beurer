@@ -133,7 +133,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding:5px 16px; ">
-                                        <b><?php echo $orders['tipo_doc']; ?>: </b>
+                                        <b><?php echo $orders['tipo_doc']; ?> </b>
                                         <span> <?php echo $orders['number_doc']; ?> </span>
                                     </td>
                                 </tr>
