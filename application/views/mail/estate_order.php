@@ -11,7 +11,7 @@
     <h1>Hola!<?php echo ' '.$nombres ?> </h1>
     <br>
     Su pedido con código :<b><?php echo ' '.strtoupper($codigo)?></b> </p> 
-    <p>a cambiado de estado a : <?php echo ' '.$estado_mensaje; ?></p>
+    <p>ha cambiado de estado a : <?php echo ' '.$estado_mensaje; ?></p>
     
 </body>
 </html>
