@@ -138,9 +138,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:5px 16px; ">
+                                    <td style="padding:5px 16px;">
                                         <b>Fecha de compra: </b>
                                         <span> <?php echo $orders['pedido_fecha']; ?> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:5px 16px;">
+                                        <b>Tipo de Pago: </b>
+                                        <span><?php echo preg_match("/^P/", $orders['cod_pedido']) ? 'Pago Efectivo ': 'Pago con Tarjeta'; ?></span>
                                     </td>
                                 </tr>
                             </table>
