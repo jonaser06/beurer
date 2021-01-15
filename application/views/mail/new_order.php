@@ -113,6 +113,36 @@
                                         <span> <?php echo $orders['direccion']; ?> </span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td style="padding:5px 16px; ">
+                                        <b>Comprador: </b>
+                                        <span> <?php echo $orders['comprador']; ?> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:5px 16px; ">
+                                        <b>Correo: </b>
+                                        <span> <?php echo $orders['correo']; ?> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:5px 16px; ">
+                                        <b>Teléfono: </b>
+                                        <span> <?php echo $orders['telefono']; ?> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:5px 16px; ">
+                                        <b><?php echo $orders['tipo_doc']; ?>: </b>
+                                        <span> <?php echo $orders['number_doc']; ?> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:5px 16px; ">
+                                        <b>Fecha de compra: </b>
+                                        <span> <?php echo $orders['pedido_fecha']; ?> </span>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>

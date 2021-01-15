@@ -395,8 +395,12 @@ ObjMain = {
     },
     delete: (event) => {
         event.preventDefault();
-        let id = event.path[3].getAttribute('data-id');
-        event.path[3].remove();
+        // let id = event.path[3].getAttribute('data-id');
+        // event.path[3].remove();
+        $nodeParent = event.target.parentElement.parentElement.parentElement;
+        let id = $nodeParent.getAttribute('data-id');
+        $nodeParent.remove();
+
         document.querySelector('.ibr-' + id).remove();
         document.querySelectorAll('.ind-resumen').forEach((indice, index) => indice.textContent = index + 1);
         /* eliminar de localstorage */
@@ -441,18 +445,21 @@ ObjMain = {
             document.querySelector('.cant-' + id).value = ncantidad;
             document.querySelector('.sub-' + id).innerHTML = subtotal;
             document.querySelector('#res-' + id).innerHTML = subtotal;
+
             /* update productos */
             let productos = localStorage.getItem('productos');
             if (productos) {
                 productos = JSON.parse(productos);
                 for (let i = 0; i < productos.length; i++) {
-                    if (productos[i].cantidad == cantidad) {
+                    if (productos[i].id == id) {
                         productos[i].cantidad = ncantidad;
                         break;
                     }
                 }
             }
             localStorage.setItem('productos', JSON.stringify(productos));
+
+
             /* recalcular */
             let item = localStorage.getItem('productos');
             item = JSON.parse(item);

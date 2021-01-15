@@ -192,7 +192,7 @@ class Ajax extends MY_Controller
                 'p.pedido_fecha <='=> $end
             ];
 
-            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado,p.recojo, pr.titulo');
             $this->db->from('pedido_detalle as pd');
             $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
             $this->db->join('productos as pr', 'pr.id = pd.id_producto');
@@ -215,19 +215,19 @@ class Ajax extends MY_Controller
                 }
 
                 #entrega de pedido
-                if($value['codigo']==0){
+                if((int)$value['recojo']==0){
                     #envios 4 dias mas
-                    $entrega = 'Recojo en tienda';
+                    $entrega = 'Despacho a domicilio';
                     $fecdess= $value['pedido_fecha'];
                     $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
                     $mFecha->add(new DateInterval('P4D'));
                     $newfecha = $mFecha->format('Y-m-d');
                 }else{
                     #recojo 2 dias mas
-                    $entrega = 'Despacho a domicilio';
+                    $entrega = 'Recojo en tienda';
                     $fecdess= $value['pedido_fecha'];
                     $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
-                    $mFecha->add(new DateInterval('P4D'));
+                    $mFecha->add(new DateInterval('P2D'));
                     $newfecha = $mFecha->format('Y-m-d');
                 }
                 $total = floatval($value['productos_precio']) - floatval($value['cupon_descuento']) + floatval($value['entrega_precio']);
@@ -282,7 +282,7 @@ class Ajax extends MY_Controller
 
         }
 
-        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
+        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo,pr.titulo');
         $this->db->from('pedido_detalle as pd');
         $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
         $this->db->join('productos as pr', 'pr.id = pd.id_producto');
@@ -300,19 +300,19 @@ class Ajax extends MY_Controller
                 $estado = 'Pedido entregado';
             }
 
-            if($value['codigo']==0){
+            if((int)$value['recojo']==0){
                 #envios 4 dias mas
-                $entrega = 'Recojo en tienda';
+                $entrega = 'Despacho a domicilio';
                 $fecdess= $value['pedido_fecha'];
                 $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
                 $mFecha->add(new DateInterval('P4D'));
                 $newfecha = $mFecha->format('Y-m-d');
             }else{
                 #recojo 2 dias mas
-                $entrega = 'Despacho a domicilio';
+                $entrega = 'Recojo en tienda';
                 $fecdess= $value['pedido_fecha'];
                 $mFecha = DateTime::createFromFormat('Y-m-d', $fecdess);
-                $mFecha->add(new DateInterval('P4D'));
+                $mFecha->add(new DateInterval('P2D'));
                 $newfecha = $mFecha->format('Y-m-d');
             }
             $total = floatval($value['productos_precio']) - floatval($value['cupon_descuento']) + floatval($value['entrega_precio']);
@@ -1268,6 +1268,12 @@ class Ajax extends MY_Controller
                 #listando productos para enviar al correo
                 $newdata['orders'] = [
                     'cod_pedido' => $pedido['codigo'],
+                    'comprador' => $pedido['nombres'].' '.$pedido['apellidos'],
+                    'correo' => $pedido['correo'],
+                    'telefono' => $pedido['telefono'],
+                    'tipo_doc' => $pedido['tipo_documento'],
+                    'number_doc' => $pedido['numero_documento'],
+                    'pedido_fecha' => $pedido['pedido_fecha'],
                     'recojo' => ($pedido['recojo']==1)?'Recojo en tienda':'Despacho a domicilio',
                     'direccion' => $pedido['dir_envio'].', '.$pedido['distrito']. ', LIMA',
                     'subtotal' => number_format($subtotal, 2, '.', ''),
