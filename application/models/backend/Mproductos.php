@@ -921,5 +921,16 @@ class Mproductos extends CI_Model {
 
     }
 
+ 
+    
+    public function getImgsDestacado(int $id) 
+    {
+        $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+        $this->db->select('*');
+        $this->db->where('imagenes.producto_id', $id);
+        $this->db->group_by('imagenes.id');
+        $query = $this->db->get('imagenes');
+        return $query->result_array();
+    }
 }
 

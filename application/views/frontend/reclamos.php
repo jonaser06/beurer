@@ -88,22 +88,67 @@
                                         <div class="divTableCell" style="width:32%;">
                                             <div class="etiquetaFormulario">Departamento: <div class="d_ob">*</div>
                                             </div>
-                                            <select id="s_depa" onchange="ObjMain.showProvincesList(this);">
-                                                <option disabled selected>Seleccione departamento</option>
+                                            <select disabled id="s_depa">
+                                                <option data-name="Lima" disabled selected>Lima</option>
                                             </select>
                                         </div>
 
                                         <div class="divTableCell" style="width:32%;">
                                             <div class="etiquetaFormulario">Provincia: <div class="d_ob">*</div>
                                             </div>
-                                            <select id="sprov" onchange="ObjMain.showDistrictsList(this);">
-                                                <option disabled selected>Seleccione provincia</option>
+                                            <select selected id="sprov">
+                                                <option data-name="Lima" disabled selected>Lima</option>
                                             </select>
                                         </div>
                                         <div class="divTableCell" style="width:32%;">
                                             <div class="etiquetaFormulario">Distrito: <div class="d_ob">*</div>
                                             </div>
-                                            <select id="sdist"></select>
+                                            <select id="sdist">
+                                                <option disabled selected="selected">SELECCIONE DISTRITO</option>   
+                                                <option id="dist-01" value="01" data-name="Lima">Lima</option>   
+                                                <option id="dist-02" value="02" data-name="Ancón">Ancón</option>
+                                                <option id="dist-03" value="03" data-name="Ate">Ate</option>
+                                                <option id="dist-04" value="04" data-name="Barranco">Barranco</option>
+                                                <option id="dist-05" value="05" data-name="Breña">Breña</option>
+                                                <option id="dist-06" value="06" data-name="Carabayllo">Carabayllo</option>
+                                                <option id="dist-07" value="07" data-name="Chaclacayo">Chaclacayo</option>
+                                                <option id="dist-08" value="08" data-name="Chorrillos">Chorrillos</option>
+                                                <option id="dist-09" value="09" data-name="Cieneguilla">Cieneguilla</option>
+                                                <option id="dist-10" value="10" data-name="Comas">Comas</option>
+                                                <option id="dist-11" value="11" data-name="El Agustino">El Agustino</option>
+                                                <option id="dist-12" value="12" data-name="Independencia">Independencia</option>
+                                                <option id="dist-13" value="13" data-name="Jesús María">Jesús María</option>
+                                                <option id="dist-14" value="14" data-name="La Molina">La Molina</option>
+                                                <option id="dist-15" value="15" data-name="La Victoria">La Victoria</option>
+                                                <option id="dist-16" value="16" data-name="Lince">Lince</option>
+                                                <option id="dist-17" value="17" data-name="Los Olivos">Los Olivos</option>
+                                                <option id="dist-18" value="18" data-name="Lurigancho">Lurigancho</option>
+                                                <option id="dist-19" value="19" data-name="Lurin">Lurin</option>
+                                                <option id="dist-20" value="20" data-name="Magdalena del Mar">Magdalena del Mar</option>
+                                                <option id="dist-21" value="21" data-name="Pueblo Libre">Pueblo Libre</option>
+                                                <option id="dist-22" value="22" data-name="Miraflores">Miraflores</option>
+                                                <option id="dist-23" value="23" data-name="Pachacamac">Pachacamac</option>
+                                                <option id="dist-24" value="24" data-name="Pucusana">Pucusana</option>
+                                                <option id="dist-25" value="25" data-name="Puente Piedra">Puente Piedra</option>
+                                                <option id="dist-26" value="26" data-name="Punta Hermosa">Punta Hermosa</option>
+                                                <option id="dist-27" value="27" data-name="Punta Negra">Punta Negra</option>
+                                                <option id="dist-28" value="28" data-name="Rímac">Rímac</option>
+                                                <option id="dist-29" value="29" data-name="San Bartolo">San Bartolo</option>
+                                                <option id="dist-30" value="30" data-name="San Borja">San Borja</option>
+                                                <option id="dist-31" value="31" data-name="San Isidro">San Isidro</option>
+                                                <option id="dist-32" value="32" data-name="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                                                <option id="dist-33" value="33" data-name="San Juan de Miraflores">San Juan de Miraflores</option>
+                                                <option id="dist-34" value="34" data-name="San Luis">San Luis</option>
+                                                <option id="dist-35" value="35" data-name="San Martín de Porres">San Martín de Porres</option>
+                                                <option id="dist-36" value="36" data-name="San Miguel">San Miguel</option>
+                                                <option id="dist-37" value="37" data-name="Santa Anita">Santa Anita</option>
+                                                <option id="dist-38" value="38" data-name="Santa María del Mar">Santa María del Mar</option>
+                                                <option id="dist-39" value="39" data-name="Santa Rosa">Santa Rosa</option>
+                                                <option id="dist-40" value="40" data-name="Santiago de Surco">Santiago de Surco</option>
+                                                <option id="dist-41" value="41" data-name="Surquillo">Surquillo</option>
+                                                <option id="dist-42" value="42" data-name="Villa El Salvador">Villa El Salvador</option>
+                                                <option id="dist-43" value="43" data-name="Villa María del Triunfo">Villa María del Triunfo</option>
+                                           </select>
                                         </div>
                                     </div>
 

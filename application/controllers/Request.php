@@ -94,7 +94,10 @@ class Request extends CI_Controller {
 		
 		if($pagina['idpagina'] == 1){
 			foreach ($data['contenido']['destacado'] as $row) {
-			$data['dstcd'][] = $this->mproductos->getOneProductos($row['producto']);
+			// $data['dstcd'][] = $this->mproductos->getOneProductos($row['producto']);
+			$prod_destacado = $this->mproductos->getOneProductos($row['producto']);
+			$prod_destacado['imagen'] = $this->mproductos->getImgsDestacado((int)$prod_destacado['id']);
+			$data['dstcd'][] =  $prod_destacado;
 			}
 
 			foreach ($data['contenido']['slideshow'] as $row) {

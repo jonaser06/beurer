@@ -277,15 +277,14 @@
             </div>
         </section>
         <!-- CARROSUEL PRODUCTOS DESTACADOS -->
+       
         <section class="section sct-two-home">
-            <h2 class="ttl-prd-dst text-center font-nexaheavy">PRODUCTOS DESTACADOS</h2>
+            <h2 class="ttl-prd-dst text-center font-nexaheavy ">PRODUCTOS DESTACADOS</h2>
             <div class="container">
-                <div class="row">
-                    
-                        
-                    <div class="carousel-home-general">
+                <div class="row" >       
+                    <div class="carousel-home-general" >
                         <?php foreach ($dstcd as $row): ?>
-                        <?php if ($row['active'] == 1): ?>
+                        <?php if (isset($row['active']) && $row['active'] == 1): ?>
                             <div class="item-carosuel">
                                 <div class="container">
                                     <div class="info-slider-home">
@@ -295,10 +294,14 @@
                                         <p class="trans-info description-slider font-nexaregular"><?= $row['contenido'] ?></p>
                                         <a href="<?= base_url($row['cat_url'].'/'.$row['subcat_url'].'/'.$row['prod_url']); ?>" class="trans-info btn-slider bg-pink">VER PRODUCTO</a>
                                     </div>
-                                    <div class="img-slider-h">
-                                            <img src="<?= base_url($row['imagen']); ?>" alt="">
-                                        
-                                    </div>
+                                    <a href="<?= base_url($row['cat_url'].'/'.$row['subcat_url'].'/'.$row['prod_url']); ?>">
+                                        <div class="img-slider-h">
+                                                <img 
+                                                src="<?= base_url($row['imagen'][0]['imagen']); ?>"
+                                                alt="img-<?= $row['prod_url']?>"
+                                                >
+                                        </div>
+                                    </a>
                                 </div>
                             </div>    
                         <?php endif ?>
@@ -308,7 +311,6 @@
             </div>
         </section>
 
-       
        
         <section class="section sct-three-home">
             <div class="container-fluid">
