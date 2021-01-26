@@ -1266,6 +1266,7 @@ class Ajax extends MY_Controller
                 $total = $subtotal + ( double ) $pedido['entrega_precio'] - ( double ) $pedido['cupon_descuento'] ;
             
                 #listando productos para enviar al correo
+                $dir =($pedido['recojo']== 1) ?   'Av.Caminos del Inca N.257 Tienda N° 149 , Santiago de Surco.' : $pedido['dir_envio'].', '.$pedido['distrito']. ', LIMA' ;
                 $newdata['orders'] = [
                     'cod_pedido' => $pedido['codigo'],
                     'comprador' => $pedido['nombres'].' '.$pedido['apellidos'],
@@ -1275,7 +1276,7 @@ class Ajax extends MY_Controller
                     'number_doc' => $pedido['numero_documento'],
                     'pedido_fecha' => $pedido['pedido_fecha'],
                     'recojo' => ($pedido['recojo']==1)?'Recojo en tienda':'Despacho a domicilio',
-                    'direccion' => $pedido['dir_envio'].', '.$pedido['distrito']. ', LIMA',
+                    'direccion' => $dir ,
                     'subtotal' => number_format($subtotal, 2, '.', ''),
                     'descuento' => $pedido['cupon_descuento'],
                     'envio' => $pedido['entrega_precio'],

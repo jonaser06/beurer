@@ -155,6 +155,15 @@
                                         <span><?php echo preg_match("/^P/", $orders['cod_pedido']) ? 'Pago Efectivo ': 'Pago con Tarjeta'; ?></span>
                                     </td>
                                 </tr>
+                                <?php if ($orders['recojo'] == 'Recojo en tienda') {?>
+                                <tr>
+                                    <td style="padding:5px 16px; ">
+                                        <b>Podrá recoger su pedido según lo indicado: </b><br><br>
+                                        <span>De comprarlo antes de las 3 PM, puede pasar a recoger su pedido el día siguiente de la compra.</span><br>
+                                        <span>De comprar su pedido luego de las 3 PM, podrá pasar por su pedido dos días después de realizada la compra.</span>
+                                    </td>
+                                </tr>       
+                                <?php }?>
                             </table>
                         </td>
                     </tr>
