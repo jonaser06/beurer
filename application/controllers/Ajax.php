@@ -1514,9 +1514,19 @@ class Ajax extends MY_Controller
                };
 
                $order_number = 'id-'.uniqid() ;
+
+               $ids     = explode('-', $this->input->post('id_productos'));
+               $quantys = explode('-', $this->input->post('cantidades'));
+               $amount = 0;
+               for ($i = 0 ; $i < count($ids); $i++) { 
+                $prod = $this->get('productos', ['id' => $ids[$i] ]);
+                $amount += floatval($prod['precio']) * (int)$quantys[$i];
+               };
+               $amount += floatval($this->input->post('envio_coste'));
                $charge = $culqi->Orders->create(
                          [
-                             "amount"        =>$this->input->post('total_coste'),
+                            //  "amount"        =>$this->input->post('total_coste'),
+                             "amount"        =>$amount * 100,
                              "capture"       =>true,
                              "currency_code" =>"PEN",
                              "description"   => 'Compra desde web BEURER' ,
