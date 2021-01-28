@@ -164,6 +164,7 @@
 
                                                 <tr>
 
+                                                    <th>id</th>
                                                     <th>Nombre</th>
                                                     <th>Estado</th>
                                                     <th>Subcategoría</th>
@@ -366,6 +367,7 @@
                 let table = $('#table_productos').DataTable({
                 "ajax": "manager/productos/read",
                     "columns": [
+                        { "data": "id" },
                         { "data": "titulo" },
                         { "data": "active", "render" : function(data){
                             var i = "";
