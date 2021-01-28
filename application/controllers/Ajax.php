@@ -1034,10 +1034,10 @@ class Ajax extends MY_Controller
               };
               $facturacion = [];
               if($this->input->post('flag_facturacion')) {
-                $dest["ruc"]    = $this->input->post('ruc');
-                $dest["r_social"]  = $this->input->post('r_social');
-                $dest["r_fiscal"]   = $this->input->post('r_fiscal');
-                $metadata["facturacion"] = json_encode($dest);
+                $facturacion["ruc"]    = $this->input->post('ruc');
+                $facturacion["r_social"]  = $this->input->post('r_social');
+                $facturacion["r_fiscal"]   = $this->input->post('r_fiscal');
+                $metadata["facturacion"] = json_encode($facturacion);
               };
               $charge = $culqi->Charges->create(
                         [
