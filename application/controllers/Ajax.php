@@ -1058,12 +1058,13 @@ class Ajax extends MY_Controller
                             ]
                         ]
                 );    
-                $response = $charge ? json_encode($charge) :null;
+                // $response = $charge ? json_encode($charge) :null;
                 $this->output
                         ->set_content_type('application/json')
                         ->set_status_header(200)
-                        ->set_output(json_encode($response));
+                        ->set_output(json_encode($charge));
                     return;
+
             } catch (Exception $e) {
                 $this->output
                         ->set_content_type('application/json')

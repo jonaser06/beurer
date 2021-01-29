@@ -440,85 +440,173 @@ function modalCheckout(title, icon, message, color) {
         // closeOnConfirm: false    
     })
 }
-
-
 function culqi() {
 
-    if (Culqi.token) {
-        console.log('token')
-        const token = Culqi.token.id;
-        const email = Culqi.token.email;
-        const formSend = dataFormSend(token, email)
-        Culqi.close()
-        ObjMain.ajax_post('POST', `${DOMAIN}ajax/createCharge`, formSend)
-            .then(resp => {
-
-                resp = JSON.parse(resp);
-                resp = JSON.parse(resp)
-                if (resp.object == 'charge') {
-                    const {
-                        ...charge
-                    } = resp;
-                    if (charge.outcome.type == "venta_exitosa") {
-                        const {
-                            metadata
-                        } = charge;
-                        const {
-                            antifraud_details
-                        } = charge;
-                        const formCharge = dataFormPurchase(metadata);
-                        formCharge.append('codigo_venta', charge.reference_code);
-                        formCharge.append('telefono', antifraud_details.phone);
-                        formCharge.append('xratioColors',converter().colores_prods); // enviamos colores
-                        formCharge.append('skus',converter().skus_prods); // enviamos skus
-                        ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchase`, formCharge)
-                            .then(resp => {
-                                resp = JSON.parse(resp);
-                                if (resp.status) {
-
-                                    localStorage.setItem('id_pedido', resp.data.codigo_pedido);
-                                    modalCheckout('Gracias por su compra', 'success',
-                                        `${charge.outcome.user_message}`, '#C5115')
-                                    setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
-                                }
-                            })
-                            .catch(err => {
-                                console.log(err)
-                            });
-                    }
-                } else {
-                    modalCheckout('Error', 'error', `${resp.user_message}`, '#C5115')
+if (Culqi.token) {
+    console.log('token')
+    const token = Culqi.token.id;
+    const email = Culqi.token.email;
+    const formSend = dataFormSend(token, email)
+    Culqi.close()
+    $.ajax({
+        type: 'POST',
+        url: `${DOMAIN}ajax/createCharge`,
+        data: formSend ,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function(data) {
+            let result = "";
+            if(data.constructor == String){
+                result = JSON.parse(data);
+            }
+            if(data.constructor == Object){
+                result = JSON.parse(JSON.stringify(data));
+            }
+            if(result.object === 'charge'){
+                if (result.outcome.type === "venta_exitosa") {
+                    const { metadata , antifraud_details } = result;
+                    const formCharge = dataFormPurchase(metadata);
+                    formCharge.append('codigo_venta', result.reference_code);
+                    formCharge.append('telefono', antifraud_details.phone);
+                    formCharge.append('xratioColors',converter().colores_prods); // enviamos colores
+                    formCharge.append('skus',converter().skus_prods); // enviamos skus
+                    $.ajax({
+                        type: 'POST',
+                        url:  `${DOMAIN}ajax/purchase`,
+                        data: formCharge ,
+                        contentType: false,
+                        processData: false,
+                        cache: false,
+                        success: function(resp) {
+                            if (resp.status) {
+                            localStorage.setItem('id_pedido', resp.data.codigo_pedido);
+                            modalCheckout('Gracias por su compra', 'success',
+                                `${result.outcome.user_message}`, '#C5115')
+                            setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
+                            }
+                        }
+                    })
+                   
                 }
-            })
-            .catch(err => {
-                console.log(err)
-
-            });
+            }
+            if(result.object === 'error'){
+                modalCheckout('Error', 'error', `${result.user_message}`, '#C5115')
+            }
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    });
+   
     } else if (Culqi.order) {
-        console.log(Culqi.order)
-        const {
-            ...order
-        } = Culqi.order;
-        localStorage.setItem('order', JSON.stringify(order));
-        const formOrder = dataFormOrder(Culqi.order);
-        const phone = JSON.parse(localStorage.getItem('Comprador')).telefono;
-        const correo = JSON.parse(localStorage.getItem('Comprador')).correo;
-        formOrder.append('telefono', phone);
-        formOrder.append('correo', correo);
-
-        ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchaseOrder`, formOrder)
-            .then(resp => {
-                resp = JSON.parse(resp);
-                if (resp.status) {
-                    localStorage.setItem('id_order', resp.data.orden_id);
-                    setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    } else {
-        console.log(Culqi.error);
-    }
+    console.log(Culqi.order)
+    const {
+        ...order
+    } = Culqi.order;
+    localStorage.setItem('order', JSON.stringify(order));
+    const formOrder = dataFormOrder(Culqi.order);
+    const phone = JSON.parse(localStorage.getItem('Comprador')).telefono;
+    const correo = JSON.parse(localStorage.getItem('Comprador')).correo;
+    formOrder.append('telefono', phone);
+    formOrder.append('correo', correo);
+    $.ajax({
+        type: 'POST',
+        url: `${DOMAIN}ajax/purchaseOrder`,
+        data: formOrder ,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function(resp) {
+            if (resp.status) {
+                localStorage.setItem('id_order', resp.data.orden_id);
+                setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
+            }
+        }
+    })
+   
+} else {
+    console.log(Culqi.error);
 }
+}
+
+// function culqi() {
+
+//     if (Culqi.token) {
+//         console.log('token')
+//         const token = Culqi.token.id;
+//         const email = Culqi.token.email;
+//         const formSend = dataFormSend(token, email)
+//         Culqi.close()
+//         ObjMain.ajax_post('POST', `${DOMAIN}ajax/createCharge`, formSend)
+//             .then(resp => {
+
+//                 resp = JSON.parse(resp);
+//                 resp = JSON.parse(resp)
+//                 if (resp.object == 'charge') {
+//                     const {
+//                         ...charge
+//                     } = resp;
+//                     if (charge.outcome.type == "venta_exitosa") {
+//                         const {
+//                             metadata
+//                         } = charge;
+//                         const {
+//                             antifraud_details
+//                         } = charge;
+//                         const formCharge = dataFormPurchase(metadata);
+//                         formCharge.append('codigo_venta', charge.reference_code);
+//                         formCharge.append('telefono', antifraud_details.phone);
+//                         formCharge.append('xratioColors',converter().colores_prods); // enviamos colores
+//                         formCharge.append('skus',converter().skus_prods); // enviamos skus
+//                         ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchase`, formCharge)
+//                             .then(resp => {
+//                                 resp = JSON.parse(resp);
+//                                 if (resp.status) {
+
+//                                     localStorage.setItem('id_pedido', resp.data.codigo_pedido);
+//                                     modalCheckout('Gracias por su compra', 'success',
+//                                         `${charge.outcome.user_message}`, '#C5115')
+//                                     setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
+//                                 }
+//                             })
+//                             .catch(err => {
+//                                 console.log(err)
+//                             });
+//                     }
+//                 } else {
+//                     modalCheckout('Error', 'error', `${resp.user_message}`, '#C5115')
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err)
+
+//             });
+//     } else if (Culqi.order) {
+//         console.log(Culqi.order)
+//         const {
+//             ...order
+//         } = Culqi.order;
+//         localStorage.setItem('order', JSON.stringify(order));
+//         const formOrder = dataFormOrder(Culqi.order);
+//         const phone = JSON.parse(localStorage.getItem('Comprador')).telefono;
+//         const correo = JSON.parse(localStorage.getItem('Comprador')).correo;
+//         formOrder.append('telefono', phone);
+//         formOrder.append('correo', correo);
+
+//         ObjMain.ajax_post('POST', `${DOMAIN}ajax/purchaseOrder`, formOrder)
+//             .then(resp => {
+//                 resp = JSON.parse(resp);
+//                 if (resp.status) {
+//                     localStorage.setItem('id_order', resp.data.orden_id);
+//                     setTimeout(() => window.location = `${DOMAIN}order-summary`, 1000);
+//                 }
+//             })
+//             .catch(err => {
+//                 console.log(err)
+//             });
+//     } else {
+//         console.log(Culqi.error);
+//     }
+// }
 </script>
