@@ -349,7 +349,7 @@
                             <div class="content-slide" style="flex-direction:column">
                                 <img style="width:100px;margin:auto" src="assets/svg/user.svg" alt="">
                                 <div class="slider">
-                                    <p>Te acesoramos en tu compra</p>
+                                    <p>Te asesoramos en tu compra</p>
                                     <article class="phones">
                                         <img style="width:45px" src="assets/svg/recurso.svg" alt="">
                                         <div class="phones-numbers">
@@ -395,7 +395,7 @@
                             <div class="content-slide" style="flex-direction:column;">
                                 <figure style="display: flex; flex-direction:column ;align-items:center">
                                     <img style="height:60px"src="assets/svg/send.svg" alt="">
-                                    <p style="font-size:1rem">!Envíos a todo el Perú !</p>
+                                    <p style="font-size:1rem">¡Envíos a todo el Perú!</p>
                                 </figure>
                                 <br>
                                 <figure style="display: flex; flex-direction:column ;align-items:center">
@@ -425,7 +425,7 @@
                         <div class="content-slide">
                             <img style="width:90px" src="assets/svg/user.svg" alt="">
                             <div class="slider">
-                                <p>Te acesoramos en tu compra</p>
+                                <p>Te asesoramos en tu compra</p>
                                 <article class="phones">
                                     <img style="width:45px" src="assets/svg/recurso.svg" alt="">
                                     <div class="phones-numbers">
@@ -467,7 +467,7 @@
                         <div class="content-slide" >
                                <figure style="display: flex; flex-direction:column ;align-items:center">
                                     <img src="assets/svg/send.svg" alt="">
-                                    <p >!Envíos a todo el Perú !</p>
+                                    <p> ¡Envíos a todo el Perú!</p>
                                 </figure>
                                 <br>
                                 <figure style="display: flex; flex-direction:column ;align-items:center">
