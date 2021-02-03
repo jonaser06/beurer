@@ -164,6 +164,7 @@ class Ajax extends MY_Controller
         
         $salida .= '<tr>';
         $salida .= '<td>Código de Compra</td>';
+        $salida .= '<td>Modelo</td>';
         $salida .= '<td>Nombres</td>';
         $salida .= '<td>Telefono</td>';
         $salida .= '<td>Correo</td>';
