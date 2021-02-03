@@ -199,7 +199,7 @@ class Ajax extends MY_Controller
             $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
             $this->db->join('productos as pr', 'pr.id = pd.id_producto');
             $this->db->where($w);
-            $this->db->group_by('p.codigo');
+            $this->db->group_by('p.id_pedido');
             $this->db->order_by('p.pedido_fecha', 'DESC');
             $query = $this->db->get()->result_array();
             /* var_dump($reclamos);
@@ -291,7 +291,7 @@ class Ajax extends MY_Controller
         $this->db->from('pedido_detalle as pd');
         $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
         $this->db->join('productos as pr', 'pr.id = pd.id_producto');
-        $this->db->group_by('p.codigo');
+        $this->db->group_by('p.id_pedido');
         $this->db->order_by('p.pedido_fecha', 'DESC');
 
         $query = $this->db->get()->result_array();
