@@ -164,7 +164,6 @@ class Ajax extends MY_Controller
         
         $salida .= '<tr>';
         $salida .= '<td>Código de Compra</td>';
-        $salida .= '<td>Modelo</td>';
         $salida .= '<td>Nombres</td>';
         $salida .= '<td>Telefono</td>';
         $salida .= '<td>Correo</td>';
@@ -193,14 +192,12 @@ class Ajax extends MY_Controller
                 'p.pedido_fecha <='=> $end
             ];
 
-            $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-            $this->db->select("GROUP_CONCAT(pd.producto_sku) as modelo ,pd.id_pedido_detalle ,pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado,p.recojo, pr.titulo");
+            // $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+            $this->db->select("pd.id_pedido_detalle ,pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado,p.recojo, pr.titulo");
             $this->db->from('pedido_detalle as pd');
             $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
             $this->db->join('productos as pr', 'pr.id = pd.id_producto');
             $this->db->where($w);
-            $this->db->group_by('p.id_pedido');
-            $this->db->order_by('p.pedido_fecha', 'DESC');
             $query = $this->db->get()->result_array();
             /* var_dump($reclamos);
             exit; */
@@ -257,7 +254,6 @@ class Ajax extends MY_Controller
                 // $salida .= '</tr>'; 
                 $salida .= '<tr>';
                 $salida .= '<td>'.$value['codigo'].'</td>';
-                $salida .= '<td>'.$value['modelo'].'</td>';
                 $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
                 $salida .= '<td>'.$value['telefono'].'</td>';
                 $salida .= '<td>'.$value['correo'].'</td>';
@@ -286,13 +282,11 @@ class Ajax extends MY_Controller
             return;
 
         }
-        $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-        $this->db->select("GROUP_CONCAT(pd.producto_sku) as modelo ,pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo,pr.titulo");
+        // $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+        $this->db->select("pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo,pr.titulo");
         $this->db->from('pedido_detalle as pd');
         $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
         $this->db->join('productos as pr', 'pr.id = pd.id_producto');
-        $this->db->group_by('p.id_pedido');
-        $this->db->order_by('p.pedido_fecha', 'DESC');
 
         $query = $this->db->get()->result_array();
         foreach ($query as $key => $value) {
@@ -326,7 +320,6 @@ class Ajax extends MY_Controller
 
             $salida .= '<tr>';
             $salida .= '<td>'.$value['codigo'].'</td>';
-            $salida .= '<td>'.$value['modelo'].'</td>';
             $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
             $salida .= '<td>'.$value['telefono'].'</td>';
             $salida .= '<td>'.$value['correo'].'</td>';
