@@ -164,6 +164,7 @@ class Ajax extends MY_Controller
         
         $salida .= '<tr>';
         $salida .= '<td>Código de Compra</td>';
+        $salida .= '<td>Modelo</td>';
         $salida .= '<td>Nombres</td>';
         $salida .= '<td>Telefono</td>';
         $salida .= '<td>Correo</td>';
@@ -193,11 +194,10 @@ class Ajax extends MY_Controller
             ];
 
             // $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-            $this->db->select("pd.id_pedido_detalle ,pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado,p.recojo, pr.titulo");
-            $this->db->from('pedido_detalle as pd');
-            $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
-            $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+            $this->db->select("p.id_pedido ,p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo");
+            $this->db->from('pedido as p');
             $this->db->where($w);
+            $this->db->order_by('pedido_fecha','ASC');
             $query = $this->db->get()->result_array();
             /* var_dump($reclamos);
             exit; */
@@ -252,16 +252,18 @@ class Ajax extends MY_Controller
                 // $salida .= '<td>'.$estado.'</td>';
                 // $salida .= '<td>'.$value['titulo'].'</td>';
                 // $salida .= '</tr>'; 
-                // $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $value['id_pedido']]);
-                // $skus = [];
-                // $cantidades = '';
-                // for ($i = 0 ; $i < count($pedido_detalle); $i++) {  
-                //     array_push($skus, $pedido_detalle[$i]['producto_sku']);
-                //     $cantidades = $cantidades.' , '.$pedido_detalle[$i]['cantidad'];
-                // }
-                // $sku        = implode('-', $skus);
+                $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $value['id_pedido']]);
+            
+                $skus = [];
+                $cantidades = '';
+                for ($i = 0 ; $i < count($pedido_detalle); $i++) {  
+                    array_push($skus, $pedido_detalle[$i]['producto_sku']);
+                    $cantidades = $cantidades.' , '.$pedido_detalle[$i]['cantidad'];
+                }
+                $sku        = implode('-', $skus);
                 $salida .= '<tr>';
                 $salida .= '<td>'.$value['codigo'].'</td>';
+                $salida .= '<td>'.$sku.'</td>';
                 $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
                 $salida .= '<td>'.$value['telefono'].'</td>';
                 $salida .= '<td>'.$value['correo'].'</td>';
@@ -269,7 +271,7 @@ class Ajax extends MY_Controller
                 $salida .= '<td>'.$value['numero_documento'].'</td>';
                 $salida .= '<td>'.$value['distrito'].'</td>';
                 $salida .= '<td>'.$value['dir_envio'].'</td>';
-                $salida .= '<td>'.$value['cantidad'].'</td>';
+                $salida .= '<td>'.$cantidades.'</td>';
                 $salida .= '<td>'.$value['entrega_precio'].'</td>';
                 $salida .= '<td>'.$value['productos_precio'].'</td>';
                 $salida .= '<td>'.$value['cupon_descuento'].'</td>';
@@ -290,11 +292,11 @@ class Ajax extends MY_Controller
             return;
 
         }
+        // $this->db->select("pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo,pr.titulo");
         // $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-        $this->db->select("pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo,pr.titulo");
-        $this->db->from('pedido_detalle as pd');
-        $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
-        $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+        $this->db->select("p.id_pedido ,p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo");
+        $this->db->from('pedido as p');
+        $this->db->order_by('pedido_fecha','ASC');
         $query = $this->db->get()->result_array();
         foreach ($query as $key => $value) {
             $estado = '';
@@ -325,17 +327,18 @@ class Ajax extends MY_Controller
             }
             $total = floatval($value['productos_precio']) - floatval($value['cupon_descuento']) + floatval($value['entrega_precio']);
         
-            // // $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $value['id_pedido']]);
+            $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $value['id_pedido']]);
             
-            // // $skus = [];
-            // // $cantidades = '';
-            // // for ($i = 0 ; $i < count($pedido_detalle); $i++) {  
-            // //     array_push($skus, $pedido_detalle[$i]['producto_sku']);
-            // //     $cantidades = $cantidades.' , '.$pedido_detalle[$i]['cantidad'];
-            // // }
-            // $sku        = implode('-', $skus);
+            $skus = [];
+            $cantidades = '';
+            for ($i = 0 ; $i < count($pedido_detalle); $i++) {  
+                array_push($skus, $pedido_detalle[$i]['producto_sku']);
+                $cantidades = $cantidades.' , '.$pedido_detalle[$i]['cantidad'];
+            }
+            $sku        = implode('-', $skus);
             $salida .= '<tr>';
             $salida .= '<td>'.$value['codigo'].'</td>';
+            $salida .= '<td>'.$sku.'</td>';
             $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
             $salida .= '<td>'.$value['telefono'].'</td>';
             $salida .= '<td>'.$value['correo'].'</td>';
@@ -343,7 +346,7 @@ class Ajax extends MY_Controller
             $salida .= '<td>'.$value['numero_documento'].'</td>';
             $salida .= '<td>'.$value['distrito'].'</td>';
             $salida .= '<td>'.$value['dir_envio'].'</td>';
-            $salida .= '<td>'.$value['cantidad'].'</td>';
+            $salida .= '<td>'.$cantidades.'</td>';
             $salida .= '<td>'.$value['entrega_precio'].'</td>';
             $salida .= '<td>'.$value['productos_precio'].'</td>';
             $salida .= '<td>'.$value['cupon_descuento'].'</td>';
