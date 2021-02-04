@@ -82,20 +82,9 @@
         <!--CREDITOS -->
         <div class="crd">
             <div class="container">
-                <div class="crd1">
-                    <p class="text-credits"><a href="index.php" target="_blank">BEURER</a></p>
-                    <p class="text-credits">TODOS LOS DERECHOS RESERVADOS 2020</p>
-                </div>
-                <div class="crd2">
-                    <p class="text-credits">POWERED BY 
-                        <a href="http://exe.digital/" target="_blank">EXE</a>
-                    </p>
-                    <p class="oculMob hidden-xs">
-                        <a href="https://validator.w3.org/check?uri=referer"
-                            class="text-f text-credits" target="_blank">HTML </a> • 
-                        <a href="https://jigsaw.w3.org/css-validator/check/referer"
-                            class="text-f text-credits" target="_blank">CSS</a>
-                    </p>
+                <div class="crd1" style="width: 100%; padding-bottom : 1rem;">
+                    <p class="text-credits" style="text-align: center;"><a href="index.php" target="_blank">BEURER</a></p>
+                    <p class="text-credits"  style="text-align: center;">TODOS LOS DERECHOS RESERVADOS 2021</p>
                 </div>
             </div>
         </div>
