@@ -164,7 +164,8 @@ class Ajax extends MY_Controller
         
         $salida .= '<tr>';
         $salida .= '<td>Código de Compra</td>';
-        $salida .= '<td>Modelo</td>';
+        $salida .= '<td>Productos</td>';
+        $salida .= '<td>skus</td>';
         $salida .= '<td>Nombres</td>';
         $salida .= '<td>Telefono</td>';
         $salida .= '<td>Correo</td>';
@@ -256,13 +257,17 @@ class Ajax extends MY_Controller
             
                 $skus = [];
                 $cantidades = '';
+                $productos = '';
                 for ($i = 0 ; $i < count($pedido_detalle); $i++) {  
                     array_push($skus, $pedido_detalle[$i]['producto_sku']);
                     $cantidades = $cantidades.' , '.$pedido_detalle[$i]['cantidad'];
+                    $prod = $this->get('productos', ['id' => $pedido_detalle[$i]['id_producto']]);
+                    $productos = $productos.' , '.$prod['titulo'];
                 }
                 $sku        = implode('-', $skus);
                 $salida .= '<tr>';
                 $salida .= '<td>'.$value['codigo'].'</td>';
+                $salida .= '<td>'.$productos.'</td>';
                 $salida .= '<td>'.$sku.'</td>';
                 $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
                 $salida .= '<td>'.$value['telefono'].'</td>';
@@ -331,13 +336,17 @@ class Ajax extends MY_Controller
             
             $skus = [];
             $cantidades = '';
+            $productos = '';
             for ($i = 0 ; $i < count($pedido_detalle); $i++) {  
                 array_push($skus, $pedido_detalle[$i]['producto_sku']);
                 $cantidades = $cantidades.' , '.$pedido_detalle[$i]['cantidad'];
+                $prod = $this->get('productos', ['id' => $pedido_detalle[$i]['id_producto']]);
+                $productos = $productos.' , '.$prod['titulo'];
             }
             $sku        = implode('-', $skus);
             $salida .= '<tr>';
             $salida .= '<td>'.$value['codigo'].'</td>';
+            $salida .= '<td>'.$productos.'</td>';
             $salida .= '<td>'.$sku.'</td>';
             $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
             $salida .= '<td>'.$value['telefono'].'</td>';
