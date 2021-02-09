@@ -1413,24 +1413,43 @@ ObjMain = {
 
     createOrder: () => {
         const formOrder = dataFormSendOrder()
-        ObjMain.ajax_post('POST', `${DOMAIN}ajax/createOrder`, formOrder)
-            .then(order => {
-
-                let streamOrder = JSON.parse(order);
-                streamOrder = JSON.parse(streamOrder)
-                console.log(streamOrder)
-                Culqi.settings({
-                    title: 'BEURER',
-                    currency: 'PEN',
-                    description: 'Completamos tu pago con toda la seguridad que tú necesitas',
-                    amount: parseFloat(streamOrder.amount).toFixed(2),
-                    order: streamOrder.id
-                });
-
-            }).catch(err => {
-                let error = JSON.parse(JSON.parse(err))
-                console.log(error)
+        $.ajax({
+                type: 'POST',
+                url: `${DOMAIN}ajax/createOrder`,
+                data: formOrder,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function(order) {
+                    let streamOrder = JSON.parse(JSON.stringify(order));
+                    // console.log(streamOrder)
+                    Culqi.settings({
+                        title: 'BEURER',
+                        currency: 'PEN',
+                        description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+                        amount: parseFloat(streamOrder.amount).toFixed(2),
+                        order: streamOrder.id
+                    });
+                }
             })
+            // ObjMain.ajax_post('POST', `${DOMAIN}ajax/createOrder`, formOrder)
+            //     .then(order => {
+
+        //         let streamOrder = JSON.parse(order);
+        //         streamOrder = JSON.parse(streamOrder)
+        //         console.log(streamOrder)
+        //         Culqi.settings({
+        //             title: 'BEURER',
+        //             currency: 'PEN',
+        //             description: 'Completamos tu pago con toda la seguridad que tú necesitas',
+        //             amount: parseFloat(streamOrder.amount).toFixed(2),
+        //             order: streamOrder.id
+        //         });
+
+        //     }).catch(err => {
+        //         let error = JSON.parse(JSON.parse(err))
+        //         console.log(error)
+        //     })
     },
     resumeOrder: () => {
         const orden = JSON.parse(localStorage.getItem('order'));

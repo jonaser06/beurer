@@ -1573,13 +1573,12 @@ class Ajax extends MY_Controller
                              "confirm" => false,
                              "expiration_date" => time() + 24*60*60*3,   // Orden con un dia de validez
 
-                         ]
-                 );    
-                 $response = $charge ? json_encode($charge) :null;
+                         ]);    
+                 
                  $this->output
                          ->set_content_type('application/json')
                          ->set_status_header(200)
-                         ->set_output(json_encode($response));
+                         ->set_output(json_encode($charge));
                      return;
              } catch (Exception $e) {
                  $this->output

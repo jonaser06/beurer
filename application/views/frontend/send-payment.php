@@ -500,12 +500,12 @@ if (Culqi.token) {
     });
    
     } else if (Culqi.order) {
-    console.log(Culqi.order)
-    const {
-        ...order
-    } = Culqi.order;
-    localStorage.setItem('order', JSON.stringify(order));
-    const formOrder = dataFormOrder(Culqi.order);
+    let result = '';
+    if(order.constructor == Object){
+		result = JSON.parse(JSON.stringify(order));
+	}
+    localStorage.setItem('order', JSON.stringify(result));
+    const formOrder = dataFormOrder(result);
     const phone = JSON.parse(localStorage.getItem('Comprador')).telefono;
     const correo = JSON.parse(localStorage.getItem('Comprador')).correo;
     formOrder.append('telefono', phone);
