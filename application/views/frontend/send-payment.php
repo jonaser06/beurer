@@ -500,6 +500,9 @@ if (Culqi.token) {
     });
    
     } else if (Culqi.order) {
+        const {
+            ...order
+        } = Culqi.order;
     let result = '';
     if(order.constructor == Object){
 		result = JSON.parse(JSON.stringify(order));
