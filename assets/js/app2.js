@@ -43,13 +43,13 @@ $(document).ready(function() {
             }.bind(this));
 
             this.nodo.addEventListener('input', function(evento) {
-                const cumpleFormatoEsperado = new RegExp(/[a-zA-Z\s]+{2,254}/).test(this.nodo.value);
+                // const cumpleFormatoEsperado = new RegExp(/[a-zA-Z\s]+{2,254}/).test(this.nodo.value);
 
-                if (cumpleFormatoEsperado) {
-                    this.nodo.value = this.valor;
-                } else {
-                    this.valor = this.nodo.value;
-                }
+                // if (cumpleFormatoEsperado) {
+                //     this.nodo.value = this.valor;
+                // } else {
+                //     this.valor = this.nodo.value;
+                // }
             }.bind(this));
         }
     }
