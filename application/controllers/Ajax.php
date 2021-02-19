@@ -166,6 +166,9 @@ class Ajax extends MY_Controller
         $salida .= '<td>Código de Compra</td>';
         $salida .= '<td>Productos</td>';
         $salida .= '<td>skus</td>';
+        $salida .= '<td>Cantidad Productos</td>';
+        $salida .= '<td>Precio de envio</td>';
+        $salida .= '<td>Precio por Productos</td>';
         $salida .= '<td>Nombres</td>';
         $salida .= '<td>Telefono</td>';
         $salida .= '<td>Correo</td>';
@@ -173,9 +176,9 @@ class Ajax extends MY_Controller
         $salida .= '<td>N° documento</td>';
         $salida .= '<td>Distrito</td>';
         $salida .= '<td>Direccion</td>';
-        $salida .= '<td>Cantidad Productos</td>';
-        $salida .= '<td>Precio de envio</td>';
-        $salida .= '<td>Precio por Productos</td>';
+        $salida .= '<td>ruc</td>';
+        $salida .= '<td>Razon social </td>';
+        $salida .= '<td>Domicilio fiscal</td>';
         $salida .= '<td>Cupon</td>';
         $salida .= '<td>PRECIO TOTAL</td>';
         $salida .= '<td>TIPO DE ENTREGA</td>';
@@ -195,7 +198,7 @@ class Ajax extends MY_Controller
             ];
 
             // $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-            $this->db->select("p.id_pedido ,p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo");
+            $this->db->select("p.ruc,p.r_social,p.r_fiscal,p.id_pedido ,p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo");
             $this->db->from('pedido as p');
             $this->db->where($w);
             $this->db->order_by('pedido_fecha','ASC');
@@ -269,6 +272,9 @@ class Ajax extends MY_Controller
                 $salida .= '<td>'.$value['codigo'].'</td>';
                 $salida .= '<td>'.$productos.'</td>';
                 $salida .= '<td>'.$sku.'</td>';
+                $salida .= '<td>'.$cantidades.'</td>';
+                $salida .= '<td>'.$value['entrega_precio'].'</td>';
+                $salida .= '<td>'.$value['productos_precio'].'</td>';
                 $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
                 $salida .= '<td>'.$value['telefono'].'</td>';
                 $salida .= '<td>'.$value['correo'].'</td>';
@@ -276,9 +282,9 @@ class Ajax extends MY_Controller
                 $salida .= '<td>'.$value['numero_documento'].'</td>';
                 $salida .= '<td>'.$value['distrito'].'</td>';
                 $salida .= '<td>'.$value['dir_envio'].'</td>';
-                $salida .= '<td>'.$cantidades.'</td>';
-                $salida .= '<td>'.$value['entrega_precio'].'</td>';
-                $salida .= '<td>'.$value['productos_precio'].'</td>';
+                $salida .= '<td>'.$value['ruc'].'</td>';
+                $salida .= '<td>'.$value['r_social'].'</td>';
+                $salida .= '<td>'.$value['r_fiscal'].'</td>';
                 $salida .= '<td>'.$value['cupon_descuento'].'</td>';
                 $salida .= '<td>'.$total.'</td>';
                 $salida .= '<td>'.$entrega.'</td>';
@@ -299,7 +305,7 @@ class Ajax extends MY_Controller
         }
         // $this->db->select("pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, pd.cantidad, p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo,pr.titulo");
         // $this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-        $this->db->select("p.id_pedido ,p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo");
+        $this->db->select("p.ruc,p.r_social,p.r_fiscal,p.id_pedido ,p.codigo, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, p.recojo");
         $this->db->from('pedido as p');
         $this->db->order_by('pedido_fecha','ASC');
         $query = $this->db->get()->result_array();
@@ -348,6 +354,9 @@ class Ajax extends MY_Controller
             $salida .= '<td>'.$value['codigo'].'</td>';
             $salida .= '<td>'.$productos.'</td>';
             $salida .= '<td>'.$sku.'</td>';
+            $salida .= '<td>'.$cantidades.'</td>';
+            $salida .= '<td>'.$value['entrega_precio'].'</td>';
+            $salida .= '<td>'.$value['productos_precio'].'</td>';
             $salida .= '<td>'.$value['nombres'].' '.$value['apellidos'].'</td>';
             $salida .= '<td>'.$value['telefono'].'</td>';
             $salida .= '<td>'.$value['correo'].'</td>';
@@ -355,9 +364,9 @@ class Ajax extends MY_Controller
             $salida .= '<td>'.$value['numero_documento'].'</td>';
             $salida .= '<td>'.$value['distrito'].'</td>';
             $salida .= '<td>'.$value['dir_envio'].'</td>';
-            $salida .= '<td>'.$cantidades.'</td>';
-            $salida .= '<td>'.$value['entrega_precio'].'</td>';
-            $salida .= '<td>'.$value['productos_precio'].'</td>';
+            $salida .= '<td>'.$value['ruc'].'</td>';
+            $salida .= '<td>'.$value['r_social'].'</td>';
+            $salida .= '<td>'.$value['r_fiscal'].'</td>';
             $salida .= '<td>'.$value['cupon_descuento'].'</td>';
             $salida .= '<td>'.$total.'</td>';
             $salida .= '<td>'.$entrega.'</td>';
@@ -633,10 +642,10 @@ class Ajax extends MY_Controller
                  ->set_content_type('application/json')
                  ->set_status_header(200)
                  ->set_output(json_encode($this->resp));
-                 $data['message'] = 'Tu reclamo se envio correctamente.';
-                 $data2['message'] = 'Tienes un nuevo reclamo a travez de beurer.pe';
+                //  $data['message'] = 'Tu reclamo se envío correctamente.';
+                 $data['message'] = 'Tienes un nuevo reclamo a travez de beurer.pe';
                  $enviar = $this->sendmail('reclamos@beurer.pe', $data, 'RECLAMO ENVIADO', 'new_reclam.php');
-                 $enviar = $this->sendmail('reclamos@beurer.pe', $data2, 'TIENES UN NUEVO RECLAMO', 'new_reclam.php');
+                //  $enviar = $this->sendmail('reclamos@beurer.pe', $data2, 'TIENES UN NUEVO RECLAMO', 'new_reclam.php');
                  return;
         }
         $this->resp['message'] = 'Ocurrio un error en la petición';
@@ -686,6 +695,7 @@ class Ajax extends MY_Controller
                 return;
             }else{
                 $dbid = $this->dbInsert('clientes',$data);
+                $userdb = $this->get('clientes',['id_cliente' => (int)$dbid]);
                 $hid = $this->salt_encrypt($dbid);
 
                 #generamos un token valido
@@ -698,6 +708,7 @@ class Ajax extends MY_Controller
                 #agrego el id al response
                 $data['id_cliente'] = $dbid;
                 $ndata = [
+                    'nombre' => $userdb['nombre'],
                     'id' => $hid,
                     'codigo' => $num
                 ];

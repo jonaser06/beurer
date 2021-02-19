@@ -40,6 +40,7 @@
                                     <thead>
                                         <tr>
                                             <th>Código Pedido</th>
+                                            <th>Fecha de compra</th>
                                             <th>Comprador</th>
                                             <th>Tipo de Entrega</th>
                                             <th>Estado</th>
@@ -83,6 +84,7 @@
         <script>
             
             let table = $('#table_pedido_estado').DataTable({
+                "order": [[ 1, "desc" ]],
                 responsive: true,
                 'paging'      : true,
                 'lengthChange': false,
@@ -91,11 +93,15 @@
                 'info'        : true,
                 'autoWidth'   : false,
                 "scrollCollapse": true,
-                "order": [[ 0, "desc" ]],
+                "order": [[ 1, "desc" ]],
                 "language"    :{"search":"Buscar", "zeroRecords":"Sin Resultados Coincidentes"},
             "ajax": "manager/pedidos/getPedidos",
                 "columns": [
                     { "data": "codigo" },
+                    { "data": "pedido_fecha", 'render' : function (data) {
+                        return data;
+                    } }
+                    ,
                     { "data": "nombres" , 'render' : function (data ,type , row) {
                         return `${row.nombres} ${row.apellidos}`
                     } },

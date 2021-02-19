@@ -41,11 +41,11 @@
                                     <thead>
                                         <tr>
                                             <th>Código Compra</th>
+                                            <th>Fecha de compra</th>
                                             <th>DNI</th>
                                             <th>Tipo de Entrega</th>
                                             <th>Rotulados</th>
                                             <th>factura</th>
-
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -82,19 +82,24 @@
         <script>
             
             let table = $('#table_rotulados').DataTable({
-            responsive: true,
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            "scrollCollapse": true,
+                "order": [[ 1, "desc" ]],
+                responsive: true,
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false,
+                "scrollCollapse": true,
+                "order": [[ 1, "desc" ]],
             "language"    :{"search":"Buscar", "zeroRecords":"Sin Resultados Coincidentes"},
             "ajax": "manager/pedidos/getPedidos",
                 "columns": [
                     { "data": "codigo", 'render' : function (data) {
                         return data.toUpperCase();
+                    } },
+                    { "data": "pedido_fecha", 'render' : function (data) {
+                        return data;
                     } }
                     ,
                     { "data": "numero_documento" }

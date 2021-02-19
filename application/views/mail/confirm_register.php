@@ -7,8 +7,8 @@
     <meta http-equip="X-UA-Compatible" content="ie-dge">
 </head>
 
-<body style="margin: 0 auto ; padding:0;color:#333333;max-width: 720px; padding: 0rem;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;border-right: 1px solid #333333;">
-    <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="border-left: 1px solid #333333;">
+<body style="margin: 0 auto ; padding:0;color:#333333;max-width: 720px; padding: 0rem;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+    <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff" >
         <!-- HEADER  -->
         <tr>
             <td align="center" style="padding-top :20px;padding-bottom:20px;margin-bottom:10px">
@@ -17,13 +17,13 @@
         </tr>
         <tr>
             <td>
-                <table width="100%" height="310">
+                <table width="95%" height="210">
                     <tr>
-                        <td align="center" style="padding: 14px; position: relative; background-size: 100% 100%;" background="<?php echo base_url('assets/images/fondomail.png'); ?>">
-                            <!-- <img width="95%" src="<?php echo base_url('assets/images/fondomail.png'); ?>" alt="#" style="border-radius: 14px;"> -->
-                            <span style="padding:14px 25px;font-size:45px;position: absolute;top:40px;left:30px; color: #fff;text-align: left">
-                                <span >Bienvenido a beurer</span>.<span >pe</span> 
-                                <span style="display: block; font-size: 25px;margin-top:20px">Tu Cuenta se ha registrado correctamente</span>
+                        <td align="center" style="padding: 14px; position: relative; background-size: 100% 100%;" background="<?php echo base_url('assets/images/group_fondo.png'); ?>">
+                            <!-- <img width="95%" src="<?php echo base_url('assets/images/group_fondo.png'); ?>" alt="#" style="border-radius: 14px;"> -->
+                            <span style="padding:0px 25px;font-size:40px;position: absolute;top:40px;left:50px; color: #fff;text-align: center">
+                                <span >¡Bienvenid@!</span><span ><?php echo ' '.$nombre ?></span> 
+                                <span style="display: block; font-size: 40px;margin-top:20px">Gracias por preferir beurer.pe</span>
                             </span>
 
                         </td>
@@ -38,7 +38,70 @@
         <tr>
             <td style="text-align: center; font-size: 30px; font-weight: bold;"><p><?php echo $codigo; ?></p></td>
         </tr>
-        <?php include 'tpl/footermail.php'; ?>
+         <tr align="center">
+            <td>
+                <table bgcolor="#fff" width='95%' style="padding-top: 25px;margin-bottom:50px">
+                    <tr>
+                        <td width="100%" style="font-weight: bold;font-size:18px;text-align: center;">Beneficios de comprar en Beurer</td>
+                    </tr>
+                    <tr>
+                        <td width="100%">
+                            <table style="margin:auto; width: 100%; ">
+                                <tr>
+                                    <td widht="33%" align="center" style="padding: 10px; ">
+                                        <table style="margin:auto; padding: 12px 20px; background-color: #f1f1f1;border-radius:14px;text-align:center;height:140px;width:160px;">
+                                            <tr>
+                                                <td>
+                                                    <a href="#" target="_blank ">
+                                                        <img src="<?php echo base_url('assets/images/honor.png')?>" alt="phone" height="65" style="margin :10px 0 ">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#333333;font-weight:bold;width: 100%; ">De 3 a 5 años de garantía</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td widht="33%" align="center" style="padding: 10px; ">
+                                        <table style="margin:auto; padding: 12px 20px; background-color: #f1f1f1;border-radius:14px;text-align:center;height:140px;min-width:160px; ">
+
+                                            <tr>
+                                                <td>
+                                                    <a href="#" target="_blank ">
+                                                        <img src="<?php echo base_url('assets/images/escudo.png')?>" alt="facebook" height="65" style="margin :10px 0 ">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#333333;font-weight:bold "><span>Compra</span><br> <span>segura</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td widht="33% " align="center" style="padding: 10px; ">
+                                        <table style="margin:auto; padding: 12px 20px; background-color: #f1f1f1;border-radius:14px;text-align:center;height:140px;width:160px; ">
+                                            <tr>
+                                                <td>
+                                                    <a href="#" target="_blank ">
+                                                        <img src="<?php echo base_url('assets/images/phone-user.png')?>" height="65" style="margin :10px 0 ">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#333333;font-weight:bold "><span>Atención</span><br> <span>Personalizada</span></td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+       
+        <?php include 'tpl/footer.php'; ?>
 
     </table>
 

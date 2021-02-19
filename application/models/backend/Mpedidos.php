@@ -11,9 +11,15 @@ class Mpedidos extends CI_Model {
         string $table,
         ?array $conditions = NULL
     ) {
-           return empty($conditions)
-            ? $this->db->get($table)->result_array()
-            : $this->db->get_where($table, $conditions)->row_array();
+          if(  empty($conditions) ) {
+            $this->db->from($table);
+            $this->db->order_by("id_pedido", "DESC");
+            $query = $this->db->get(); 
+            return $query->result_array();
+          }
+          return $this->db->get_where($table, $conditions)->row_array();
+
+             
     }
 
 
