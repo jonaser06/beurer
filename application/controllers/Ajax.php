@@ -68,12 +68,23 @@ class Ajax extends MY_Controller
                 'p.pedido_fecha <='=> $end
             ];
 
-            $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
-            $this->db->from('pedido_detalle as pd');
-            $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
-            $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+            $this->db->select('*');
             $this->db->where($w);
+            $this->db->from('pedido');
             $query = $this->db->get()->result_array();
+
+        
+            for ($i=0; $i <count($query) ; $i++) { 
+                $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $query[$i]['id_pedido']]);
+                $productos = [];
+                for ($h = 0 ; $h < count($pedido_detalle); $h++) {  
+                    $prod = $this->get('productos', ['id' => $pedido_detalle[$h]['id_producto']]);
+                    array_push($productos,$prod['titulo']);
+                }
+                $query[$i]['productos'] = implode(',',$productos);
+            }
+           
+            
 
             if($query){
                 $this->resp['status'] = true;
@@ -97,14 +108,24 @@ class Ajax extends MY_Controller
             }
         }
 
-        $pagination = $this->pagination('pedido_detalle', $currentpage );
+        $pagination = $this->pagination('pedido', $currentpage );
 
-        $this->db->select('pd.id_pedido_detalle, pd.id_pedido, pd.id_producto, p.nombres, p.apellidos, p.telefono, p.correo, p.tipo_documento, p.numero_documento, p.provincia, p.distrito, p.dir_envio, p.entrega_precio, p.productos_precio, p.cupon_descuento, p.pedido_fecha, p.pedido_estado, pr.titulo');
-        $this->db->from('pedido_detalle as pd');
-        $this->db->join('pedido as p', 'p.id_pedido = pd.id_pedido_detalle');
-        $this->db->join('productos as pr', 'pr.id = pd.id_producto');
+        $this->db->select('*');
+        $this->db->from('pedido');
         $this->db->limit($pagination['forpage'],$pagination['offset']);
         $query = $this->db->get()->result_array();
+        
+        for ($i=0; $i <count($query) ; $i++) { 
+            $pedido_detalle  = $this->dbSelect('*','pedido_detalle', [ 'id_pedido' => $query[$i]['id_pedido']]);
+            $productos = [];
+            for ($h = 0 ; $h < count($pedido_detalle); $h++) {  
+                $prod = $this->get('productos', ['id' => $pedido_detalle[$h]['id_producto']]);
+                array_push($productos,$prod['titulo']);
+            }
+            $query[$i]['productos'] = implode(' , ',$productos);
+        }
+       
+       
 
         if($query){
             $this->resp['status'] = true;

@@ -1,8 +1,8 @@
 let DOMAIN;
 let ObjReclamos = {
     init: () => {
-        // DOMAIN = (window.location.hostname == 'localhost') ? 'http://localhost/beurer/' : 'https://beurer.pe/';
-        DOMAIN = 'https://beurer.pe/';
+        DOMAIN = (window.location.hostname == 'localhost') ? 'http://localhost/beurer/' : 'https://beurer.pe/';
+        // DOMAIN = 'https://beurer.pe/';
         if (document.querySelector('.section_reclamos') != null) {
             ObjReclamos.load_reclamos();
         }
@@ -20,9 +20,10 @@ let ObjReclamos = {
 
         ObjReclamos.ajax_post('POST', DOMAIN + 'ajax/get_report', formData)
             .then((resp) => {
+                console.log(resp);
                 resp = JSON.parse(resp);
                 if (resp.status) {
-                    // console.log(resp);
+                    console.log(resp);
                     document.querySelector('.btn-sbmt-exp').disabled = false;
                     resp.data.forEach((d) => {
                         let estado;
@@ -40,7 +41,7 @@ let ObjReclamos = {
                         reclamo += '<th>' + d.nombres + '</th>';
                         reclamo += '<th>' + d.apellidos + '</th>';
                         reclamo += '<th>' + d.pedido_fecha + '</th>';
-                        reclamo += '<th>' + d.titulo + '</th>';
+                        reclamo += '<th>' + d.productos + '</th>';
                         reclamo += '<th>' + estado + '</th>';
                         reclamo += '</tr>';
                     });
@@ -86,7 +87,7 @@ let ObjReclamos = {
                         reclamo += '<th>' + d.nombres + '</th>';
                         reclamo += '<th>' + d.apellidos + '</th>';
                         reclamo += '<th>' + d.pedido_fecha + '</th>';
-                        reclamo += '<th>' + d.titulo + '</th>';
+                        reclamo += '<th>' + d.productos + '</th>';
                         reclamo += '<th>' + estado + '</th>';
                         reclamo += '</tr>';
                     });
